@@ -81,30 +81,39 @@ def merge_structure_jsons(file_path1: str, file_path2: str) -> API_ORGANIZED_FLO
     )
 
 
-def parse_flows_file(file_path: str) -> API_ORGANIZED_FLOWS:
+def parse_flows_file(file_path: str, verbose: bool = False) -> API_ORGANIZED_FLOWS:
     """
     Returns the path to the created json file
     """
     print(f'Reading file: {file_path}')
 
-    start = timer()
+    if verbose:
+        start = timer()
     flows = __read_flows_from_file(file_path)
     total_flow_count = len(flows)
     organized_flows = __organize_flows(flows)
-    end = timer()
-    print(f'Extracted {total_flow_count} flow details in: {datetime.timedelta(seconds=(end-start))}')
+    if verbose:
+        print(f'Extracted {total_flow_count} flow details in: {datetime.timedelta(seconds=(timer()-start))}')
 
-    start = timer()
+    if verbose:
+        start = timer()
     singularized_flows = __singularize_flows(organized_flows)
-    end = timer()
-    print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {datetime.timedelta(seconds=(end-start))}')
+    if verbose:
+        print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {datetime.timedelta(seconds=(timer()-start))}')
 
-    start = timer()
+    if verbose:
+        start = timer()
     result = __organize_flows(singularized_flows)
-    end = timer()
-    print(f'Ordered flows according to services and endpoints in: {datetime.timedelta(seconds=(end-start))}')
+    if verbose:
+        print(f'Ordered flows according to services and endpoints in: {datetime.timedelta(seconds=(timer()-start))}')
 
     return result
+
+
+def store_flow_details_as_json(file_path: str, flow_details: API_ORGANIZED_FLOWS) -> None:
+    flow_details_dicts = __convert_api_structured_flows_to_dict(flow_details)
+    with open(file_path, 'w') as fp:
+        json.dump(flow_details_dicts, fp)
 
 
 
@@ -300,12 +309,6 @@ def __singularize_flows(organized_flows: API_ORGANIZED_FLOWS) -> Set[PssFlowDeta
     return result
 
 
-def __store_flow_details_as_json(file_path: str, flow_details: API_ORGANIZED_FLOWS) -> None:
-    flow_details_dicts = __convert_api_structured_flows_to_dict(flow_details)
-    with open(file_path, 'w') as fp:
-        json.dump(flow_details_dicts, fp)
-
-
 
 
 
@@ -321,7 +324,7 @@ if __name__ == "__main__":
     file_name, _ = os.path.splitext(file_path)
     storage_path = f'{file_name}.json'
     start = timer()
-    __store_flow_details_as_json(storage_path, flows)
+    store_flow_details_as_json(storage_path, flows)
     end = timer()
     print(f'Stored JSON encoded PSS API endpoint information in {datetime.timedelta(seconds=(end-start))} at: {storage_path}')
     print(f'Total execution time: {datetime.timedelta(seconds=(end-app_start))}')
