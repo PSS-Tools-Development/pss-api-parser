@@ -7,4 +7,4 @@ This is a tool designed to take a file containing network flows recorded with [m
 
 # What does it do
 
-The module parses the flows in the specified file and attempts to create a structure description of the PSS API based on that information. It tries to determine data types for query/request parameters and properties of objects returned by the PSS API.
+The module parses the flows in the specified file and attempts to create a structure description of the PSS API based on that information. It tries to determine data types for query/request parameters and properties of objects returned by the PSS API. The output will be a list of dictionaries, one per API service. Those dictionaries contain dictionaries, one per API endpoint. Each of those dictionaries contains information on a specific endpoint.
