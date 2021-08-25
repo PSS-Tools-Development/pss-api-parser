@@ -60,25 +60,18 @@ def merge_organized_flows(flows1: API_ORGANIZED_FLOWS, flows2: API_ORGANIZED_FLO
 
 
 def merge_structure_jsons(file_path1: str, file_path2: str) -> API_ORGANIZED_FLOWS:
-    flows1, flows2 = (None, None)
-    with open(file_path1, 'r') as fp:
-        flows1 = json.load(fp)
-    with open(file_path2, 'r') as fp:
-        flows2 = json.load(fp)
+    flows1 = read_structure_json(file_path1)
+    flows2 = read_structure_json(file_path2)
 
-    if flows1 == None:
-        if flows2 == None:
-            raise Exception(f'Reading the specified files failed.')
+    if flows1:
+        if flows2:
+            return merge_organized_flows(flows1, flows2)
         else:
-            return convert_organized_dicts_to_organized_flows(flows2)
+            return flows1
+    elif flows2:
+        return flows2
     else:
-        if flows2 == None:
-            return convert_organized_dicts_to_organized_flows(flows1)
-
-    return merge_organized_flows(
-        convert_organized_dicts_to_organized_flows(flows1),
-        convert_organized_dicts_to_organized_flows(flows2)
-    )
+        raise Exception(f'Something fishy happened')
 
 
 def parse_flows_file(file_path: str, verbose: bool = False) -> API_ORGANIZED_FLOWS:
@@ -110,7 +103,14 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> API_ORGANIZED_FLO
     return result
 
 
-def store_flow_details_as_json(file_path: str, flow_details: API_ORGANIZED_FLOWS) -> None:
+def read_structure_json(file_path: str) -> API_ORGANIZED_FLOWS:
+    with open(file_path, 'r') as fp:
+        flows = json.load(fp)
+    result = convert_organized_dicts_to_organized_flows(flows)
+    return result
+
+
+def store_structure_json(file_path: str, flow_details: API_ORGANIZED_FLOWS) -> None:
     flow_details_dicts = __convert_api_structured_flows_to_dict(flow_details)
     with open(file_path, 'w') as fp:
         json.dump(flow_details_dicts, fp)
@@ -324,7 +324,7 @@ if __name__ == "__main__":
     file_name, _ = os.path.splitext(file_path)
     storage_path = f'{file_name}.json'
     start = timer()
-    store_flow_details_as_json(storage_path, flows)
+    store_structure_json(storage_path, flows)
     end = timer()
     print(f'Stored JSON encoded PSS API endpoint information in {datetime.timedelta(seconds=(end-start))} at: {storage_path}')
     print(f'Total execution time: {datetime.timedelta(seconds=(end-app_start))}')
