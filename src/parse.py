@@ -17,7 +17,7 @@ from flowdetails import PssFlowDetails, ResponseStructure
 
 # ----- Constants and type definitions -----
 
-__API_STRUCTURED_FLOWS = Dict[str, Dict[str, List[PssFlowDetails]]]
+API_STRUCTURED_FLOWS = Dict[str, Dict[str, List[PssFlowDetails]]]
 
 __TYPE_ORDER_LOOKUP: Dict[str, int] = {
     'float': 4,
@@ -31,7 +31,33 @@ __TYPE_ORDER_LOOKUP: Dict[str, int] = {
 
 
 
-# ----- Functions -----
+# ----- Public Functions -----
+
+def parse_flows_file(file_path: str) -> API_STRUCTURED_FLOWS:
+    """
+    Returns the path to the created json file
+    """
+    print(f'Reading file: {file_path}')
+
+    start = timer()
+    flows = __read_flows_from_file(file_path)
+    total_flow_count = len(flows)
+    organized_flows = __organize_flows(flows)
+    end = timer()
+    print(f'Extracted {total_flow_count} flow details in: {datetime.timedelta(seconds=(end-start))} (total execution time: {datetime.timedelta(seconds=(end-app_start))})')
+
+    start = timer()
+    singularized_flows = __singularize_flows(organized_flows)
+    end = timer()
+    print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {datetime.timedelta(seconds=(end-start))} (total execution time: {datetime.timedelta(seconds=(end-app_start))})')
+
+    return singularized_flows
+
+
+
+
+
+# ----- Private Functions -----
 
 def __convert_flow_to_dict(flow: HTTPFlow) -> dict:
     result = {}
@@ -174,8 +200,8 @@ def __merge_type_dictionaries(d1: dict, d2: dict) -> dict:
     return result
 
 
-def __organize_flows(extracted_flow_details: List[PssFlowDetails]) -> __API_STRUCTURED_FLOWS:
-    result: __API_STRUCTURED_FLOWS = {}
+def __organize_flows(extracted_flow_details: List[PssFlowDetails]) -> API_STRUCTURED_FLOWS:
+    result: API_STRUCTURED_FLOWS = {}
     for flow_details in extracted_flow_details:
         result.setdefault(flow_details.service, {}).setdefault(flow_details.endpoint, []).append(flow_details)
     return result
@@ -200,7 +226,7 @@ def __read_flows_from_file(file_path: str) -> List[PssFlowDetails]:
     return result
 
 
-def __singularize_flows(organized_flows: __API_STRUCTURED_FLOWS) -> Set[PssFlowDetails]:
+def __singularize_flows(organized_flows: API_STRUCTURED_FLOWS) -> Set[PssFlowDetails]:
     result: Set[PssFlowDetails] = set()
     for _, endpoints in organized_flows.items():
         for _, endpoint_flows in endpoints.items():
@@ -228,19 +254,7 @@ if __name__ == "__main__":
     if (len(sys.argv) == 1):
         raise ValueError('The path to the flows file has not been specified!')
     file_path = ' '.join(sys.argv[1:])
-    print(f'Reading file: {file_path}')
-
-    start = timer()
-    flows = __read_flows_from_file(file_path)
-    total_flow_count = len(flows)
-    organized_flows = __organize_flows(flows)
-    end = timer()
-    print(f'Extracted {total_flow_count} flow details in: {datetime.timedelta(seconds=(end-start))} (total execution time: {datetime.timedelta(seconds=(end-app_start))})')
-
-    start = timer()
-    singularized_flows = __singularize_flows(organized_flows)
-    end = timer()
-    print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {datetime.timedelta(seconds=(end-start))} (total execution time: {datetime.timedelta(seconds=(end-app_start))})')
+    singularized_flows = parse_flows_file(file_path)
 
     file_name, _ = os.path.splitext(file_path)
     storage_path = f'{file_name}.json'
