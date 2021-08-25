@@ -65,7 +65,7 @@ def parse_flows_file(file_path: str) -> API_ORGANIZED_FLOWS:
 
 # ----- Private Functions -----
 
-def convert_api_structured_flows_to_dict(flows: API_ORGANIZED_FLOWS) -> API_ORGANIZED_FLOWS_DICT:
+def __convert_api_structured_flows_to_dict(flows: API_ORGANIZED_FLOWS) -> API_ORGANIZED_FLOWS_DICT:
     result = {}
     for service, endpoints in flows.items():
         for endpoint, flow_details in endpoints.items():
@@ -254,7 +254,7 @@ def __singularize_flows(organized_flows: API_ORGANIZED_FLOWS) -> Set[PssFlowDeta
 
 
 def __store_flow_details_as_json(file_path: str, flow_details: API_ORGANIZED_FLOWS) -> None:
-    flow_details_dicts = convert_api_structured_flows_to_dict(flow_details)
+    flow_details_dicts = __convert_api_structured_flows_to_dict(flow_details)
     with open(file_path, 'w') as fp:
         json.dump(flow_details_dicts, fp)
 
