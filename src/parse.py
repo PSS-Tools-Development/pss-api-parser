@@ -34,6 +34,53 @@ __TYPE_ORDER_LOOKUP: Dict[str, int] = {
 
 # ----- Public Functions -----
 
+def convert_organized_dicts_to_organized_flows(organized_dict: API_ORGANIZED_FLOWS_DICT) -> API_ORGANIZED_FLOWS:
+    result: API_ORGANIZED_FLOWS = {}
+    for service, endpoints in organized_dict.items():
+        for endpoint, flow_dict in endpoints:
+            result.setdefault(service, {}).setdefault(endpoint, []).append(PssFlowDetails(flow_dict))
+    return result
+
+
+def merge_organized_flows(flows1: API_ORGANIZED_FLOWS, flows2: API_ORGANIZED_FLOWS) -> API_ORGANIZED_FLOWS:
+    merged_flows: API_ORGANIZED_FLOWS = {}
+    for service1, endpoints1 in flows1.items():
+        if service1 in flows2:
+            for endpoint1, flow_details1 in endpoints1:
+                if endpoint1 in flows2[service1]:
+                    merged_flows.setdefault(service1, {}).setdefault(endpoint1, []).extend(flow_details1)
+                    merged_flows.setdefault(service1, {}).setdefault(endpoint1, []).extend(flows2[service1][endpoint1])
+                else:
+                    merged_flows.setdefault(service1, {})[endpoint1] = flows1
+        else:
+            merged_flows[service1] = endpoints1
+
+    result = __organize_flows(__singularize_flows(merged_flows))
+    return result
+
+
+def merge_structure_jsons(file_path1: str, file_path2: str) -> API_ORGANIZED_FLOWS:
+    flows1, flows2 = (None, None)
+    with open(file_path1, 'r') as fp:
+        flows1 = json.load(fp)
+    with open(file_path2, 'r') as fp:
+        flows2 = json.load(fp)
+
+    if flows1 == None:
+        if flows2 == None:
+            raise Exception(f'Reading the specified files failed.')
+        else:
+            return convert_organized_dicts_to_organized_flows(flows2)
+    else:
+        if flows2 == None:
+            return convert_organized_dicts_to_organized_flows(flows1)
+
+    return merge_organized_flows(
+        convert_organized_dicts_to_organized_flows(flows1),
+        convert_organized_dicts_to_organized_flows(flows2)
+    )
+
+
 def parse_flows_file(file_path: str) -> API_ORGANIZED_FLOWS:
     """
     Returns the path to the created json file
@@ -233,8 +280,8 @@ def __read_flows_from_file(file_path: str) -> List[PssFlowDetails]:
 
         try:
             tnetstring.load(flow_reader.fo)
-        except:
-            raise Exception(f'The specified file is not a Flows file: {file_path}')
+        except ValueError as e:
+            raise Exception(f'The specified file is not a Flows file: {file_path}') from e
 
         result = [PssFlowDetails(__convert_flow_to_dict(recorded_flow)) for recorded_flow in flow_reader.stream()]
 
