@@ -154,7 +154,7 @@ def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
         for param in query_string.split('&'):
             split_param = param.split('=')
             if len(split_param) > 1:
-                result['query_parameters'][split_param[0]] = __determine_data_type(split_param[1])
+                result['query_parameters'][split_param[0]] = __determine_data_type(split_param[1], split_param[0])
             else:
                 result['query_parameters'][split_param[0]] = None
 
@@ -201,7 +201,7 @@ def __convert_xml_to_dict(root: ElementTree.Element) -> ResponseStructure:
 
     result = {}
     if root.attrib:
-        result['properties'] = {key: __determine_data_type(value) for key, value in root.attrib.items()}
+        result['properties'] = {key: __determine_data_type(value, key) for key, value in root.attrib.items()}
     for child in root:
         if child.tag not in result:
             child_dict = __convert_xml_to_dict(child)
@@ -209,7 +209,7 @@ def __convert_xml_to_dict(root: ElementTree.Element) -> ResponseStructure:
     return {root.tag: result}
 
 
-def __determine_data_type(value: str) -> str:
+def __determine_data_type(value: str, property_name: str) -> str:
     if value:
         try:
             int(value)
@@ -235,6 +235,12 @@ def __determine_data_type(value: str) -> str:
                 return 'datetime'
             except:
                 pass
+
+    if property_name:
+        if property_name.endswith('Date'):
+            return 'datetime'
+        if property_name.endswith('Id'):
+            return 'int'
 
     return 'str'
 
