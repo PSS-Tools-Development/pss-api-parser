@@ -209,7 +209,7 @@ def __convert_xml_to_dict(root: ElementTree.Element) -> ResponseStructure:
     return {root.tag: result}
 
 
-def __determine_data_type(value: str, property_name: str) -> str:
+def __determine_data_type(value: str, property_name: str = None) -> str:
     if value:
         try:
             int(value)
