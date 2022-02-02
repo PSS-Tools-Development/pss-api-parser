@@ -86,12 +86,19 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows
         start = timer()
     flows = __read_flows_from_file(file_path)
     total_flow_count = len(flows)
-    all_organized_flows = __organize_flows(flows)
     if verbose:
         print(f'Extracted {total_flow_count} flow details in: {timedelta(seconds=(timer()-start))}')
 
     if verbose:
         start = timer()
+    object_structures = __get_object_structures_from_flows(flows)
+    object_count = len(object_structures)
+    if verbose:
+        print(f'Extracted {object_count} entity types in: {timedelta(seconds=(timer()-start))}')
+
+    if verbose:
+        start = timer()
+    all_organized_flows = __organize_flows(flows)
     singularized_flows = __singularize_flows(all_organized_flows)
     if verbose:
         print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {timedelta(seconds=(timer()-start))}')
@@ -101,8 +108,6 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows
     organized_flows = __organize_flows(singularized_flows)
     if verbose:
         print(f'Ordered flows according to services and endpoints in: {timedelta(seconds=(timer()-start))}')
-
-    object_structures = __get_object_structures_from_flows(flows)
 
     result = {
         'endpoints': organized_flows,
