@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import datetime
+from datetime import datetime, timedelta
 import json
 import os.path
 import sys
@@ -88,19 +88,19 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows
     total_flow_count = len(flows)
     all_organized_flows = __organize_flows(flows)
     if verbose:
-        print(f'Extracted {total_flow_count} flow details in: {datetime.timedelta(seconds=(timer()-start))}')
+        print(f'Extracted {total_flow_count} flow details in: {timedelta(seconds=(timer()-start))}')
 
     if verbose:
         start = timer()
     singularized_flows = __singularize_flows(all_organized_flows)
     if verbose:
-        print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {datetime.timedelta(seconds=(timer()-start))}')
+        print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {timedelta(seconds=(timer()-start))}')
 
     if verbose:
         start = timer()
     organized_flows = __organize_flows(singularized_flows)
     if verbose:
-        print(f'Ordered flows according to services and endpoints in: {datetime.timedelta(seconds=(timer()-start))}')
+        print(f'Ordered flows according to services and endpoints in: {timedelta(seconds=(timer()-start))}')
 
     object_structures = __get_object_structures_from_flows(flows)
 
@@ -236,12 +236,6 @@ def __determine_data_type(value: str, property_name: str = None) -> str:
             except:
                 pass
 
-    if property_name:
-        if property_name.endswith('Date'):
-            return 'datetime'
-        if property_name.endswith('Id'):
-            return 'int'
-
     return 'str'
 
 
@@ -366,12 +360,12 @@ if __name__ == "__main__":
     if (len(sys.argv) == 1):
         raise ValueError('The path to the flows file has not been specified!')
     file_path = ' '.join(sys.argv[1:])
-    flows = parse_flows_file(file_path)
+    flows = parse_flows_file(file_path, verbose=True)
 
     file_name, _ = os.path.splitext(file_path)
     storage_path = f'{file_name}.json'
     start = timer()
     store_structure_json(storage_path, flows, indent=2)
     end = timer()
-    print(f'Stored JSON encoded PSS API endpoint information in {datetime.timedelta(seconds=(end-start))} at: {storage_path}')
-    print(f'Total execution time: {datetime.timedelta(seconds=(end-app_start))}')
+    print(f'Stored JSON encoded PSS API endpoint information in {timedelta(seconds=(end-start))} at: {storage_path}')
+    print(f'Total execution time: {timedelta(seconds=(end-app_start))}')
