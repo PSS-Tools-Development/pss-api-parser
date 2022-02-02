@@ -248,10 +248,11 @@ def __get_object_structures_from_response_structure(response_structure: Response
     result: Dict[str, List[PssObjectStructure]] = {}
     for key, value in response_structure.items():
         if isinstance(value, dict):
-            if 'properties' in value:
-                result[key] = PssObjectStructure(key, value['properties'])
-            else:
-                result = __get_object_structures_from_response_structure(value)
+            properties = value.get('properties')
+            if properties and 'version' not in properties:
+                result[key] = PssObjectStructure(key, properties)
+                response_structure[key].pop('properties')
+            result.update(__get_object_structures_from_response_structure(value))
     return result
 
 
