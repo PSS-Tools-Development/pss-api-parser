@@ -140,7 +140,8 @@ def __convert_api_structured_flows_to_dict(flows: ApiOrganizedFlows) -> ApiOrgan
     for service, endpoints in flows['endpoints'].items():
         for endpoint, flow_details in endpoints.items():
             result.setdefault('endpoints', {}).setdefault(service, {})[endpoint] = dict(flow_details[0])
-    result['entities'] = {object_structure.object_type_name: object_structure.properties for object_structure in flows['entities']}
+    temp_entities = {object_structure.object_type_name: object_structure.properties for object_structure in flows['entities']}
+    result['entities'] = {key: temp_entities[key] for key in sorted(temp_entities.keys())}
     return result
 
 
