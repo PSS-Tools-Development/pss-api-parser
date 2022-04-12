@@ -1,2 +1,2 @@
-mitmproxy==7.0.2
+mitmproxy>=7.0.2
 Jinja2
