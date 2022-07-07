@@ -1,4 +1,5 @@
 from typing import List as _List
+from typing import Tuple as _Tuple
 
 from .service_base import PssServiceBase as _ServiceBase
 {% for endpoint in service.endpoints %}

@@ -3,6 +3,7 @@
 ####################################################
 
 from typing import List as _List
+from typing import Tuple as _Tuple
 
 from ... import core as _core
 {% for endpoint in service.endpoints %}
