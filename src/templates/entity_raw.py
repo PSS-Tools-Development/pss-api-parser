@@ -11,7 +11,7 @@ class {{entity.name}}Raw():
 
     def __init__(self, {{entity.name_snake_case}}_info: _EntityInfo) -> None:
 {% for property in entity.properties %}
-        self.__{{property.name_snake_case}}: {{property.type}} = _parse.{{property.parser_function_name}}({{entity.name_snake_case}}_info.get('{{property.name}}'))
+        self.__{{property.name_snake_case}}: {{property.type}} = _parse.pss_{{property.type}}({{entity.name_snake_case}}_info.get('{{property.name}}'))
 {% endfor %}
 {% for property in entity.properties %}
 

@@ -31,12 +31,6 @@
 #   .xml_node_name
 
 
-IMPORTS = {
-    'datetime': 'from datetime import datetime as _datetime',
-    'List': 'from typing import List as _List',
-}
-
-
 import json as _json
 import os as _os
 from typing import Dict as _Dict
@@ -48,6 +42,16 @@ from jinja2 import Environment as _Environment, PackageLoader as _PackageLoader
 from . import utils as _utils
 
 
+IMPORTS = {
+    'datetime': 'from datetime import datetime as _datetime',
+    'List': 'from typing import List as _List',
+}
+
+PARSER_FUNCTIONS = {
+    'int': 'pss_int'
+}
+
+
 
 def read_data(file_path: str) -> dict:
     result = None
@@ -56,14 +60,14 @@ def read_data(file_path: str) -> dict:
     return result
 
 
-def prepare_data(data: dict) -> _Tuple[dict, dict]:
+def prepare_data(data: dict) -> _Tuple[list, list]:
     known_entity_names = set(data['entities'].keys())
     services = __prepare_endpoint_data(data['endpoints'], known_entity_names)
     entities = __prepare_entity_data(data['entities'])
     return (services, entities)
 
 
-def __prepare_endpoint_data(endpoints_data: dict, known_entity_names: set) -> dict:
+def __prepare_endpoint_data(endpoints_data: dict, known_entity_names: set) -> list:
     result = []
     for service_name, endpoints in endpoints_data.items():
         service_imports = {'List'}
@@ -106,8 +110,24 @@ def __prepare_endpoint_data(endpoints_data: dict, known_entity_names: set) -> di
     return result
 
 
-def __prepare_entity_data(entities_data: dict) -> dict:
-    return None
+def __prepare_entity_data(entities_data: dict) -> list:
+    result = []
+    for entity_name, entity_properties in entities_data.items():
+        properties = []
+        for property_name, property_type in entity_properties.items():
+            properties.append({
+                'name': property_name,
+                'name_snake_case': _utils.convert_to_snake_case(property_name),
+                'type': property_type
+            })
+        result.append({
+            'name': entity_name,
+            'name_snake_case': _utils.convert_to_snake_case(entity_name),
+            'properties': properties,
+            'xml_node_name': entity_name,
+        })
+    result.sort(key=lambda d: d['name'])
+    return result
 
 
 def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, str]:
@@ -156,7 +176,7 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
     services_raw_init_template = env.get_template('services_raw_init.py')
 
     services_path = _os.path.join(target_path, 'services')
-    services_raw_path = _os.path.join(target_path, 'services', 'raw')
+    services_raw_path = _os.path.join(services_path, 'raw')
 
     _utils.create_path(target_path)
     _utils.create_path(services_path)
@@ -173,7 +193,6 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
             service_raw_template.render(service=service),
             overwrite=True
         )
-        break
 
     _utils.create_file(
         _os.path.join(services_path, '__init__.py'),
@@ -183,6 +202,42 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
     _utils.create_file(
         _os.path.join(services_raw_path, '__init__.py'),
         services_raw_init_template.render(services=services),
+        overwrite=True
+    )
+
+    entities = data[1]
+
+    entity_template = env.get_template('entity.py')
+    entities_init_template = env.get_template('entities_init.py')
+    entity_raw_template = env.get_template('entity_raw.py')
+    entities_raw_init_template = env.get_template('entities_raw_init.py')
+
+    entities_path = _os.path.join(target_path, 'entities')
+    entities_raw_path = _os.path.join(entities_path, 'raw')
+
+    _utils.create_path(entities_path)
+    _utils.create_path(entities_raw_path)
+
+    for entity in entities:
+        _utils.create_file(
+            _os.path.join(entities_path, entity['name_snake_case'] + '.py'),
+            entity_template.render(entity=entity),
+            overwrite=True
+        )
+        _utils.create_file(
+            _os.path.join(entities_raw_path, entity['name_snake_case'] + '_raw.py'),
+            entity_raw_template.render(entity=entity),
+            overwrite=True
+        )
+
+    _utils.create_file(
+        _os.path.join(entities_path, '__init__.py'),
+        entities_init_template.render(entities=entities),
+        overwrite=True
+    )
+    _utils.create_file(
+        _os.path.join(entities_raw_path, '__init__.py'),
+        entities_raw_init_template.render(entities=entities),
         overwrite=True
     )
 
