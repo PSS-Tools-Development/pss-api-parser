@@ -62,12 +62,12 @@ def read_data(file_path: str) -> dict:
 
 def prepare_data(data: dict) -> _Tuple[list, list]:
     known_entity_names = set(data['entities'].keys())
-    services = __prepare_endpoint_data(data['endpoints'], known_entity_names)
-    entities = __prepare_entity_data(data['entities'])
+    services = __prepare_services_data(data['endpoints'], known_entity_names)
+    entities = __prepare_entities_data(data['entities'])
     return (services, entities)
 
 
-def __prepare_endpoint_data(endpoints_data: dict, known_entity_names: set) -> list:
+def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> list:
     result = []
     for service_name, endpoints in endpoints_data.items():
         service_imports = {'List'}
@@ -111,7 +111,7 @@ def __prepare_endpoint_data(endpoints_data: dict, known_entity_names: set) -> li
     return result
 
 
-def __prepare_entity_data(entities_data: dict) -> list:
+def __prepare_entities_data(entities_data: dict) -> list:
     result = []
     for entity_name, entity_properties in entities_data.items():
         properties = []
@@ -163,15 +163,18 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
     return result
 
 
-def generate_files_from_data(data: dict, target_path: str) -> None:
+def generate_files_from_data(services_data: list, entities_data: list, target_path: str) -> None:
     env = _Environment(
         loader=_PackageLoader('src'),
         trim_blocks=True
     )
 
-    services = data[0]
+    __generate_services_files(services_data, target_path, env)
+    __generate_client_file(services_data, target_path, env)
+    __generate_entities_files(entities_data, target_path, env)
 
-    client_template = env.get_template('client.py')
+
+def __generate_services_files(services_data: dict, target_path: str, env: _Environment) -> None:
     service_template = env.get_template('service.py')
     services_init_template = env.get_template('services_init.py')
     service_raw_template = env.get_template('service_raw.py')
@@ -184,7 +187,7 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
     _utils.create_path(services_path)
     _utils.create_path(services_raw_path)
 
-    for service in services:
+    for service in services_data:
         _utils.create_file(
             _os.path.join(services_path, service['name_snake_case'] + '.py'),
             service_template.render(service=service),
@@ -197,20 +200,25 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
 
     _utils.create_file(
         _os.path.join(services_path, '__init__.py'),
-        services_init_template.render(services=services),
+        services_init_template.render(services=services_data),
     )
     _utils.create_file(
         _os.path.join(services_raw_path, '__init__.py'),
-        services_raw_init_template.render(services=services),
+        services_raw_init_template.render(services=services_data),
         overwrite=True
     )
+
+
+def __generate_client_file(services_data: dict, target_path: str, env: _Environment) -> None:
+    client_template = env.get_template('client.py')
+
     _utils.create_file(
         _os.path.join(target_path, 'client.py'),
-        client_template.render(services=services),
+        client_template.render(services=services_data),
     )
 
-    entities = data[1]
 
+def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment) -> None:
     entity_template = env.get_template('entity.py')
     entities_init_template = env.get_template('entities_init.py')
     entity_raw_template = env.get_template('entity_raw.py')
@@ -222,7 +230,7 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
     _utils.create_path(entities_path)
     _utils.create_path(entities_raw_path)
 
-    for entity in entities:
+    for entity in entities_data:
         _utils.create_file(
             _os.path.join(entities_path, entity['name_snake_case'] + '.py'),
             entity_template.render(entity=entity),
@@ -235,16 +243,16 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
 
     _utils.create_file(
         _os.path.join(entities_path, '__init__.py'),
-        entities_init_template.render(entities=entities),
+        entities_init_template.render(entities=entities_data),
     )
     _utils.create_file(
         _os.path.join(entities_raw_path, '__init__.py'),
-        entities_raw_init_template.render(entities=entities),
+        entities_raw_init_template.render(entities=entities_data),
         overwrite=True
     )
 
 
 def generate_source_code(data_file_path: str, target_path: str) -> None:
     data = read_data(data_file_path)
-    prepared_data = prepare_data(data)
-    generate_files_from_data(prepared_data, target_path)
+    services_data, entities_data = prepare_data(data)
+    generate_files_from_data(services_data, entities_data, target_path)
