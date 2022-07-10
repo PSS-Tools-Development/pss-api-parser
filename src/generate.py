@@ -74,7 +74,7 @@ def __prepare_endpoint_data(endpoints_data: dict, known_entity_names: set) -> li
 
         service = {
             'endpoints': [],
-            'entity_types': set(),
+            'entity_types': [],
             'imports': [],
             'name': service_name,
             'name_snake_case': _utils.convert_to_snake_case(service_name),
@@ -94,17 +94,18 @@ def __prepare_endpoint_data(endpoints_data: dict, known_entity_names: set) -> li
                 'base_path_name': name_snake_case.upper(),
                 'name': endpoint_name,
                 'name_snake_case': name_snake_case,
-                'parameter_definitions': ', '.join([f'{parameter["name_snake_case"]}: {parameter["type"]}' for parameter in parameters]),
+                'parameter_definitions': ', '.join([f'{parameter["name_snake_case"]}: {parameter["type"]}' for parameter in parameters if parameter['type']]),
                 'parameters': parameters,
                 'return_type': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
             })
 
             if return_type:
-                service['entity_types'].add(return_type)
+                service['entity_types'].append(return_type)
         for service_import in service_imports:
             if service_import in IMPORTS:
                 service['imports'].append(IMPORTS[service_import])
+        service['entity_types'] = sorted(list(set(service['entity_types'])))
         service['imports'] = sorted(list(set(service['imports'])))
         result.append(service)
     return result
@@ -170,6 +171,7 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
 
     services = data[0]
 
+    client_template = env.get_template('client.py')
     service_template = env.get_template('service.py')
     services_init_template = env.get_template('services_init.py')
     service_raw_template = env.get_template('service_raw.py')
@@ -186,7 +188,6 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
         _utils.create_file(
             _os.path.join(services_path, service['name_snake_case'] + '.py'),
             service_template.render(service=service),
-            overwrite=True
         )
         _utils.create_file(
             _os.path.join(services_raw_path, service['name_snake_case'] + '_raw.py'),
@@ -197,12 +198,15 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
     _utils.create_file(
         _os.path.join(services_path, '__init__.py'),
         services_init_template.render(services=services),
-        overwrite=True
     )
     _utils.create_file(
         _os.path.join(services_raw_path, '__init__.py'),
         services_raw_init_template.render(services=services),
         overwrite=True
+    )
+    _utils.create_file(
+        _os.path.join(target_path, 'client.py'),
+        client_template.render(services=services),
     )
 
     entities = data[1]
@@ -222,7 +226,6 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
         _utils.create_file(
             _os.path.join(entities_path, entity['name_snake_case'] + '.py'),
             entity_template.render(entity=entity),
-            overwrite=True
         )
         _utils.create_file(
             _os.path.join(entities_raw_path, entity['name_snake_case'] + '_raw.py'),
@@ -233,7 +236,6 @@ def generate_files_from_data(data: dict, target_path: str) -> None:
     _utils.create_file(
         _os.path.join(entities_path, '__init__.py'),
         entities_init_template.render(entities=entities),
-        overwrite=True
     )
     _utils.create_file(
         _os.path.join(entities_raw_path, '__init__.py'),
