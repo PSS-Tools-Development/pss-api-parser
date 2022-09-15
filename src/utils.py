@@ -4,6 +4,8 @@ import re as _re
 
 
 def convert_to_snake_case(s) -> str:
+    if not s:
+        return s
     return '_'.join(
         _re.sub('([A-Z\d][a-z]+)', r' \1',
         _re.sub('([A-Z\d]+)', r' \1',

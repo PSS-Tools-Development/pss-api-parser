@@ -35,6 +35,7 @@ import json as _json
 import os as _os
 from typing import Dict as _Dict
 from typing import List as _List
+from typing import Optional as _Optional
 from typing import Tuple as _Tuple
 from jinja2 import Environment as _Environment, PackageLoader as _PackageLoader
 
@@ -45,10 +46,6 @@ from . import utils as _utils
 IMPORTS = {
     'datetime': 'from datetime import datetime as _datetime',
     'List': 'from typing import List as _List',
-}
-
-PARSER_FUNCTIONS = {
-    'int': 'pss_int'
 }
 
 
@@ -115,20 +112,53 @@ def __prepare_entities_data(entities_data: dict) -> list:
     result = []
     for entity_name, entity_properties in entities_data.items():
         properties = []
+        property_names = []
         for property_name, property_type in entity_properties.items():
+            property_names.append(property_name)
             properties.append({
                 'name': property_name,
                 'name_snake_case': _utils.convert_to_snake_case(property_name),
                 'type': property_type
             })
+        id_property = __find_id_property(property_names, entity_name)
+        name_property = __find_name_property(property_names, entity_name)
         result.append({
+            'base_class_name': 'EntityWithIdBase' if id_property else 'EntityBase',
+            'id_property_name': _utils.convert_to_snake_case(id_property),
             'name': entity_name,
+            'name_property_name': _utils.convert_to_snake_case(name_property),
             'name_snake_case': _utils.convert_to_snake_case(entity_name),
             'properties': properties,
             'xml_node_name': entity_name,
         })
     result.sort(key=lambda d: d['name'])
     return result
+
+
+def __find_id_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
+    exact_id_name = f'{entity_name}Id'
+    found_id_name = False
+
+    for property_name in property_names:
+        if property_name:
+            if property_name == exact_id_name:
+                return property_name
+            found_id_name = found_id_name or property_name == 'Id'
+    if found_id_name:
+        return 'Id'
+    return None
+
+
+def __find_name_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
+    message = None
+    name = None
+    title = None
+    key = None
+
+    for property_name in property_names:
+        if property_name and property_name[:2] == 'Id':
+            return property_name
+    return None
 
 
 def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, str]:
@@ -163,18 +193,18 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
     return result
 
 
-def generate_files_from_data(services_data: list, entities_data: list, target_path: str) -> None:
+def generate_files_from_data(services_data: list, entities_data: list, target_path: str, force_overwrite: bool) -> None:
     env = _Environment(
         loader=_PackageLoader('src'),
         trim_blocks=True
     )
 
-    __generate_services_files(services_data, target_path, env)
-    __generate_client_file(services_data, target_path, env)
-    __generate_entities_files(entities_data, target_path, env)
+    __generate_services_files(services_data, target_path, env, force_overwrite)
+    __generate_client_file(services_data, target_path, env, force_overwrite)
+    __generate_entities_files(entities_data, target_path, env, force_overwrite)
 
 
-def __generate_services_files(services_data: dict, target_path: str, env: _Environment) -> None:
+def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
     service_template = env.get_template('service.py')
     services_init_template = env.get_template('services_init.py')
     service_raw_template = env.get_template('service_raw.py')
@@ -191,6 +221,7 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
         _utils.create_file(
             _os.path.join(services_path, service['name_snake_case'] + '.py'),
             service_template.render(service=service),
+            overwrite=force_overwrite,
         )
         _utils.create_file(
             _os.path.join(services_raw_path, service['name_snake_case'] + '_raw.py'),
@@ -201,6 +232,7 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
     _utils.create_file(
         _os.path.join(services_path, '__init__.py'),
         services_init_template.render(services=services_data),
+        overwrite=force_overwrite,
     )
     _utils.create_file(
         _os.path.join(services_raw_path, '__init__.py'),
@@ -209,16 +241,17 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
     )
 
 
-def __generate_client_file(services_data: dict, target_path: str, env: _Environment) -> None:
+def __generate_client_file(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
     client_template = env.get_template('client.py')
 
     _utils.create_file(
         _os.path.join(target_path, 'client.py'),
         client_template.render(services=services_data),
+        overwrite=force_overwrite,
     )
 
 
-def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment) -> None:
+def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
     entity_template = env.get_template('entity.py')
     entities_init_template = env.get_template('entities_init.py')
     entity_raw_template = env.get_template('entity_raw.py')
@@ -234,6 +267,7 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
         _utils.create_file(
             _os.path.join(entities_path, entity['name_snake_case'] + '.py'),
             entity_template.render(entity=entity),
+            overwrite=force_overwrite,
         )
         _utils.create_file(
             _os.path.join(entities_raw_path, entity['name_snake_case'] + '_raw.py'),
@@ -244,6 +278,7 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     _utils.create_file(
         _os.path.join(entities_path, '__init__.py'),
         entities_init_template.render(entities=entities_data),
+        overwrite=force_overwrite,
     )
     _utils.create_file(
         _os.path.join(entities_raw_path, '__init__.py'),
@@ -252,7 +287,9 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     )
 
 
-def generate_source_code(data_file_path: str, target_path: str) -> None:
+def generate_source_code(data_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
+    if force_overwrite is None:
+        raise Exception('Parameter \'force_overwrite\' must not be None!')
     data = read_data(data_file_path)
     services_data, entities_data = prepare_data(data)
-    generate_files_from_data(services_data, entities_data, target_path)
+    generate_files_from_data(services_data, entities_data, target_path, force_overwrite)
