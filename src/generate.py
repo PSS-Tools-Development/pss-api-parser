@@ -205,10 +205,10 @@ def generate_files_from_data(services_data: list, entities_data: list, target_pa
 
 
 def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    service_template = env.get_template('service.py')
-    services_init_template = env.get_template('services_init.py')
-    service_raw_template = env.get_template('service_raw.py')
-    services_raw_init_template = env.get_template('services_raw_init.py')
+    service_template = env.get_template('service.jinja2')
+    services_init_template = env.get_template('services_init.jinja2')
+    service_raw_template = env.get_template('service_raw.jinja2')
+    services_raw_init_template = env.get_template('services_raw_init.jinja2')
 
     services_path = _os.path.join(target_path, 'services')
     services_raw_path = _os.path.join(services_path, 'raw')
@@ -242,7 +242,7 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
 
 
 def __generate_client_file(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    client_template = env.get_template('client.py')
+    client_template = env.get_template('client.jinja2')
 
     _utils.create_file(
         _os.path.join(target_path, 'client.py'),
@@ -252,10 +252,10 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
 
 
 def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    entity_template = env.get_template('entity.py')
-    entities_init_template = env.get_template('entities_init.py')
-    entity_raw_template = env.get_template('entity_raw.py')
-    entities_raw_init_template = env.get_template('entities_raw_init.py')
+    entity_template = env.get_template('entity.jinja2')
+    entities_init_template = env.get_template('entities_init.jinja2')
+    entity_raw_template = env.get_template('entity_raw.jinja2')
+    entities_raw_init_template = env.get_template('entities_raw_init.jinja2')
 
     entities_path = _os.path.join(target_path, 'entities')
     entities_raw_path = _os.path.join(entities_path, 'raw')
