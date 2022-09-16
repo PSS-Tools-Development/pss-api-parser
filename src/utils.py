@@ -2,14 +2,13 @@ import os as _os
 import re as _re
 
 
-
 def convert_to_snake_case(s) -> str:
     if not s:
         return s
     return '_'.join(
-        _re.sub('([A-Z\d][a-z]+)', r' \1',
-        _re.sub('([A-Z\d]+)', r' \1',
-        s.replace('-', ' '))).split()).lower()
+        _re.sub(r'([A-Z\d][a-z]+)', r' \1',
+                _re.sub(r'([A-Z\d]+)', r' \1',
+                        s.replace('-', ' '))).split()).lower()
 
 
 def create_path(path: str) -> None:

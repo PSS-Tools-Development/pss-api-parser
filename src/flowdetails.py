@@ -1,9 +1,9 @@
-from typing import Dict, List, Union
-
+from typing import Dict, Union
 
 ResponseStructure = Dict[str, Union[str, 'ResponseStructure']]
 
-class PssFlowDetails():
+
+class PssFlowDetails:
     def __init__(self, details: dict) -> None:
         self.__content_structure: ResponseStructure = details['content_structure']
         self.__content_type: str = details['content_type']
@@ -41,19 +41,16 @@ class PssFlowDetails():
     def service(self) -> str:
         return self.__service
 
-
     def __eq__(self, other):
         if isinstance(other, PssFlowDetails):
             return (
-                self.service == other.service
-                and self.endpoint == other.endpoint
+                    self.service == other.service
+                    and self.endpoint == other.endpoint
             )
         return False
 
-
     def __hash__(self):
         return hash((self.service, self.endpoint))
-
 
     def __iter__(self):
         result = {
@@ -68,14 +65,12 @@ class PssFlowDetails():
         for item in result.items():
             yield item
 
-
     def __lt__(self, other):
-        if (isinstance(other, PssFlowDetails)):
+        if isinstance(other, PssFlowDetails):
             if self.service == other.service:
                 return self.endpoint < other.endpoint
             else:
                 return self.service < other.service
-
 
     def __ne__(self, other):
         return not self.__eq__(other)

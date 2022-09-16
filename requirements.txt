@@ -1,2 +1,2 @@
-mitmproxy>=7.0.2
-Jinja2
+mitmproxy==8.1.1
+Jinja2==3.1.2

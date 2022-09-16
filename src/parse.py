@@ -1,20 +1,18 @@
 #!/usr/bin/env python3
 
-from datetime import datetime, timedelta
 import json
 import os.path
 import sys
+from datetime import datetime, timedelta
 from timeit import default_timer as timer
-from typing import Dict, List, Set, Tuple, Union
+from typing import Dict, List, Set, Union
 from xml.etree import ElementTree
 
 from mitmproxy.http import HTTPFlow
-from mitmproxy.flow import Flow
 from mitmproxy.io import FlowReader, tnetstring
 
 from flowdetails import PssFlowDetails, ResponseStructure
 from objectstructure import PssObjectStructure
-
 
 # ----- Constants and type definitions -----
 
@@ -29,9 +27,6 @@ __TYPE_ORDER_LOOKUP: Dict[str, int] = {
     'datetime': 1,
     'str': 0
 }
-
-
-
 
 
 # ----- Public Functions -----
@@ -81,33 +76,34 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows
     Returns the path to the created json file
     """
     print(f'Reading file: {file_path}')
+    start_timer = 0
 
     if verbose:
-        start = timer()
+        start_timer = timer()
     flows = __read_flows_from_file(file_path)
     total_flow_count = len(flows)
     if verbose:
-        print(f'Extracted {total_flow_count} flow details in: {timedelta(seconds=(timer()-start))}')
+        print(f'Extracted {total_flow_count} flow details in: {timedelta(seconds=(timer() - start_timer))}')
 
     if verbose:
-        start = timer()
+        start_timer = timer()
     object_structures = __get_object_structures_from_flows(flows)
     object_count = len(object_structures)
     if verbose:
-        print(f'Extracted {object_count} entity types in: {timedelta(seconds=(timer()-start))}')
+        print(f'Extracted {object_count} entity types in: {timedelta(seconds=(timer() - start_timer))}')
 
     if verbose:
-        start = timer()
+        start_timer = timer()
     all_organized_flows = __organize_flows(flows)
     singularized_flows = __singularize_flows(all_organized_flows)
     if verbose:
-        print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {timedelta(seconds=(timer()-start))}')
+        print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {timedelta(seconds=(timer() - start_timer))}')
 
     if verbose:
-        start = timer()
+        start_timer = timer()
     organized_flows = __organize_flows(singularized_flows)
     if verbose:
-        print(f'Ordered flows according to services and endpoints in: {timedelta(seconds=(timer()-start))}')
+        print(f'Ordered flows according to services and endpoints in: {timedelta(seconds=(timer() - start_timer))}')
 
     result = {
         'endpoints': organized_flows,
@@ -130,9 +126,6 @@ def store_structure_json(file_path: str, flow_details: ApiOrganizedFlows, indent
         json.dump(flow_details_dicts, fp, indent=indent)
 
 
-
-
-
 # ----- Private Functions -----
 
 def __convert_api_structured_flows_to_dict(flows: ApiOrganizedFlows) -> ApiOrganizedFlowsDict:
@@ -147,7 +140,7 @@ def __convert_api_structured_flows_to_dict(flows: ApiOrganizedFlows) -> ApiOrgan
 
 def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
     result = {}
-    result['method'] = flow.request.method # GET/POST
+    result['method'] = flow.request.method  # GET/POST
     if '?' in flow.request.path:
         path, query_string = flow.request.path.split('?')
     else:
@@ -319,7 +312,7 @@ def __merge_type_dictionaries(d1: dict, d2: dict) -> dict:
 
 
 def __organize_flows(extracted_flow_details: List[PssFlowDetails]) -> ApiOrganizedFlows:
-    sorted_flows = sorted(extracted_flow_details, key=lambda x: (f'{x.service}{x.endpoint}'))
+    sorted_flows = sorted(extracted_flow_details, key=lambda x: f'{x.service}{x.endpoint}')
     result: ApiOrganizedFlows = {}
     for flow_details in sorted_flows:
         result.setdefault(flow_details.service, {}).setdefault(flow_details.endpoint, []).append(flow_details)
@@ -357,14 +350,11 @@ def __singularize_flows(organized_flows: ApiOrganizedFlows) -> Set[PssFlowDetail
     return result
 
 
-
-
-
 # ----- MAIN -----
 
 if __name__ == "__main__":
     app_start = timer()
-    if (len(sys.argv) == 1):
+    if len(sys.argv) == 1:
         raise ValueError('The path to the flows file has not been specified!')
     file_path = ' '.join(sys.argv[1:])
     flows = parse_flows_file(file_path, verbose=True)
@@ -374,5 +364,5 @@ if __name__ == "__main__":
     start = timer()
     store_structure_json(storage_path, flows, indent=2)
     end = timer()
-    print(f'Stored JSON encoded PSS API endpoint information in {timedelta(seconds=(end-start))} at: {storage_path}')
-    print(f'Total execution time: {timedelta(seconds=(end-app_start))}')
+    print(f'Stored JSON encoded PSS API endpoint information in {timedelta(seconds=(end - start))} at: {storage_path}')
+    print(f'Total execution time: {timedelta(seconds=(end - app_start))}')

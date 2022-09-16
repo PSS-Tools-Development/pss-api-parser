@@ -39,7 +39,6 @@ from typing import Optional as _Optional
 from typing import Tuple as _Tuple
 from jinja2 import Environment as _Environment, PackageLoader as _PackageLoader
 
-
 from . import utils as _utils
 
 
@@ -49,9 +48,7 @@ IMPORTS = {
 }
 
 
-
 def read_data(file_path: str) -> dict:
-    result = None
     with open(file_path) as f:
         result = _json.load(f)
     return result
@@ -61,7 +58,7 @@ def prepare_data(data: dict) -> _Tuple[list, list]:
     known_entity_names = set(data['entities'].keys())
     services = __prepare_services_data(data['endpoints'], known_entity_names)
     entities = __prepare_entities_data(data['entities'])
-    return (services, entities)
+    return services, entities
 
 
 def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> list:
@@ -150,11 +147,6 @@ def __find_id_property(property_names: _List[str], entity_name: str) -> _Optiona
 
 
 def __find_name_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
-    message = None
-    name = None
-    title = None
-    key = None
-
     for property_name in property_names:
         if property_name and property_name[:2] == 'Id':
             return property_name
@@ -175,7 +167,7 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
         else:
             for key, value in response_structure.items():
                 result = __get_return_type(value, entity_names, key)
-                if result[1]: # At least 1 known entity type has been found
+                if result[1]:  # At least 1 known entity type has been found
                     break
                 else:
                     result = (parent_tag_name, None)
@@ -184,11 +176,11 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
 
 def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
     result = []
-    for name, type in query_parameters.items():
+    for name, parameter_type in query_parameters.items():
         result.append({
             'name': name,
             'name_snake_case': _utils.convert_to_snake_case(name),
-            'type': type
+            'type': parameter_type
         })
     return result
 
