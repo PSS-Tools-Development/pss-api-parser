@@ -226,7 +226,7 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
     _utils.create_file(
         _os.path.join(services_path, '__init__.py'),
         format_source(services_init_template.render(services=services_data)),
-        overwrite=force_overwrite,
+        overwrite=True,
     )
     _utils.create_file(
         _os.path.join(services_raw_path, '__init__.py'),
@@ -263,6 +263,7 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
             format_source(entity_template.render(entity=entity)),
             overwrite=force_overwrite,
         )
+
         _utils.create_file(
             _os.path.join(entities_raw_path, entity['name_snake_case'] + '_raw.py'),
             format_source(entity_raw_template.render(entity=entity)),
@@ -272,8 +273,9 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     _utils.create_file(
         _os.path.join(entities_path, '__init__.py'),
         format_source(entities_init_template.render(entities=entities_data)),
-        overwrite=force_overwrite,
+        overwrite=True,
     )
+
     _utils.create_file(
         _os.path.join(entities_raw_path, '__init__.py'),
         format_source(entities_raw_init_template.render(entities=entities_data)),
