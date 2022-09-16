@@ -37,10 +37,11 @@ from typing import Dict as _Dict
 from typing import List as _List
 from typing import Optional as _Optional
 from typing import Tuple as _Tuple
+
+import autopep8
 from jinja2 import Environment as _Environment, PackageLoader as _PackageLoader
 
 from . import utils as _utils
-
 
 IMPORTS = {
     'datetime': 'from datetime import datetime as _datetime',
@@ -177,11 +178,12 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
 def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
     result = []
     for name, parameter_type in query_parameters.items():
-        result.append({
-            'name': name,
-            'name_snake_case': _utils.convert_to_snake_case(name),
-            'type': parameter_type
-        })
+        if name:
+            result.append({
+                'name': name,
+                'name_snake_case': _utils.convert_to_snake_case(name),
+                'type': parameter_type
+            })
     return result
 
 
@@ -212,23 +214,23 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
     for service in services_data:
         _utils.create_file(
             _os.path.join(services_path, service['name_snake_case'] + '.py'),
-            service_template.render(service=service),
+            format_source(service_template.render(service=service)),
             overwrite=force_overwrite,
         )
         _utils.create_file(
             _os.path.join(services_raw_path, service['name_snake_case'] + '_raw.py'),
-            service_raw_template.render(service=service),
+            format_source(service_raw_template.render(service=service)),
             overwrite=True
         )
 
     _utils.create_file(
         _os.path.join(services_path, '__init__.py'),
-        services_init_template.render(services=services_data),
+        format_source(services_init_template.render(services=services_data)),
         overwrite=force_overwrite,
     )
     _utils.create_file(
         _os.path.join(services_raw_path, '__init__.py'),
-        services_raw_init_template.render(services=services_data),
+        format_source(services_raw_init_template.render(services=services_data)),
         overwrite=True
     )
 
@@ -238,7 +240,7 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
 
     _utils.create_file(
         _os.path.join(target_path, 'client.py'),
-        client_template.render(services=services_data),
+        format_source(client_template.render(services=services_data)),
         overwrite=force_overwrite,
     )
 
@@ -258,23 +260,23 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     for entity in entities_data:
         _utils.create_file(
             _os.path.join(entities_path, entity['name_snake_case'] + '.py'),
-            entity_template.render(entity=entity),
+            format_source(entity_template.render(entity=entity)),
             overwrite=force_overwrite,
         )
         _utils.create_file(
             _os.path.join(entities_raw_path, entity['name_snake_case'] + '_raw.py'),
-            entity_raw_template.render(entity=entity),
+            format_source(entity_raw_template.render(entity=entity)),
             overwrite=True
         )
 
     _utils.create_file(
         _os.path.join(entities_path, '__init__.py'),
-        entities_init_template.render(entities=entities_data),
+        format_source(entities_init_template.render(entities=entities_data)),
         overwrite=force_overwrite,
     )
     _utils.create_file(
         _os.path.join(entities_raw_path, '__init__.py'),
-        entities_raw_init_template.render(entities=entities_data),
+        format_source(entities_raw_init_template.render(entities=entities_data)),
         overwrite=True
     )
 
@@ -285,3 +287,7 @@ def generate_source_code(data_file_path: str, target_path: str, force_overwrite:
     data = read_data(data_file_path)
     services_data, entities_data = prepare_data(data)
     generate_files_from_data(services_data, entities_data, target_path, force_overwrite)
+
+
+def format_source(content: str) -> str:
+    return autopep8.fix_code(content)
