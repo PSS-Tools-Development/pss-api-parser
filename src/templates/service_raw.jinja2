@@ -22,7 +22,7 @@ class {{service.name}}Raw:
 
 {% for endpoint in service.endpoints %}
     @staticmethod
-    async def _{{endpoint.name_snake_case}}(production_server: str, {{endpoint.parameter_definitions}}, **params) -> _List[_{{endpoint.return_type}}]:
+    async def _{{endpoint.name_snake_case}}(production_server: str{% if endpoint.parameter_calls %}, {{endpoint.parameter_definitions}}{% endif %}, **params) -> _List[_{{endpoint.return_type}}]:
         params = {
     {% for parameter in endpoint.parameters %}
             '{{parameter.name}}': {{parameter.name_snake_case}},
