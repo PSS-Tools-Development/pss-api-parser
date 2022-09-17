@@ -38,7 +38,6 @@ from typing import List as _List
 from typing import Optional as _Optional
 from typing import Tuple as _Tuple
 
-import autoflake
 import autopep8
 from jinja2 import Environment as _Environment, PackageLoader as _PackageLoader
 
@@ -91,6 +90,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'name': endpoint_name,
                 'name_snake_case': name_snake_case,
                 'parameter_definitions': ', '.join([f'{parameter["name_snake_case"]}: {parameter["type"]}' for parameter in parameters if parameter['type']]),
+                'parameter_calls': ', '.join([f'self.{parameter["name_snake_case"]}' for parameter in parameters if parameter['type']]),
                 'parameters': parameters,
                 'return_type': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
@@ -293,9 +293,4 @@ def generate_source_code(data_file_path: str, target_path: str, force_overwrite:
 
 
 def format_source(content: str) -> str:
-    formated_content = content
-
-    formated_content = autopep8.fix_code(formated_content)
-    formated_content = autoflake.fix_code(formated_content)
-
-    return formated_content
+    return autopep8.fix_code(content)

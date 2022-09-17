@@ -1,3 +1,5 @@
+from .service_base_raw import ServiceBaseRaw
+
 {% for service in services %}
-from . import {{service.name_snake_case}}_raw as {{service.name}}Raw
+from .{{service.name_snake_case}}_raw import {{service.name}}Raw
 {% endfor %}
