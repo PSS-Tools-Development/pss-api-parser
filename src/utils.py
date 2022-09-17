@@ -1,5 +1,7 @@
+import json as _json
 import os as _os
 import re as _re
+from typing import Union as _Union
 
 
 def convert_to_snake_case(s) -> str:
@@ -20,3 +22,9 @@ def create_file(path: str, contents: str, overwrite: bool = False) -> None:
     if overwrite or not _os.path.exists(path):
         with open(path, 'w') as fp:
             fp.write(contents or '')
+
+
+def read_json(file_path: str) -> _Union[list, dict]:
+    with open(file_path, 'r') as fp:
+        result = _json.load(fp)
+    return result

@@ -13,6 +13,8 @@ from mitmproxy.io import FlowReader, tnetstring
 
 from flowdetails import PssFlowDetails, ResponseStructure
 from objectstructure import PssObjectStructure
+import utils
+
 
 # ----- Constants and type definitions -----
 
@@ -107,7 +109,7 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows
 
     result = {
         'endpoints': organized_flows,
-        'entities': list(object_structures.values()),
+        'entities': sorted(list(object_structures.values()), key=lambda x: x.object_type_name),
     }
 
     return result
@@ -323,7 +325,7 @@ def __read_flows_from_file(file_path: str) -> List[PssFlowDetails]:
     if not os.path.isfile(file_path):
         raise FileNotFoundError(f'The specified file could not be found at: {file_path}')
 
-    result: List[PssFlowDetails] = []
+    flow_details: List[PssFlowDetails] = []
 
     with open(file_path, 'rb') as fp:
         flow_reader: FlowReader = FlowReader(fp)
@@ -333,8 +335,11 @@ def __read_flows_from_file(file_path: str) -> List[PssFlowDetails]:
         except ValueError as e:
             raise Exception(f'The specified file is not a Flows file: {file_path}') from e
 
-        result = [PssFlowDetails(__convert_flow_to_dict(recorded_flow)) for recorded_flow in flow_reader.stream()]
+        flow_details = [PssFlowDetails(__convert_flow_to_dict(recorded_flow)) for recorded_flow in flow_reader.stream()]
 
+    blacklisted_services = utils.read_json('src/blacklisted_services.json')
+    blacklisted_endpoints = utils.read_json('src/blacklisted_endpoints.json')
+    result = [flow for flow in flow_details if flow.service not in blacklisted_services and not any(endpoint in flow.endpoint for endpoint in blacklisted_endpoints)]
     return result
 
 
@@ -357,12 +362,12 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         raise ValueError('The path to the flows file has not been specified!')
     file_path = ' '.join(sys.argv[1:])
-    flows = parse_flows_file(file_path, verbose=True)
+    flow_details = parse_flows_file(file_path, verbose=True)
 
     file_name, _ = os.path.splitext(file_path)
     storage_path = f'{file_name}.json'
     start = timer()
-    store_structure_json(storage_path, flows, indent=2)
+    store_structure_json(storage_path, flow_details, indent=2)
     end = timer()
     print(f'Stored JSON encoded PSS API endpoint information in {timedelta(seconds=(end - start))} at: {storage_path}')
     print(f'Total execution time: {timedelta(seconds=(end - app_start))}')
