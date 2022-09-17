@@ -287,6 +287,7 @@ def __merge_flows(flow1: PssFlowDetails, flow2: PssFlowDetails) -> PssFlowDetail
         'query_parameters': query_parameters,
         'response_structure': response_structure,
         'service': flow1.service,
+        'original_flow': flow1.original_flow
     }
     return PssFlowDetails(result)
 
