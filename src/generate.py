@@ -90,6 +90,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'name': endpoint_name,
                 'name_snake_case': name_snake_case,
                 'parameter_definitions': ', '.join([f'{parameter["name_snake_case"]}: {parameter["type"]}' for parameter in parameters if parameter['type']]),
+                'parameter_calls': ', '.join([f'self.{parameter["name_snake_case"]}' for parameter in parameters if parameter['type']]),
                 'parameters': parameters,
                 'return_type': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
