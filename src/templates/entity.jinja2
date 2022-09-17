@@ -16,11 +16,18 @@ class {{entity.name}}(_{{entity.base_class_name}}, _{{entity.name}}Raw):
 
 
     def __repr__(self) -> str:
+{% if entity.id_property_name %}
         return f'<{{entity.name}} {self.id}: {self.name}>'
-
+{% else %}
+        return f'<{{entity.name}}: {self.name}>'
+{% endif %}
 
     def __str__(self) -> str:
+{% if entity.id_property_name %}
         return f'<{{entity.name}} {self.id}: {self.name}>'
+{% else %}
+        return f'<{{entity.name}}: {self.name}>'
+{% endif %}
 
 
 {% if entity.id_property_name %}
