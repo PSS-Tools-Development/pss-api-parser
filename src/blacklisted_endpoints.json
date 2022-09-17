@@ -1,6 +1,7 @@
 [
     "AddGamecenterFriends",
     "AuthorizeFirebaseToken",
+    "CreateMission",
     "FindUserRanking",
     "GetShipByUserId",
     "HeartBeat",
@@ -22,5 +23,10 @@
     "ListTasksOfAUser",
     "ListUserMarkers",
     "ListUserStarSystems",
-    "UserGameCenterAuthorize"
+    "SelectEvent",
+    "SpeedUpTravelling",
+    "PurchaseFromMarker",
+    "SteamLogin3",
+    "UserGameCenterAuthorize",
+    "UserSteamAuthorize"
 ]
