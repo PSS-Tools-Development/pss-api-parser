@@ -182,7 +182,7 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
         if name:
             result.append({
                 'name': name,
-                'name_snake_case': _utils.convert_to_snake_case(name),
+                'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_to_snake_case(name)),
                 'type': parameter_type
             })
     return result

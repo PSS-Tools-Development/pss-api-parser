@@ -1,7 +1,14 @@
 import json as _json
+import keyword as _keyword
 import os as _os
 import re as _re
 from typing import Union as _Union
+
+
+def append_underscore_if_keyword(s) -> str:
+    if _keyword.iskeyword(s):
+        s += '_'
+    return s
 
 
 def convert_to_snake_case(s) -> str:
