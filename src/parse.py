@@ -159,6 +159,7 @@ def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
             split_param = param.split('=')
             if split_param[0]:
                 if len(split_param) == 1:
+                    # Check for missing '=' and attempt to split param name and value
                     param_value = __RX_PARAMETER_CHECK.search(split_param[0])
                     value_span = param_value.span()
                     param_name = split_param[0][:value_span[0]]
