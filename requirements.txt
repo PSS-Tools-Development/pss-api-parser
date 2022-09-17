@@ -3,3 +3,4 @@ Jinja2==3.1.2
 autopep8==1.7.0
 contexttimer==0.3.3
 colorama==0.4.5
+autoflake==1.5.3

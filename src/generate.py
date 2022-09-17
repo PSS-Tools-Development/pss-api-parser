@@ -38,6 +38,7 @@ from typing import List as _List
 from typing import Optional as _Optional
 from typing import Tuple as _Tuple
 
+import autoflake
 import autopep8
 from jinja2 import Environment as _Environment, PackageLoader as _PackageLoader
 
@@ -292,4 +293,9 @@ def generate_source_code(data_file_path: str, target_path: str, force_overwrite:
 
 
 def format_source(content: str) -> str:
-    return autopep8.fix_code(content)
+    formated_content = content
+
+    formated_content = autopep8.fix_code(formated_content)
+    formated_content = autoflake.fix_code(formated_content)
+
+    return formated_content
