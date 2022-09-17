@@ -82,7 +82,7 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows
 
     if verbose:
         start_timer = timer()
-    flows = __read_flows_from_file(file_path)
+    flows = sorted(__read_flows_from_file(file_path), key=lambda x: str(x))
     total_flow_count = len(flows)
     if verbose:
         print(f'Extracted {total_flow_count} flow details in: {timedelta(seconds=(timer() - start_timer))}')
@@ -180,6 +180,8 @@ def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
     result['response_structure'] = {}
     if result['response']:
         result['response_structure'] = __convert_xml_to_dict(ElementTree.fromstring(result['response']))
+
+    result['original_flow'] = flow
     return result
 
 

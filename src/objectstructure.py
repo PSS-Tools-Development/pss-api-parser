@@ -8,3 +8,6 @@ class PssObjectStructure:
 
     def __repr__(self) -> str:
         return f'<PssObjectStructure "{self.object_type_name}">'
+
+    def __str__(self) -> str:
+        return self.__repr__()
