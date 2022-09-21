@@ -89,8 +89,8 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'base_path_name': name_snake_case.upper(),
                 'name': endpoint_name,
                 'name_snake_case': name_snake_case,
-                'parameter_definitions': ', '.join([f'{parameter["name_snake_case"]}: {parameter["type"]}' for parameter in parameters if parameter['type']]),
-                'parameter_calls': ', '.join([f'self.{parameter["name_snake_case"]}' for parameter in parameters if parameter['type']]),
+                'parameter_definitions': __format_parameters_definitions(parameters),
+                'parameter_calls': __format_parameters_calls(parameters),
                 'parameters': parameters,
                 'return_type': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
@@ -105,6 +105,31 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
         service['imports'] = sorted(list(set(service['imports'])))
         result.append(service)
     return result
+
+
+def __format_parameters_definitions(parameters):
+    formated_parameters = []
+
+    for parameter in parameters:
+        if parameter['type']:
+            formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
+
+            if parameter['default_value']:
+                formated_parameter += f' = {parameter["default_value"]}'
+
+            formated_parameters.append(formated_parameter)
+
+    return ', '.join(formated_parameters)
+
+
+def __format_parameters_calls(parameters):
+    formated_parameters = []
+
+    for parameter in parameters:
+        if parameter['type']:
+            formated_parameters.append(f'self.{parameter["name_snake_case"]}')
+
+    return ', '.join(formated_parameters)
 
 
 def __prepare_entities_data(entities_data: dict) -> list:
@@ -180,10 +205,15 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
     result = []
     for name, parameter_type in query_parameters.items():
         if name:
+            default_value = None
+            if name == 'designVersion':
+                default_value = 'None'
+
             result.append({
                 'name': name,
                 'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_to_snake_case(name)),
-                'type': parameter_type
+                'type': parameter_type,
+                'default_value': default_value
             })
     return result
 
