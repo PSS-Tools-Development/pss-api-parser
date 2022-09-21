@@ -2,6 +2,7 @@
 
 import json
 import os.path
+import re
 import sys
 from datetime import datetime, timedelta
 from timeit import default_timer as timer
@@ -21,6 +22,8 @@ import utils
 ApiOrganizedFlows = Dict[str, Dict[str, Union[List[PssFlowDetails], List[PssObjectStructure]]]]
 ApiOrganizedFlowsDict = Dict[str, 'ApiOrganizedFlowsDict']
 NestedDict = Dict[str, Union[str, 'NestedDict']]
+
+__RX_PARAMETER_CHECK: re.Pattern = re.compile('\d.*', )
 
 __TYPE_ORDER_LOOKUP: Dict[str, int] = {
     'float': 4,
@@ -154,10 +157,18 @@ def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
     if query_string:
         for param in query_string.split('&'):
             split_param = param.split('=')
-            if len(split_param) > 1:
-                result['query_parameters'][split_param[0]] = __determine_data_type(split_param[1], split_param[0])
-            else:
-                result['query_parameters'][split_param[0]] = None
+            if split_param[0]:
+                if len(split_param) == 1:
+                    # Check for missing '=' and attempt to split param name and value
+                    param_value = __RX_PARAMETER_CHECK.search(split_param[0])
+                    value_span = param_value.span()
+                    param_name = split_param[0][:value_span[0]]
+                    split_param = [param_name, split_param[0][value_span[0]:value_span[1]]]
+
+                if len(split_param) > 1:
+                    result['query_parameters'][split_param[0]] = __determine_data_type(split_param[1], split_param[0])
+                else:
+                    result['query_parameters'][split_param[0]] = None
 
     result['content'] = flow.request.content.decode('utf-8') or None
     result['content_structure'] = {}
