@@ -126,7 +126,7 @@ def __format_parameters_calls(parameters):
     formated_parameters = []
 
     for parameter in parameters:
-        if parameter['type']:
+        if parameter['type'] and not parameter['default_value']:
             formated_parameters.append(f'self.{parameter["name_snake_case"]}')
 
     return ', '.join(formated_parameters)
