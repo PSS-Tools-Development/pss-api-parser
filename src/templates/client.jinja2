@@ -49,7 +49,7 @@ class PssApiClient:
 
     def _update_services(self) -> None:
 {% for service in services %}
-        self.__{{service.name_snake_case}}: _{{service.name}} = _{{service.name}}(self.production_server, self.device_type)
+        self.__{{service.name_snake_case}}: _{{service.name}} = _{{service.name}}(self.production_server, self.language_key)
 {% endfor %}
 
 
