@@ -89,8 +89,9 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'base_path_name': name_snake_case.upper(),
                 'name': endpoint_name,
                 'name_snake_case': name_snake_case,
-                'parameter_definitions': __format_parameters_definitions(parameters),
-                'parameter_calls': __format_parameters_calls(parameters),
+                'parameter_service_raw_definitions': __format_parameters_service_raw_definitions(parameters),
+                'parameters_service_raw_calls': __format_parameters_service_raw_calls(parameters),
+                'parameters_service_definitions': __format_parameters_service_definitions(parameters),
                 'parameters': parameters,
                 'return_type': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
@@ -107,27 +108,39 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
     return result
 
 
-def __format_parameters_definitions(parameters):
+def __format_parameters_service_raw_definitions(parameters):
     formated_parameters = []
 
     for parameter in parameters:
         if parameter['type']:
+            formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
+            formated_parameters.append(formated_parameter)
+
+    return ', '.join(formated_parameters)
+
+
+def __format_parameters_service_raw_calls(parameters):
+    formated_parameters = []
+
+    for parameter in parameters:
+        if parameter['type']:
+            self_prefix = 'self.' if parameter['self_field'] else  ''
+            formated_parameters.append(f'{self_prefix}{parameter["name_snake_case"]}')
+
+    return ', '.join(formated_parameters)
+
+
+def __format_parameters_service_definitions(parameters):
+    formated_parameters = []
+
+    for parameter in parameters:
+        if parameter['type'] and not parameter['self_field']:
             formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
 
             if parameter['default_value']:
                 formated_parameter += f' = {parameter["default_value"]}'
 
             formated_parameters.append(formated_parameter)
-
-    return ', '.join(formated_parameters)
-
-
-def __format_parameters_calls(parameters):
-    formated_parameters = []
-
-    for parameter in parameters:
-        if parameter['type'] and not parameter['default_value']:
-            formated_parameters.append(f'self.{parameter["name_snake_case"]}')
 
     return ', '.join(formated_parameters)
 
@@ -209,11 +222,16 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
             if name == 'designVersion':
                 default_value = 'None'
 
+            self_field = False
+            if name == 'languageKey':
+                self_field = True
+
             result.append({
                 'name': name,
                 'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_to_snake_case(name)),
                 'type': parameter_type,
-                'default_value': default_value
+                'default_value': default_value,
+                'self_field': self_field,
             })
     return result
 

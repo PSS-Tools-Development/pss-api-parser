@@ -11,8 +11,8 @@ from ..entities import {{entity_type}} as _{{entity_type}}
 
 class {{service.name}}(_ServiceBase, _{{service.name}}Raw):
 {% for endpoint in service.endpoints %}
-    async def {{endpoint.name_snake_case}}(self, **params) -> _List[_{{endpoint.return_type}}]:
-        return await self._{{endpoint.name_snake_case}}(self.production_server{% if endpoint.parameter_calls %}, {{ endpoint.parameter_calls }}{% endif %}, **params)
+    async def {{endpoint.name_snake_case}}(self{% if endpoint.parameters_service_definitions %}, {{ endpoint.parameters_service_definitions }}{% endif %}, **params) -> _List[_{{endpoint.return_type}}]:
+        return await self._{{endpoint.name_snake_case}}(self.production_server{% if endpoint.parameters_service_raw_calls %}, {{ endpoint.parameters_service_raw_calls }}{% endif %}, **params)
 {% endfor %}
 
     def __repr__(self) -> str:
