@@ -58,6 +58,8 @@ __RX_PROPERTIES: re.Pattern = re.compile('( (' + '|'.join(__ENTITY_PROPERTY_NAME
 # ---------- Functions ----------
 
 def anonymize_flow(flow: HTTPFlow) -> HTTPFlow:
+    flow.server_conn.sockname = (None, None)
+
     for query_param_name, query_param_value in flow.request.query.items():
         if query_param_name.lower() in __QUERY_PARAM_NAMES and query_param_value:
             try:
