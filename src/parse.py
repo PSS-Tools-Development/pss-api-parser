@@ -21,14 +21,17 @@ ApiOrganizedFlows = Dict[str, Dict[str, Union[List[PssFlowDetails], List[PssObje
 ApiOrganizedFlowsDict = Dict[str, 'ApiOrganizedFlowsDict']
 NestedDict = Dict[str, Union[str, 'NestedDict']]
 
+__PSS_BOOL_VALUES = ('true', 'false', 'True', 'False')
+
 __RX_PARAMETER_CHECK: re.Pattern = re.compile('\d.*', )
 
 __TYPE_ORDER_LOOKUP: Dict[str, int] = {
+    'str': 5,
     'float': 4,
     'int': 3,
     'bool': 2,
     'datetime': 1,
-    'str': 0
+    'none': 0,
 }
 
 
@@ -91,6 +94,9 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows
     if verbose:
         start_timer = timer()
     object_structures = __get_object_structures_from_flows(flows)
+    for object_structure in object_structures.values():
+        if 'none' in object_structure.properties.values():
+            i = 0
     object_count = len(object_structures)
     if verbose:
         print(f'Extracted {object_count} entity types in: {timedelta(seconds=(timer() - start_timer))}')
@@ -215,27 +221,45 @@ def __convert_xml_to_dict(root: ElementTree.Element) -> ResponseStructure:
     if root.attrib:
         result['properties'] = {key: __determine_data_type(value, key) for key, value in root.attrib.items()}
     for child in root:
-        if child.tag not in result:
-            child_dict = __convert_xml_to_dict(child)
+        child_dict = __convert_xml_to_dict(child)
+        if child.tag in result:
+            result[child.tag]['properties'] = __merge_type_dictionaries(result[child.tag]['properties'], child_dict[child.tag]['properties'])
+        else:
             result[child.tag] = child_dict[child.tag]
     return {root.tag: result}
 
 
 def __determine_data_type(value: str, property_name: str = None) -> str:
     if value:
+        int_value = None
+        float_value = None
+
         try:
-            int(value)
+            float_value = float(value)
+        except:
+            pass
+
+        try:
+            int_value = int(value)
+        except:
+            pass
+
+        if int_value is not None and float_value is not None:
+            try:
+                float_int_value = float(int_value)
+            except OverflowError: # int is too large to be converted to float, could be a bit-mask
+                return 'str'
+
+            if float_int_value == float_value:
+                return 'int'
+            else:
+                return 'float'
+        elif int_value is not None:
             return 'int'
-        except:
-            pass
-
-        try:
-            float(value)
+        elif float_value is not None:
             return 'float'
-        except:
-            pass
 
-        if value.lower() in ('true', 'false'):
+        if value.lower() in __PSS_BOOL_VALUES:
             return 'bool'
 
         try:
@@ -244,7 +268,9 @@ def __determine_data_type(value: str, property_name: str = None) -> str:
         except:
             pass
 
-    return 'str'
+        return 'str'
+
+    return 'none'
 
 
 def __get_object_structures_from_response_structure(response_structure: ResponseStructure) -> Dict[str, List[PssObjectStructure]]:
@@ -259,12 +285,16 @@ def __get_object_structures_from_response_structure(response_structure: Response
     return result
 
 
-def __get_object_structures_from_flows(flows: List[PssFlowDetails]) -> List[PssObjectStructure]:
-    result: Dict[str, List[PssObjectStructure]] = {}
+def __get_object_structures_from_flows(flows: List[PssFlowDetails]) -> Dict[str, PssObjectStructure]:
+    result: Dict[str, PssObjectStructure] = {}
     for flow in flows:
         current_object_structures = __get_object_structures_from_response_structure(flow.response_structure)
         for object_name, object_structure in current_object_structures.items():
             result[object_name] = __merge_object_structures(object_structure, result.get(object_name))
+    for object_structure in result.values():
+        for property_name, property_type in object_structure.properties.items():
+            if property_type == 'none':
+                object_structure.properties[property_name] = 'str'
     return result
 
 
