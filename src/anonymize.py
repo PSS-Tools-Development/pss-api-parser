@@ -157,8 +157,10 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         raise ValueError('The path to the flows file has not been specified!')
     file_path = ' '.join(sys.argv[1:])
+    print(f'Anonymizing flows file at: {file_path}')
     flows = anynomize_flows(file_path)
 
     file_name, _ = os.path.splitext(file_path)
     storage_path = f'{file_name}_anonymized.flows'
     store_flows(storage_path, flows)
+    print(f'Stored anonymized flows file at: {storage_path}')
