@@ -1,3 +1,4 @@
+from datetime import datetime as _datetime
 import json as _json
 import keyword as _keyword
 import os as _os
@@ -29,6 +30,13 @@ def create_file(path: str, contents: str, overwrite: bool = False) -> None:
     if overwrite or not _os.path.exists(path):
         with open(path, 'w') as fp:
             fp.write(contents or '')
+
+
+def parse_pss_datetime(dt: str) -> _datetime:
+    try:
+        return _datetime.strptime(dt, '%Y-%m-%dT%H:%M:%S')
+    except:
+        return _datetime.strptime(dt, '%Y-%m-%dT%H:%M:%S.%f')
 
 
 def read_json(file_path: str) -> _Union[list, dict]:
