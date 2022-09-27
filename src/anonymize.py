@@ -127,19 +127,6 @@ def anonymize_flow(flow: HTTPFlow) -> HTTPFlow:
 
         flow.response.content = response_content.encode('utf-8')
 
-    name_in_request = [name for name in __QUERY_PARAM_NAMES if name in request_content.lower()]
-    name_in_response = [name for name in __QUERY_PARAM_NAMES if name in response_content.lower()]
-    if (name_in_request and not found_request_match) or (name_in_response and not found_response_match):
-        pass
-    if found_request_match or found_response_match:
-        print()
-        print()
-        if request_content:
-            print(request_content)
-            print()
-        print(response_content)
-        i = 0
-
     return flow
 
 
