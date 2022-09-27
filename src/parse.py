@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import json
 import os.path
 import re
@@ -241,14 +239,10 @@ def __determine_data_type(value: str, property_name: str = None) -> str:
             return 'bool'
 
         try:
-            datetime.strptime(value, '%Y-%m-%dT%H:%M:%S')
+            utils.parse_pss_datetime(value)
             return 'datetime'
         except:
-            try:
-                datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                return 'datetime'
-            except:
-                pass
+            pass
 
     return 'str'
 
@@ -367,6 +361,7 @@ def __singularize_flows(organized_flows: ApiOrganizedFlows) -> Set[PssFlowDetail
                     merged_flow = __merge_flows(merged_flow, flow2)
             result.add(merged_flow)
     return result
+
 
 
 # ----- MAIN -----
