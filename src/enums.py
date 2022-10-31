@@ -100,20 +100,3 @@ def store_enum_file(enum_definitions: _Dict[str, EnumDefinition], store_at: str,
         separators = (', ', ': ')
     with open(store_at, 'w') as fp:
         _json.dump(enum_definitions, fp, indent=indent, separators=separators)
-
-
-if __name__ == "__main__":
-    app_start = _timer()
-    if len(_sys.argv) == 1:
-        raise ValueError('The path to the CSharp dump file has not been specified!')
-    file_path = ' '.join(_sys.argv[1:])
-    file_name, _ = _os.path.splitext(file_path)
-    storage_path = f'{file_name}_enums.json'
-
-    start = _timer()
-    enums = parse_csharp_dump_file(file_path)
-    end = _timer()
-
-    store_enum_file(enums, storage_path, indent=2)
-    print(f'Stored JSON encoded PSS API endpoint information in {_timedelta(seconds=(end - start))} at: {storage_path}')
-    print(f'Total execution time: {_timedelta(seconds=(end - app_start))}')
