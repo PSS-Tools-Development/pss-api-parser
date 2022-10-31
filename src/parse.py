@@ -2,7 +2,7 @@ import json
 import os.path
 import re
 import sys
-from datetime import datetime, timedelta
+from datetime import timedelta
 from timeit import default_timer as timer
 from typing import Dict, List, Set, Union
 from xml.etree import ElementTree
