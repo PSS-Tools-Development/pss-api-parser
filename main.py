@@ -17,8 +17,8 @@ if __name__ == '__main__':
         Example: python main.py --endpoints examples/pss_api_ios_v0.989.9402.json --output bin
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("--endpoints", type=str, required=True, help="endpoints JSON file to be parsed")
-    parser.add_argument("--enums", type=str, required=False, help="enumerations JSON file to be parsed")
+    parser.add_argument("--endpoints", type=str, required=True, help="endpoints JSON file to be generated")
+    parser.add_argument("--enums", type=str, required=False, help="enumerations JSON file to be generated")
     parser.add_argument("--output", type=str, required=True, help="directory storing generated files")
     parser.add_argument("--overwrite", action="store_true", default=False, help="overwrite not raw files")
     args = parser.parse_args()
