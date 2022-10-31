@@ -1,31 +1,35 @@
-import json
-import os.path
-import re
-import sys
-from datetime import timedelta
-from timeit import default_timer as timer
-from typing import Dict, List, Set, Union
-from xml.etree import ElementTree
+from contexttimer import Timer as _Timer
+import json as _json
+import os as _os
+import re as _re
+import sys as _sys
+from typing import Dict as _Dict
+from typing import List as _List
+from typing import Set as _Set
+from typing import Union as _Union
+from xml.etree import ElementTree as _ElementTree
 
-from mitmproxy.http import HTTPFlow
-from mitmproxy.io import FlowReader, tnetstring
+from mitmproxy.http import HTTPFlow as _HTTPFlow
+from mitmproxy.io import FlowReader as _FlowReader
+from mitmproxy.io import tnetstring as _tnetstring
 
-from flowdetails import PssFlowDetails, ResponseStructure
-from objectstructure import PssObjectStructure
-import utils
+from flowdetails import PssFlowDetails as _PssFlowDetails
+from flowdetails import ResponseStructure as _ResponseStructure
+from objectstructure import PssObjectStructure as _PssObjectStructure
+import utils as _utils
 
 
 # ----- Constants and type definitions -----
 
-ApiOrganizedFlows = Dict[str, Dict[str, Union[List[PssFlowDetails], List[PssObjectStructure]]]]
-ApiOrganizedFlowsDict = Dict[str, 'ApiOrganizedFlowsDict']
-NestedDict = Dict[str, Union[str, 'NestedDict']]
+ApiOrganizedFlows = _Dict[str, _Dict[str, _Union[_List[_PssFlowDetails], _List[_PssObjectStructure]]]]
+ApiOrganizedFlowsDict = _Dict[str, 'ApiOrganizedFlowsDict']
+NestedDict = _Dict[str, _Union[str, 'NestedDict']]
 
 __PSS_BOOL_VALUES = ('true', 'false', 'True', 'False')
 
-__RX_PARAMETER_CHECK: re.Pattern = re.compile('\d.*', )
+__RX_PARAMETER_CHECK: _re.Pattern = _re.compile('\d.*', )
 
-__TYPE_ORDER_LOOKUP: Dict[str, int] = {
+__TYPE_ORDER_LOOKUP: _Dict[str, int] = {
     'str': 5,
     'float': 4,
     'int': 3,
@@ -41,7 +45,7 @@ def convert_organized_dicts_to_organized_flows(organized_dict: ApiOrganizedFlows
     result: ApiOrganizedFlows = {}
     for service, endpoints in organized_dict.items():
         for endpoint, flow_dict in endpoints:
-            result.setdefault(service, {}).setdefault(endpoint, []).append(PssFlowDetails(flow_dict))
+            result.setdefault(service, {}).setdefault(endpoint, []).append(_PssFlowDetails(flow_dict))
     return result
 
 
@@ -79,60 +83,59 @@ def merge_structure_jsons(file_path1: str, file_path2: str) -> ApiOrganizedFlows
 
 def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows:
     """
-    Returns the path to the created json file
+    Returns a dictionary with the parsed services and endpoints.
     """
     print(f'Reading file: {file_path}')
     start_timer = 0
 
-    if verbose:
-        start_timer = timer()
-    flows = sorted(__read_flows_from_file(file_path), key=lambda x: str(x))
-    total_flow_count = len(flows)
-    if verbose:
-        print(f'Extracted {total_flow_count} flow details in: {timedelta(seconds=(timer() - start_timer))}')
+    with _Timer() as timer:
+        flows = sorted(__read_flows_from_file(file_path), key=lambda x: str(x))
+        total_flow_count = len(flows)
+        if verbose:
+            print(f'Extracted {total_flow_count} flow details in: {timer.elapsed}')
 
-    if verbose:
-        start_timer = timer()
-    object_structures = __get_object_structures_from_flows(flows)
-    for object_structure in object_structures.values():
-        if 'none' in object_structure.properties.values():
-            i = 0
-    object_count = len(object_structures)
-    if verbose:
-        print(f'Extracted {object_count} entity types in: {timedelta(seconds=(timer() - start_timer))}')
+        object_structures = __get_object_structures_from_flows(flows)
+        for object_structure in object_structures.values():
+            if 'none' in object_structure.properties.values():
+                i = 0
+        object_count = len(object_structures)
+        if verbose:
+            print(f'Extracted {object_count} entity types in: {timer.elapsed}')
 
-    if verbose:
-        start_timer = timer()
-    all_organized_flows = __organize_flows(flows)
-    singularized_flows = __singularize_flows(all_organized_flows)
-    if verbose:
-        print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {timedelta(seconds=(timer() - start_timer))}')
+        all_organized_flows = __organize_flows(flows)
+        singularized_flows = __singularize_flows(all_organized_flows)
+        if verbose:
+            print(f'Merged flows and extracted {len(singularized_flows)} different PSS API endpoints in: {timer.elapsed}')
 
-    if verbose:
-        start_timer = timer()
-    organized_flows = __organize_flows(singularized_flows)
-    if verbose:
-        print(f'Ordered flows according to services and endpoints in: {timedelta(seconds=(timer() - start_timer))}')
+        organized_flows = __organize_flows(singularized_flows)
+        if verbose:
+            print(f'Ordered flows according to services and endpoints in: {timer.elapsed}')
 
-    result = {
-        'endpoints': organized_flows,
-        'entities': sorted(list(object_structures.values()), key=lambda x: x.object_type_name),
-    }
+        result = {
+            'endpoints': organized_flows,
+            'entities': sorted(list(object_structures.values()), key=lambda x: x.object_type_name),
+        }
 
-    return result
+        return result
 
 
 def read_structure_json(file_path: str) -> ApiOrganizedFlows:
     with open(file_path, 'r') as fp:
-        flows = json.load(fp)
+        flows = _json.load(fp)
     result = convert_organized_dicts_to_organized_flows(flows)
     return result
 
 
-def store_structure_json(file_path: str, flow_details: ApiOrganizedFlows, indent: int = None) -> None:
+def store_structure_json(file_path: str, flow_details: ApiOrganizedFlows, compressed: bool = True) -> None:
     flow_details_dicts = __convert_api_structured_flows_to_dict(flow_details)
+    if compressed:
+        indent = 0
+        separators = (',', ':')
+    else:
+        indent = 2
+        separators = (', ', ': ')
     with open(file_path, 'w') as fp:
-        json.dump(flow_details_dicts, fp, indent=indent)
+        _json.dump(flow_details_dicts, fp, indent=indent, separators=separators)
 
 
 # ----- Private Functions -----
@@ -147,7 +150,7 @@ def __convert_api_structured_flows_to_dict(flows: ApiOrganizedFlows) -> ApiOrgan
     return result
 
 
-def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
+def __convert_flow_to_dict(flow: _HTTPFlow) -> NestedDict:
     result = {}
     result['method'] = flow.request.method  # GET/POST
     if '?' in flow.request.path:
@@ -182,13 +185,13 @@ def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
 
     if result['method'] == 'POST' and result['content']:
         try:
-            result['content_structure'] = __convert_xml_to_dict(ElementTree.fromstring(result['content']))
+            result['content_structure'] = __convert_xml_to_dict(_ElementTree.fromstring(result['content']))
             result['content_type'] = 'xml'
         except:
             pass
         if 'content_type' not in result:
             try:
-                result['content_structure'] = __convert_json_to_dict(json.loads(result['content']))
+                result['content_structure'] = __convert_json_to_dict(_json.loads(result['content']))
                 result['content_type'] = 'json'
             except:
                 pass
@@ -196,13 +199,13 @@ def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
     result['response'] = flow.response.content.decode('utf-8') or None
     result['response_structure'] = {}
     if result['response']:
-        result['response_structure'] = __convert_xml_to_dict(ElementTree.fromstring(result['response']))
+        result['response_structure'] = __convert_xml_to_dict(_ElementTree.fromstring(result['response']))
 
     result['original_flow'] = flow
     return result
 
 
-def __convert_json_to_dict(loaded_json: ResponseStructure) -> ResponseStructure:
+def __convert_json_to_dict(loaded_json: _ResponseStructure) -> _ResponseStructure:
     if not loaded_json:
         return {}
 
@@ -215,7 +218,7 @@ def __convert_json_to_dict(loaded_json: ResponseStructure) -> ResponseStructure:
     return result
 
 
-def __convert_xml_to_dict(root: ElementTree.Element) -> ResponseStructure:
+def __convert_xml_to_dict(root: _ElementTree.Element) -> _ResponseStructure:
     if root is None:
         return {}
 
@@ -265,7 +268,7 @@ def __determine_data_type(value: str, property_name: str = None) -> str:
             return 'bool'
 
         try:
-            utils.parse_pss_datetime(value)
+            _utils.parse_pss_datetime(value)
             return 'datetime'
         except:
             pass
@@ -275,20 +278,20 @@ def __determine_data_type(value: str, property_name: str = None) -> str:
     return 'none'
 
 
-def __get_object_structures_from_response_structure(response_structure: ResponseStructure) -> Dict[str, List[PssObjectStructure]]:
-    result: Dict[str, List[PssObjectStructure]] = {}
+def __get_object_structures_from_response_structure(response_structure: _ResponseStructure) -> _Dict[str, _List[_PssObjectStructure]]:
+    result: _Dict[str, _List[_PssObjectStructure]] = {}
     for key, value in response_structure.items():
         if isinstance(value, dict):
             properties = value.get('properties')
             if properties and 'version' not in properties:
-                result[key] = PssObjectStructure(key, properties)
+                result[key] = _PssObjectStructure(key, properties)
                 response_structure[key].pop('properties')
             result.update(__get_object_structures_from_response_structure(value))
     return result
 
 
-def __get_object_structures_from_flows(flows: List[PssFlowDetails]) -> Dict[str, PssObjectStructure]:
-    result: Dict[str, PssObjectStructure] = {}
+def __get_object_structures_from_flows(flows: _List[_PssFlowDetails]) -> _Dict[str, _PssObjectStructure]:
+    result: _Dict[str, _PssObjectStructure] = {}
     for flow in flows:
         current_object_structures = __get_object_structures_from_response_structure(flow.response_structure)
         for object_name, object_structure in current_object_structures.items():
@@ -300,7 +303,7 @@ def __get_object_structures_from_flows(flows: List[PssFlowDetails]) -> Dict[str,
     return result
 
 
-def __merge_object_structures(structure1: PssObjectStructure, structure2: PssObjectStructure) -> PssObjectStructure:
+def __merge_object_structures(structure1: _PssObjectStructure, structure2: _PssObjectStructure) -> _PssObjectStructure:
     if not structure1:
         return structure2
     if not structure2:
@@ -308,10 +311,10 @@ def __merge_object_structures(structure1: PssObjectStructure, structure2: PssObj
     if structure1.object_type_name != structure2.object_type_name:
         raise Exception('object type names do not match.')
     properties = __merge_type_dictionaries(structure1.properties, structure2.properties)
-    return PssObjectStructure(structure1.object_type_name, properties)
+    return _PssObjectStructure(structure1.object_type_name, properties)
 
 
-def __merge_flows(flow1: PssFlowDetails, flow2: PssFlowDetails) -> PssFlowDetails:
+def __merge_flows(flow1: _PssFlowDetails, flow2: _PssFlowDetails) -> _PssFlowDetails:
     query_parameters = __merge_type_dictionaries(flow1.query_parameters, flow2.query_parameters)
     content_structure = __merge_type_dictionaries(flow1.content_structure, flow2.content_structure)
     response_structure = __merge_type_dictionaries(flow1.response_structure, flow2.response_structure)
@@ -326,7 +329,7 @@ def __merge_flows(flow1: PssFlowDetails, flow2: PssFlowDetails) -> PssFlowDetail
         'service': flow1.service,
         'original_flow': flow1.original_flow
     }
-    return PssFlowDetails(result)
+    return _PssFlowDetails(result)
 
 
 def __merge_type_dictionaries(d1: dict, d2: dict) -> dict:
@@ -353,7 +356,7 @@ def __merge_type_dictionaries(d1: dict, d2: dict) -> dict:
     return result
 
 
-def __organize_flows(extracted_flow_details: List[PssFlowDetails]) -> ApiOrganizedFlows:
+def __organize_flows(extracted_flow_details: _List[_PssFlowDetails]) -> ApiOrganizedFlows:
     sorted_flows = sorted(extracted_flow_details, key=lambda x: f'{x.service}{x.endpoint}')
     result: ApiOrganizedFlows = {}
     for flow_details in sorted_flows:
@@ -361,30 +364,30 @@ def __organize_flows(extracted_flow_details: List[PssFlowDetails]) -> ApiOrganiz
     return result
 
 
-def __read_flows_from_file(file_path: str) -> List[PssFlowDetails]:
-    if not os.path.isfile(file_path):
+def __read_flows_from_file(file_path: str) -> _List[_PssFlowDetails]:
+    if not _os.path.isfile(file_path):
         raise FileNotFoundError(f'The specified file could not be found at: {file_path}')
 
-    flow_details: List[PssFlowDetails] = []
+    flow_details: _List[_PssFlowDetails] = []
 
     with open(file_path, 'rb') as fp:
-        flow_reader: FlowReader = FlowReader(fp)
+        flow_reader: _FlowReader = _FlowReader(fp)
 
         try:
-            tnetstring.load(flow_reader.fo)
+            _tnetstring.load(flow_reader.fo)
         except ValueError as e:
             raise Exception(f'The specified file is not a Flows file: {file_path}') from e
 
-        flow_details = [PssFlowDetails(__convert_flow_to_dict(recorded_flow)) for recorded_flow in flow_reader.stream()]
+        flow_details = [_PssFlowDetails(__convert_flow_to_dict(recorded_flow)) for recorded_flow in flow_reader.stream()]
 
-    blacklisted_services = utils.read_json('src/blacklisted_services.json')
-    blacklisted_endpoints = utils.read_json('src/blacklisted_endpoints.json')
+    blacklisted_services = _utils.read_json('src/blacklisted_services.json')
+    blacklisted_endpoints = _utils.read_json('src/blacklisted_endpoints.json')
     result = [flow for flow in flow_details if flow.service not in blacklisted_services and not any(endpoint in flow.endpoint for endpoint in blacklisted_endpoints)]
     return result
 
 
-def __singularize_flows(organized_flows: ApiOrganizedFlows) -> Set[PssFlowDetails]:
-    result: Set[PssFlowDetails] = set()
+def __singularize_flows(organized_flows: ApiOrganizedFlows) -> _Set[_PssFlowDetails]:
+    result: _Set[_PssFlowDetails] = set()
     for _, endpoints in organized_flows.items():
         for _, endpoint_flows in endpoints.items():
             merged_flow = endpoint_flows[0]
@@ -393,22 +396,3 @@ def __singularize_flows(organized_flows: ApiOrganizedFlows) -> Set[PssFlowDetail
                     merged_flow = __merge_flows(merged_flow, flow2)
             result.add(merged_flow)
     return result
-
-
-
-# ----- MAIN -----
-
-if __name__ == "__main__":
-    app_start = timer()
-    if len(sys.argv) == 1:
-        raise ValueError('The path to the flows file has not been specified!')
-    file_path = ' '.join(sys.argv[1:])
-    flow_details = parse_flows_file(file_path, verbose=True)
-
-    file_name, _ = os.path.splitext(file_path)
-    storage_path = f'{file_name}.json'
-    start = timer()
-    store_structure_json(storage_path, flow_details, indent=2)
-    end = timer()
-    print(f'Stored JSON encoded PSS API endpoint information in {timedelta(seconds=(end - start))} at: {storage_path}')
-    print(f'Total execution time: {timedelta(seconds=(end - app_start))}')

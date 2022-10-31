@@ -92,9 +92,15 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
     return result
 
 
-def store_enum_file(enum_definitions: _Dict[str, EnumDefinition], store_at: str, indent: int = 4) -> None:
-    with open(store_at, 'w') as fp:
-        _json.dump(enum_definitions, fp, indent=indent)
+def store_enum_file(enum_definitions: _Dict[str, EnumDefinition], store_at: str, compressed: bool = False) -> None:
+    if compressed:
+        indent = 0
+        separators = (',', ':')
+    else:
+        indent = 2
+        separators = (', ', ': ')
+    with open(file_path, 'w') as fp:
+        _json.dump(enum_definitions, fp, indent=indent, separators=separators)
 
 
 if __name__ == "__main__":
