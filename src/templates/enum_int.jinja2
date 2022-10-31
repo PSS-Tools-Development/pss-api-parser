@@ -6,6 +6,6 @@ fixing, if Savy uses enum values that are python keywords.
 """
 
 class {{enum.name}}(_IntEnum):
-{% for enum_value in enum.values %}
+{% for enum_value in enum.enum_values %}
     {{enum_value.name}} = {{enum_value.value}}
 {% endfor %}

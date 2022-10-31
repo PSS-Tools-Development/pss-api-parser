@@ -71,7 +71,7 @@ def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_da
     potential_enum_names = set(potential_enum_names)
     parsed_enum_names = set(enums_data.keys())
     used_enum_names = potential_enum_names.intersection(potential_enum_names, parsed_enum_names)
-    result = {kvp for kvp in enums_data.items() if kvp[0] in used_enum_names}
+    result = {key: value for key, value in enums_data.items() if key in used_enum_names}
     return result
 
 
@@ -84,6 +84,7 @@ def prepare_parsed_api_data(parsed_api_data: dict) -> _Tuple[list, list]:
 
 def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinition]) -> list:
     result = []
+    ignore_value_names = ['None', 'Unknown']
     for enum_name in sorted(parsed_enums_data.keys()):
         enum_definition = {
             'name': enum_name,
@@ -91,16 +92,13 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
             'type': parsed_enums_data[enum_name]['type']
         }
 
-        enum_value_names = [kvp[0] for kvp in sorted(parsed_enums_data[enum_name]['values'].items(), key=lambda item: item[1]) if kvp[1] != 'None' and kvp[1] != 'Unknown']
-        if 'None' in parsed_enums_data[enum_name]['values'].keys():
-            enum_value_names.insert(0, 'None')
-        if 'Unknown' in parsed_enums_data[enum_name]['values'].keys():
-            enum_value_names.insert(0, 'Unknown')
+        sorted_enum_values = sorted(parsed_enums_data[enum_name]['values'].items(), key=lambda item: item[1] or 0 if parsed_enums_data[enum_name]['type'] == _enums.TYPE_INT_ENUM else '')
+        enum_value_names = [key for key, value in sorted_enum_values if value not in ignore_value_names]
 
-        enum_definition['values'] = []
+        enum_definition['enum_values'] = []
         for value_name in enum_value_names:
-            enum_definition['values'].append({
-                'name': [value_name],
+            enum_definition['enum_values'].append({
+                'name': 'None_' if value_name == 'None' else value_name,
                 'value': parsed_enums_data[enum_name]['values'][value_name]
             })
         result.append(enum_definition)
@@ -236,7 +234,7 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
     _utils.create_path(enums_path)
 
     for enum in enums_data:
-        template = int_enum_template if enums_data['type'] == _enums.TYPE_INT_ENUM else str_enum_template
+        template = int_enum_template if enum['type'] == _enums.TYPE_INT_ENUM else str_enum_template
         _utils.create_file(
             _os.path.join(enums_path, enum['name_snake_case'] + '.py'),
             format_source(template.render(enum=enum)),

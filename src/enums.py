@@ -8,7 +8,7 @@ from typing import Dict as _Dict
 from typing import List as _List
 from typing import Union as _Union
 
-import utils as _utils
+from . import utils as _utils
 
 
 EnumDefinition = _Dict[str, _Union[str, _Dict[str, _Union[int, str]]]]
