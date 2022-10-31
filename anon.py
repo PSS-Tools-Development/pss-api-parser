@@ -8,7 +8,7 @@ import sys as _sys
 from colorama import init as _colorama_init
 from colorama import Fore as _Fore
 
-from .src import anonymize as _anonymize
+from src import anonymize as _anonymize
 
 
 
@@ -32,9 +32,9 @@ if __name__ == '__main__':
         _sys.exit(ERR_INPUT_NOT_FOUND)
 
     with _Timer() as t:
-        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Input file: {args.flows}')
+        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Input file: {args.in_}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Output path: {args.out}')
-        print(f'{_Fore.BLUE} >>>{_Fore.RESET} Starting generation...')
+        print(f'{_Fore.BLUE} >>>{_Fore.RESET} Anonymizing captured flows...')
 
         input_file_name_with_extension = _os.path.split(args.in_)[1]
         output_file_name = f'{_os.path.splitext(input_file_name_with_extension)[0]}_anonymized.flows'

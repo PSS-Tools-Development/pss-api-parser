@@ -1,9 +1,9 @@
-from email.policy import HTTP
-from typing import Dict, Union
+from typing import Dict as _Dict
+from typing import Union as _Union
 
-from mitmproxy.http import HTTPFlow
+from mitmproxy.http import HTTPFlow as _HTTPFlow
 
-ResponseStructure = Dict[str, Union[str, 'ResponseStructure']]
+ResponseStructure = _Dict[str, _Union[str, 'ResponseStructure']]
 
 
 class PssFlowDetails:
@@ -12,10 +12,10 @@ class PssFlowDetails:
         self.__content_type: str = details['content_type']
         self.__endpoint: str = details['endpoint']
         self.__method: str = details['method']
-        self.__query_parameters: Dict[str, str] = details['query_parameters']
+        self.__query_parameters: _Dict[str, str] = details['query_parameters']
         self.__response_structure: ResponseStructure = details['response_structure']
         self.__service: str = details['service']
-        self.__original_flow: HTTPFlow = details['original_flow']
+        self.__original_flow: _HTTPFlow = details['original_flow']
 
     def __repr__(self) -> str:
         return f'<PssFlowDetails {self.service}/{self.endpoint}>'
@@ -41,11 +41,11 @@ class PssFlowDetails:
         return self.__method
 
     @property
-    def original_flow(self) -> HTTPFlow:
+    def original_flow(self) -> _HTTPFlow:
         return self.__original_flow
 
     @property
-    def query_parameters(self) -> Dict[str, str]:
+    def query_parameters(self) -> _Dict[str, str]:
         return self.__query_parameters
 
     @property

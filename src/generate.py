@@ -1,36 +1,3 @@
-# ToDo
-# ✓ Template for raw service
-# ✓ Template for service basis
-# ✓ Template for raw entity
-# ✓ Template for entity basis
-# (Start with a rough outsketch, then refine)
-#
-# Read json file
-# Preprocess data to add more keys and values to the dicts:
-# - service
-#   .endpoints
-#     .base_path_name
-#     .function_name (endpoint name converted to snake case)
-#     .name
-#     .name_snake_case (name converted to snake case)
-#     .return_type
-#     .parameter_definitions (comma-separated list of {parameter.name_snake_case: parameter_type})
-#     .parameters
-#       .name
-#       .name_snake_case
-#     .xml_parent_tag_name
-#   .name
-# - entity
-#   .name
-#   .name_snake_case
-#   .properties
-#     .name
-#     .name_snake_case
-#     .parser_function_name (determined through a dictionary with types to name relationships)
-#     .type
-#   .xml_node_name
-
-
 import json as _json
 import os as _os
 import string as _string
@@ -39,8 +6,9 @@ from typing import List as _List
 from typing import Optional as _Optional
 from typing import Tuple as _Tuple
 
-import autopep8
-from jinja2 import Environment as _Environment, PackageLoader as _PackageLoader
+import autopep8 as _autopep8
+from jinja2 import Environment as _Environment
+from jinja2 import PackageLoader as _PackageLoader
 
 from . import enums as _enums
 from . import utils as _utils
@@ -354,7 +322,7 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
 
 
 def format_source(content: str) -> str:
-    return autopep8.fix_code(content)
+    return _autopep8.fix_code(content)
 
 
 def read_data(file_path: str) -> dict:

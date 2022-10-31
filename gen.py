@@ -8,7 +8,7 @@ import sys as _sys
 from colorama import init as _colorama_init
 from colorama import Fore as _Fore
 
-from .src import generate as _generate
+from src import generate as _generate
 
 
 
@@ -45,7 +45,7 @@ if __name__ == '__main__':
             print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Enumerations: {args.enums}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Output path: {output_directory}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Overwrite: {"Yes" if args.overwrite else "No"}')
-        print(f'{_Fore.BLUE} >>>{_Fore.RESET} Starting generation...')
+        print(f'{_Fore.BLUE} >>>{_Fore.RESET} Generating code...')
 
         _generate.generate_source_code(
             args.flows,

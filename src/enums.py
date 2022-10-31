@@ -5,7 +5,6 @@ import re as _re
 import sys as _sys
 from timeit import default_timer as _timer
 from typing import Dict as _Dict
-from typing import List as _List
 from typing import Union as _Union
 
 from . import utils as _utils
@@ -94,12 +93,12 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
 
 def store_enum_file(enum_definitions: _Dict[str, EnumDefinition], store_at: str, compressed: bool = False) -> None:
     if compressed:
-        indent = 0
+        indent = None
         separators = (',', ':')
     else:
         indent = 2
         separators = (', ', ': ')
-    with open(file_path, 'w') as fp:
+    with open(store_at, 'w') as fp:
         _json.dump(enum_definitions, fp, indent=indent, separators=separators)
 
 

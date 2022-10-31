@@ -13,10 +13,10 @@ from mitmproxy.http import HTTPFlow as _HTTPFlow
 from mitmproxy.io import FlowReader as _FlowReader
 from mitmproxy.io import tnetstring as _tnetstring
 
-from flowdetails import PssFlowDetails as _PssFlowDetails
-from flowdetails import ResponseStructure as _ResponseStructure
-from objectstructure import PssObjectStructure as _PssObjectStructure
-import utils as _utils
+from .flowdetails import PssFlowDetails as _PssFlowDetails
+from .flowdetails import ResponseStructure as _ResponseStructure
+from .objectstructure import PssObjectStructure as _PssObjectStructure
+from . import utils as _utils
 
 
 # ----- Constants and type definitions -----
@@ -129,7 +129,7 @@ def read_structure_json(file_path: str) -> ApiOrganizedFlows:
 def store_structure_json(file_path: str, flow_details: ApiOrganizedFlows, compressed: bool = True) -> None:
     flow_details_dicts = __convert_api_structured_flows_to_dict(flow_details)
     if compressed:
-        indent = 0
+        indent = None
         separators = (',', ':')
     else:
         indent = 2

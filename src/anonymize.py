@@ -1,19 +1,15 @@
-import json
-import os.path
-import re
-import sys
-from datetime import datetime, timedelta
-from timeit import default_timer as timer
-from typing import Dict, List, Set, Union
-from xml.etree import ElementTree
+import json as _json
+import os as _os
+import re as _re
+import sys as _sys
+from typing import List as _List
 
-from mitmproxy.http import HTTPFlow
-from mitmproxy.io import FlowReader, FlowWriter, tnetstring
-from mitmproxy.coretypes.multidict import MultiDictView
+from mitmproxy.http import HTTPFlow as _HTTPFlow
+from mitmproxy.io import FlowReader as _FlowReader
+from mitmproxy.io import FlowWriter as _FlowWriter
+from mitmproxy.io import tnetstring as _tnetstring
 
-from flowdetails import PssFlowDetails, ResponseStructure
-from objectstructure import PssObjectStructure
-import utils
+from . import utils as _utils
 
 
 
@@ -51,13 +47,13 @@ __QUERY_PARAM_NAMES = [
     'steamid',
     'ticket',
 ]
-__RX_PROPERTIES: re.Pattern = re.compile('( (' + '|'.join(__ENTITY_PROPERTY_NAMES) + ')="(.*?)")', re.IGNORECASE | re.MULTILINE)
+__RX_PROPERTIES: _re.Pattern = _re.compile('( (' + '|'.join(__ENTITY_PROPERTY_NAMES) + ')="(.*?)")', _re.IGNORECASE | _re.MULTILINE)
 
 
 
 # ---------- Functions ----------
 
-def anonymize_flow(flow: HTTPFlow) -> HTTPFlow:
+def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
     flow.server_conn.sockname = (None, None)
 
     for query_param_name, query_param_value in flow.request.query.items():
@@ -73,7 +69,7 @@ def anonymize_flow(flow: HTTPFlow) -> HTTPFlow:
     if flow.request.content:
         request_content = flow.request.content.decode('utf-8')
         try:
-            request_content_dict: dict = json.loads(request_content)
+            request_content_dict: dict = _json.loads(request_content)
         except:
             request_content_dict: dict = None
         if request_content_dict:
@@ -86,7 +82,7 @@ def anonymize_flow(flow: HTTPFlow) -> HTTPFlow:
                     except:
                         query_param_value = 'x' * len(query_param_value)
                     request_content_dict[query_param_name] = query_param_value
-            request_content = json.dumps(request_content_dict)
+            request_content = _json.dumps(request_content_dict)
         else:
             # Request Content is most likely a query parameter string
             if '=' in request_content:
@@ -118,7 +114,7 @@ def anonymize_flow(flow: HTTPFlow) -> HTTPFlow:
                 property_value = '0' * len(property_value)
             except:
                 try:
-                    utils.parse_pss_datetime(property_value)
+                    _utils.parse_pss_datetime(property_value)
                     property_value = '2016-01-06T00:00:00'
                 except:
                     property_value = 'x' * len(property_value)
@@ -129,12 +125,12 @@ def anonymize_flow(flow: HTTPFlow) -> HTTPFlow:
     return flow
 
 
-def anynomize_flows(file_path: str) -> List[HTTPFlow]:
+def anynomize_flows(file_path: str) -> _List[_HTTPFlow]:
     with open(file_path, 'rb') as fp:
-        flow_reader: FlowReader = FlowReader(fp)
+        flow_reader: _FlowReader = _FlowReader(fp)
 
         try:
-            tnetstring.load(flow_reader.fo)
+            _tnetstring.load(flow_reader.fo)
         except ValueError as e:
             raise Exception(f'The specified file is not a Flows file: {file_path}') from e
 
@@ -142,24 +138,8 @@ def anynomize_flows(file_path: str) -> List[HTTPFlow]:
     return flows
 
 
-def store_flows(file_path: str, flows: List[HTTPFlow]) -> None:
+def store_flows(file_path: str, flows: _List[_HTTPFlow]) -> None:
     with open(file_path, 'wb') as fp:
-        flow_writer: FlowWriter = FlowWriter(fp)
+        flow_writer: _FlowWriter = _FlowWriter(fp)
         for flow in flows:
             flow_writer.add(flow)
-
-
-
-# ----- MAIN -----
-
-if __name__ == "__main__":
-    if len(sys.argv) == 1:
-        raise ValueError('The path to the flows file has not been specified!')
-    file_path = ' '.join(sys.argv[1:])
-    print(f'Anonymizing flows file at: {file_path}')
-    flows = anynomize_flows(file_path)
-
-    file_name, _ = os.path.splitext(file_path)
-    storage_path = f'{file_name}_anonymized.flows'
-    store_flows(storage_path, flows)
-    print(f'Stored anonymized flows file at: {storage_path}')
