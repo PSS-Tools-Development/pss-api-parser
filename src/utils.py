@@ -6,19 +6,23 @@ import re as _re
 from typing import Union as _Union
 
 
-def append_underscore_if_keyword(s) -> str:
+def append_underscore_if_keyword(s: str) -> str:
     if _keyword.iskeyword(s):
         s += '_'
     return s
 
 
-def convert_to_snake_case(s) -> str:
+def convert_camel_to_snake_case(s: str) -> str:
     if not s:
         return s
     return '_'.join(
         _re.sub(r'([A-Z\d][a-z]+)', r' \1',
                 _re.sub(r'([A-Z\d]+)', r' \1',
                         s.replace('-', ' '))).split()).lower()
+
+
+def convert_snake_to_camel_case(s: str) -> str:
+    return ''.join(sub.title() for sub in s.split('_'))
 
 
 def create_path(path: str) -> None:

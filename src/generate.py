@@ -72,11 +72,11 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             'entity_types': [],
             'imports': [],
             'name': service_name,
-            'name_snake_case': _utils.convert_to_snake_case(service_name),
+            'name_snake_case': _utils.convert_camel_to_snake_case(service_name),
         }
 
         for endpoint_name, endpoint_definition in endpoints.items():
-            name_snake_case = _utils.convert_to_snake_case(endpoint_name)
+            name_snake_case = _utils.convert_camel_to_snake_case(endpoint_name)
             xml_parent_tag_name, return_type = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
             parameters = __extract_parameters(endpoint_definition['query_parameters'])
             service_imports.update(parameter['type'] for parameter in parameters)
@@ -154,17 +154,17 @@ def __prepare_entities_data(entities_data: dict) -> list:
             property_names.append(property_name)
             properties.append({
                 'name': property_name,
-                'name_snake_case': _utils.convert_to_snake_case(property_name),
+                'name_snake_case': _utils.convert_camel_to_snake_case(property_name),
                 'type': property_type
             })
         id_property = __find_id_property(property_names, entity_name)
         name_property = __find_name_property(property_names, entity_name)
         result.append({
             'base_class_name': 'EntityWithIdBase' if id_property else 'EntityBase',
-            'id_property_name': _utils.convert_to_snake_case(id_property),
+            'id_property_name': _utils.convert_camel_to_snake_case(id_property),
             'name': entity_name,
-            'name_property_name': _utils.convert_to_snake_case(name_property),
-            'name_snake_case': _utils.convert_to_snake_case(entity_name),
+            'name_property_name': _utils.convert_camel_to_snake_case(name_property),
+            'name_snake_case': _utils.convert_camel_to_snake_case(entity_name),
             'properties': properties,
             'xml_node_name': entity_name,
         })
@@ -228,7 +228,7 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
 
             result.append({
                 'name': name,
-                'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_to_snake_case(name)),
+                'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_camel_to_snake_case(name)),
                 'type': parameter_type,
                 'default_value': default_value,
                 'self_field': self_field,

@@ -1,1744 +1,2248 @@
 {
   "AccessTokenType": {
-    "ACCESS": 0,
-    "PUBLIC": 1
+    "type": "IntEnum",
+    "values": {
+      "Access": 0,
+      "Public": 1
+    }
   },
   "GuideType": {
-    "None": "None",
-    "BuyRoom": "BuyRoom",
-    "BuyCharacter": "BuyCharacter",
-    "UpgradeRoom": "UpgradeRoom",
-    "UpgradeCharacter": "UpgradeCharacter",
-    "BuyShip": "BuyShip",
-    "PVP": 6,
-    "StartGuide": "StartGuide"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "BuyRoom": "BuyRoom",
+      "BuyCharacter": "BuyCharacter",
+      "UpgradeRoom": "UpgradeRoom",
+      "UpgradeCharacter": "UpgradeCharacter",
+      "BuyShip": "BuyShip",
+      "PVP": "PVP",
+      "StartGuide": "StartGuide"
+    }
   },
   "AchievementType": {
-    "Mining": "Mining",
-    "Architect": "Architect",
-    "Crew": "Crew",
-    "Offence": "Offence",
-    "Defence": "Defence",
-    "Alliance": "Alliance",
-    "League": "League",
-    "Economy": "Economy",
-    "Driller": "Driller",
-    "Admiral": "Admiral",
-    "Faction": "Faction",
-    "Challenge": "Challenge",
-    "Rank": "Rank",
-    "Event": "Event",
-    "SupplyDonation": "SupplyDonation",
-    "SupplyLoot": "SupplyLoot",
-    "StarbasesDestroyed": "StarbasesDestroyed",
-    "Tournament": "Tournament",
-    "Stars": "Stars",
-    "Research": "Research",
-    "Commerce": "Commerce",
-    "Collection": "Collection",
-    "AI": 22,
-    "Explorer": "Explorer",
-    "Operator": "Operator",
-    "Weapon": "Weapon"
+    "type": "StrEnum",
+    "values": {
+      "Mining": "Mining",
+      "Architect": "Architect",
+      "Crew": "Crew",
+      "Offence": "Offence",
+      "Defence": "Defence",
+      "Alliance": "Alliance",
+      "League": "League",
+      "Economy": "Economy",
+      "Driller": "Driller",
+      "Admiral": "Admiral",
+      "Faction": "Faction",
+      "Challenge": "Challenge",
+      "Rank": "Rank",
+      "Event": "Event",
+      "SupplyDonation": "SupplyDonation",
+      "SupplyLoot": "SupplyLoot",
+      "StarbasesDestroyed": "StarbasesDestroyed",
+      "Tournament": "Tournament",
+      "Stars": "Stars",
+      "Research": "Research",
+      "Commerce": "Commerce",
+      "Collection": "Collection",
+      "AI": "AI",
+      "Explorer": "Explorer",
+      "Operator": "Operator",
+      "Weapon": "Weapon"
+    }
   },
   "DurationType": {
-    "None": "None",
-    "Permanent": "Permanent",
-    "Monthly": "Monthly",
-    "Yearly": "Yearly"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Permanent": "Permanent",
+      "Monthly": "Monthly",
+      "Yearly": "Yearly"
+    }
   },
   "ActionTypeCategory": {
-    "SetPower": "SetPower",
-    "Target": "Target",
-    "SetItem": "SetItem",
-    "UseSpecialPower": "UseSpecialPower"
+    "type": "StrEnum",
+    "values": {
+      "SetPower": "SetPower",
+      "Target": "Target",
+      "SetItem": "SetItem",
+      "UseSpecialPower": "UseSpecialPower"
+    }
   },
   "ActionTypeParameterRelativity": {
-    "None": "None",
-    "Relative": "Relative",
-    "Absolute": "Absolute",
-    "Percentage": "Percentage",
-    "Highest": "Highest",
-    "Lowest": "Lowest"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Relative": "Relative",
+      "Absolute": "Absolute",
+      "Percentage": "Percentage",
+      "Highest": "Highest",
+      "Lowest": "Lowest"
+    }
   },
   "AllianceWarStatus": {
-    "Playing": "Playing",
-    "AttackingAllianceWin": "AttackingAllianceWin",
-    "DefendingAllianceWin": "DefendingAllianceWin",
-    "Draw": "Draw"
+    "type": "StrEnum",
+    "values": {
+      "Playing": "Playing",
+      "AttackingAllianceWin": "AttackingAllianceWin",
+      "DefendingAllianceWin": "DefendingAllianceWin",
+      "Draw": "Draw"
+    }
   },
   "Status": {
-    "Alive": "Alive",
-    "Destroyed": "Destroyed"
+    "type": "StrEnum",
+    "values": {
+      "Alive": "Alive",
+      "Destroyed": "Destroyed"
+    }
   },
   "AnimationEffectType": {
-    "None": "None",
-    "Normal": "Normal",
-    "Multiply": "Multiply",
-    "Laser": "Laser",
-    "Trail": "Trail"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Normal": "Normal",
+      "Multiply": "Multiply",
+      "Laser": "Laser",
+      "Trail": "Trail"
+    }
   },
   "InteractionType": {
-    "USER_AS_SELLER": 0,
-    "USER_AS_BUYER": 1
+    "type": "IntEnum",
+    "values": {
+      "UserAsSeller": 0,
+      "UserAsBuyer": 1
+    }
   },
   "SimilarityType": {
-    "USERNAME": 0,
-    "EMAIL": 1,
-    "PASSWORD": 2,
-    "IP_ADDRESS": 3,
-    "DEVICE": 4
+    "type": "IntEnum",
+    "values": {
+      "Username": 0,
+      "Email": 1,
+      "Password": 2,
+      "IpAddress": 3,
+      "Device": 4
+    }
   },
   "AssetType": {
-    "None": "None",
-    "UnityMaterial": "UnityMaterial",
-    "UnityModel": "UnityModel",
-    "Sprite": "Sprite",
-    "Sound": "Sound",
-    "Texture": "Texture"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "UnityMaterial": "UnityMaterial",
+      "UnityModel": "UnityModel",
+      "Sprite": "Sprite",
+      "Sound": "Sound",
+      "Texture": "Texture"
+    }
   },
   "DownloadType": {
-    "Download": "Download",
-    "Stream": "Stream"
+    "type": "StrEnum",
+    "values": {
+      "Download": "Download",
+      "Stream": "Stream"
+    }
   },
   "AuditType": {
-    "LogIn": "LogIn",
-    "ForgotPassword": "ForgotPassword",
-    "ChangeUsername": "ChangeUsername",
-    "AddSingleReward": "AddSingleReward",
-    "AddAllianceReward": "AddAllianceReward",
-    "AddTopPlayersReward": "AddTopPlayersReward",
-    "ChangeCharacter": "ChangeCharacter",
-    "Starbux": "Starbux",
-    "InspectShip": "InspectShip",
-    "RejectBattle": "RejectBattle",
-    "CollectReward": "CollectReward",
-    "Character": "Character",
-    "ItemChanged": "ItemChanged",
-    "Purchase": "Purchase",
-    "Warning": "Warning",
-    "DailyAction": "DailyAction",
-    "Challenge": "Challenge",
-    "UpgradeShip": "UpgradeShip",
-    "Room": "Room",
-    "Points": "Points",
-    "AllianceScore": "AllianceScore",
-    "ActivateScratchy": "ActivateScratchy",
-    "ItunesPostback": "ItunesPostback",
-    "ConsumeItem": "ConsumeItem",
-    "Security": "Security",
-    "PlaceBet": "PlaceBet",
-    "GoogleAnalytics": "GoogleAnalytics",
-    "CommunityManager": "CommunityManager",
-    "VIPReceivedScratchy": "VIPReceivedScratchy",
-    "RewardStore": "RewardStore",
-    "ContributorReward": "ContributorReward",
-    "StarbuxPurchaseIssue": "StarbuxPurchaseIssue",
-    "PingPong": "PingPong",
-    "DesignUpdate": "DesignUpdate",
-    "DesignCreate": "DesignCreate",
-    "DesignDelete": "DesignDelete",
-    "PlayerBanned": "PlayerBanned",
-    "DesignApprove": "DesignApprove",
-    "DesignReview": "DesignReview",
-    "DesignDependencyReview": "DesignDependencyReview",
-    "DesignCopy": "DesignCopy",
-    "GoogleNotification": "GoogleNotification",
-    "DesignRevert": "DesignRevert",
-    "DesignDeleteReview": "DesignDeleteReview",
-    "MissionLoot": "MissionLoot",
-    "BattleUsage": "BattleUsage",
-    "CloudWatchExport": "CloudWatchExport",
-    "CreateBattle": "CreateBattle",
-    "AllAuditType": "AllAuditType",
-    "BadRequest400": "BadRequest400",
-    "HeartBeat": "HeartBeat",
-    "Matchmaking": "Matchmaking",
-    "CharacterDonation": "CharacterDonation",
-    "StarBattleMatchmaking": "StarBattleMatchmaking",
-    "SaveShipXml": "SaveShipXml",
-    "SeasonPassVIP": "SeasonPassVIP",
-    "GiveNullPromotionDesignIdRewards": "GiveNullPromotionDesignIdRewards",
-    "PromotionCode": "PromotionCode",
-    "AthenaBotAnalysis": "AthenaBotAnalysis",
-    "MarketSaleRequirementNotMet": "MarketSaleRequirementNotMet",
-    "CollectFleetGift": "CollectFleetGift"
+    "type": "StrEnum",
+    "values": {
+      "LogIn": "LogIn",
+      "ForgotPassword": "ForgotPassword",
+      "ChangeUsername": "ChangeUsername",
+      "AddSingleReward": "AddSingleReward",
+      "AddAllianceReward": "AddAllianceReward",
+      "AddTopPlayersReward": "AddTopPlayersReward",
+      "ChangeCharacter": "ChangeCharacter",
+      "Starbux": "Starbux",
+      "InspectShip": "InspectShip",
+      "RejectBattle": "RejectBattle",
+      "CollectReward": "CollectReward",
+      "Character": "Character",
+      "ItemChanged": "ItemChanged",
+      "Purchase": "Purchase",
+      "Warning": "Warning",
+      "DailyAction": "DailyAction",
+      "Challenge": "Challenge",
+      "UpgradeShip": "UpgradeShip",
+      "Room": "Room",
+      "Points": "Points",
+      "AllianceScore": "AllianceScore",
+      "ActivateScratchy": "ActivateScratchy",
+      "ItunesPostback": "ItunesPostback",
+      "ConsumeItem": "ConsumeItem",
+      "Security": "Security",
+      "PlaceBet": "PlaceBet",
+      "GoogleAnalytics": "GoogleAnalytics",
+      "CommunityManager": "CommunityManager",
+      "VIPReceivedScratchy": "VIPReceivedScratchy",
+      "RewardStore": "RewardStore",
+      "ContributorReward": "ContributorReward",
+      "StarbuxPurchaseIssue": "StarbuxPurchaseIssue",
+      "PingPong": "PingPong",
+      "DesignUpdate": "DesignUpdate",
+      "DesignCreate": "DesignCreate",
+      "DesignDelete": "DesignDelete",
+      "PlayerBanned": "PlayerBanned",
+      "DesignApprove": "DesignApprove",
+      "DesignReview": "DesignReview",
+      "DesignDependencyReview": "DesignDependencyReview",
+      "DesignCopy": "DesignCopy",
+      "GoogleNotification": "GoogleNotification",
+      "DesignRevert": "DesignRevert",
+      "DesignDeleteReview": "DesignDeleteReview",
+      "MissionLoot": "MissionLoot",
+      "BattleUsage": "BattleUsage",
+      "CloudWatchExport": "CloudWatchExport",
+      "CreateBattle": "CreateBattle",
+      "AllAuditType": "AllAuditType",
+      "BadRequest400": "BadRequest400",
+      "HeartBeat": "HeartBeat",
+      "Matchmaking": "Matchmaking",
+      "CharacterDonation": "CharacterDonation",
+      "StarBattleMatchmaking": "StarBattleMatchmaking",
+      "SaveShipXml": "SaveShipXml",
+      "SeasonPassVIP": "SeasonPassVIP",
+      "GiveNullPromotionDesignIdRewards": "GiveNullPromotionDesignIdRewards",
+      "PromotionCode": "PromotionCode",
+      "AthenaBotAnalysis": "AthenaBotAnalysis",
+      "MarketSaleRequirementNotMet": "MarketSaleRequirementNotMet",
+      "CollectFleetGift": "CollectFleetGift"
+    }
   },
   "BackgroundEffectType": {
-    "Normal": "Normal",
-    "Lightning": "Lightning",
-    "Nebula": "Nebula",
-    "Asteroid": "Asteroid",
-    "Mirror": "Mirror",
-    "Solar": "Solar"
+    "type": "StrEnum",
+    "values": {
+      "Normal": "Normal",
+      "Lightning": "Lightning",
+      "Nebula": "Nebula",
+      "Asteroid": "Asteroid",
+      "Mirror": "Mirror",
+      "Solar": "Solar"
+    }
   },
   "BackgroundType": {
-    "Main": "Main",
-    "Battle": "Battle",
-    "Both": "Both",
-    "Special": "Special"
+    "type": "StrEnum",
+    "values": {
+      "Main": "Main",
+      "Battle": "Battle",
+      "Both": "Both",
+      "Special": "Special"
+    }
   },
   "EnvironmentType": {
-    "None": "None",
-    "Asteroid": "Asteroid",
-    "Solar": "Solar"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Asteroid": "Asteroid",
+      "Solar": "Solar"
+    }
   },
   "HazardType": {
-    "None": "None",
-    "EMP": 1,
-    "Fire": "Fire",
-    "Freeze": "Freeze"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "EMP": "EMP",
+      "Fire": "Fire",
+      "Freeze": "Freeze"
+    }
   },
   "HazardCategory": {
-    "None": "None",
-    "Initial": "Initial",
-    "Interval": "Interval"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Initial": "Initial",
+      "Interval": "Interval"
+    }
   },
   "OrbitAnchorAlignment": {
-    "None": "None",
-    "Center": "Center",
-    "Top": "Top",
-    "Bottom": "Bottom",
-    "Left": "Left",
-    "Right": "Right",
-    "TopLeft": "TopLeft",
-    "TopRight": "TopRight",
-    "BottomLeft": "BottomLeft",
-    "BottomRight": "BottomRight"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Center": "Center",
+      "Top": "Top",
+      "Bottom": "Bottom",
+      "Left": "Left",
+      "Right": "Right",
+      "TopLeft": "TopLeft",
+      "TopRight": "TopRight",
+      "BottomLeft": "BottomLeft",
+      "BottomRight": "BottomRight"
+    }
   },
   "XPForStarBattle": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 100,
+      "Level2": 105,
+      "Level3": 110,
+      "Level4": 115,
+      "Level5": 120,
+      "Level6": 125,
+      "Level7": 130,
+      "Level8": 135,
+      "Level9": 140,
+      "Level10": 150,
+      "Level11": 200,
+      "Level12": 300
+    }
   },
   "MineralRewardsForStarBattle": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 2000,
+      "Level2": 3000,
+      "Level3": 5000,
+      "Level4": 8000,
+      "Level5": 25000,
+      "Level6": 50000,
+      "Level7": 90000,
+      "Level8": 100000,
+      "Level9": 100000,
+      "Level10": 110000,
+      "Level11": 110000,
+      "Level12": 120000
+    }
   },
   "GasRewardsForStarBattle": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 1000,
+      "Level2": 1500,
+      "Level3": 2500,
+      "Level4": 6000,
+      "Level5": 20000,
+      "Level6": 40000,
+      "Level7": 70000,
+      "Level8": 80000,
+      "Level9": 90000,
+      "Level10": 90000,
+      "Level11": 100000,
+      "Level12": 100000
+    }
   },
   "RewardPercentage": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 20,
+      "Level2": 19,
+      "Level3": 18,
+      "Level4": 17,
+      "Level5": 16,
+      "Level6": 15,
+      "Level7": 14,
+      "Level8": 13,
+      "Level9": 12,
+      "Level10": 11,
+      "Level11": 10,
+      "Level12": 10
+    }
   },
   "MaximumRewardCap": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 60,
+      "Level2": 60,
+      "Level3": 360,
+      "Level4": 2040,
+      "Level5": 7200,
+      "Level6": 15000,
+      "Level7": 28000,
+      "Level8": 32500,
+      "Level9": 60000,
+      "Level10": 77000,
+      "Level11": 100000,
+      "Level12": 120000
+    }
   },
   "OutcomeType": {
-    "Playing": "Playing",
-    "AttackerWon": "AttackerWon",
-    "DefenderWon": "DefenderWon",
-    "AttackerRetreated": "AttackerRetreated",
-    "Draw": "Draw",
-    "Waiting": "Waiting",
-    "Processing": "Processing",
-    "WaitingForResultToFinalse": "WaitingForResultToFinalse",
-    "Reviewing": "Reviewing"
+    "type": "StrEnum",
+    "values": {
+      "Playing": "Playing",
+      "AttackerWon": "AttackerWon",
+      "DefenderWon": "DefenderWon",
+      "AttackerRetreated": "AttackerRetreated",
+      "Draw": "Draw",
+      "Waiting": "Waiting",
+      "Processing": "Processing",
+      "WaitingForResultToFinalse": "WaitingForResultToFinalse",
+      "Reviewing": "Reviewing"
+    }
   },
   "BattleType": {
-    "Unknown": "Unknown",
-    "PVP": 1,
-    "PVPRevenge": "PVPRevenge",
-    "PVPLocked": "PVPLocked",
-    "Mission": "Mission",
-    "Alliance": "Alliance",
-    "Friendly": "Friendly",
-    "Raid": "Raid",
-    "PVE": 8
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "PVP": "PVP",
+      "PVPRevenge": "PVPRevenge",
+      "PVPLocked": "PVPLocked",
+      "Mission": "Mission",
+      "Alliance": "Alliance",
+      "Friendly": "Friendly",
+      "Raid": "Raid",
+      "PVE": "PVE"
+    }
   },
   "IdentifierType": {
-    "DeviceKey": "DeviceKey",
-    "IPAddress": "IPAddress",
-    "UserId": "UserId"
+    "type": "StrEnum",
+    "values": {
+      "DeviceKey": "DeviceKey",
+      "IPAddress": "IPAddress",
+      "UserId": "UserId"
+    }
   },
   "RestrictionType": {
-    "DeviceKey": "DeviceKey",
-    "IPAddress": "IPAddress",
-    "ClientBattle": "ClientBattle",
-    "CollectStarbux": "CollectStarbux"
+    "type": "StrEnum",
+    "values": {
+      "DeviceKey": "DeviceKey",
+      "IPAddress": "IPAddress",
+      "ClientBattle": "ClientBattle",
+      "CollectStarbux": "CollectStarbux"
+    }
   },
   "CasinoMatchStatus": {
-    "None": "None",
-    "Playing": "Playing",
-    "Finalised": "Finalised"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Playing": "Playing",
+      "Finalised": "Finalised"
+    }
   },
   "CasinoMatchType": {
-    "None": "None",
-    "CasinoWar": "CasinoWar",
-    "Poker": "Poker",
-    "BlackJack": "BlackJack"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "CasinoWar": "CasinoWar",
+      "Poker": "Poker",
+      "BlackJack": "BlackJack"
+    }
   },
   "SpecialRuleType": {
-    "None": "None",
-    "CrewLevel": "CrewLevel",
-    "CrewReplacement": "CrewReplacement",
-    "CollectionReplacement": "CollectionReplacement"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "CrewLevel": "CrewLevel",
+      "CrewReplacement": "CrewReplacement",
+      "CollectionReplacement": "CollectionReplacement"
+    }
   },
   "ChallengeType": {
-    "AI": 0,
-    "GalaxyMap": "GalaxyMap",
-    "ShipChallenge": "ShipChallenge"
+    "type": "StrEnum",
+    "values": {
+      "AI": "AI",
+      "GalaxyMap": "GalaxyMap",
+      "ShipChallenge": "ShipChallenge"
+    }
   },
   "ChallengeScoringType": {
-    "Standard": "Standard"
+    "type": "StrEnum",
+    "values": {
+      "Standard": "Standard"
+    }
   },
   "ChallengeFlags": {
-    "None": "None",
-    "IsRealTime": "IsRealTime",
-    "IsFirstFree": "IsFirstFree",
-    "IsSinglePlay": "IsSinglePlay",
-    "IsManualCommandEnabled": "IsManualCommandEnabled"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Isrealtime": 1,
+      "Isfirstfree": 2,
+      "Issingleplay": 4,
+      "Ismanualcommandenabled": 8
+    }
   },
   "ChannelType": {
-    "Public": "Public",
-    "User": "User",
-    "Alliance": "Alliance",
-    "System": "System"
+    "type": "StrEnum",
+    "values": {
+      "Public": "Public",
+      "User": "User",
+      "Alliance": "Alliance",
+      "System": "System"
+    }
   },
   "LegendaryCharacterLevelUpGasCost": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12",
-    "Level13": "Level13",
-    "Level14": "Level14",
-    "Level15": "Level15",
-    "Level16": "Level16",
-    "Level17": "Level17",
-    "Level18": "Level18",
-    "Level19": "Level19",
-    "Level20": "Level20",
-    "Level21": "Level21",
-    "Level22": "Level22",
-    "Level23": "Level23",
-    "Level24": "Level24",
-    "Level25": "Level25",
-    "Level26": "Level26",
-    "Level27": "Level27",
-    "Level28": "Level28",
-    "Level29": "Level29",
-    "Level30": "Level30",
-    "Level31": "Level31",
-    "Level32": "Level32",
-    "Level33": "Level33",
-    "Level34": "Level34",
-    "Level35": "Level35",
-    "Level36": "Level36",
-    "Level37": "Level37",
-    "Level38": "Level38",
-    "Level39": "Level39",
-    "Level40": "Level40",
-    "Level41": "Level41",
-    "Level42": "Level42",
-    "Level43": "Level43",
-    "Level44": "Level44",
-    "Level45": "Level45",
-    "Level46": "Level46",
-    "Level47": "Level47",
-    "Level48": "Level48",
-    "Level49": "Level49"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 0,
+      "Level2": 200000,
+      "Level3": 250000,
+      "Level4": 300000,
+      "Level5": 350000,
+      "Level6": 400000,
+      "Level7": 450000,
+      "Level8": 500000,
+      "Level9": 550000,
+      "Level10": 600000,
+      "Level11": 650000,
+      "Level12": 700000,
+      "Level13": 750000,
+      "Level14": 800000,
+      "Level15": 850000,
+      "Level16": 900000,
+      "Level17": 950000,
+      "Level18": 1000000,
+      "Level19": 1050000,
+      "Level20": 1100000,
+      "Level21": 1150000,
+      "Level22": 1200000,
+      "Level23": 1250000,
+      "Level24": 1300000,
+      "Level25": 1350000,
+      "Level26": 1400000,
+      "Level27": 1450000,
+      "Level28": 1500000,
+      "Level29": 1550000,
+      "Level30": 1600000,
+      "Level31": 1650000,
+      "Level32": 1700000,
+      "Level33": 1750000,
+      "Level34": 1800000,
+      "Level35": 1850000,
+      "Level36": 1900000,
+      "Level37": 1950000,
+      "Level38": 2000000,
+      "Level39": 2050000,
+      "Level40": 2100000,
+      "Level41": 2150000,
+      "Level42": 2200000,
+      "Level43": 2250000,
+      "Level44": 2300000,
+      "Level45": 2350000,
+      "Level46": 2400000,
+      "Level47": 2450000,
+      "Level48": 2500000,
+      "Level49": 2500000
+    }
   },
   "CharacterLevelUpGasCost": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12",
-    "Level13": "Level13",
-    "Level14": "Level14",
-    "Level15": "Level15",
-    "Level16": "Level16",
-    "Level17": "Level17",
-    "Level18": "Level18",
-    "Level19": "Level19",
-    "Level20": "Level20",
-    "Level21": "Level21",
-    "Level22": "Level22",
-    "Level23": "Level23",
-    "Level24": "Level24",
-    "Level25": "Level25",
-    "Level26": "Level26",
-    "Level27": "Level27",
-    "Level28": "Level28",
-    "Level29": "Level29",
-    "Level30": "Level30",
-    "Level31": "Level31",
-    "Level32": "Level32",
-    "Level33": "Level33",
-    "Level34": "Level34",
-    "Level35": "Level35",
-    "Level36": "Level36",
-    "Level37": "Level37",
-    "Level38": "Level38",
-    "Level39": "Level39",
-    "Level40": "Level40",
-    "Level41": "Level41",
-    "Level42": "Level42",
-    "Level43": "Level43",
-    "Level44": "Level44"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 0,
+      "Level2": 0,
+      "Level3": 25,
+      "Level4": 50,
+      "Level5": 100,
+      "Level6": 200,
+      "Level7": 500,
+      "Level8": 1000,
+      "Level9": 2000,
+      "Level10": 3000,
+      "Level11": 4500,
+      "Level12": 6000,
+      "Level13": 10000,
+      "Level14": 20000,
+      "Level15": 30000,
+      "Level16": 35000,
+      "Level17": 65000,
+      "Level18": 80000,
+      "Level19": 95000,
+      "Level20": 110000,
+      "Level21": 130000,
+      "Level22": 160000,
+      "Level23": 180000,
+      "Level24": 200000,
+      "Level25": 240000,
+      "Level26": 270000,
+      "Level27": 310000,
+      "Level28": 350000,
+      "Level29": 390000,
+      "Level30": 430000,
+      "Level31": 480000,
+      "Level32": 540000,
+      "Level33": 590000,
+      "Level34": 650000,
+      "Level35": 720000,
+      "Level36": 780000,
+      "Level37": 850000,
+      "Level38": 930000,
+      "Level39": 1000000,
+      "Level40": 1100000,
+      "Level41": 1200000,
+      "Level42": 1300000,
+      "Level43": 1400000,
+      "Level44": 1500000
+    }
   },
   "ExperiencePoint": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12",
-    "Level13": "Level13",
-    "Level14": "Level14",
-    "Level15": "Level15",
-    "Level16": "Level16",
-    "Level17": "Level17",
-    "Level18": "Level18",
-    "Level19": "Level19",
-    "Level20": "Level20",
-    "Level21": "Level21",
-    "Level22": "Level22",
-    "Level23": "Level23",
-    "Level24": "Level24",
-    "Level25": "Level25",
-    "Level26": "Level26",
-    "Level27": "Level27",
-    "Level28": "Level28",
-    "Level29": "Level29",
-    "Level30": "Level30",
-    "Level31": "Level31",
-    "Level32": "Level32",
-    "Level33": "Level33",
-    "Level34": "Level34",
-    "Level35": "Level35",
-    "Level36": "Level36",
-    "Level37": "Level37",
-    "Level38": "Level38",
-    "Level39": "Level39",
-    "Level40": "Level40",
-    "Level41": "Level41",
-    "Level42": "Level42",
-    "Level43": "Level43",
-    "Level44": "Level44"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 0,
+      "Level2": 90,
+      "Level3": 360,
+      "Level4": 810,
+      "Level5": 1440,
+      "Level6": 2250,
+      "Level7": 3270,
+      "Level8": 4500,
+      "Level9": 5940,
+      "Level10": 7590,
+      "Level11": 9450,
+      "Level12": 11580,
+      "Level13": 13980,
+      "Level14": 16650,
+      "Level15": 19590,
+      "Level16": 22800,
+      "Level17": 26340,
+      "Level18": 30210,
+      "Level19": 34410,
+      "Level20": 38940,
+      "Level21": 43800,
+      "Level22": 49020,
+      "Level23": 54600,
+      "Level24": 60540,
+      "Level25": 66840,
+      "Level26": 73500,
+      "Level27": 80550,
+      "Level28": 87990,
+      "Level29": 95820,
+      "Level30": 104040,
+      "Level31": 112650,
+      "Level32": 121680,
+      "Level33": 131130,
+      "Level34": 141000,
+      "Level35": 151290,
+      "Level36": 162000,
+      "Level37": 173160,
+      "Level38": 184770,
+      "Level39": 196830,
+      "Level40": 209340,
+      "Level41": 310170,
+      "Level42": 326550,
+      "Level43": 343440,
+      "Level44": 360840
+    }
   },
   "SpecialAbilityType": {
-    "None": "None",
-    "HealSelfHp": "HealSelfHp",
-    "HealSameRoomCharacters": "HealSameRoomCharacters",
-    "AddReload": "AddReload",
-    "DeductReload": "DeductReload",
-    "HealRoomHp": "HealRoomHp",
-    "DamageToRoom": "DamageToRoom",
-    "DamageToSameRoomCharacters": "DamageToSameRoomCharacters",
-    "DamageToCurrentEnemy": "DamageToCurrentEnemy",
-    "SetFire": "SetFire",
-    "Teleport": "Teleport",
-    "Freeze": "Freeze",
-    "FireWalk": "FireWalk",
-    "Clone": "Clone",
-    "Polymorph": "Polymorph",
-    "Mimic": "Mimic",
-    "Summon": "Summon",
-    "Invulnerability": "Invulnerability",
-    "ProtectRoom": "ProtectRoom",
-    "Bloodlust": "Bloodlust"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "HealSelfHp": "HealSelfHp",
+      "HealSameRoomCharacters": "HealSameRoomCharacters",
+      "AddReload": "AddReload",
+      "DeductReload": "DeductReload",
+      "HealRoomHp": "HealRoomHp",
+      "DamageToRoom": "DamageToRoom",
+      "DamageToSameRoomCharacters": "DamageToSameRoomCharacters",
+      "DamageToCurrentEnemy": "DamageToCurrentEnemy",
+      "SetFire": "SetFire",
+      "Teleport": "Teleport",
+      "Freeze": "Freeze",
+      "FireWalk": "FireWalk",
+      "Clone": "Clone",
+      "Polymorph": "Polymorph",
+      "Mimic": "Mimic",
+      "Summon": "Summon",
+      "Invulnerability": "Invulnerability",
+      "ProtectRoom": "ProtectRoom",
+      "Bloodlust": "Bloodlust"
+    }
   },
   "Rarity": {
-    "None": "None",
-    "Common": "Common",
-    "Elite": "Elite",
-    "Unique": "Unique",
-    "Epic": "Epic",
-    "Hero": "Hero",
-    "Special": "Special",
-    "Legendary": "Legendary"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Common": "Common",
+      "Elite": "Elite",
+      "Unique": "Unique",
+      "Epic": "Epic",
+      "Hero": "Hero",
+      "Special": "Special",
+      "Legendary": "Legendary"
+    }
   },
   "ProgressionType": {
-    "Linear": "Linear",
-    "EaseIn": "EaseIn",
-    "EaseOut": "EaseOut"
+    "type": "StrEnum",
+    "values": {
+      "Linear": "Linear",
+      "EaseIn": "EaseIn",
+      "EaseOut": "EaseOut"
+    }
   },
   "CharacterDesignFlagType": {
-    "None": "None",
-    "IsCrew": "IsCrew",
-    "CanCreateViaPrestige": "CanCreateViaPrestige",
-    "IsPrize": "IsPrize",
-    "IsCaptain": "IsCaptain",
-    "AvailableInDropship": "AvailableInDropship"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Iscrew": 1,
+      "Cancreateviaprestige": 2,
+      "Isprize": 4,
+      "Iscaptain": 8,
+      "Availableindropship": 16
+    }
   },
   "CharacterStatus": {
-    "Stand": "Stand",
-    "Move": "Move",
-    "Action": "Action",
-    "Attack": "Attack",
-    "Lift": "Lift"
+    "type": "IntEnum",
+    "values": {
+      "Stand": 0,
+      "Move": 1,
+      "Action": 2,
+      "Attack": 3,
+      "Lift": 4
+    }
   },
   "CharacterControlMode": {
-    "None": "None",
-    "Tap": "Tap",
-    "Drag": "Drag"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Tap": 1,
+      "Drag": 2
+    }
   },
   "CharacterMovementStatus": {
-    "Stand": "Stand",
-    "Walking": "Walking",
-    "WalkingToCenterPointToCallLift": "WalkingToCenterPointToCallLift",
-    "MovingByLift": "MovingByLift",
-    "CallLift": "CallLift",
-    "WaitForLift": "WaitForLift",
-    "WalkToLift": "WalkToLift",
-    "RepairYourRoom": "RepairYourRoom",
-    "AttackEnemyRoom": "AttackEnemyRoom",
-    "AttackEnemyCharacter": "AttackEnemyCharacter"
+    "type": "IntEnum",
+    "values": {
+      "Stand": 0,
+      "Walking": 1,
+      "Walkingtocenterpointtocalllift": 2,
+      "Movingbylift": 3,
+      "Calllift": 4,
+      "Waitforlift": 5,
+      "Walktolift": 6,
+      "Repairyourroom": 7,
+      "Attackenemyroom": 8,
+      "Attackenemycharacter": 9
+    }
   },
   "CharacterFlags": {
-    "Favourite": "Favourite"
+    "type": "IntEnum",
+    "values": {
+      "Favourite": 1
+    }
   },
   "CharacterPartType": {
-    "Head": "Head",
-    "Body": "Body",
-    "Leg": "Leg"
+    "type": "StrEnum",
+    "values": {
+      "Head": "Head",
+      "Body": "Body",
+      "Leg": "Leg"
+    }
   },
   "CollectionType": {
-    "None": "None",
-    "Character": "Character",
-    "Item": "Item"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Character": "Character",
+      "Item": "Item"
+    }
   },
   "BattleCommandType": {
-    "SetPower": "SetPower",
-    "SetTarget": "SetTarget",
-    "SetAIEnabled": "SetAIEnabled",
-    "SetCharacterAIEnabled": "SetCharacterAIEnabled",
-    "SetRoomAIEnabled": "SetRoomAIEnabled",
-    "SetItem": "SetItem",
-    "Escape": "Escape",
-    "UseSpecialPower": "UseSpecialPower",
-    "UseItem": "UseItem",
-    "SelectCharacter": "SelectCharacter"
+    "type": "StrEnum",
+    "values": {
+      "SetPower": "SetPower",
+      "SetTarget": "SetTarget",
+      "SetAIEnabled": "SetAIEnabled",
+      "SetCharacterAIEnabled": "SetCharacterAIEnabled",
+      "SetRoomAIEnabled": "SetRoomAIEnabled",
+      "SetItem": "SetItem",
+      "Escape": "Escape",
+      "UseSpecialPower": "UseSpecialPower",
+      "UseItem": "UseItem",
+      "SelectCharacter": "SelectCharacter"
+    }
   },
   "Argument": {
-    "All": "All",
-    "Power": "Power",
-    "Target": "Target",
-    "Item": "Item"
+    "type": "StrEnum",
+    "values": {
+      "All": "All",
+      "Power": "Power",
+      "Target": "Target",
+      "Item": "Item"
+    }
   },
   "ConcurrencyTransactionOperation": {
-    "CREATE": 0,
-    "UPDATE": 1,
-    "DELETE": 2
+    "type": "IntEnum",
+    "values": {
+      "Create": 0,
+      "Update": 1,
+      "Delete": 2
+    }
   },
   "ConditionTypeCategory": {
-    "YourShip": "YourShip",
-    "YourRoom": "YourRoom",
-    "YourCharacter": "YourCharacter",
-    "EnemyShip": "EnemyShip",
-    "EnemyRoom": "EnemyRoom",
-    "EnemyCharacter": "EnemyCharacter",
-    "None": "None",
-    "Current": "Current",
-    "EnemyCraft": "EnemyCraft",
-    "TargetRoom": "TargetRoom",
-    "YourCraft": "YourCraft",
-    "CurrentRoom": "CurrentRoom",
-    "OriginRoom": "OriginRoom"
+    "type": "StrEnum",
+    "values": {
+      "YourShip": "YourShip",
+      "YourRoom": "YourRoom",
+      "YourCharacter": "YourCharacter",
+      "EnemyShip": "EnemyShip",
+      "EnemyRoom": "EnemyRoom",
+      "EnemyCharacter": "EnemyCharacter",
+      "None": null,
+      "Current": "Current",
+      "EnemyCraft": "EnemyCraft",
+      "TargetRoom": "TargetRoom",
+      "YourCraft": "YourCraft",
+      "CurrentRoom": "CurrentRoom",
+      "OriginRoom": "OriginRoom"
+    }
   },
   "ConditionTypeComparison": {
-    "Higher": "Higher",
-    "Lower": "Lower",
-    "Equal": "Equal",
-    "HigherPercentage": "HigherPercentage",
-    "LowerPercentage": "LowerPercentage",
-    "EqualPercentage": "EqualPercentage",
-    "NotEqual": "NotEqual",
-    "HigherOrEqualPercentage": "HigherOrEqualPercentage",
-    "LowerOrEqualPercentage": "LowerOrEqualPercentage"
+    "type": "StrEnum",
+    "values": {
+      "Higher": "Higher",
+      "Lower": "Lower",
+      "Equal": "Equal",
+      "HigherPercentage": "HigherPercentage",
+      "LowerPercentage": "LowerPercentage",
+      "EqualPercentage": "EqualPercentage",
+      "NotEqual": "NotEqual",
+      "HigherOrEqualPercentage": "HigherOrEqualPercentage",
+      "LowerOrEqualPercentage": "LowerOrEqualPercentage"
+    }
   },
   "ConditionTypeAvailabilityMask": {
-    "None": "None",
-    "TargetRoom": "TargetRoom",
-    "TargetCharacter": "TargetCharacter"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Targetroom": 1,
+      "Targetcharacter": 2
+    }
   },
   "ConditionTypeParameter": {
-    "None": "None",
-    "Hp": "Hp",
-    "Shield": "Shield",
-    "Count": "Count",
-    "FriendlyCount": "FriendlyCount",
-    "EnemyCount": "EnemyCount",
-    "CloakingDuration": "CloakingDuration",
-    "SystemDamage": "SystemDamage",
-    "HullDamage": "HullDamage",
-    "StunLength": "StunLength",
-    "EMPLength": "EMPLength",
-    "CharacterDamage": "CharacterDamage",
-    "FireLength": "FireLength",
-    "BreachChance": "BreachChance",
-    "Speed": "Speed",
-    "DirectSystemDamage": "DirectSystemDamage",
-    "ShieldDamage": "ShieldDamage",
-    "Cost": "Cost"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Hp": "Hp",
+      "Shield": "Shield",
+      "Count": "Count",
+      "FriendlyCount": "FriendlyCount",
+      "EnemyCount": "EnemyCount",
+      "CloakingDuration": "CloakingDuration",
+      "SystemDamage": "SystemDamage",
+      "HullDamage": "HullDamage",
+      "StunLength": "StunLength",
+      "EMPLength": "EMPLength",
+      "CharacterDamage": "CharacterDamage",
+      "FireLength": "FireLength",
+      "BreachChance": "BreachChance",
+      "Speed": "Speed",
+      "DirectSystemDamage": "DirectSystemDamage",
+      "ShieldDamage": "ShieldDamage",
+      "Cost": "Cost"
+    }
   },
   "Contributor": {
-    "None": "None",
-    "Mod": "Mod",
-    "Translator": "Translator",
-    "CommunityManager": "CommunityManager"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Mod": 1,
+      "Translator": 2,
+      "Communitymanager": 3
+    }
   },
   "CurrencyType": {
-    "Unknown": "Unknown",
-    "Gas": "Gas",
-    "Mineral": "Mineral",
-    "Starbux": "Starbux",
-    "Item": "Item",
-    "Supply": "Supply",
-    "Character": "Character",
-    "Room": "Room",
-    "Points": "Points",
-    "Score": "Score",
-    "Research": "Research",
-    "AI": 11,
-    "Event": "Event",
-    "Mission": "Mission",
-    "System": "System",
-    "CharacterId": "CharacterId",
-    "RoomId": "RoomId",
-    "BackgroundId": "BackgroundId",
-    "XP": 18,
-    "PurchasePoints": "PurchasePoints",
-    "Marker": "Marker",
-    "Promotion": "Promotion",
-    "Situation": "Situation",
-    "SecondsSinceLastPurchase": "SecondsSinceLastPurchase",
-    "AllRooms": "AllRooms",
-    "PassPoints": "PassPoints",
-    "AllItems": "AllItems",
-    "AllCharacters": "AllCharacters"
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "Gas": "Gas",
+      "Mineral": "Mineral",
+      "Starbux": "Starbux",
+      "Item": "Item",
+      "Supply": "Supply",
+      "Character": "Character",
+      "Room": "Room",
+      "Points": "Points",
+      "Score": "Score",
+      "Research": "Research",
+      "AI": "AI",
+      "Event": "Event",
+      "Mission": "Mission",
+      "System": "System",
+      "CharacterId": "CharacterId",
+      "RoomId": "RoomId",
+      "BackgroundId": "BackgroundId",
+      "XP": "XP",
+      "PurchasePoints": "PurchasePoints",
+      "Marker": "Marker",
+      "Promotion": "Promotion",
+      "Situation": "Situation",
+      "SecondsSinceLastPurchase": "SecondsSinceLastPurchase",
+      "AllRooms": "AllRooms",
+      "PassPoints": "PassPoints",
+      "AllItems": "AllItems",
+      "AllCharacters": "AllCharacters"
+    }
   },
   "DataValidationErrorType": {
-    "ERROR": 0,
-    "WARNING": 1,
-    "SUGGESTION": 2
+    "type": "IntEnum",
+    "values": {
+      "Error": 0,
+      "Warning": 1,
+      "Suggestion": 2
+    }
   },
   "DeviceFlag": {
-    "None": "None",
-    "Guid": "Guid"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Guid": 1
+    }
   },
   "DeviceType": {
-    "DeviceTypeIPhone": "DeviceTypeIPhone",
-    "DeviceTypeAndroid": "DeviceTypeAndroid",
-    "DeviceTypeMac": "DeviceTypeMac",
-    "DeviceiOSWidget": "DeviceiOSWidget",
-    "DeviceTypeSteam": "DeviceTypeSteam",
-    "DeviceTypeWindows": "DeviceTypeWindows",
-    "DeviceTypeGeneric": "DeviceTypeGeneric",
-    "DeviceTypeAndroidWeb": "DeviceTypeAndroidWeb",
-    "DeviceTypeWeb": "DeviceTypeWeb"
+    "type": "StrEnum",
+    "values": {
+      "DeviceTypeIPhone": "DeviceTypeIPhone",
+      "DeviceTypeAndroid": "DeviceTypeAndroid",
+      "DeviceTypeMac": "DeviceTypeMac",
+      "DeviceiOSWidget": "DeviceiOSWidget",
+      "DeviceTypeSteam": "DeviceTypeSteam",
+      "DeviceTypeWindows": "DeviceTypeWindows",
+      "DeviceTypeGeneric": "DeviceTypeGeneric",
+      "DeviceTypeAndroidWeb": "DeviceTypeAndroidWeb",
+      "DeviceTypeWeb": "DeviceTypeWeb"
+    }
   },
   "DeviceTypeEnum": {
-    "DeviceTypeIPhone": "DeviceTypeIPhone",
-    "DeviceTypeAndroid": "DeviceTypeAndroid",
-    "DeviceTypeMac": "DeviceTypeMac",
-    "DeviceiOSWidget": "DeviceiOSWidget",
-    "DeviceTypeSteam": "DeviceTypeSteam",
-    "DeviceTypeWindows": "DeviceTypeWindows",
-    "DeviceTypeGeneric": "DeviceTypeGeneric",
-    "DeviceTypeAndroidWeb": "DeviceTypeAndroidWeb"
+    "type": "StrEnum",
+    "values": {
+      "DeviceTypeIPhone": "DeviceTypeIPhone",
+      "DeviceTypeAndroid": "DeviceTypeAndroid",
+      "DeviceTypeMac": "DeviceTypeMac",
+      "DeviceiOSWidget": "DeviceiOSWidget",
+      "DeviceTypeSteam": "DeviceTypeSteam",
+      "DeviceTypeWindows": "DeviceTypeWindows",
+      "DeviceTypeGeneric": "DeviceTypeGeneric",
+      "DeviceTypeAndroidWeb": "DeviceTypeAndroidWeb"
+    }
   },
   "DivisionType": {
-    "None": "None",
-    "Individual": "Individual",
-    "Fleet": "Fleet"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Individual": "Individual",
+      "Fleet": "Fleet"
+    }
   },
   "DrawType": {
-    "None": "None",
-    "Character": "Character"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Character": "Character"
+    }
   },
   "ExternalAccountType": {
-    "Normal": "Normal",
-    "QQ": 1,
-    "Wechat": "Wechat"
+    "type": "IntEnum",
+    "values": {
+      "Normal": 0,
+      "Wechat": 2,
+      "Qq": 1
+    }
   },
   "FileDownloadCategory": {
-    "None": "None",
-    "NewGame": "NewGame",
-    "MainScene": "MainScene",
-    "BattleScene": "BattleScene",
-    "CharacterScene": "CharacterScene",
-    "ScratchyScene": "ScratchyScene",
-    "WarScene": "WarScene",
-    "BattlePass": "BattlePass"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Newgame": 1,
+      "Mainscene": 2,
+      "Battlescene": 3,
+      "Characterscene": 4,
+      "Scratchyscene": 5,
+      "Warscene": 6,
+      "Battlepass": 7
+    }
   },
   "FileType": {
-    "File": "File",
-    "Sprite": "Sprite",
-    "TextureAtlas": "TextureAtlas",
-    "Sound": "Sound",
-    "AssetBundle": "AssetBundle"
+    "type": "IntEnum",
+    "values": {
+      "File": 0,
+      "Sprite": 1,
+      "Sound": 3,
+      "Textureatlas": 2,
+      "Assetbundle": 4
+    }
   },
   "AccessType": {
-    "Private": "Private",
-    "Public": "Public",
-    "Business": "Business",
-    "System": "System"
+    "type": "IntEnum",
+    "values": {
+      "Private": 0,
+      "Public": 1,
+      "Business": 2,
+      "System": 3
+    }
   },
   "FriendType": {
-    "Friend": "Friend",
-    "Ignore": "Ignore",
-    "Invited": "Invited",
-    "Approval": "Approval",
-    "Abuse": "Abuse",
-    "FacebookFriend": "FacebookFriend",
-    "Unfriended": "Unfriended"
+    "type": "StrEnum",
+    "values": {
+      "Friend": "Friend",
+      "Ignore": "Ignore",
+      "Invited": "Invited",
+      "Approval": "Approval",
+      "Abuse": "Abuse",
+      "FacebookFriend": "FacebookFriend",
+      "Unfriended": "Unfriended"
+    }
   },
   "ValueSourceType": {
-    "Db": "Db",
-    "GoogleSheets": "GoogleSheets",
-    "Invalid": "Invalid"
+    "type": "IntEnum",
+    "values": {
+      "Db": 0,
+      "Invalid": 2,
+      "Googlesheets": 1
+    }
   },
   "HistoryType": {
-    "Unknown": "Unknown",
-    "SystemAverageCredits": "SystemAverageCredits",
-    "ItemPrices": "ItemPrices",
-    "UserTrophy": "UserTrophy",
-    "UserStarbux": "UserStarbux",
-    "ItemsInCirculation": "ItemsInCirculation",
-    "AllianceTrophy": "AllianceTrophy"
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "SystemAverageCredits": "SystemAverageCredits",
+      "ItemPrices": "ItemPrices",
+      "UserTrophy": "UserTrophy",
+      "UserStarbux": "UserStarbux",
+      "ItemsInCirculation": "ItemsInCirculation",
+      "AllianceTrophy": "AllianceTrophy"
+    }
   },
   "FitType": {
-    "ZoomOut": "ZoomOut",
-    "ZoomIn": "ZoomIn"
+    "type": "IntEnum",
+    "values": {
+      "Zoomout": 0,
+      "Zoomin": 1
+    }
   },
   "AmmoCategory": {
-    "None": "None",
-    "Ammo": "Ammo",
-    "Android": "Android",
-    "Craft": "Craft",
-    "Module": "Module",
-    "Charge": "Charge"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Ammo": "Ammo",
+      "Android": "Android",
+      "Craft": "Craft",
+      "Module": "Module",
+      "Charge": "Charge"
+    }
   },
   "ItemSubType": {
-    "None": "None",
-    "EquipmentHead": "EquipmentHead",
-    "EquipmentBody": "EquipmentBody",
-    "EquipmentLeg": "EquipmentLeg",
-    "EquipmentWeapon": "EquipmentWeapon",
-    "EquipmentAccessory": "EquipmentAccessory",
-    "EquipmentPet": "EquipmentPet",
-    "GasPack": "GasPack",
-    "MineralPack": "MineralPack",
-    "Immunity": "Immunity",
-    "Artifact": "Artifact",
-    "Revive": "Revive",
-    "Scratchy": "Scratchy",
-    "Consumable": "Consumable",
-    "InstantPrize": "InstantPrize",
-    "Module": "Module",
-    "Rename": "Rename",
-    "Sticker": "Sticker",
-    "Skin": "Skin",
-    "InstantTraining": "InstantTraining",
-    "ReduceFatigue": "ReduceFatigue",
-    "ReducePrestige": "ReducePrestige",
-    "ResetTraining": "ResetTraining",
-    "AIBook": "AIBook",
-    "FillMineralStorage": "FillMineralStorage",
-    "FillGasStorage": "FillGasStorage",
-    "BoostMineralPercentage": "BoostMineralPercentage",
-    "BoostGasPercentage": "BoostGasPercentage",
-    "SpeedUpConstruction": "SpeedUpConstruction",
-    "IncreaseXPReward": "IncreaseXPReward",
-    "IncreaseMineralReward": "IncreaseMineralReward",
-    "IncreaseGasReward": "IncreaseGasReward",
-    "IncreaseLootReward": "IncreaseLootReward",
-    "Rearm": "Rearm",
-    "Situation": "Situation",
-    "BlueprintShip": "BlueprintShip",
-    "BlueprintRoom": "BlueprintRoom",
-    "SpeedUpResearch": "SpeedUpResearch",
-    "RoomSkin": "RoomSkin",
-    "InstantXP": "InstantXP"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "EquipmentHead": "EquipmentHead",
+      "EquipmentBody": "EquipmentBody",
+      "EquipmentLeg": "EquipmentLeg",
+      "EquipmentWeapon": "EquipmentWeapon",
+      "EquipmentAccessory": "EquipmentAccessory",
+      "EquipmentPet": "EquipmentPet",
+      "GasPack": "GasPack",
+      "MineralPack": "MineralPack",
+      "Immunity": "Immunity",
+      "Artifact": "Artifact",
+      "Revive": "Revive",
+      "Scratchy": "Scratchy",
+      "Consumable": "Consumable",
+      "InstantPrize": "InstantPrize",
+      "Module": "Module",
+      "Rename": "Rename",
+      "Sticker": "Sticker",
+      "Skin": "Skin",
+      "InstantTraining": "InstantTraining",
+      "ReduceFatigue": "ReduceFatigue",
+      "ReducePrestige": "ReducePrestige",
+      "ResetTraining": "ResetTraining",
+      "AIBook": "AIBook",
+      "FillMineralStorage": "FillMineralStorage",
+      "FillGasStorage": "FillGasStorage",
+      "BoostMineralPercentage": "BoostMineralPercentage",
+      "BoostGasPercentage": "BoostGasPercentage",
+      "SpeedUpConstruction": "SpeedUpConstruction",
+      "IncreaseXPReward": "IncreaseXPReward",
+      "IncreaseMineralReward": "IncreaseMineralReward",
+      "IncreaseGasReward": "IncreaseGasReward",
+      "IncreaseLootReward": "IncreaseLootReward",
+      "Rearm": "Rearm",
+      "Situation": "Situation",
+      "BlueprintShip": "BlueprintShip",
+      "BlueprintRoom": "BlueprintRoom",
+      "SpeedUpResearch": "SpeedUpResearch",
+      "RoomSkin": "RoomSkin",
+      "InstantXP": "InstantXP"
+    }
   },
   "ModuleType": {
-    "None": "None",
-    "Trap": "Trap",
-    "Armor": "Armor",
-    "Enhancement": "Enhancement",
-    "Sandbag": "Sandbag",
-    "WaterSprinkler": "WaterSprinkler",
-    "Turret": "Turret"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Trap": "Trap",
+      "Armor": "Armor",
+      "Enhancement": "Enhancement",
+      "Sandbag": "Sandbag",
+      "WaterSprinkler": "WaterSprinkler",
+      "Turret": "Turret"
+    }
   },
   "EnhancementType": {
-    "None": "None",
-    "Hp": "Hp",
-    "Attack": "Attack",
-    "Pilot": "Pilot",
-    "Repair": "Repair",
-    "Weapon": "Weapon",
-    "Science": "Science",
-    "Engine": "Engine",
-    "Stamina": "Stamina",
-    "Ability": "Ability",
-    "FireResistance": "FireResistance",
-    "SharpShooterSkill": "SharpShooterSkill",
-    "InstantKillSkill": "InstantKillSkill",
-    "ResurrectSkill": "ResurrectSkill",
-    "FreezeAttackSkill": "FreezeAttackSkill",
-    "EmpSkill": "EmpSkill",
-    "BloodThirstSkill": "BloodThirstSkill",
-    "MedicalSkill": "MedicalSkill"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Hp": "Hp",
+      "Attack": "Attack",
+      "Pilot": "Pilot",
+      "Repair": "Repair",
+      "Weapon": "Weapon",
+      "Science": "Science",
+      "Engine": "Engine",
+      "Stamina": "Stamina",
+      "Ability": "Ability",
+      "FireResistance": "FireResistance",
+      "SharpShooterSkill": "SharpShooterSkill",
+      "InstantKillSkill": "InstantKillSkill",
+      "ResurrectSkill": "ResurrectSkill",
+      "FreezeAttackSkill": "FreezeAttackSkill",
+      "EmpSkill": "EmpSkill",
+      "BloodThirstSkill": "BloodThirstSkill",
+      "MedicalSkill": "MedicalSkill"
+    }
   },
   "ItemType": {
-    "None": "None",
-    "Mineral": "Mineral",
-    "Gas": "Gas",
-    "Missile": "Missile",
-    "Craft": "Craft",
-    "Equipment": "Equipment",
-    "Android": "Android",
-    "Capacity": "Capacity"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Mineral": "Mineral",
+      "Gas": "Gas",
+      "Missile": "Missile",
+      "Craft": "Craft",
+      "Equipment": "Equipment",
+      "Android": "Android",
+      "Capacity": "Capacity"
+    }
   },
   "ItemDesignFlagType": {
-    "None": "None",
-    "AllowTrading": "AllowTrading",
-    "DropshipReward": "DropshipReward",
-    "ChallengeReward": "ChallengeReward",
-    "PvpReward": "PvpReward",
-    "InstantReward": "InstantReward",
-    "MissionReward": "MissionReward",
-    "Consumable": "Consumable",
-    "AlignToTop": "AlignToTop",
-    "AllowDonation": "AllowDonation",
-    "Giftable": "Giftable",
-    "UseOnCrew": "UseOnCrew",
-    "RecyclingBuild": "RecyclingBuild",
-    "UsedItem": "UsedItem",
-    "AllowManufacture": "AllowManufacture",
-    "TaskPrize": "TaskPrize",
-    "UniqueContentReward": "UniqueContentReward",
-    "UseOnRoom": "UseOnRoom",
-    "DontShowRewards": "DontShowRewards"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Consumable": 64,
+      "Giftable": 512,
+      "Allowtrading": 1,
+      "Dropshipreward": 2,
+      "Challengereward": 4,
+      "Pvpreward": 8,
+      "Instantreward": 16,
+      "Missionreward": 32,
+      "Aligntotop": 128,
+      "Allowdonation": 256,
+      "Useoncrew": 1024,
+      "Recyclingbuild": 2048,
+      "Useditem": 4096,
+      "Allowmanufacture": 8192,
+      "Taskprize": 16384,
+      "Uniquecontentreward": 32768,
+      "Useonroom": 65536,
+      "Dontshowrewards": 131072
+    }
   },
   "LiftStatus": {
-    "Stand": "Stand",
-    "Moving": "Moving",
-    "CarryingCharacter": "CarryingCharacter",
-    "WaitingForCharacterToGoIn": "WaitingForCharacterToGoIn",
-    "WaitingForCharacterToGoOut": "WaitingForCharacterToGoOut"
+    "type": "IntEnum",
+    "values": {
+      "Stand": 0,
+      "Moving": 1,
+      "Carryingcharacter": 2,
+      "Waitingforcharactertogoin": 3,
+      "Waitingforcharactertogoout": 4
+    }
   },
   "MapEventType": {
-    "None": "None"
+    "type": "IntEnum",
+    "values": {
+      "None": null
+    }
   },
   "MessageType": {
-    "Public": "Public",
-    "Private": "Private",
-    "System": "System",
-    "Alliance": "Alliance",
-    "Moments": "Moments",
-    "Market": "Market",
-    "Catalog": "Catalog",
-    "Battle": "Battle",
-    "Tournament": "Tournament",
-    "Mission": "Mission",
-    "Task": "Task",
-    "Global": "Global"
+    "type": "StrEnum",
+    "values": {
+      "Public": "Public",
+      "Private": "Private",
+      "System": "System",
+      "Alliance": "Alliance",
+      "Moments": "Moments",
+      "Market": "Market",
+      "Catalog": "Catalog",
+      "Battle": "Battle",
+      "Tournament": "Tournament",
+      "Mission": "Mission",
+      "Task": "Task",
+      "Global": "Global"
+    }
   },
   "ActivityType": {
-    "None": "None",
-    "Replay": "Replay",
-    "Application": "Application",
-    "Joined": "Joined",
-    "MembershipChanged": "MembershipChanged",
-    "Invited": "Invited",
-    "Donated": "Donated",
-    "Reward": "Reward",
-    "RewardCollected": "RewardCollected",
-    "DeviceLogin": "DeviceLogin",
-    "MarketListed": "MarketListed",
-    "MarketSold": "MarketSold",
-    "MarketExpired": "MarketExpired",
-    "RewardPending": "RewardPending",
-    "Unfriended": "Unfriended",
-    "BattleMatched": "BattleMatched",
-    "BattleLoadProgress": "BattleLoadProgress",
-    "AllianceSettingsUpdated": "AllianceSettingsUpdated",
-    "AllianceQualified": "AllianceQualified",
-    "Actioned": "Actioned",
-    "ModelUpdate": "ModelUpdate",
-    "FriendRequestDecline": "FriendRequestDecline",
-    "FriendRequestAccept": "FriendRequestAccept",
-    "AllianceAnnouncement": "AllianceAnnouncement",
-    "ReloadUserData": "ReloadUserData",
-    "FriendRequestCancel": "FriendRequestCancel",
-    "Gift": "Gift"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Replay": "Replay",
+      "Application": "Application",
+      "Joined": "Joined",
+      "MembershipChanged": "MembershipChanged",
+      "Invited": "Invited",
+      "Donated": "Donated",
+      "Reward": "Reward",
+      "RewardCollected": "RewardCollected",
+      "DeviceLogin": "DeviceLogin",
+      "MarketListed": "MarketListed",
+      "MarketSold": "MarketSold",
+      "MarketExpired": "MarketExpired",
+      "RewardPending": "RewardPending",
+      "Unfriended": "Unfriended",
+      "BattleMatched": "BattleMatched",
+      "BattleLoadProgress": "BattleLoadProgress",
+      "AllianceSettingsUpdated": "AllianceSettingsUpdated",
+      "AllianceQualified": "AllianceQualified",
+      "Actioned": "Actioned",
+      "ModelUpdate": "ModelUpdate",
+      "FriendRequestDecline": "FriendRequestDecline",
+      "FriendRequestAccept": "FriendRequestAccept",
+      "AllianceAnnouncement": "AllianceAnnouncement",
+      "ReloadUserData": "ReloadUserData",
+      "FriendRequestCancel": "FriendRequestCancel",
+      "Gift": "Gift"
+    }
   },
   "MissileType": {
-    "Laser": "Laser",
-    "Rocket": "Rocket",
-    "LongDistanceMissile": "LongDistanceMissile"
+    "type": "StrEnum",
+    "values": {
+      "Laser": "Laser",
+      "Rocket": "Rocket",
+      "LongDistanceMissile": "LongDistanceMissile"
+    }
   },
   "FlightType": {
-    "Immediate": "Immediate",
-    "Linear": "Linear",
-    "Ion": "Ion",
-    "Homing": "Homing"
+    "type": "StrEnum",
+    "values": {
+      "Immediate": "Immediate",
+      "Linear": "Linear",
+      "Ion": "Ion",
+      "Homing": "Homing"
+    }
   },
   "ExplosionType": {
-    "Single": "Single",
-    "Radius": "Radius",
-    "Line": "Line",
-    "All": "All",
-    "Random": "Random"
+    "type": "StrEnum",
+    "values": {
+      "Single": "Single",
+      "Radius": "Radius",
+      "Line": "Line",
+      "All": "All",
+      "Random": "Random"
+    }
   },
   "MissionDesignStatus": {
-    "None": "None",
-    "Draft": "Draft",
-    "Review": "Review",
-    "Published": "Published",
-    "DependencyReview": "DependencyReview",
-    "Archive": "Archive",
-    "DeleteReview": "DeleteReview"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Draft": "Draft",
+      "Review": "Review",
+      "Published": "Published",
+      "DependencyReview": "DependencyReview",
+      "Archive": "Archive",
+      "DeleteReview": "DeleteReview"
+    }
   },
   "MissionDesignType": {
-    "None": "None",
-    "Single": "Single",
-    "Surprise": "Surprise",
-    "Instant": "Instant",
-    "Exploration": "Exploration"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Single": "Single",
+      "Surprise": "Surprise",
+      "Instant": "Instant",
+      "Exploration": "Exploration"
+    }
   },
   "MissionDesignFlag": {
-    "None": "None",
-    "HideWhenRequirementNotSatisfied": "HideWhenRequirementNotSatisfied",
-    "GalaxyExclusive": "GalaxyExclusive",
-    "ShownWhenUnexplored": "ShownWhenUnexplored",
-    "DisableHPCheck": "DisableHPCheck"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Hidewhenrequirementnotsatisfied": 1,
+      "Galaxyexclusive": 2,
+      "Shownwhenunexplored": 4,
+      "Disablehpcheck": 8
+    }
   },
   "MissionEventType": {
-    "Battle": "Battle",
-    "Adventure": "Adventure",
-    "Story": "Story"
+    "type": "StrEnum",
+    "values": {
+      "Battle": "Battle",
+      "Adventure": "Adventure",
+      "Story": "Story"
+    }
   },
   "RequirementType": {
-    "None": "None",
-    "RoomDesignType": "RoomDesignType",
-    "MissileDesignType": "MissileDesignType",
-    "ResearchDesignType": "ResearchDesignType",
-    "Crew": "Crew",
-    "Mineral": "Mineral",
-    "Gas": "Gas"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "RoomDesignType": "RoomDesignType",
+      "MissileDesignType": "MissileDesignType",
+      "ResearchDesignType": "ResearchDesignType",
+      "Crew": "Crew",
+      "Mineral": "Mineral",
+      "Gas": "Gas"
+    }
   },
   "HackType": {
-    "TransferStarbux": "TransferStarbux",
-    "MultipleAccounts": "MultipleAccounts",
-    "TooManyBattles": "TooManyBattles",
-    "NoBattleAfterQuize": "NoBattleAfterQuize",
-    "TooManyUnattempQuize": "TooManyUnattempQuize"
+    "type": "IntEnum",
+    "values": {
+      "Transferstarbux": 1,
+      "Multipleaccounts": 2,
+      "Toomanybattles": 4,
+      "Nobattleafterquize": 8,
+      "Toomanyunattempquize": 16
+    }
   },
   "PromotionType": {
-    "None": "None",
-    "Offer": "Offer",
-    "VIP": 2,
-    "WebPromotion": "WebPromotion",
-    "DailyDealOffer": "DailyDealOffer",
-    "ValueOffer": "ValueOffer",
-    "Code": "Code",
-    "NonPremiumDailyDealOffer": "NonPremiumDailyDealOffer"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Offer": "Offer",
+      "VIP": "VIP",
+      "WebPromotion": "WebPromotion",
+      "DailyDealOffer": "DailyDealOffer",
+      "ValueOffer": "ValueOffer",
+      "Code": "Code",
+      "NonPremiumDailyDealOffer": "NonPremiumDailyDealOffer"
+    }
   },
   "PromotionDesignFlag": {
-    "None": "None",
-    "ShowSplash": "ShowSplash",
-    "ShowBadge": "ShowBadge",
-    "Stacks": "Stacks",
-    "SinglePurchase": "SinglePurchase",
-    "SinglePurchasePerDay": "SinglePurchasePerDay"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Stacks": 4,
+      "Showsplash": 1,
+      "Showbadge": 2,
+      "Singlepurchase": 8,
+      "Singlepurchaseperday": 16
+    }
   },
   "QuizType": {
-    "Unknown": "Unknown",
-    "Recaptcha": "Recaptcha"
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "Recaptcha": "Recaptcha"
+    }
   },
   "QuestionType": {
-    "Unknown": "Unknown",
-    "Item": "Item",
-    "Character": "Character",
-    "Room": "Room",
-    "Custom": "Custom"
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "Item": "Item",
+      "Character": "Character",
+      "Room": "Room",
+      "Custom": "Custom"
+    }
   },
   "QuizResult": {
-    "Incorrect": "Incorrect",
-    "Correct": "Correct",
-    "NotAnswerred": "NotAnswerred"
+    "type": "StrEnum",
+    "values": {
+      "Incorrect": "Incorrect",
+      "Correct": "Correct",
+      "NotAnswerred": "NotAnswerred"
+    }
   },
   "ResearchDesignType": {
-    "Normal": "Normal",
-    "CrewLevelUpCost": "CrewLevelUpCost",
-    "ConcurrentConstruction": "ConcurrentConstruction",
-    "Paint": "Paint",
-    "TradeCapacity": "TradeCapacity",
-    "ModuleCapacity": "ModuleCapacity",
-    "StickerCapacity": "StickerCapacity",
-    "AmmoSalvageCapacity": "AmmoSalvageCapacity",
-    "CollectAll": "CollectAll",
-    "Blender": "Blender",
-    "ItemRecycling": "ItemRecycling",
-    "BoostGauge": "BoostGauge",
-    "StorageModifier": "StorageModifier",
-    "StorageIncrease": "StorageIncrease"
+    "type": "StrEnum",
+    "values": {
+      "Normal": "Normal",
+      "CrewLevelUpCost": "CrewLevelUpCost",
+      "ConcurrentConstruction": "ConcurrentConstruction",
+      "Paint": "Paint",
+      "TradeCapacity": "TradeCapacity",
+      "ModuleCapacity": "ModuleCapacity",
+      "StickerCapacity": "StickerCapacity",
+      "AmmoSalvageCapacity": "AmmoSalvageCapacity",
+      "CollectAll": "CollectAll",
+      "Blender": "Blender",
+      "ItemRecycling": "ItemRecycling",
+      "BoostGauge": "BoostGauge",
+      "StorageModifier": "StorageModifier",
+      "StorageIncrease": "StorageIncrease"
+    }
   },
   "ResearchState": {
-    "None": "None",
-    "Researching": "Researching",
-    "Completed": "Completed"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Researching": "Researching",
+      "Completed": "Completed"
+    }
   },
   "RewardType": {
-    "None": "None",
-    "FrequentFlyer": "FrequentFlyer",
-    "Tournament": "Tournament",
-    "BattlePassStandard": "BattlePassStandard",
-    "BattlePassPremium": "BattlePassPremium"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "FrequentFlyer": "FrequentFlyer",
+      "Tournament": "Tournament",
+      "BattlePassStandard": "BattlePassStandard",
+      "BattlePassPremium": "BattlePassPremium"
+    }
   },
   "TransactionType": {
-    "None": "None",
-    "MoPub": "MoPub",
-    "Unity": "Unity",
-    "Tapjoy": "Tapjoy",
-    "Admob": "Admob"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "MoPub": "MoPub",
+      "Unity": "Unity",
+      "Tapjoy": "Tapjoy",
+      "Admob": "Admob"
+    }
   },
   "GridType": {
-    "None": "None",
-    "Normal": "Normal",
-    "Resource": "Resource"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Normal": "Normal",
+      "Resource": "Resource"
+    }
   },
   "RoomType": {
-    "None": "None",
-    "Laser": "Laser",
-    "Bridge": "Bridge",
-    "Engine": "Engine",
-    "Lift": "Lift",
-    "Bedroom": "Bedroom",
-    "Shield": "Shield",
-    "Storage": "Storage",
-    "Reactor": "Reactor",
-    "Missile": "Missile",
-    "Teleport": "Teleport",
-    "Mineral": "Mineral",
-    "Gas": "Gas",
-    "Command": "Command",
-    "Research": "Research",
-    "Wall": "Wall",
-    "Council": "Council",
-    "Carrier": "Carrier",
-    "AntiCraft": "AntiCraft",
-    "Medical": "Medical",
-    "Trap": "Trap",
-    "Radar": "Radar",
-    "Stealth": "Stealth",
-    "Training": "Training",
-    "Cannon": "Cannon",
-    "Corridor": "Corridor",
-    "StationMissile": "StationMissile",
-    "Android": "Android",
-    "Printer": "Printer",
-    "Supply": "Supply",
-    "SuperWeapon": "SuperWeapon",
-    "Recycling": "Recycling",
-    "Hull": "Hull"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Laser": "Laser",
+      "Bridge": "Bridge",
+      "Engine": "Engine",
+      "Lift": "Lift",
+      "Bedroom": "Bedroom",
+      "Shield": "Shield",
+      "Storage": "Storage",
+      "Reactor": "Reactor",
+      "Missile": "Missile",
+      "Teleport": "Teleport",
+      "Mineral": "Mineral",
+      "Gas": "Gas",
+      "Command": "Command",
+      "Research": "Research",
+      "Wall": "Wall",
+      "Council": "Council",
+      "Carrier": "Carrier",
+      "AntiCraft": "AntiCraft",
+      "Medical": "Medical",
+      "Trap": "Trap",
+      "Radar": "Radar",
+      "Stealth": "Stealth",
+      "Training": "Training",
+      "Cannon": "Cannon",
+      "Corridor": "Corridor",
+      "StationMissile": "StationMissile",
+      "Android": "Android",
+      "Printer": "Printer",
+      "Supply": "Supply",
+      "SuperWeapon": "SuperWeapon",
+      "Recycling": "Recycling",
+      "Hull": "Hull"
+    }
   },
   "CategoryType": {
-    "Weapon": "Weapon",
-    "Defence": "Defence",
-    "Support": "Support",
-    "Resources": "Resources"
+    "type": "StrEnum",
+    "values": {
+      "Weapon": "Weapon",
+      "Defence": "Defence",
+      "Support": "Support",
+      "Resources": "Resources"
+    }
   },
   "TargetType": {
-    "None": "None",
-    "SingleRoom": "SingleRoom",
-    "RandomRoom": "RandomRoom",
-    "Craft": "Craft"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "SingleRoom": "SingleRoom",
+      "RandomRoom": "RandomRoom",
+      "Craft": "Craft"
+    }
   },
   "RoomFlags": {
-    "None": "None",
-    "RequirePower": "RequirePower",
-    "RequireTarget": "RequireTarget",
-    "RequireItem": "RequireItem",
-    "AllowDesignSwitch": "AllowDesignSwitch",
-    "DisplayWhenMissingRequirements": "DisplayWhenMissingRequirements",
-    "DontAllowUpgrade": "DontAllowUpgrade"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Requirepower": 1,
+      "Requiretarget": 2,
+      "Requireitem": 4,
+      "Allowdesignswitch": 8,
+      "Displaywhenmissingrequirements": 16,
+      "Dontallowupgrade": 32
+    }
   },
   "CrewSacrificePoints": {
-    "None": "None",
-    "Common": "Common",
-    "Elite": "Elite",
-    "Unique": "Unique",
-    "Epic": "Epic",
-    "Hero": "Hero",
-    "Special": "Special",
-    "Legendary": "Legendary"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Common": 5,
+      "Elite": 20,
+      "Unique": 60,
+      "Epic": 200,
+      "Hero": 800,
+      "Special": 2500,
+      "Legendary": 6000
+    }
   },
   "ItemRequiredPoints": {
-    "None": "None",
-    "Common": "Common",
-    "Elite": "Elite",
-    "Unique": "Unique",
-    "Epic": "Epic",
-    "Hero": "Hero",
-    "Special": "Special",
-    "Legendary": "Legendary"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Common": 10,
+      "Elite": 40,
+      "Unique": 120,
+      "Epic": 400,
+      "Hero": 1600,
+      "Special": 5000,
+      "Legendary": 12000
+    }
   },
   "AvailabilityUserType": {
-    "NormalUser": "NormalUser",
-    "AllianceUser": "AllianceUser"
+    "type": "StrEnum",
+    "values": {
+      "NormalUser": "NormalUser",
+      "AllianceUser": "AllianceUser"
+    }
   },
   "RoomEffectType": {
-    "None": "None",
-    "Light": "Light",
-    "Smoke": "Smoke",
-    "Particle": "Particle"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Light": "Light",
+      "Smoke": "Smoke",
+      "Particle": "Particle"
+    }
   },
   "RoomSpriteType": {
-    "Interior": "Interior",
-    "Exterior": "Exterior",
-    "InteriorDestroyed": "InteriorDestroyed",
-    "ExteriorDestroyed": "ExteriorDestroyed",
-    "InteriorActivate": "InteriorActivate",
-    "ExteriorActivate": "ExteriorActivate",
-    "Loading": "Loading"
+    "type": "StrEnum",
+    "values": {
+      "Interior": "Interior",
+      "Exterior": "Exterior",
+      "InteriorDestroyed": "InteriorDestroyed",
+      "ExteriorDestroyed": "ExteriorDestroyed",
+      "InteriorActivate": "InteriorActivate",
+      "ExteriorActivate": "ExteriorActivate",
+      "Loading": "Loading"
+    }
   },
   "RoomDesignSpriteFlag": {
-    "None": "None",
-    "HideIfRequirementNotMet": "HideIfRequirementNotMet"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Hideifrequirementnotmet": 1
+    }
   },
   "RoomStatus": {
-    "Building": "Building",
-    "Normal": "Normal",
-    "Inventory": "Inventory",
-    "Upgrading": "Upgrading"
+    "type": "StrEnum",
+    "values": {
+      "Building": "Building",
+      "Normal": "Normal",
+      "Inventory": "Inventory",
+      "Upgrading": "Upgrading"
+    }
   },
   "SaleStatus": {
-    "Unknown": "Unknown",
-    "Listed": "Listed",
-    "Sold": "Sold",
-    "Expired": "Expired",
-    "PurchasePending": "PurchasePending",
-    "ExpiryPending": "ExpiryPending"
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "Listed": "Listed",
+      "Sold": "Sold",
+      "Expired": "Expired",
+      "PurchasePending": "PurchasePending",
+      "ExpiryPending": "ExpiryPending"
+    }
   },
   "SaleGasMineralCap": {
-    "Level1": "Level1",
-    "Level2": "Level2",
-    "Level3": "Level3",
-    "Level4": "Level4",
-    "Level5": "Level5",
-    "Level6": "Level6",
-    "Level7": "Level7",
-    "Level8": "Level8",
-    "Level9": "Level9",
-    "Level10": "Level10",
-    "Level11": "Level11",
-    "Level12": "Level12",
-    "Level13": "Level13",
-    "Level14": "Level14"
+    "type": "IntEnum",
+    "values": {
+      "Level1": 0,
+      "Level2": 0,
+      "Level3": 6250,
+      "Level4": 41250,
+      "Level5": 187500,
+      "Level6": 375000,
+      "Level7": 750000,
+      "Level8": 937500,
+      "Level9": 1875000,
+      "Level10": 2500000,
+      "Level11": 3000000,
+      "Level12": 3000000,
+      "Level13": 3000000,
+      "Level14": 3000000
+    }
   },
   "SeasonType": {
-    "None": "None"
+    "type": "IntEnum",
+    "values": {
+      "None": null
+    }
   },
   "SettingFlags": {
-    "None": "None",
-    "IMACFullScreenSettingFlag": "IMACFullScreenSettingFlag",
-    "ChinaMode": "ChinaMode",
-    "UseOneSignal": "UseOneSignal",
-    "UseFirebaseMessaging": "UseFirebaseMessaging",
-    "UseRedis": "UseRedis",
-    "SyncServer": "SyncServer",
-    "NewTournamentChanges": "NewTournamentChanges",
-    "DownloadAllDesigns": "DownloadAllDesigns",
-    "UseHeartbeatWebsocket": "UseHeartbeatWebsocket",
-    "UseShipSnapshot": "UseShipSnapshot",
-    "UseRedisCompression": "UseRedisCompression",
-    "UseConcurrencyRedLock": "UseConcurrencyRedLock",
-    "UseMarketSnipingDelay": "UseMarketSnipingDelay",
-    "UseLiveOps": "UseLiveOps",
-    "UseHistoryCache": "UseHistoryCache",
-    "LegendaryLeague": "LegendaryLeague",
-    "AllowOneGlobalMerchantShip": "AllowOneGlobalMerchantShip",
-    "AllowOneGlobalNPCShip": "AllowOneGlobalNPCShip",
-    "UseOpenSearch": "UseOpenSearch",
-    "UseClientBattleFinalisationOnLogin": "UseClientBattleFinalisationOnLogin"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Imacfullscreensettingflag": 1,
+      "Chinamode": 2,
+      "Useonesignal": 4,
+      "Usefirebasemessaging": 8,
+      "Useredis": 16,
+      "Syncserver": 32,
+      "Newtournamentchanges": 64,
+      "Downloadalldesigns": 128,
+      "Useheartbeatwebsocket": 256,
+      "Useshipsnapshot": 512,
+      "Userediscompression": 1024,
+      "Useconcurrencyredlock": 2048,
+      "Usemarketsnipingdelay": 4096,
+      "Useliveops": 8192,
+      "Usehistorycache": 16384,
+      "Legendaryleague": 32768,
+      "Allowoneglobalmerchantship": 65536,
+      "Allowoneglobalnpcship": 131072,
+      "Useopensearch": 262144,
+      "Useclientbattlefinalisationonlogin": 524288
+    }
   },
   "SaleType": {
-    "None": "None",
-    "Character": "Character",
-    "Bonus": "Bonus",
-    "Room": "Room",
-    "Item": "Item",
-    "Ship": "Ship",
-    "FleetGift": "FleetGift"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Character": "Character",
+      "Bonus": "Bonus",
+      "Room": "Room",
+      "Item": "Item",
+      "Ship": "Ship",
+      "FleetGift": "FleetGift"
+    }
   },
   "DailyRewardType": {
-    "Starbux": "Starbux",
-    "Mineral": "Mineral",
-    "Gas": "Gas",
-    "Item": "Item",
-    "Crew": "Crew"
+    "type": "StrEnum",
+    "values": {
+      "Starbux": "Starbux",
+      "Mineral": "Mineral",
+      "Gas": "Gas",
+      "Item": "Item",
+      "Crew": "Crew"
+    }
   },
   "ABTestingFlag": {
-    "ABTestingFlagA": "ABTestingFlagA",
-    "ABTestingFlagB": "ABTestingFlagB"
+    "type": "IntEnum",
+    "values": {
+      "Abtestingflaga": 1,
+      "Abtestingflagb": 2
+    }
   },
   "FeatureFlag": {
-    "FeatureFlagNone": "FeatureFlagNone",
-    "FeatureFlagGalaxy": "FeatureFlagGalaxy",
-    "FeatureFlagRoomRearm": "FeatureFlagRoomRearm",
-    "FeatureFlagShopTopbar": "FeatureFlagShopTopbar",
-    "FeatureFlagAppsflyer": "FeatureFlagAppsflyer",
-    "FeatureFlagBranch": "FeatureFlagBranch"
+    "type": "IntEnum",
+    "values": {
+      "Featureflagnone": 0,
+      "Featureflaggalaxy": 1,
+      "Featureflagroomrearm": 2,
+      "Featureflagshoptopbar": 4,
+      "Featureflagappsflyer": 8,
+      "Featureflagbranch": 16
+    }
   },
   "ChecksumType": {
-    "BuildKeyChecksum": "BuildKeyChecksum",
-    "HardcodedChecksum": "HardcodedChecksum"
+    "type": "IntEnum",
+    "values": {
+      "Buildkeychecksum": 0,
+      "Hardcodedchecksum": 1
+    }
   },
   "VisibilityFlags": {
-    "None": "None",
-    "HideWhenNotSatisfied": "HideWhenNotSatisfied",
-    "ShowWhenNotSatisfied": "ShowWhenNotSatisfied",
-    "AlwaysShow": "AlwaysShow",
-    "AlwaysHide": "AlwaysHide"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Hidewhennotsatisfied": 1,
+      "Showwhennotsatisfied": 2,
+      "Alwaysshow": 3,
+      "Alwayshide": 4
+    }
   },
   "ShipType": {
-    "None": "None",
-    "Player": "Player",
-    "Alliance": "Alliance",
-    "Both": "Both",
-    "Template": "Template"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Player": "Player",
+      "Alliance": "Alliance",
+      "Both": "Both",
+      "Template": "Template"
+    }
   },
   "ShipStatus": {
-    "Online": "Online",
-    "Offline": "Offline",
-    "Attacking": "Attacking",
-    "Defending": "Defending",
-    "Searching": "Searching"
+    "type": "StrEnum",
+    "values": {
+      "Online": "Online",
+      "Offline": "Offline",
+      "Attacking": "Attacking",
+      "Defending": "Defending",
+      "Searching": "Searching"
+    }
   },
   "SituationType": {
-    "None": "None",
-    "Environmental": "Environmental",
-    "User": "User"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Environmental": "Environmental",
+      "User": "User"
+    }
   },
   "SituationCategory": {
-    "Global": "Global",
-    "User": "User"
+    "type": "StrEnum",
+    "values": {
+      "Global": "Global",
+      "User": "User"
+    }
   },
   "ChangeType": {
-    "None": "None",
-    "AddCrew": "AddCrew",
-    "AddLoot": "AddLoot",
-    "AddEXP": "AddEXP",
-    "AddLootBonusGas": "AddLootBonusGas",
-    "AddLootBonusMineral": "AddLootBonusMineral",
-    "AddLeagueBonusGas": "AddLeagueBonusGas",
-    "ResearchBoost": "ResearchBoost",
-    "MiningBoost": "MiningBoost"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "AddCrew": "AddCrew",
+      "AddLoot": "AddLoot",
+      "AddEXP": "AddEXP",
+      "AddLootBonusGas": "AddLootBonusGas",
+      "AddLootBonusMineral": "AddLootBonusMineral",
+      "AddLeagueBonusGas": "AddLeagueBonusGas",
+      "ResearchBoost": "ResearchBoost",
+      "MiningBoost": "MiningBoost"
+    }
   },
   "SituationDesignFlag": {
-    "None": "None",
-    "AffectAttackingShip": "AffectAttackingShip",
-    "AffectDefendingShip": "AffectDefendingShip",
-    "AffectPvP": "AffectPvP",
-    "AffectPvE": "AffectPvE"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Affectattackingship": 1,
+      "Affectdefendingship": 2,
+      "Affectpvp": 4,
+      "Affectpve": 8
+    }
   },
   "TriggerType": {
-    "None": "None",
-    "PvP": "PvP",
-    "ScanShip": "ScanShip",
-    "CollectResources": "CollectResources"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "PvP": "PvP",
+      "ScanShip": "ScanShip",
+      "CollectResources": "CollectResources"
+    }
   },
   "MarkerFlag": {
-    "None": "None",
-    "Global": "Global",
-    "User": "User",
-    "DisplayOnMission": "DisplayOnMission",
-    "DisplayOnSystemInfo": "DisplayOnSystemInfo",
-    "CreateMarkerIfExists": "CreateMarkerIfExists",
-    "CreateMarkerIfExistsKeepExisting": "CreateMarkerIfExistsKeepExisting",
-    "UseTravelMultiplier": "UseTravelMultiplier",
-    "DeleteShipIdAfterDefeat": "DeleteShipIdAfterDefeat"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Global": 1,
+      "User": 2,
+      "Displayonmission": 4,
+      "Displayonsysteminfo": 8,
+      "Createmarkerifexists": 16,
+      "Createmarkerifexistskeepexisting": 32,
+      "Usetravelmultiplier": 64,
+      "Deleteshipidafterdefeat": 128
+    }
   },
   "MarkerType": {
-    "None": "None",
-    "MissionObjective": "MissionObjective",
-    "CombatObjective": "CombatObjective",
-    "Mining": "Mining",
-    "NPCShip": "NPCShip",
-    "Casino": "Casino",
-    "MerchantShip": "MerchantShip"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "MissionObjective": "MissionObjective",
+      "CombatObjective": "CombatObjective",
+      "Mining": "Mining",
+      "NPCShip": "NPCShip",
+      "Casino": "Casino",
+      "MerchantShip": "MerchantShip"
+    }
   },
   "MovementType": {
-    "None": "None",
-    "OneWay": "OneWay",
-    "TwoWay": "TwoWay",
-    "Wander": "Wander"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "OneWay": "OneWay",
+      "TwoWay": "TwoWay",
+      "Wander": "Wander"
+    }
   },
   "GenerationFlags": {
-    "None": "None"
+    "type": "IntEnum",
+    "values": {
+      "None": 0
+    }
   },
   "BehaviorFlags": {
-    "None": "None"
+    "type": "IntEnum",
+    "values": {
+      "None": 0
+    }
   },
   "CompletionValueType": {
-    "None": "None",
-    "Wins": "Wins",
-    "Hp": "Hp"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Wins": "Wins",
+      "Hp": "Hp"
+    }
   },
   "CostType": {
-    "None": "None",
-    "Stardust": "Stardust",
-    "VoidParticle": "VoidParticle",
-    "Random": "Random"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Stardust": "Stardust",
+      "VoidParticle": "VoidParticle",
+      "Random": "Random"
+    }
   },
   "StickerType": {
-    "Character": "Character",
-    "ItemSticker": "ItemSticker"
+    "type": "StrEnum",
+    "values": {
+      "Character": "Character",
+      "ItemSticker": "ItemSticker"
+    }
   },
   "ObjectiveType": {
-    "None": "None",
-    "Scan": "Scan",
-    "Train": "Train",
-    "LevelUpCrew": "LevelUpCrew",
-    "UpgradeRooms": "UpgradeRooms",
-    "WinPVPBattles": "WinPVPBattles",
-    "RecruitCrew": "RecruitCrew",
-    "TravelLength": "TravelLength",
-    "WinGroundBattles": "WinGroundBattles",
-    "CollectFloatingStarbux": "CollectFloatingStarbux",
-    "WinDailyMissions": "WinDailyMissions",
-    "WinChallengeEvent": "WinChallengeEvent",
-    "BlendCrew": "BlendCrew",
-    "EjectItems": "EjectItems",
-    "PurchaseStarbux": "PurchaseStarbux",
-    "DonateCrew": "DonateCrew",
-    "PrestigeCharacter": "PrestigeCharacter",
-    "WinMissionDesign": "WinMissionDesign",
-    "DestroyShipOfRace": "DestroyShipOfRace",
-    "Doves": "Doves",
-    "WinMissionEvent": "WinMissionEvent",
-    "SuccessfulSales": "SuccessfulSales",
-    "BattleReport": "BattleReport",
-    "DeployMiningDroneCount": "DeployMiningDroneCount",
-    "CraftItemCount": "CraftItemCount",
-    "SellItemCount": "SellItemCount",
-    "RecycleItemCount": "RecycleItemCount",
-    "UseItemCount": "UseItemCount",
-    "ExploreSystemCount": "ExploreSystemCount",
-    "TravelSystemCount": "TravelSystemCount",
-    "CollectGeneratedMineralCount": "CollectGeneratedMineralCount",
-    "CollectGeneratedGasCount": "CollectGeneratedGasCount",
-    "DonateSupplyCount": "DonateSupplyCount",
-    "RevengeBattleCount": "RevengeBattleCount"
+    "type": "IntEnum",
+    "values": {
+      "None": null,
+      "Scan": 1,
+      "Train": 2,
+      "Doves": 19,
+      "Levelupcrew": 3,
+      "Upgraderooms": 4,
+      "Winpvpbattles": 5,
+      "Recruitcrew": 6,
+      "Travellength": 7,
+      "Wingroundbattles": 8,
+      "Collectfloatingstarbux": 9,
+      "Windailymissions": 10,
+      "Winchallengeevent": 11,
+      "Blendcrew": 12,
+      "Ejectitems": 13,
+      "Purchasestarbux": 14,
+      "Donatecrew": 15,
+      "Prestigecharacter": 16,
+      "Winmissiondesign": 17,
+      "Destroyshipofrace": 18,
+      "Winmissionevent": 20,
+      "Successfulsales": 21,
+      "Battlereport": 22,
+      "Deployminingdronecount": 23,
+      "Craftitemcount": 24,
+      "Sellitemcount": 25,
+      "Recycleitemcount": 26,
+      "Useitemcount": 27,
+      "Exploresystemcount": 28,
+      "Travelsystemcount": 29,
+      "Collectgeneratedmineralcount": 30,
+      "Collectgeneratedgascount": 31,
+      "Donatesupplycount": 32,
+      "Revengebattlecount": 33
+    }
   },
   "TaskCategory": {
-    "None": "None",
-    "Standard": "Standard",
-    "Competition": "Competition",
-    "Global": "Global",
-    "BattlePassDaily": "BattlePassDaily",
-    "BattlePassSeason": "BattlePassSeason",
-    "BattlePassDailyTemplate": "BattlePassDailyTemplate",
-    "BattlePassSeasonTemplate": "BattlePassSeasonTemplate",
-    "BattlePassDailyReroll": "BattlePassDailyReroll"
+    "type": "IntEnum",
+    "values": {
+      "None": null,
+      "Standard": 1,
+      "Competition": 2,
+      "Global": 3,
+      "Battlepassdaily": 4,
+      "Battlepassseason": 5,
+      "Battlepassdailytemplate": 6,
+      "Battlepassseasontemplate": 7,
+      "Battlepassdailyreroll": 8
+    }
   },
   "TaskDesignFlagsType": {
-    "None": "None"
+    "type": "IntEnum",
+    "values": {
+      "None": 1
+    }
   },
   "ObjectiveArgumentKeyword": {
-    "None": "None",
-    "EnemyCrewDeathCount": "EnemyCrewDeathCount",
-    "RevengeBattleCount": "RevengeBattleCount",
-    "CloakCount": "CloakCount",
-    "RepairRoomCount": "RepairRoomCount",
-    "TeleportCrewCount": "TeleportCrewCount",
-    "HealCrewHpCount": "HealCrewHpCount",
-    "TotalCrewDamage": "TotalCrewDamage",
-    "LootResourceAmount": "LootResourceAmount",
-    "WinPVPBattleCount": "WinPVPBattleCount",
-    "WinGroundBattleCount": "WinGroundBattleCount",
-    "WinDailyMissionCount": "WinDailyMissionCount",
-    "WinChallengeEvent": "WinChallengeEvent",
-    "WinMissionDesign": "WinMissionDesign",
-    "DestroyShipOfRace": "DestroyShipOfRace"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "EnemyCrewDeathCount": "EnemyCrewDeathCount",
+      "RevengeBattleCount": "RevengeBattleCount",
+      "CloakCount": "CloakCount",
+      "RepairRoomCount": "RepairRoomCount",
+      "TeleportCrewCount": "TeleportCrewCount",
+      "HealCrewHpCount": "HealCrewHpCount",
+      "TotalCrewDamage": "TotalCrewDamage",
+      "LootResourceAmount": "LootResourceAmount",
+      "WinPVPBattleCount": "WinPVPBattleCount",
+      "WinGroundBattleCount": "WinGroundBattleCount",
+      "WinDailyMissionCount": "WinDailyMissionCount",
+      "WinChallengeEvent": "WinChallengeEvent",
+      "WinMissionDesign": "WinMissionDesign",
+      "DestroyShipOfRace": "DestroyShipOfRace"
+    }
   },
   "TrainingAnimationStyle": {
-    "Jumping": "Jumping",
-    "Weightlifting": "Weightlifting",
-    "Running": "Running",
-    "Reading": "Reading",
-    "Pushup": "Pushup",
-    "Punching": "Punching",
-    "Meditation": "Meditation"
+    "type": "StrEnum",
+    "values": {
+      "Jumping": "Jumping",
+      "Weightlifting": "Weightlifting",
+      "Running": "Running",
+      "Reading": "Reading",
+      "Pushup": "Pushup",
+      "Punching": "Punching",
+      "Meditation": "Meditation"
+    }
   },
   "TrainingStat": {
-    "Unknown": "Unknown",
-    "Hp": "Hp",
-    "Attack": "Attack",
-    "Science": "Science",
-    "Repair": "Repair",
-    "Stamina": "Stamina",
-    "Weapon": "Weapon",
-    "Pilot": "Pilot",
-    "Engine": "Engine",
-    "Ability": "Ability",
-    "Xp": "Xp"
+    "type": "IntEnum",
+    "values": {
+      "Unknown": 0,
+      "Hp": 1,
+      "Attack": 2,
+      "Science": 3,
+      "Repair": 4,
+      "Stamina": 5,
+      "Weapon": 6,
+      "Pilot": 7,
+      "Engine": 8,
+      "Ability": 9,
+      "Xp": 10
+    }
   },
   "TranslationType": {
-    "Both": "Both",
-    "Server": "Server",
-    "Client": "Client",
-    "Others": "Others"
+    "type": "StrEnum",
+    "values": {
+      "Both": "Both",
+      "Server": "Server",
+      "Client": "Client",
+      "Others": "Others"
+    }
   },
   "PSSAdminDesignType": {
-    "None": "None",
-    "ItemDesign": "ItemDesign",
-    "RoomDesign": "RoomDesign",
-    "CharacterDesign": "CharacterDesign"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Itemdesign": 1,
+      "Roomdesign": 2,
+      "Characterdesign": 3
+    }
   },
   "SyncStatus": {
-    "None": "None",
-    "Untested": "Untested",
-    "Testing": "Testing",
-    "Passed": "Passed",
-    "Failed": "Failed"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Untested": "Untested",
+      "Testing": "Testing",
+      "Passed": "Passed",
+      "Failed": "Failed"
+    }
   },
   "BattleSyncEntity": {
-    "None": "None",
-    "Ship": "Ship",
-    "Room": "Room",
-    "Character": "Character",
-    "Lift": "Lift",
-    "Missile": "Missile",
-    "Craft": "Craft"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Ship": "Ship",
+      "Room": "Room",
+      "Character": "Character",
+      "Lift": "Lift",
+      "Missile": "Missile",
+      "Craft": "Craft"
+    }
   },
   "SyncErrorType": {
-    "None": "None",
-    "HP": 1,
-    "Shield": "Shield",
-    "PositionX": "PositionX",
-    "PositionY": "PositionY",
-    "Exist": "Exist",
-    "RoomStatus": "RoomStatus",
-    "RoomRow": "RoomRow",
-    "CapacityUsed": "CapacityUsed",
-    "TargetId": "TargetId",
-    "AssignedPower": "AssignedPower",
-    "Progress": "Progress",
-    "Level": "Level",
-    "Stamina": "Stamina",
-    "CurrentRoom": "CurrentRoom",
-    "Fatigue": "Fatigue",
-    "Speed": "Speed",
-    "ArrivedFrame": "ArrivedFrame",
-    "OriginRoom": "OriginRoom",
-    "ActionFrame": "ActionFrame"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "HP": "HP",
+      "Shield": "Shield",
+      "PositionX": "PositionX",
+      "PositionY": "PositionY",
+      "Exist": "Exist",
+      "RoomStatus": "RoomStatus",
+      "RoomRow": "RoomRow",
+      "CapacityUsed": "CapacityUsed",
+      "TargetId": "TargetId",
+      "AssignedPower": "AssignedPower",
+      "Progress": "Progress",
+      "Level": "Level",
+      "Stamina": "Stamina",
+      "CurrentRoom": "CurrentRoom",
+      "Fatigue": "Fatigue",
+      "Speed": "Speed",
+      "ArrivedFrame": "ArrivedFrame",
+      "OriginRoom": "OriginRoom",
+      "ActionFrame": "ActionFrame"
+    }
   },
   "Outcome": {
-    "None": "None",
-    "Win": "Win",
-    "Draw": "Draw",
-    "Loss": "Loss"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Win": "Win",
+      "Draw": "Draw",
+      "Loss": "Loss"
+    }
   },
   "UpdateUserType": {
-    "UPDATE_HEART_BEAT_DATE": 1
+    "type": "IntEnum",
+    "values": {
+      "UpdateHeartBeatDate": 1
+    }
   },
   "GoogleSubscriptionNotificationType": {
-    "SUBSCRIPTION_RECOVERED": 1,
-    "SUBSCRIPTION_RENEWED": 2,
-    "SUBSCRIPTION_CANCELED": 3,
-    "SUBSCRIPTION_PURCHASED": 4,
-    "SUBSCRIPTION_ON_HOLD": 5,
-    "SUBSCRIPTION_IN_GRACE_PERIOD": 6,
-    "SUBSCRIPTION_RESTARTED": 7,
-    "SUBSCRIPTION_PRICE_CHANGE_CONFIRMED": 8,
-    "SUBSCRIPTION_DEFERRED": 9,
-    "SUBSCRIPTION_PAUSED": 10,
-    "SUBSCRIPTION_PAUSE_SCHEDULE_CHANGED": 11,
-    "SUBSCRIPTION_REVOKED": 12,
-    "SUBSCRIPTION_EXPIRED": 13
+    "type": "IntEnum",
+    "values": {
+      "SubscriptionRecovered": 1,
+      "SubscriptionRenewed": 2,
+      "SubscriptionCanceled": 3,
+      "SubscriptionPurchased": 4,
+      "SubscriptionOnHold": 5,
+      "SubscriptionInGracePeriod": 6,
+      "SubscriptionRestarted": 7,
+      "SubscriptionPriceChangeConfirmed": 8,
+      "SubscriptionDeferred": 9,
+      "SubscriptionPaused": 10,
+      "SubscriptionPauseScheduleChanged": 11,
+      "SubscriptionRevoked": 12,
+      "SubscriptionExpired": 13
+    }
   },
   "UserFlags": {
-    "None": "None",
-    "AllowForceBTest": "AllowForceBTest"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Allowforcebtest": 1
+    }
   },
   "EmailVerificationStatus": {
-    "None": "None",
-    "IsEmailInvalid": "IsEmailInvalid",
-    "IsEmailValid": "IsEmailValid",
-    "IsEmailVerified": "IsEmailVerified"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "IsEmailInvalid": "IsEmailInvalid",
+      "IsEmailValid": "IsEmailValid",
+      "IsEmailVerified": "IsEmailVerified"
+    }
   },
   "ErrorCode": {
-    "NoError": "NoError",
-    "CriticalError": "CriticalError",
-    "NonCriticalError": "NonCriticalError",
-    "Warning": "Warning",
-    "AuthenticationJWTFailed": "AuthenticationJWTFailed",
-    "RecaptchaFailed": "RecaptchaFailed",
-    "RecaptchaFailedThreeTimes": "RecaptchaFailedThreeTimes",
-    "UserAccountBanned": "UserAccountBanned",
-    "RequireClientUpdate": "RequireClientUpdate",
-    "EmailVerification": "EmailVerification",
-    "AlreadyVerifiedReceipt": "AlreadyVerifiedReceipt",
-    "TimeLimitReached": "TimeLimitReached",
-    "Maintenance": "Maintenance",
-    "PurchaseNotMetRequirement": "PurchaseNotMetRequirement",
-    "PurchaseOnceOnlyError": "PurchaseOnceOnlyError",
-    "PurchaseBundleInfoNotFound": "PurchaseBundleInfoNotFound",
-    "PurchaseAlreadyRewarded": "PurchaseAlreadyRewarded"
+    "type": "StrEnum",
+    "values": {
+      "NoError": "NoError",
+      "CriticalError": "CriticalError",
+      "NonCriticalError": "NonCriticalError",
+      "Warning": "Warning",
+      "AuthenticationJWTFailed": "AuthenticationJWTFailed",
+      "RecaptchaFailed": "RecaptchaFailed",
+      "RecaptchaFailedThreeTimes": "RecaptchaFailedThreeTimes",
+      "UserAccountBanned": "UserAccountBanned",
+      "RequireClientUpdate": "RequireClientUpdate",
+      "EmailVerification": "EmailVerification",
+      "AlreadyVerifiedReceipt": "AlreadyVerifiedReceipt",
+      "TimeLimitReached": "TimeLimitReached",
+      "Maintenance": "Maintenance",
+      "PurchaseNotMetRequirement": "PurchaseNotMetRequirement",
+      "PurchaseOnceOnlyError": "PurchaseOnceOnlyError",
+      "PurchaseBundleInfoNotFound": "PurchaseBundleInfoNotFound",
+      "PurchaseAlreadyRewarded": "PurchaseAlreadyRewarded"
+    }
   },
   "AuthenticationType": {
-    "None": "None",
-    "Basic": "Basic",
-    "JWT": 2,
-    "SMS": 3
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Basic": "Basic",
+      "JWT": "JWT",
+      "SMS": "SMS"
+    }
   },
   "MatchingStatus": {
-    "Unknown": "Unknown",
-    "Excluded": "Excluded",
-    "Inactive": "Inactive",
-    "Active": "Active"
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "Excluded": "Excluded",
+      "Inactive": "Inactive",
+      "Active": "Active"
+    }
   },
   "OpenType": {
-    "None": "None",
-    "QQ": 1,
-    "Wechat": "Wechat"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "QQ": "QQ",
+      "Wechat": "Wechat"
+    }
   },
   "AllianceMembership": {
-    "None": "None",
-    "Candidate": "Candidate",
-    "Ensign": "Ensign",
-    "Lieutenant": "Lieutenant",
-    "Major": "Major",
-    "Commander": "Commander",
-    "ViceAdmiral": "ViceAdmiral",
-    "FleetAdmiral": "FleetAdmiral",
-    "Starbase": "Starbase"
+    "type": "StrEnum",
+    "values": {
+      "None": null,
+      "Candidate": "Candidate",
+      "Ensign": "Ensign",
+      "Lieutenant": "Lieutenant",
+      "Major": "Major",
+      "Commander": "Commander",
+      "ViceAdmiral": "ViceAdmiral",
+      "FleetAdmiral": "FleetAdmiral",
+      "Starbase": "Starbase"
+    }
   },
   "UserType": {
-    "Unverified": "Unverified",
-    "Verified": "Verified",
-    "Administrator": "Administrator",
-    "Banned": "Banned",
-    "Backer": "Backer",
-    "Mission": "Mission",
-    "UserTypePaying": "UserTypePaying",
-    "UserTypeJailBroken": "UserTypeJailBroken",
-    "UserTypeAlliance": "UserTypeAlliance",
-    "UserTypeModerator": "UserTypeModerator",
-    "UserTypeTemplate": "UserTypeTemplate",
-    "UserTypeCommunityManager": "UserTypeCommunityManager",
-    "SyncUser": "SyncUser",
-    "UserTypeDesigner": "UserTypeDesigner",
-    "UserTypeLiveOps": "UserTypeLiveOps",
-    "UserTypeTest": "UserTypeTest",
-    "UserTypeDisabled": "UserTypeDisabled"
+    "type": "StrEnum",
+    "values": {
+      "Unverified": "Unverified",
+      "Verified": "Verified",
+      "Administrator": "Administrator",
+      "Banned": "Banned",
+      "Backer": "Backer",
+      "Mission": "Mission",
+      "UserTypePaying": "UserTypePaying",
+      "UserTypeJailBroken": "UserTypeJailBroken",
+      "UserTypeAlliance": "UserTypeAlliance",
+      "UserTypeModerator": "UserTypeModerator",
+      "UserTypeTemplate": "UserTypeTemplate",
+      "UserTypeCommunityManager": "UserTypeCommunityManager",
+      "SyncUser": "SyncUser",
+      "UserTypeDesigner": "UserTypeDesigner",
+      "UserTypeLiveOps": "UserTypeLiveOps",
+      "UserTypeTest": "UserTypeTest",
+      "UserTypeDisabled": "UserTypeDisabled"
+    }
   },
   "GenderType": {
-    "Unknown": "Unknown",
-    "Male": "Male",
-    "Female": "Female"
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "Male": "Male",
+      "Female": "Female"
+    }
   },
   "RaceType": {
-    "Unknown": "Unknown",
-    "Asian": "Asian",
-    "White": "White",
-    "Black": "Black",
-    "Animal": "Animal",
-    "Alien": "Alien",
-    "Robot": "Robot"
+    "type": "StrEnum",
+    "values": {
+      "Unknown": "Unknown",
+      "Asian": "Asian",
+      "White": "White",
+      "Black": "Black",
+      "Animal": "Animal",
+      "Alien": "Alien",
+      "Robot": "Robot"
+    }
   },
   "DailyRewardStatus": {
-    "Box": "Box",
-    "CommonCrew": "CommonCrew",
-    "HeroCrew": "HeroCrew",
-    "Cargo1": "Cargo1",
-    "Cargo2": "Cargo2",
-    "Cargo3": "Cargo3",
-    "Cargo4": "Cargo4",
-    "StarbaseCash": "StarbaseCash",
-    "StarbaseRaid": "StarbaseRaid"
+    "type": "StrEnum",
+    "values": {
+      "Box": "Box",
+      "CommonCrew": "CommonCrew",
+      "HeroCrew": "HeroCrew",
+      "Cargo1": "Cargo1",
+      "Cargo2": "Cargo2",
+      "Cargo3": "Cargo3",
+      "Cargo4": "Cargo4",
+      "StarbaseCash": "StarbaseCash",
+      "StarbaseRaid": "StarbaseRaid"
+    }
   },
   "UserStatus": {
-    "LikedFacebook": "LikedFacebook",
-    "FollowedTwitter": "FollowedTwitter",
-    "ChangedUsername": "ChangedUsername",
-    "ManuallyBannedFromChat": "ManuallyBannedFromChat",
-    "MutePublicChat": "MutePublicChat",
-    "MuteDonation": "MuteDonation",
-    "DisableAds": "DisableAds",
-    "ActivateFirstScratchy": "ActivateFirstScratchy",
-    "DrawFirstCharacterWithStarbux": "DrawFirstCharacterWithStarbux",
-    "DrawFirstCharacterInTutorial": "DrawFirstCharacterInTutorial",
-    "PurchasedTournamentBoxSmall": "PurchasedTournamentBoxSmall",
-    "PurchasedTournamentBoxMedium": "PurchasedTournamentBoxMedium",
-    "PurchasedTournamentBoxLarge": "PurchasedTournamentBoxLarge",
-    "BTest": "BTest",
-    "UnsubscribedFromMailingList": "UnsubscribedFromMailingList",
-    "BannedFromMarket": "BannedFromMarket",
-    "PEvent": "PEvent",
-    "PEventSentToFirebase": "PEventSentToFirebase",
-    "DisableGalaxyMap": "DisableGalaxyMap",
-    "SubscriptionInGracePeriod": "SubscriptionInGracePeriod",
-    "SubscriptionAccountOnHold": "SubscriptionAccountOnHold",
-    "SubscribeToFirebase": "SubscribeToFirebase",
-    "AllowPublicTokenGeneration": "AllowPublicTokenGeneration"
+    "type": "IntEnum",
+    "values": {
+      "Likedfacebook": 1,
+      "Followedtwitter": 2,
+      "Changedusername": 4,
+      "Manuallybannedfromchat": 8,
+      "Mutepublicchat": 16,
+      "Mutedonation": 32,
+      "Disableads": 64,
+      "Activatefirstscratchy": 128,
+      "Drawfirstcharacterwithstarbux": 256,
+      "Drawfirstcharacterintutorial": 512,
+      "Purchasedtournamentboxsmall": 1024,
+      "Purchasedtournamentboxmedium": 2048,
+      "Purchasedtournamentboxlarge": 4096,
+      "Btest": 8192,
+      "Unsubscribedfrommailinglist": 16384,
+      "Bannedfrommarket": 32768,
+      "Pevent": 65536,
+      "Peventsenttofirebase": 131072,
+      "Disablegalaxymap": 262144,
+      "Subscriptioningraceperiod": 524288,
+      "Subscriptionaccountonhold": 1048576,
+      "Subscribetofirebase": 2097152,
+      "Allowpublictokengeneration": 4194304
+    }
   },
   "RewardVideoIntention": {
-    "None": "None",
-    "Starbux": "Starbux",
-    "RushRoomConstruction": "RushRoomConstruction",
-    "RushRoomManufacture": "RushRoomManufacture",
-    "RushResearch": "RushResearch",
-    "RushShipUpgrade": "RushShipUpgrade",
-    "MiningBoost": "MiningBoost",
-    "BoostGauge": "BoostGauge"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Starbux": 1,
+      "Rushroomconstruction": 2,
+      "Rushroommanufacture": 3,
+      "Rushresearch": 4,
+      "Rushshipupgrade": 5,
+      "Miningboost": 6,
+      "Boostgauge": 7
+    }
   },
   "TUTORIAL_STEP": {
-    "TUTORIAL_STEP_NONE": 0,
-    "TUTORIAL_STEP_WELCOME": 1,
-    "TUTORIAL_STEP_BROWSE_WEAPONS_ROOMS": 2,
-    "TUTORIAL_STEP_PURCHASE_MINING_LAZER": 3,
-    "TUTORIAL_STEP_PLACE_MINING_LAZER_ROOM": 4,
-    "TUTORIAL_STEP_WAIT_FOR_CONSTRUCTION": 5,
-    "TUTORIAL_STEP_PLACED_MINING_LAZER_ROOM": 6,
-    "TUTORIAL_STEP_COLLECT_MINERAL": 7,
-    "TUTORIAL_STEP_OTHER_WAYS_TO_EARN_MINERALS": 8,
-    "TUTORIAL_STEP_WELCOME_STARSYSTEM": 9,
-    "TUTORIAL_STEP_BOOTCAMP_MISSION": 10,
-    "TUTORIAL_STEP_ATTACK": 11,
-    "TUTORIAL_STEP_WELCOME_TO_BATTLE": 12,
-    "TUTORIAL_STEP_BATTLE_ENERGY_BAR": 13,
-    "TUTORIAL_STEP_BATTLE_TAP_LEFT": 14,
-    "TUTORIAL_STEP_BATTLE_TAP_RIGHT": 15,
-    "TUTORIAL_STEP_BATTLE_AIM": 16,
-    "TUTORIAL_STEP_BATTLE_POWER_ROOM": 17,
-    "TUTORIAL_STEP_BATTLE_PROCESS": 18,
-    "TUTORIAL_STEP_WON_FIRST_BATTLE": 19,
-    "TUTORIAL_STEP_UPGRADE_CREW": 20,
-    "TUTORIAL_STEP_TAP_CREW_UPGRADE": 21,
-    "TUTORIAL_STEP_CONFIRM_CREW_UPGRADE": 22,
-    "TUTORIAL_STEP_CREW_UPGRADED": 23,
-    "TUTORIAL_STEP_CREW_DESCRIPTION": 24,
-    "TUTORIAL_STEP_UPGRADE_BEDROOM": 25,
-    "TUTORIAL_STEP_SELECT_BEDROOM": 26,
-    "TUTORIAL_STEP_TAP_ROOM_UPGRADE": 27,
-    "TUTORIAL_STEP_TAP_ROOM_UPGRADE_CONFIRM": 28,
-    "TUTORIAL_STEP_TAP_ROOM_UPGRADE_CONFIRM2": 29,
-    "TUTORIAL_STEP_ROOM_UPGRADING": 30,
-    "TUTORIAL_STEP_RECRUIT": 31,
-    "TUTORIAL_STEP_RECRUIT_TAP_CHARACTER": 32,
-    "TUTORIAL_STEP_RECRUIT_TAP_RECRUIT": 33,
-    "TUTORIAL_STEP_ACHIEVEMENT": 34,
-    "TUTORIAL_STEP_ACHIEVEMENT_TAP_TROPHY": 35,
-    "TUTORIAL_STEP_ACHIEVEMENT_TAP_ACHIEVEMENT": 36,
-    "TUTORIAL_STEP_ACHIEVEMENT_TAP_COLLECT": 37,
-    "TUTORIAL_STEP_ACHIEVEMENT_TAP_CLOSE": 38,
-    "TUTORIAL_STEP_CREW_ASSIGN_JOB": 39,
-    "TUTORIAL_STEP_CREW_SELECT": 40,
-    "TUTORIAL_STEP_CREW_DRAG": 41,
-    "TUTORIAL_STEP_CREW_ASSIGNED": 42,
-    "TUTORIAL_STEP_CREW_GUNNER": 43,
-    "TUTORIAL_STEP_FINISHED_BASICS": 44,
-    "TUTORIAL_STEP_FINISHED_BASICS_2": 45,
-    "TUTORIAL_STEP_FINISHED_FREE_EXPLORE": 46,
-    "TUTORIAL_STEP_POWER_INTRO": 47,
-    "TUTORIAL_STEP_POWER_REDUCE_ENGINE": 48,
-    "TUTORIAL_STEP_POWER_BAR": 49,
-    "TUTORIAL_STEP_POWER_INCREASE_LAZER": 50,
-    "TUTORIAL_STEP_POWER_MONITOR": 51,
-    "TUTORIAL_STEP_UPGRADE_SHIP": 52,
-    "TUTORIAL_STEP_TAP_SHIP_BUTTON": 53,
-    "TUTORIAL_STEP_TAP_SHIP_UPGRADE": 54,
-    "TUTORIAL_STEP_SHIP_UPGRADING": 55,
-    "TUTORIAL_STEP_SHIP_UPGRADED": 56,
-    "TUTORIAL_STEP_MORE_ROOMS": 57,
-    "TUTORIAL_STEP_GOOD_LUCK": 58,
-    "TUTORIAL_STEP_OPTIONS": 59,
-    "TUTORIAL_STEP_END": 60
+    "type": "IntEnum",
+    "values": {
+      "TutorialStepNone": 0,
+      "TutorialStepWelcome": 1,
+      "TutorialStepBrowseWeaponsRooms": 2,
+      "TutorialStepPurchaseMiningLazer": 3,
+      "TutorialStepPlaceMiningLazerRoom": 4,
+      "TutorialStepWaitForConstruction": 5,
+      "TutorialStepPlacedMiningLazerRoom": 6,
+      "TutorialStepCollectMineral": 7,
+      "TutorialStepOtherWaysToEarnMinerals": 8,
+      "TutorialStepWelcomeStarsystem": 9,
+      "TutorialStepBootcampMission": 10,
+      "TutorialStepAttack": 11,
+      "TutorialStepWelcomeToBattle": 12,
+      "TutorialStepBattleEnergyBar": 13,
+      "TutorialStepBattleTapLeft": 14,
+      "TutorialStepBattleTapRight": 15,
+      "TutorialStepBattleAim": 16,
+      "TutorialStepBattlePowerRoom": 17,
+      "TutorialStepBattleProcess": 18,
+      "TutorialStepWonFirstBattle": 19,
+      "TutorialStepUpgradeCrew": 20,
+      "TutorialStepTapCrewUpgrade": 21,
+      "TutorialStepConfirmCrewUpgrade": 22,
+      "TutorialStepCrewUpgraded": 23,
+      "TutorialStepCrewDescription": 24,
+      "TutorialStepUpgradeBedroom": 25,
+      "TutorialStepSelectBedroom": 26,
+      "TutorialStepTapRoomUpgrade": 27,
+      "TutorialStepTapRoomUpgradeConfirm": 28,
+      "TutorialStepTapRoomUpgradeConfirm2": 29,
+      "TutorialStepRoomUpgrading": 30,
+      "TutorialStepRecruit": 31,
+      "TutorialStepRecruitTapCharacter": 32,
+      "TutorialStepRecruitTapRecruit": 33,
+      "TutorialStepAchievement": 34,
+      "TutorialStepAchievementTapTrophy": 35,
+      "TutorialStepAchievementTapAchievement": 36,
+      "TutorialStepAchievementTapCollect": 37,
+      "TutorialStepAchievementTapClose": 38,
+      "TutorialStepCrewAssignJob": 39,
+      "TutorialStepCrewSelect": 40,
+      "TutorialStepCrewDrag": 41,
+      "TutorialStepCrewAssigned": 42,
+      "TutorialStepCrewGunner": 43,
+      "TutorialStepFinishedBasics": 44,
+      "TutorialStepFinishedBasics2": 45,
+      "TutorialStepFinishedFreeExplore": 46,
+      "TutorialStepPowerIntro": 47,
+      "TutorialStepPowerReduceEngine": 48,
+      "TutorialStepPowerBar": 49,
+      "TutorialStepPowerIncreaseLazer": 50,
+      "TutorialStepPowerMonitor": 51,
+      "TutorialStepUpgradeShip": 52,
+      "TutorialStepTapShipButton": 53,
+      "TutorialStepTapShipUpgrade": 54,
+      "TutorialStepShipUpgrading": 55,
+      "TutorialStepShipUpgraded": 56,
+      "TutorialStepMoreRooms": 57,
+      "TutorialStepGoodLuck": 58,
+      "TutorialStepOptions": 59,
+      "TutorialStepEnd": 60
+    }
   },
   "ReportType": {
-    "None": "None",
-    "TopSpenders": "TopSpenders",
-    "Trophy": "Trophy",
-    "LastLoginDate": "LastLoginDate",
-    "Admin": "Admin",
-    "Everyone": "Everyone"
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Trophy": 2,
+      "Admin": 4,
+      "Everyone": 5,
+      "Topspenders": 1,
+      "Lastlogindate": 3
+    }
   },
   "PurchaseVIPStatus": {
-    "None": "None",
-    "VIP": 1
+    "type": "IntEnum",
+    "values": {
+      "None": 0,
+      "Vip": 1
+    }
   },
   "LeagueType": {
-    "Standard": "Standard",
-    "Legendary": "Legendary"
+    "type": "IntEnum",
+    "values": {
+      "Standard": 0,
+      "Legendary": 1
+    }
   }
 }

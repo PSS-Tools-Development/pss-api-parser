@@ -8,6 +8,8 @@ from typing import Dict as _Dict
 from typing import List as _List
 from typing import Union as _Union
 
+import utils as _utils
+
 
 EnumDefinition = _Dict[str, _Union[str, _Dict[str, _Union[int, str]]]]
 TYPE_INT_ENUM = 'IntEnum'
@@ -54,10 +56,28 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
                             'type': TYPE_INT_ENUM if 'Flag' in enum_name else '',
                             'values': {}
                         }
-                elif enum_name:
+                elif line.startswith('}'): # All values collected
+                    if not result[enum_name]['type']:
+                        if any(value_type and isinstance(value_type, str) for value_type in result[enum_name]['values'].values()):
+                            result[enum_name]['type'] = TYPE_STR_ENUM
+                        else:
+                            result[enum_name]['type'] = TYPE_INT_ENUM
+                    if result[enum_name]['type'] == TYPE_STR_ENUM:
+                        for enum_value_name in result[enum_name]['values'].keys():
+                            if result[enum_name]['values'][enum_value_name] is not None:
+                                result[enum_name]['values'][enum_value_name] = enum_value_name
+                    elif result[enum_name]['type'] == TYPE_INT_ENUM:
+                        for enum_value_name in tuple(result[enum_name]['values'].keys()):
+                            fixed_enum_value_name = _utils.convert_snake_to_camel_case(enum_value_name)
+                            if fixed_enum_value_name != enum_value_name:
+                                result[enum_name]['values'][fixed_enum_value_name] = result[enum_name]['values'][enum_value_name]
+                                result[enum_name]['values'].pop(enum_value_name)
+                    found_marker = False
+                    enum_name = rx_enum_value_custom = None
+                else: # Search for values
                     if '[XmlEnumAttribute]' in line:
                         likely_str = True
-                    elif 'const' in line: # Search for values
+                    elif 'const' in line:
                         match = rx_enum_value_custom.search(line)
                         if match:
                             enum_value_name = match.group(2)
@@ -69,14 +89,6 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
                                 enum_value_value = None
                             result[enum_name]['values'][enum_value_name] = enum_value_value
                         likely_str = False
-                elif line.startswith('}'):
-                    if not result[enum_name]['type']:
-                        if any(value_type == 'str' for value_type in result[enum_name]['values'].values()):
-                            result[enum_name]['type'] = TYPE_STR_ENUM
-                        else:
-                            result[enum_name]['type'] = TYPE_INT_ENUM
-                    found_marker = False
-                    enum_name = rx_enum_value_custom = None
     return result
 
 
