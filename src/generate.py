@@ -33,6 +33,7 @@
 
 import json as _json
 import os as _os
+import string as _string
 from typing import Dict as _Dict
 from typing import List as _List
 from typing import Optional as _Optional
@@ -159,9 +160,8 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'base_path_name': name_snake_case.upper(),
                 'name': endpoint_name,
                 'name_snake_case': name_snake_case,
-                'parameter_service_raw_definitions': __format_parameters_service_raw_definitions(parameters),
-                'parameters_service_raw_calls': __format_parameters_service_raw_calls(parameters),
-                'parameters_service_definitions': __format_parameters_service_definitions(parameters),
+                'name_snake_case_without_version': name_snake_case.rstrip(_string.digits).rstrip('_'),
+                'parameter_definitions': ', '.join([f'{parameter["name_snake_case"]}: {parameter["type"]}' for parameter in parameters if parameter['type']]),
                 'parameters': parameters,
                 'return_type': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
@@ -194,7 +194,8 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
     __generate_services_files(services_data, target_path, env, force_overwrite)
     __generate_client_file(services_data, target_path, env, force_overwrite)
     __generate_entities_files(entities_data, target_path, env, force_overwrite)
-    __generate_enums_files(enums_data, target_path, env, force_overwrite)
+    if enums_data:
+        __generate_enums_files(enums_data, target_path, env, force_overwrite)
 
 
 def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
@@ -356,7 +357,7 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
             result.append({
                 'name': name,
                 'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_camel_to_snake_case(name)),
-                'type': parameter_type,
+                'type': 'str' if parameter_type == 'none' else parameter_type,
                 'default_value': default_value,
                 'self_field': self_field,
             })

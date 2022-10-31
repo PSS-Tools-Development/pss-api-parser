@@ -12,24 +12,26 @@ from ...entities import {{entity_type}} as _{{entity_type}}
 {% endfor %}
 
 
-class {{service.name}}Raw:
 
-    SERVICE_NAME = '{{service.name}}'
+# ---------- Constants ----------
+
 {% for endpoint in service.endpoints %}
-    {{endpoint.base_path_name}}_BASE_PATH: str = '{{service.name}}/{{endpoint.name}}'
+{{endpoint.base_path_name}}_BASE_PATH: str = '{{service.name}}/{{endpoint.name}}'
 {% endfor %}
 
 
-{% for endpoint in service.endpoints %}
-    @staticmethod
-    async def _{{endpoint.name_snake_case}}(production_server: str{% if endpoint.parameter_service_raw_definitions %}, {{endpoint.parameter_service_raw_definitions}}{% endif %}, **params) -> _List[_{{endpoint.return_type}}]:
-        params = {
-    {% for parameter in endpoint.parameters %}
-            '{{parameter.name}}': {{parameter.name_snake_case}},
-    {% endfor %}
-            **params
-        }
+# ---------- Endpoints ----------
 
-        result = await _core.get_entities_from_path(_{{endpoint.return_type}}, '{{endpoint.xml_parent_tag_name}}', production_server, {{service.name}}Raw.{{endpoint.base_path_name}}_BASE_PATH, **params)
-        return result
+{% for endpoint in service.endpoints %}
+async def {{endpoint.name_snake_case}}(production_server: str{% if endpoint.parameter_definitions %}, {{endpoint.parameter_definitions}}{% endif %}, **params) -> _List[_{{endpoint.return_type}}]:
+    params = {
+{% for parameter in endpoint.parameters %}
+        '{{parameter.name}}': {{parameter.name_snake_case}},
+{% endfor %}
+        **params
+    }
+    result = await _core.get_entities_from_path(_{{endpoint.return_type}}, '{{endpoint.xml_parent_tag_name}}', production_server, {{endpoint.base_path_name}}_BASE_PATH, **params)
+    return result
+
+
 {% endfor %}

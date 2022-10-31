@@ -156,6 +156,8 @@ def __convert_flow_to_dict(flow: HTTPFlow) -> NestedDict:
         path, query_string = (flow.request.path, None)
 
     result['service'], result['endpoint'] = path.split('/')[1:]
+    if 'Alliance' in result['service']:
+        i = 0
 
     result['query_parameters'] = {}
     if query_string:

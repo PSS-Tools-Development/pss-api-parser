@@ -3,20 +3,18 @@
 {% endfor %}
 
 from .raw import {{service.name}}Raw as _{{service.name}}Raw
-from .service_base import ServiceBase as _ServiceBase
+from .service_base import PssServiceBase as _ServiceBase
 {% for entity_type in service.entity_types %}
 from ..entities import {{entity_type}} as _{{entity_type}}
 {% endfor %}
 
 
-class {{service.name}}(_ServiceBase, _{{service.name}}Raw):
+class {{service.name}}(_ServiceBase):
 {% for endpoint in service.endpoints %}
-    async def {{endpoint.name_snake_case}}(self{% if endpoint.parameters_service_definitions %}, {{ endpoint.parameters_service_definitions }}{% endif %}, **params) -> _List[_{{endpoint.return_type}}]:
-        return await self._{{endpoint.name_snake_case}}(self.production_server{% if endpoint.parameters_service_raw_calls %}, {{ endpoint.parameters_service_raw_calls }}{% endif %}, **params)
+    async def {{endpoint.name_snake_case_without_version}}(self, {{endpoint.parameter_definitions}}) -> _List[_{{endpoint.return_type}}]:
+        raise NotImplemented()
+        #result = await _{{service.name}}Raw.{{endpoint.name_snake_case}}(self.production_server, {{endpoint.parameter_definitions}})
+        #return result
+
+
 {% endfor %}
-
-    def __repr__(self) -> str:
-        return f'<{{service.name}}: {self.name}>'
-
-    def __str__(self) -> str:
-        return f'<{{service.name}}: {self.name}>'
