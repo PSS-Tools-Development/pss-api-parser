@@ -32,12 +32,12 @@ if __name__ == '__main__':
         sys.exit(ERR_INPUT_NOT_EXISTS)
 
     with Timer() as t:
-        print(Fore.YELLOW + '>>> ' + Fore.RESET + 'Endpoints: {}'.format(args.endpoints))
+        print(f'{Fore.YELLOW} >>>{Fore.RESET} Endpoints: {args.endpoints}')
         if args.enums:
-            print(Fore.YELLOW + '>>> ' + Fore.RESET + 'Enumerations: {}'.format(args.enums))
-        print(Fore.YELLOW + '>>> ' + Fore.RESET + 'Output: {}'.format(args.output))
-        print(Fore.YELLOW + '>>> ' + Fore.RESET + 'Overwrite: {}'.format('Yes' if args.overwrite else 'No'))
-        print(Fore.BLUE + '>>> ' + Fore.RESET + 'Starting generation...')
+            print(f'{Fore.YELLOW} >>>{Fore.RESET} Enumerations: {args.enums}')
+        print(f'{Fore.YELLOW} >>>{Fore.RESET} Output: {args.output}')
+        print(f'{Fore.YELLOW} >>>{Fore.RESET} Overwrite: {"Yes" if args.output else "No"}')
+        print(f'{Fore.BLUE} >>>{Fore.RESET} Starting generation...')
 
         generate.generate_source_code(
             args.endpoints,
@@ -46,4 +46,4 @@ if __name__ == '__main__':
             force_overwrite=args.overwrite,
         )
 
-        print(Fore.BLUE + '>>> ' + Fore.RESET + 'Done in {}s'.format(t.elapsed))
+        print(f'{Fore.BLUE} >>>{Fore.RESET} Done in {t.elapsed}s')
