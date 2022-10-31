@@ -14,21 +14,21 @@ ERR_INPUT_NOT_EXISTS = 1
 
 if __name__ == '__main__':
     """
-        Example: python main.py --endpoints examples/pss_api_ios_v0.989.9402.json --output bin
+        Example: python main.py --endpoints examples/pss_api_steam_v0.991.4_anonymized.json --enums examples/pss_v0.992_dump_enums.json --output bin
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("--endpoints", type=str, required=True, help="endpoints JSON file to be generated")
-    parser.add_argument("--enums", type=str, required=False, help="enumerations JSON file to be generated")
-    parser.add_argument("--output", type=str, required=True, help="directory storing generated files")
-    parser.add_argument("--overwrite", action="store_true", default=False, help="overwrite not raw files")
+    parser.add_argument('--services', type=str, required=True, help='Path to the services JSON file to be used')
+    parser.add_argument('--enums', type=str, required=False, help='Path to the enumerations JSON file to be used')
+    parser.add_argument('--output', type=str, required=True, help='Target directory for the generated files')
+    parser.add_argument('--overwrite', action="store_true", default=False, help='Overwrite all files (by default only raw files will be overwritten)')
     args = parser.parse_args()
 
-    if not os.path.isfile(args.endpoints):
-        print(Fore.RED + 'ERROR: Endpoints JSON file not exists')
+    if not os.path.isfile(args.services):
+        print(f'{Fore.RED}ERROR: Services JSON file does not exist!{Fore.RESET}')
         sys.exit(ERR_INPUT_NOT_EXISTS)
 
     if args.enums and not os.path.isfile(args.enums):
-        print(Fore.RED + 'ERROR: Enumerations JSON file not exists')
+        print(f'{Fore.RED}ERROR: Enumerations JSON file does not exist!{Fore.RESET}')
         sys.exit(ERR_INPUT_NOT_EXISTS)
 
     with Timer() as t:
