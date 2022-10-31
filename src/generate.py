@@ -41,6 +41,7 @@ from typing import Tuple as _Tuple
 import autopep8
 from jinja2 import Environment as _Environment, PackageLoader as _PackageLoader
 
+from . import enums as _enums
 from . import utils as _utils
 
 IMPORTS = {
@@ -49,17 +50,88 @@ IMPORTS = {
 }
 
 
-def read_data(file_path: str) -> dict:
-    with open(file_path) as f:
-        result = _json.load(f)
+
+
+
+# -----
+# ----- Prepare -----
+# -----
+
+
+def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_data: list, entities_data: list) -> _Dict[str, _enums.EnumDefinition]:
+    potential_enum_names = []
+    for service in services_data:
+        for endpoint in service['endpoints']:
+            for parameter in endpoint['parameters']:
+                potential_enum_names.append(_utils.convert_snake_to_camel_case(_utils.convert_camel_to_snake_case(parameter['name'])))
+
+    for entity in entities_data:
+        for property in entity['properties']:
+            potential_enum_names.append(property['name'])
+    potential_enum_names = set(potential_enum_names)
+    parsed_enum_names = set(enums_data.keys())
+    used_enum_names = potential_enum_names.intersection(potential_enum_names, parsed_enum_names)
+    result = {kvp for kvp in enums_data.items() if kvp[0] in used_enum_names}
     return result
 
 
-def prepare_data(data: dict) -> _Tuple[list, list]:
-    known_entity_names = set(data['entities'].keys())
-    services = __prepare_services_data(data['endpoints'], known_entity_names)
-    entities = __prepare_entities_data(data['entities'])
+def prepare_parsed_api_data(parsed_api_data: dict) -> _Tuple[list, list]:
+    known_entity_names = set(parsed_api_data['entities'].keys())
+    services = __prepare_services_data(parsed_api_data['endpoints'], known_entity_names)
+    entities = __prepare_entities_data(parsed_api_data['entities'])
     return services, entities
+
+
+def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinition]) -> list:
+    result = []
+    for enum_name in sorted(parsed_enums_data.keys()):
+        enum_definition = {
+            'name': enum_name,
+            'name_snake_case': _utils.convert_camel_to_snake_case(enum_name),
+            'type': parsed_enums_data[enum_name]['type']
+        }
+
+        enum_value_names = [kvp[0] for kvp in sorted(parsed_enums_data[enum_name]['values'].items(), key=lambda item: item[1]) if kvp[1] != 'None' and kvp[1] != 'Unknown']
+        if 'None' in parsed_enums_data[enum_name]['values'].keys():
+            enum_value_names.insert(0, 'None')
+        if 'Unknown' in parsed_enums_data[enum_name]['values'].keys():
+            enum_value_names.insert(0, 'Unknown')
+
+        enum_definition['values'] = []
+        for value_name in enum_value_names:
+            enum_definition['values'].append({
+                'name': [value_name],
+                'value': parsed_enums_data[enum_name]['values'][value_name]
+            })
+        result.append(enum_definition)
+    return result
+
+
+def __prepare_entities_data(entities_data: dict) -> list:
+    result = []
+    for entity_name, entity_properties in entities_data.items():
+        properties = []
+        property_names = []
+        for property_name, property_type in entity_properties.items():
+            property_names.append(property_name)
+            properties.append({
+                'name': property_name,
+                'name_snake_case': _utils.convert_camel_to_snake_case(property_name),
+                'type': property_type
+            })
+        id_property = __find_id_property(property_names, entity_name)
+        name_property = __find_name_property(property_names, entity_name)
+        result.append({
+            'base_class_name': 'EntityWithIdBase' if id_property else 'EntityBase',
+            'id_property_name': _utils.convert_camel_to_snake_case(id_property),
+            'name': entity_name,
+            'name_property_name': _utils.convert_camel_to_snake_case(name_property),
+            'name_snake_case': _utils.convert_camel_to_snake_case(entity_name),
+            'properties': properties,
+            'xml_node_name': entity_name,
+        })
+    result.sort(key=lambda d: d['name'])
+    return result
 
 
 def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> list:
@@ -108,135 +180,14 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
     return result
 
 
-def __format_parameters_service_raw_definitions(parameters):
-    formated_parameters = []
-
-    for parameter in parameters:
-        if parameter['type']:
-            formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
-            formated_parameters.append(formated_parameter)
-
-    return ', '.join(formated_parameters)
 
 
-def __format_parameters_service_raw_calls(parameters):
-    formated_parameters = []
-
-    for parameter in parameters:
-        if parameter['type']:
-            self_prefix = 'self.' if parameter['self_field'] else  ''
-            formated_parameters.append(f'{self_prefix}{parameter["name_snake_case"]}')
-
-    return ', '.join(formated_parameters)
+# -----
+# ----- Generate -----
+# -----
 
 
-def __format_parameters_service_definitions(parameters):
-    formated_parameters = []
-
-    for parameter in parameters:
-        if parameter['type'] and not parameter['self_field']:
-            formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
-
-            if parameter['default_value']:
-                formated_parameter += f' = {parameter["default_value"]}'
-
-            formated_parameters.append(formated_parameter)
-
-    return ', '.join(formated_parameters)
-
-
-def __prepare_entities_data(entities_data: dict) -> list:
-    result = []
-    for entity_name, entity_properties in entities_data.items():
-        properties = []
-        property_names = []
-        for property_name, property_type in entity_properties.items():
-            property_names.append(property_name)
-            properties.append({
-                'name': property_name,
-                'name_snake_case': _utils.convert_camel_to_snake_case(property_name),
-                'type': property_type
-            })
-        id_property = __find_id_property(property_names, entity_name)
-        name_property = __find_name_property(property_names, entity_name)
-        result.append({
-            'base_class_name': 'EntityWithIdBase' if id_property else 'EntityBase',
-            'id_property_name': _utils.convert_camel_to_snake_case(id_property),
-            'name': entity_name,
-            'name_property_name': _utils.convert_camel_to_snake_case(name_property),
-            'name_snake_case': _utils.convert_camel_to_snake_case(entity_name),
-            'properties': properties,
-            'xml_node_name': entity_name,
-        })
-    result.sort(key=lambda d: d['name'])
-    return result
-
-
-def __find_id_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
-    exact_id_name = f'{entity_name}Id'
-    found_id_name = False
-
-    for property_name in property_names:
-        if property_name:
-            if property_name == exact_id_name:
-                return property_name
-            found_id_name = found_id_name or property_name == 'Id'
-    if found_id_name:
-        return 'Id'
-    return None
-
-
-def __find_name_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
-    for property_name in property_names:
-        if property_name and property_name[:2] == 'Id':
-            return property_name
-    return None
-
-
-def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, str]:
-    """ The return type will be determined by crawling through dict 'response_structure' until there's
-        a match of tag name and any known entity_name. All matching tag names on that depth will
-        be considered for the response type. If there's only one entity type, a list of that entity
-        type will be returned. If there are multiple, the return type is a Tuple of those entity types."""
-    result = (parent_tag_name, None)
-    if isinstance(response_structure, dict):
-        keys = list(response_structure.keys())
-        entity_types = [key for key in keys if key in entity_names]
-        if entity_types:
-            result = (parent_tag_name, entity_types[0])
-        else:
-            for key, value in response_structure.items():
-                result = __get_return_type(value, entity_names, key)
-                if result[1]:  # At least 1 known entity type has been found
-                    break
-                else:
-                    result = (parent_tag_name, None)
-    return result
-
-
-def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
-    result = []
-    for name, parameter_type in query_parameters.items():
-        if name:
-            default_value = None
-            if name == 'designVersion':
-                default_value = 'None'
-
-            self_field = False
-            if name == 'languageKey':
-                self_field = True
-
-            result.append({
-                'name': name,
-                'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_camel_to_snake_case(name)),
-                'type': parameter_type,
-                'default_value': default_value,
-                'self_field': self_field,
-            })
-    return result
-
-
-def generate_files_from_data(services_data: list, entities_data: list, target_path: str, force_overwrite: bool) -> None:
+def generate_files_from_data(services_data: list, entities_data: list, enums_data: list, target_path: str, force_overwrite: bool) -> None:
     env = _Environment(
         loader=_PackageLoader('src'),
         trim_blocks=True
@@ -245,6 +196,58 @@ def generate_files_from_data(services_data: list, entities_data: list, target_pa
     __generate_services_files(services_data, target_path, env, force_overwrite)
     __generate_client_file(services_data, target_path, env, force_overwrite)
     __generate_entities_files(entities_data, target_path, env, force_overwrite)
+    __generate_enums_files(enums_data, target_path, env, force_overwrite)
+
+
+def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
+    if force_overwrite is None:
+        raise Exception('Parameter \'force_overwrite\' must not be None!')
+    parsed_api_data = read_data(parsed_api_data_file_path)
+    services_data, entities_data = prepare_parsed_api_data(parsed_api_data)
+
+    enums_data = read_data(enums_data_file_path) if enums_data_file_path else None
+    if enums_data:
+        filtered_enums_data = filter_enums_data(enums_data, services_data, entities_data)
+        prepared_enums_data = prepare_parsed_enums_data(filtered_enums_data)
+    else:
+        filtered_enums_data = None
+        prepared_enums_data = None
+
+    generate_files_from_data(services_data, entities_data, prepared_enums_data, target_path, force_overwrite)
+
+
+def __generate_client_file(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    client_template = env.get_template('client.jinja2')
+
+    _utils.create_file(
+        _os.path.join(target_path, 'client.py'),
+        format_source(client_template.render(services=services_data)),
+        overwrite=force_overwrite,
+    )
+
+
+def __generate_enums_files(enums_data: list, target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    int_enum_template = env.get_template('enum_int.jinja2')
+    str_enum_template = env.get_template('enum_str.jinja2')
+    enum_init_template = env.get_template('enum_init.jinja2')
+    enums_path = _os.path.join(target_path, 'enums')
+
+    _utils.create_path(target_path)
+    _utils.create_path(enums_path)
+
+    for enum in enums_data:
+        template = int_enum_template if enums_data['type'] == _enums.TYPE_INT_ENUM else str_enum_template
+        _utils.create_file(
+            _os.path.join(enums_path, enum['name_snake_case'] + '.py'),
+            format_source(template.render(enum=enum)),
+            overwrite=force_overwrite,
+        )
+
+    _utils.create_file(
+        _os.path.join(enums_path, '__init__.py'),
+        format_source(enum_init_template.render(enums=enums_data)),
+        overwrite=force_overwrite,
+    )
 
 
 def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
@@ -281,16 +284,6 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
         _os.path.join(services_raw_path, '__init__.py'),
         format_source(services_raw_init_template.render(services=services_data)),
         overwrite=True
-    )
-
-
-def __generate_client_file(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    client_template = env.get_template('client.jinja2')
-
-    _utils.create_file(
-        _os.path.join(target_path, 'client.py'),
-        format_source(client_template.render(services=services_data)),
-        overwrite=force_overwrite,
     )
 
 
@@ -332,13 +325,120 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     )
 
 
-def generate_source_code(data_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
-    if force_overwrite is None:
-        raise Exception('Parameter \'force_overwrite\' must not be None!')
-    data = read_data(data_file_path)
-    services_data, entities_data = prepare_data(data)
-    generate_files_from_data(services_data, entities_data, target_path, force_overwrite)
+
+
+
+# -----
+# ----- Utility -----
+# -----
 
 
 def format_source(content: str) -> str:
     return autopep8.fix_code(content)
+
+
+def read_data(file_path: str) -> dict:
+    with open(file_path) as f:
+        result = _json.load(f)
+    return result
+
+
+def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
+    result = []
+    for name, parameter_type in query_parameters.items():
+        if name:
+            default_value = None
+            if name == 'designVersion':
+                default_value = 'None'
+
+            self_field = False
+            if name == 'languageKey':
+                self_field = True
+
+            result.append({
+                'name': name,
+                'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_camel_to_snake_case(name)),
+                'type': parameter_type,
+                'default_value': default_value,
+                'self_field': self_field,
+            })
+    return result
+
+
+def __find_id_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
+    exact_id_name = f'{entity_name}Id'
+    found_id_name = False
+
+    for property_name in property_names:
+        if property_name:
+            if property_name == exact_id_name:
+                return property_name
+            found_id_name = found_id_name or property_name == 'Id'
+    if found_id_name:
+        return 'Id'
+    return None
+
+
+def __find_name_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
+    for property_name in property_names:
+        if property_name and property_name[:2] == 'Id':
+            return property_name
+    return None
+
+
+def __format_parameters_service_definitions(parameters):
+    formated_parameters = []
+
+    for parameter in parameters:
+        if parameter['type'] and not parameter['self_field']:
+            formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
+
+            if parameter['default_value']:
+                formated_parameter += f' = {parameter["default_value"]}'
+
+            formated_parameters.append(formated_parameter)
+
+    return ', '.join(formated_parameters)
+
+
+def __format_parameters_service_raw_calls(parameters):
+    formated_parameters = []
+
+    for parameter in parameters:
+        if parameter['type']:
+            self_prefix = 'self.' if parameter['self_field'] else  ''
+            formated_parameters.append(f'{self_prefix}{parameter["name_snake_case"]}')
+
+    return ', '.join(formated_parameters)
+
+
+def __format_parameters_service_raw_definitions(parameters):
+    formated_parameters = []
+
+    for parameter in parameters:
+        if parameter['type']:
+            formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
+            formated_parameters.append(formated_parameter)
+
+    return ', '.join(formated_parameters)
+
+
+def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, str]:
+    """ The return type will be determined by crawling through dict 'response_structure' until there's
+        a match of tag name and any known entity_name. All matching tag names on that depth will
+        be considered for the response type. If there's only one entity type, a list of that entity
+        type will be returned. If there are multiple, the return type is a Tuple of those entity types."""
+    result = (parent_tag_name, None)
+    if isinstance(response_structure, dict):
+        keys = list(response_structure.keys())
+        entity_types = [key for key in keys if key in entity_names]
+        if entity_types:
+            result = (parent_tag_name, entity_types[0])
+        else:
+            for key, value in response_structure.items():
+                result = __get_return_type(value, entity_names, key)
+                if result[1]:  # At least 1 known entity type has been found
+                    break
+                else:
+                    result = (parent_tag_name, None)
+    return result

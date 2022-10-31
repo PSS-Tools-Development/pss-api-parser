@@ -25,6 +25,11 @@ def convert_snake_to_camel_case(s: str) -> str:
     return ''.join(sub.title() for sub in s.split('_'))
 
 
+def convert_snake_to_lower_camel_case(s: str) -> str:
+    subs = s.split('_')
+    return subs[0] + ''.join(sub.title() for sub in subs[1:])
+
+
 def create_path(path: str) -> None:
     if not _os.path.exists(path):
         _os.mkdir(path)
