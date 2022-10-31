@@ -23,7 +23,7 @@ from ...entities import {{entity_type}} as _{{entity_type}}
 # ---------- Endpoints ----------
 
 {% for endpoint in service.endpoints %}
-async def {{endpoint.name_snake_case}}(production_server: str{% if endpoint.parameter_definitions %}, {{endpoint.parameter_definitions}}{% endif %}, **params) -> _List[_{{endpoint.return_type}}]:
+async def {{endpoint.name_snake_case}}(production_server: str{% if endpoint.parameter_raw_definitions %}, {{endpoint.parameter_raw_definitions}}{% endif %}, **params) -> _List[_{{endpoint.return_type}}]:
     params = {
 {% for parameter in endpoint.parameters %}
         '{{parameter.name}}': {{parameter.name_snake_case}},

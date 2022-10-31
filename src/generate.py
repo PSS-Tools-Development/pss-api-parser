@@ -152,16 +152,36 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             parameters = __extract_parameters(endpoint_definition['query_parameters'])
             service_imports.update(parameter['type'] for parameter in parameters)
 
+            parameter_definitions = []
+            parameter_raw_definitions = []
+            raw_endpoint_call_parameters = []
             for parameter in parameters:
                 type_ = parameter['type']
                 if type_ in IMPORTS:
                     parameter['type'] = f'_{type_}'
+
+                parameter_name = parameter['name_snake_case']
+                param_def = f'{parameter_name}: {parameter["type"]}'
+                parameter_raw_definitions.append(param_def)
+
+                if parameter['self_field']:
+                    raw_endpoint_call_parameters.append(f'self.{parameter_name}')
+                else:
+                    default_value = parameter.get('default_value')
+                    if default_value:
+                        parameter_definitions.append(f'{param_def} = {default_value}')
+                    else:
+                        parameter_definitions.append(param_def)
+                    raw_endpoint_call_parameters.append(parameter_name)
+
             service['endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
                 'name': endpoint_name,
                 'name_snake_case': name_snake_case,
                 'name_snake_case_without_version': name_snake_case.rstrip(_string.digits).rstrip('_'),
-                'parameter_definitions': ', '.join([f'{parameter["name_snake_case"]}: {parameter["type"]}' for parameter in parameters if parameter['type']]),
+                'parameter_definitions': ', '.join(parameter_definitions),
+                'parameter_raw_definitions': ', '.join(parameter_raw_definitions),
+                'raw_endpoint_call_parameters': ', '.join(raw_endpoint_call_parameters),
                 'parameters': parameters,
                 'return_type': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
@@ -176,6 +196,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
         service['imports'] = sorted(list(set(service['imports'])))
         result.append(service)
     return result
+
 
 
 
@@ -385,41 +406,18 @@ def __find_name_property(property_names: _List[str], entity_name: str) -> _Optio
     return None
 
 
-def __format_parameters_service_definitions(parameters):
-    formated_parameters = []
-
+def __get_endpoint_raw_parameter_definitions(parameters: _List[dict]) -> _List[str]:
+    result = []
     for parameter in parameters:
-        if parameter['type'] and not parameter['self_field']:
-            formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
-
-            if parameter['default_value']:
-                formated_parameter += f' = {parameter["default_value"]}'
-
-            formated_parameters.append(formated_parameter)
-
-    return ', '.join(formated_parameters)
-
-
-def __format_parameters_service_raw_calls(parameters):
-    formated_parameters = []
-
-    for parameter in parameters:
+        param_def = ''
         if parameter['type']:
-            self_prefix = 'self.' if parameter['self_field'] else  ''
-            formated_parameters.append(f'{self_prefix}{parameter["name_snake_case"]}')
-
-    return ', '.join(formated_parameters)
-
-
-def __format_parameters_service_raw_definitions(parameters):
-    formated_parameters = []
-
-    for parameter in parameters:
-        if parameter['type']:
-            formated_parameter = f'{parameter["name_snake_case"]}: {parameter["type"]}'
-            formated_parameters.append(formated_parameter)
-
-    return ', '.join(formated_parameters)
+            param_def = f'{parameter["name_snake_case"]}: {parameter["type"]}'
+            default_value = parameter.get('default_value')
+            if default_value:
+                param_def += f' = {default_value}'
+        if param_def:
+            result.append(param_def)
+    return result
 
 
 def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, str]:
