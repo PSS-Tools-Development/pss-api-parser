@@ -14,7 +14,7 @@ from src import generate as _generate
 
 if __name__ == '__main__':
     """
-        Example: python gen.py --flows examples/pss_api_steam_v0.991.4_anonymized.json --enums examples/pss_v0.992_dump_enums.json --output bin
+        Example: python gen.py --flows examples/pss_api_steam_v0.991.4_anonymized.json --enums examples/pss_v0.992_dump_enums.json --out bin
     """
 
     # enable Windows support of colors

@@ -18,7 +18,9 @@ IMPORTS = {
     'List': 'from typing import List as _List',
 }
 
-
+FORCED_ENUMS_GENERATION = [
+    'DeviceType'
+]
 
 
 
@@ -37,9 +39,13 @@ def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_da
     for entity in entities_data:
         for property in entity['properties']:
             potential_enum_names.append(property['name'])
+
+    potential_enum_names += FORCED_ENUMS_GENERATION
     potential_enum_names = set(potential_enum_names)
+   
     parsed_enum_names = set(enums_data.keys())
     used_enum_names = potential_enum_names.intersection(potential_enum_names, parsed_enum_names)
+    
     result = {key: value for key, value in enums_data.items() if key in used_enum_names}
     return result
 
@@ -66,12 +72,41 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
 
         enum_definition['enum_values'] = []
         for value_name in enum_value_names:
-            enum_definition['enum_values'].append({
-                'name': 'None_' if value_name == 'None' else value_name,
-                'value': parsed_enums_data[enum_name]['values'][value_name]
-            })
+            if value_name != 'None':
+                enum_definition['enum_values'].append({
+                    'name': value_name,
+                    'name_upper': _utils.convert_camel_to_snake_case(value_name).upper(),
+                    'value': parsed_enums_data[enum_name]['values'][value_name],
+                })
         result.append(enum_definition)
     return result
+
+
+def __generate_custom_enums_data() -> list:
+    return [
+        {
+            'name': 'LanguageKey',
+            'name_snake_case': 'language_key',
+            'type': 'str',
+            'enum_values': [
+                {
+                    'name': 'German',
+                    'name_upper': 'GERMAN',
+                    'value': 'de',
+                },
+                {
+                    'name': 'English',
+                    'name_upper': 'ENGLISH',
+                    'value': 'en',
+                },
+                {
+                    'name': 'French',
+                    'name_upper': 'FRENCH',
+                    'value': 'fr',
+                }
+            ]
+        },
+    ]
 
 
 def __prepare_entities_data(entities_data: dict) -> list:
@@ -197,11 +232,14 @@ def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: s
     if enums_data:
         filtered_enums_data = filter_enums_data(enums_data, services_data, entities_data)
         prepared_enums_data = prepare_parsed_enums_data(filtered_enums_data)
-    else:
-        filtered_enums_data = None
-        prepared_enums_data = None
+        custom_enums_data = __generate_custom_enums_data()
 
-    generate_files_from_data(services_data, entities_data, prepared_enums_data, target_path, force_overwrite)
+        all_enums_data = prepared_enums_data + custom_enums_data
+    else:
+        all_enums_data = None
+
+    generate_files_from_data(services_data, entities_data,
+                             all_enums_data, target_path, force_overwrite)
 
 
 def __generate_client_file(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
