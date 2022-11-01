@@ -19,14 +19,14 @@ class {{entity.name}}(_{{entity.base_class_name}}, _{{entity.name}}Raw):
 {% if entity.id_property_name %}
         return f'<{{entity.name}} {self.id}>'
 {% else %}
-        return f'<{{entity.name}}>'
+        return '<{{entity.name}}>'
 {% endif %}
 
     def __str__(self) -> str:
 {% if entity.id_property_name %}
         return f'<{{entity.name}} {self.id}>'
 {% else %}
-        return f'<{{entity.name}}>'
+        return '<{{entity.name}}>'
 {% endif %}
 
 
