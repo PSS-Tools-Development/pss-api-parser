@@ -1,23 +1,21 @@
-from contexttimer import Timer as _Timer
 import json as _json
 import os as _os
 import re as _re
-import sys as _sys
 from typing import Dict as _Dict
 from typing import List as _List
 from typing import Set as _Set
 from typing import Union as _Union
 from xml.etree import ElementTree as _ElementTree
 
+from contexttimer import Timer as _Timer
 from mitmproxy.http import HTTPFlow as _HTTPFlow
 from mitmproxy.io import FlowReader as _FlowReader
 from mitmproxy.io import tnetstring as _tnetstring
 
+from . import utils as _utils
 from .flowdetails import PssFlowDetails as _PssFlowDetails
 from .flowdetails import ResponseStructure as _ResponseStructure
 from .objectstructure import PssObjectStructure as _PssObjectStructure
-from . import utils as _utils
-
 
 # ----- Constants and type definitions -----
 
@@ -252,7 +250,7 @@ def __determine_data_type(value: str, property_name: str = None) -> str:
         if int_value is not None and float_value is not None:
             try:
                 float_int_value = float(int_value)
-            except OverflowError: # int is too large to be converted to float, could be a bit-mask
+            except OverflowError:  # int is too large to be converted to float, could be a bit-mask
                 return 'str'
 
             if float_int_value == float_value:

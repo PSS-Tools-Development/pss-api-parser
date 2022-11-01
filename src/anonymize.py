@@ -1,7 +1,5 @@
 import json as _json
-import os as _os
 import re as _re
-import sys as _sys
 from typing import List as _List
 
 from mitmproxy.http import HTTPFlow as _HTTPFlow
@@ -10,8 +8,6 @@ from mitmproxy.io import FlowWriter as _FlowWriter
 from mitmproxy.io import tnetstring as _tnetstring
 
 from . import utils as _utils
-
-
 
 # ---------- Constants ----------
 
@@ -48,7 +44,6 @@ __QUERY_PARAM_NAMES = [
     'ticket',
 ]
 __RX_PROPERTIES: _re.Pattern = _re.compile('( (' + '|'.join(__ENTITY_PROPERTY_NAMES) + ')="(.*?)")', _re.IGNORECASE | _re.MULTILINE)
-
 
 
 # ---------- Functions ----------
@@ -90,7 +85,7 @@ def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
                 request_content_dict = {}
                 for query_param in query_params:
                     split_query_param = query_param.split('=')
-                    if len(split_query_param) == 2: # Ignore malformed query parameters or strings that aren't query parameters
+                    if len(split_query_param) == 2:  # Ignore malformed query parameters or strings that aren't query parameters
                         query_param_name, query_param_value = split_query_param
                         if query_param_name.lower() in __QUERY_PARAM_NAMES and query_param_value:
                             try:

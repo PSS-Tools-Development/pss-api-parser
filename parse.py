@@ -1,15 +1,13 @@
 import argparse as _argparse
-from contexttimer import Timer as _Timer
 import os as _os
 import sys as _sys
 
-from colorama import init as _colorama_init
 from colorama import Fore as _Fore
+from colorama import init as _colorama_init
+from contexttimer import Timer as _Timer
 
-from src import parse as _parse
 from src import enums as _enums
-
-
+from src import parse as _parse
 
 if __name__ == '__main__':
     """

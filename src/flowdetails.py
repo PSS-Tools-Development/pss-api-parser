@@ -23,7 +23,6 @@ class PssFlowDetails:
     def __str__(self) -> str:
         return self.__repr__()
 
-
     @property
     def content_structure(self) -> ResponseStructure:
         return self.__content_structure

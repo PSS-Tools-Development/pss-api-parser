@@ -23,7 +23,6 @@ FORCED_ENUMS_GENERATION = [
 ]
 
 
-
 # -----
 # ----- Prepare -----
 # -----
@@ -42,10 +41,10 @@ def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_da
 
     potential_enum_names += FORCED_ENUMS_GENERATION
     potential_enum_names = set(potential_enum_names)
-   
+
     parsed_enum_names = set(enums_data.keys())
     used_enum_names = potential_enum_names.intersection(potential_enum_names, parsed_enum_names)
-    
+
     result = {key: value for key, value in enums_data.items() if key in used_enum_names}
     return result
 
@@ -199,9 +198,6 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
         service['imports'] = sorted(list(set(service['imports'])))
         result.append(service)
     return result
-
-
-
 
 
 # -----
