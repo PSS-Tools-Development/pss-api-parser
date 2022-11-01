@@ -278,6 +278,7 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
 
 def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
     service_template = env.get_template('service.jinja2')
+    service_base_template = env.get_template('service_base.jinja2')
     services_init_template = env.get_template('services_init.jinja2')
     service_raw_template = env.get_template('service_raw.jinja2')
     services_raw_init_template = env.get_template('services_raw_init.jinja2')
@@ -306,6 +307,13 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
         format_source(services_init_template.render(services=services_data)),
         overwrite=True,
     )
+
+    _utils.create_file(
+        _os.path.join(services_path, 'service_base.py'),
+        format_source(service_base_template.render()),
+        overwrite=True,
+    )
+
     _utils.create_file(
         _os.path.join(services_raw_path, '__init__.py'),
         format_source(services_raw_init_template.render(services=services_data)),
@@ -315,8 +323,10 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
 
 def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
     entity_template = env.get_template('entity.jinja2')
+    entity_base_template = env.get_template('entity_base.jinja2')
     entities_init_template = env.get_template('entities_init.jinja2')
     entity_raw_template = env.get_template('entity_raw.jinja2')
+    entity_base_raw_template = env.get_template('entity_base_raw.jinja2')
     entities_raw_init_template = env.get_template('entities_raw_init.jinja2')
 
     entities_path = _os.path.join(target_path, 'entities')
@@ -345,13 +355,22 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     )
 
     _utils.create_file(
+        _os.path.join(entities_path, 'entity_base.py'),
+        format_source(entity_base_template.render()),
+        overwrite=True,
+    )
+
+    _utils.create_file(
         _os.path.join(entities_raw_path, '__init__.py'),
         format_source(entities_raw_init_template.render(entities=entities_data)),
         overwrite=True
     )
 
-
-
+    _utils.create_file(
+        _os.path.join(entities_raw_path, 'entity_base_raw.py'),
+        format_source(entity_base_raw_template.render()),
+        overwrite=True,
+    )
 
 
 # -----
