@@ -3,7 +3,7 @@
 {% endfor %}
 
 from .raw import {{service.name}}Raw as _{{service.name}}Raw
-from .service_base import PssServiceBase as _ServiceBase
+from .service_base import ServiceBase as _ServiceBase
 {% for entity_type in service.entity_types %}
 from ..entities import {{entity_type}} as _{{entity_type}}
 {% endfor %}
