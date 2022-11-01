@@ -1,18 +1,18 @@
 {% for service_import in service.imports %}
-{{service_import}}
+{{ service_import }}
 {% endfor %}
 
-from .raw import {{service.name}}Raw as _{{service.name}}Raw
+from .raw import {{ service.name }}Raw as _{{ service.name }}Raw
 from .service_base import ServiceBase as _ServiceBase
 {% for entity_type in service.entity_types %}
-from ..entities import {{entity_type}} as _{{entity_type}}
+from ..entities import {{ entity_type }} as _{{ entity_type }}
 {% endfor %}
 
 
-class {{service.name}}(_ServiceBase):
+class {{ service.name }}(_ServiceBase):
 {% for endpoint in service.endpoints %}
-    async def {{endpoint.name_snake_case_without_version}}(self, {{endpoint.parameter_definitions}}) -> _List[_{{endpoint.return_type}}]:
-        result = await _{{service.name}}Raw.{{endpoint.name_snake_case}}(self.production_server{% if endpoint.raw_endpoint_call_parameters %}, {{endpoint.raw_endpoint_call_parameters}}{% endif %})
+    async def {{ endpoint.name_snake_case_without_version }}(self, {{ endpoint.parameter_definitions }}) -> _List[_{{ endpoint.return_type }}]:
+        result = await _{{ service.name }}Raw.{{ endpoint.name_snake_case }}(self.production_server{% if endpoint.raw_endpoint_call_parameters %}, {{ endpoint.raw_endpoint_call_parameters }}{% endif %})
         return result
 
 {% endfor %}

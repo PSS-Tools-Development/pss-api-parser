@@ -4,34 +4,34 @@ from typing import Any as _Any
 from typing import Dict as _Dict
 from typing import Tuple as _Tuple
 
-from .entity_base import {{entity.base_class_name}} as _{{entity.base_class_name}}
-from .raw import {{entity.name}}Raw as _{{entity.name}}Raw
+from .entity_base import {{ entity.base_class_name }} as _{{ entity.base_class_name }}
+from .raw import {{ entity.name }}Raw as _{{ entity.name }}Raw
 from ..types import EntityInfo as _EntityInfo
 from ..utils import parse as _parse
 
 
-class {{entity.name}}(_{{entity.base_class_name}}, _{{entity.name}}Raw):
-    def __init__(self, {{entity.name_snake}}_info: _EntityInfo) -> None:
-        super().__init__({{entity.name_snake}}_info)
+class {{ entity.name }}(_{{ entity.base_class_name }}, _{{ entity.name }}Raw):
+    def __init__(self, {{ entity.name_snake }}_info: _EntityInfo) -> None:
+        super().__init__({{ entity.name_snake }}_info)
 
 
     def __repr__(self) -> str:
 {% if entity.id_property_name %}
-        return f'<{{entity.name}} {self.id}>'
+        return f'<{{ entity.name }} {self.id}>'
 {% else %}
-        return '<{{entity.name}}>'
+        return '<{{ entity.name }}>'
 {% endif %}
 
     def __str__(self) -> str:
 {% if entity.id_property_name %}
-        return f'<{{entity.name}} {self.id}>'
+        return f'<{{ entity.name }} {self.id}>'
 {% else %}
-        return '<{{entity.name}}>'
+        return '<{{ entity.name }}>'
 {% endif %}
 
 
 {% if entity.id_property_name %}
     @property
     def id(self) -> int:
-        return self.{{ entity.id_property_name }}
+        return self.{{  entity.id_property_name  }}
 {% endif %}

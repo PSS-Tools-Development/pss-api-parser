@@ -5,11 +5,11 @@ This file has been be generated from decompilation and might require manual
 fixing, if Savy uses enum values that are python keywords.
 """
 
-class {{enum.name}}(_IntEnum):
+class {{ enum.name }}(_IntEnum):
 {% if not enum.enum_values %}
     pass
 {% else %}
     {% for enum_value in enum.enum_values %}
-    {{enum_value.name_upper}} = {{enum_value.value}}
+    {{ enum_value.name_upper }} = {{ enum_value.value }}
     {% endfor %}
 {% endif %}
