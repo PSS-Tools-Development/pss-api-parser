@@ -239,7 +239,14 @@ def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: s
 
 
 def __generate_client_file(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    client_base_template = env.get_template('client_base.jinja2')
     client_template = env.get_template('client.jinja2')
+
+    _utils.create_file(
+        _os.path.join(target_path, 'client_base.py'),
+        format_source(client_base_template.render(services=services_data)),
+        overwrite=True,
+    )
 
     _utils.create_file(
         _os.path.join(target_path, 'client.py'),
@@ -301,13 +308,13 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
     _utils.create_file(
         _os.path.join(services_path, '__init__.py'),
         format_source(services_init_template.render(services=services_data)),
-        overwrite=True,
+        overwrite=force_overwrite,
     )
 
     _utils.create_file(
         _os.path.join(services_path, 'service_base.py'),
         format_source(service_base_template.render()),
-        overwrite=True,
+        overwrite=force_overwrite,
     )
 
     _utils.create_file(
@@ -347,13 +354,13 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     _utils.create_file(
         _os.path.join(entities_path, '__init__.py'),
         format_source(entities_init_template.render(entities=entities_data)),
-        overwrite=True,
+        overwrite=force_overwrite,
     )
 
     _utils.create_file(
         _os.path.join(entities_path, 'entity_base.py'),
         format_source(entity_base_template.render()),
-        overwrite=True,
+        overwrite=force_overwrite,
     )
 
     _utils.create_file(
