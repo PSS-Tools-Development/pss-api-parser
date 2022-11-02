@@ -123,12 +123,6 @@ def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
 def anynomize_flows(file_path: str) -> _List[_HTTPFlow]:
     with open(file_path, 'rb') as fp:
         flow_reader: _FlowReader = _FlowReader(fp)
-
-        try:
-            _tnetstring.load(flow_reader.fo)
-        except ValueError as e:
-            raise Exception(f'The specified file is not a Flows file: {file_path}') from e
-
         flows = [anonymize_flow(flow) for flow in flow_reader.stream()]
     return flows
 

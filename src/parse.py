@@ -346,12 +346,6 @@ def __read_flows_from_file(file_path: str) -> _List[_PssFlowDetails]:
 
     with open(file_path, 'rb') as fp:
         flow_reader: _FlowReader = _FlowReader(fp)
-
-        try:
-            _tnetstring.load(flow_reader.fo)
-        except ValueError as e:
-            raise Exception(f'The specified file is not a Flows file: {file_path}') from e
-
         flow_details = [_PssFlowDetails(__convert_flow_to_dict(recorded_flow)) for recorded_flow in flow_reader.stream()]
 
     blacklisted_services = _utils.read_json('src/blacklisted_services.json')
