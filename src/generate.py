@@ -168,14 +168,17 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 parameter_raw_definitions.append(param_def)
 
                 if parameter['self_field']:
-                    raw_endpoint_call_parameters.append(f'self.{parameter_name}')
+                    raw_endpoint_call_parameter = f'{parameter_name}=self.{parameter_name}'
+                    raw_endpoint_call_parameters.append(raw_endpoint_call_parameter)
                 else:
                     default_value = parameter.get('default_value')
                     if default_value:
                         parameter_definitions_with_default_value.append(f'{param_def} = {default_value}')
                     else:
                         parameter_definitions.append(param_def)
-                    raw_endpoint_call_parameters.append(parameter_name)
+
+                    raw_endpoint_call_parameter = f'{parameter_name}={parameter_name}'
+                    raw_endpoint_call_parameters.append(raw_endpoint_call_parameter)
 
             parameter_definitions += parameter_definitions_with_default_value
 
