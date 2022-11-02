@@ -11,13 +11,17 @@ class PssApiClientBase:
         self.__device_type: _DeviceType = device_type or _DeviceType.DEVICE_TYPE_ANDROID
         self.__language_key: _LanguageKey = language_key or _LanguageKey.ENGLISH
         self.__production_server: str = production_server
-        self._update_services()
 
     @classmethod
     async def create(cls, device_type: _DeviceType = None, language_key: _LanguageKey = None, production_server: str = None):
-        if not production_server:
-            production_server = await cls.get_production_server(cls)
-        return PssApiClientBase(device_type, language_key, production_server)
+        self = cls(device_type, language_key, production_server)
+
+        if not self.production_server:
+            await self.init_production_server()
+
+        self._update_services()
+
+        return self
 
     @property
     def device_type(self) -> _DeviceType:
@@ -30,6 +34,10 @@ class PssApiClientBase:
     @property
     def production_server(self) -> str:
         return self.__production_server
+
+    @production_server.setter
+    def production_server(self, value):
+        self.__production_server = value
 {% for service in services %}
 
     @property
@@ -37,13 +45,13 @@ class PssApiClientBase:
         return self.__{{ service.name_snake_case }}
 {% endfor %}
 
-    async def get_production_server(self) -> str:
+    async def init_production_server(self) -> None:
         setting_service = _SettingService(
             _constants.DEFAULT_PRODUCTION_SERVER, self.language_key
         )
 
-        setting = await setting_service.get_latest_version(self.device_type)
-        return setting.production_server
+        settings = await setting_service.get_latest_version(self.device_type)
+        self.production_server = settings[0].production_server
 
 
     def _update_services(self) -> None:
