@@ -1,0 +1,2291 @@
+{
+  "endpoints": {
+    "AchievementService": {
+      "ListAchievementDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAchievementDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "AchievementService": {
+            "ListAchievementDesigns": {
+              "AchievementDesigns": {
+                "AchievementDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "AchievementService"
+      }
+    }, 
+    "AllianceService": {
+      "ListAlliancesByChampionshipScoreRanking": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAlliancesByChampionshipScoreRanking", 
+        "method": "GET", 
+        "query_parameters": {
+          "to": "int", 
+          "accessToken": "str", 
+          "from": "int"
+        }, 
+        "response_structure": {
+          "AllianceService": {
+            "ListUsersByChampionshipScoreRanking": {
+              "Alliances": {
+                "Alliance": {}
+              }
+            }
+          }
+        }, 
+        "service": "AllianceService"
+      }, 
+      "ListAlliancesByRanking": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAlliancesByRanking", 
+        "method": "GET", 
+        "query_parameters": {
+          "take": "int", 
+          "skip": "int"
+        }, 
+        "response_structure": {
+          "AllianceService": {
+            "ListAlliancesByRanking": {
+              "Alliances": {
+                "Alliance": {}
+              }
+            }
+          }
+        }, 
+        "service": "AllianceService"
+      }, 
+      "ListUsers2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListUsers2", 
+        "method": "GET", 
+        "query_parameters": {
+          "allianceId": "int", 
+          "accessToken": "str", 
+          "skip": "int", 
+          "take": "int"
+        }, 
+        "response_structure": {
+          "AllianceService": {
+            "ListUsers": {
+              "Messages": {
+                "Message": {}
+              }, 
+              "Users": {
+                "User": {
+                  "Alliance": {}, 
+                  "UserSeason": {}
+                }
+              }
+            }
+          }
+        }, 
+        "service": "AllianceService"
+      }, 
+      "SearchAlliances": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "SearchAlliances", 
+        "method": "GET", 
+        "query_parameters": {
+          "accessToken": "str", 
+          "skip": "int", 
+          "take": "int", 
+          "name": "str"
+        }, 
+        "response_structure": {
+          "AllianceService": {
+            "SearchAlliances": {
+              "Alliances": {
+                "Alliance": {}
+              }
+            }
+          }
+        }, 
+        "service": "AllianceService"
+      }
+    }, 
+    "AnimationService": {
+      "ListAnimations": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAnimations", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "AnimationService": {
+            "ListAnimations": {
+              "Animations": {
+                "Animation": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "AnimationService"
+      }
+    }, 
+    "BackgroundService": {
+      "ListBackgrounds": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListBackgrounds", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "BackgroundService": {
+            "ListBackgrounds": {
+              "Backgrounds": {
+                "Background": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "BackgroundService"
+      }
+    }, 
+    "ChallengeService": {
+      "ListAllChallengeDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllChallengeDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "ChallengeService": {
+            "ListAllChallengeDesigns": {
+              "ChallengeDesigns": {
+                "ChallengeDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "ChallengeService"
+      }
+    }, 
+    "CharacterService": {
+      "ListAllCharacterDesignActions": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllCharacterDesignActions", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "CharacterService": {
+            "ListAllCharacterDesignActions": {
+              "properties": {
+                "version": "int"
+              }, 
+              "CharacterDesignActions": {
+                "CharacterDesignAction": {}
+              }
+            }
+          }
+        }, 
+        "service": "CharacterService"
+      }, 
+      "ListAllCharacterDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllCharacterDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "CharacterService": {
+            "ListAllCharacterDesigns": {
+              "CharacterDesigns": {
+                "CharacterDesign": {
+                  "CharacterParts": {
+                    "CharacterPart": {}
+                  }
+                }
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "CharacterService"
+      }, 
+      "ListAllDrawDesigns": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllDrawDesigns", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "CharacterService": {
+            "ListAllDrawDesigns": {
+              "DrawDesigns": {
+                "DrawDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "CharacterService"
+      }
+    }, 
+    "CollectionService": {
+      "ListAllCollectionDesigns": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllCollectionDesigns", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "CollectionService": {
+            "ListAllCollectionDesigns": {
+              "CollectionDesigns": {
+                "CollectionDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "CollectionService"
+      }
+    }, 
+    "DivisionService": {
+      "ListAllDivisionDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllDivisionDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "DivisionService": {
+            "ListAllDivisionDesigns": {
+              "DivisionDesigns": {
+                "DivisionDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "DivisionService"
+      }
+    }, 
+    "FileService": {
+      "ListFiles4": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListFiles4", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "FileService": {
+            "ListFiles": {
+              "Files": {
+                "File": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "FileService"
+      }, 
+      "ListSprites2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListSprites2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "FileService": {
+            "ListSprites": {
+              "Sprites": {
+                "Sprite": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "FileService"
+      }
+    }, 
+    "GalaxyService": {
+      "GoTo": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "GoTo", 
+        "method": "POST", 
+        "query_parameters": {
+          "starSystemId": "int", 
+          "clientDateTime": "str", 
+          "checksum": "str", 
+          "accessToken": "str"
+        }, 
+        "response_structure": {
+          "GalaxyService": {
+            "GoTo": {
+              "Ship": {
+                "Items": {
+                  "Item": {}
+                }, 
+                "Characters": {
+                  "Character": {
+                    "IsPrestiging": {}, 
+                    "Items": {
+                      "Item": {}
+                    }, 
+                    "CharacterActions": {
+                      "CharacterAction": {}
+                    }, 
+                    "FrameToAttackOrRepair": {}
+                  }
+                }, 
+                "Rooms": {
+                  "Room": {}
+                }, 
+                "Researches": {
+                  "Research": {}
+                }, 
+                "Lifts": {}, 
+                "UserStarSystems": {
+                  "UserStarSystem": {}
+                }
+              }
+            }
+          }
+        }, 
+        "service": "GalaxyService"
+      }, 
+      "ListMarkerGeneratorDesigns": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListMarkerGeneratorDesigns", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int", 
+          "languageKey": "str"
+        }, 
+        "response_structure": {
+          "GalaxyService": {
+            "ListMarkerGeneratorDesigns": {
+              "StarSystemMarkerGenerators": {
+                "StarSystemMarkerGenerator": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "GalaxyService"
+      }, 
+      "ListStarSystemLinks": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListStarSystemLinks", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "GalaxyService": {
+            "ListStarSystemLinks": {
+              "properties": {
+                "version": "int"
+              }, 
+              "StarSystemLinks": {
+                "StarSystemLink": {}
+              }
+            }
+          }
+        }, 
+        "service": "GalaxyService"
+      }, 
+      "ListStarSystemMarkers": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListStarSystemMarkers", 
+        "method": "GET", 
+        "query_parameters": {
+          "clientDateTime": "str", 
+          "accessToken": "str"
+        }, 
+        "response_structure": {
+          "GalaxyService": {
+            "ListStarSystemMarkers": {
+              "StarSystemMarkers": {
+                "StarSystemMarker": {}
+              }
+            }
+          }
+        }, 
+        "service": "GalaxyService"
+      }, 
+      "ListStarSystems": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListStarSystems", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "GalaxyService": {
+            "ListStarSystems": {
+              "StarSystems": {
+                "StarSystem": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "GalaxyService"
+      }, 
+      "UpdateMarkerMovement": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "UpdateMarkerMovement", 
+        "method": "POST", 
+        "query_parameters": {
+          "starSystemMarkerId": "int", 
+          "checksum": "str", 
+          "clientDateTime": "str", 
+          "accessToken": "str"
+        }, 
+        "response_structure": {
+          "GalaxyService": {
+            "UpdateMarkerMovement": {
+              "StarSystemMarker": {}, 
+              "UserMarker": {}
+            }
+          }
+        }, 
+        "service": "GalaxyService"
+      }
+    }, 
+    "ItemService": {
+      "ListItemDesignActions": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListItemDesignActions", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "ItemService": {
+            "ListItemDesignActions": {
+              "ItemDesignActions": {
+                "ItemDesignAction": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "ItemService"
+      }, 
+      "ListItemDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListItemDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "ItemService": {
+            "ListItemDesigns": {
+              "ItemDesigns": {
+                "ItemDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "ItemService"
+      }
+    }, 
+    "LadderService": {
+      "ListUsersByChampionshipScoreRanking": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListUsersByChampionshipScoreRanking", 
+        "method": "GET", 
+        "query_parameters": {
+          "to": "int", 
+          "accessToken": "str", 
+          "from": "int"
+        }, 
+        "response_structure": {
+          "LadderService": {
+            "ListUsersByChampionshipScoreRanking": {
+              "Users": {
+                "User": {}
+              }
+            }
+          }
+        }, 
+        "service": "LadderService"
+      }, 
+      "ListUsersByRanking": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListUsersByRanking", 
+        "method": "GET", 
+        "query_parameters": {
+          "to": "str", 
+          "to100": "str", 
+          "accessToken": "str", 
+          "from": "int"
+        }, 
+        "response_structure": {
+          "LadderService": {
+            "ListUsersByRanking": {
+              "Users": {
+                "User": {}
+              }
+            }
+          }
+        }, 
+        "service": "LadderService"
+      }
+    }, 
+    "LeagueService": {
+      "ListLeagues2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListLeagues2", 
+        "method": "GET", 
+        "query_parameters": {
+          "accessToken": "str", 
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "LeagueService": {
+            "ListLeagues": {
+              "properties": {
+                "version": "int"
+              }, 
+              "Leagues": {
+                "League": {}
+              }
+            }
+          }
+        }, 
+        "service": "LeagueService"
+      }
+    }, 
+    "LiveOpsService": {
+      "GetCatalogQuantity": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "GetCatalogQuantity", 
+        "method": "GET", 
+        "query_parameters": {}, 
+        "response_structure": {
+          "LiveOpsService": {
+            "GetCatalogQuantity": {}
+          }
+        }, 
+        "service": "LiveOpsService"
+      }
+    }, 
+    "MessageService": {
+      "ListActiveMarketplaceMessages5": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListActiveMarketplaceMessages5", 
+        "method": "GET", 
+        "query_parameters": {
+          "rarity": "str", 
+          "itemDesignId": "int", 
+          "userId": "int", 
+          "accessToken": "str", 
+          "currencyType": "str", 
+          "itemSubType": "str"
+        }, 
+        "response_structure": {
+          "MessageService": {
+            "ListActiveMarketplaceMessages": {
+              "Messages": {
+                "Message": {}
+              }
+            }
+          }
+        }, 
+        "service": "MessageService"
+      }, 
+      "ListMessagesForChannelKey": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListMessagesForChannelKey", 
+        "method": "GET", 
+        "query_parameters": {
+          "accessToken": "str", 
+          "channelKey": "str"
+        }, 
+        "response_structure": {
+          "MessageService": {
+            "ListMessagesForChannelKey": {
+              "Messages": {
+                "Message": {}
+              }
+            }
+          }
+        }, 
+        "service": "MessageService"
+      }
+    }, 
+    "MissionService": {
+      "ListAllMissionDesigns4": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllMissionDesigns4", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "MissionService": {
+            "ListAllMissionDesigns": {
+              "MissionDesigns": {
+                "MissionDesign": {
+                  "InstantMissionEvents": {}
+                }
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "MissionService"
+      }
+    }, 
+    "PromotionService": {
+      "FixUserPromotions": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "FixUserPromotions", 
+        "method": "POST", 
+        "query_parameters": {
+          "accessToken": "str"
+        }, 
+        "response_structure": {
+          "PromotionService": {
+            "FixUserPromotions": {
+              "User": {
+                "Alliance": {}, 
+                "UserSeason": {}
+              }
+            }
+          }
+        }, 
+        "service": "PromotionService"
+      }, 
+      "ListAllPromotionDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllPromotionDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "PromotionService": {
+            "ListAllPromotionDesigns": {
+              "properties": {
+                "version": "int"
+              }, 
+              "PromotionDesigns": {
+                "PromotionDesign": {}
+              }
+            }
+          }
+        }, 
+        "service": "PromotionService"
+      }
+    }, 
+    "ResearchService": {
+      "ListAllResearchDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllResearchDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "ResearchService": {
+            "ListAllResearchDesigns": {
+              "ResearchDesigns": {
+                "ResearchDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "ResearchService"
+      }
+    }, 
+    "RewardService": {
+      "ListAllRewardDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllRewardDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RewardService": {
+            "ListAllRewardDesigns": {
+              "RewardDesigns": {
+                "RewardDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "RewardService"
+      }
+    }, 
+    "RoomDesignSpriteService": {
+      "ListRoomDesignSprites": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListRoomDesignSprites", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RoomDesignSpriteService": {
+            "ListRoomDesignSprites": {
+              "properties": {
+                "version": "int"
+              }, 
+              "RoomDesignSprites": {
+                "RoomDesignSprite": {}
+              }
+            }
+          }
+        }, 
+        "service": "RoomDesignSpriteService"
+      }
+    }, 
+    "RoomService": {
+      "ListActionTypes2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListActionTypes2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RoomService": {
+            "ListActionTypes": {
+              "properties": {
+                "version": "int"
+              }, 
+              "ActionTypes": {
+                "ActionType": {}
+              }
+            }
+          }
+        }, 
+        "service": "RoomService"
+      }, 
+      "ListConditionTypes2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListConditionTypes2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RoomService": {
+            "ListConditionTypes": {
+              "ConditionTypes": {
+                "ConditionType": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "RoomService"
+      }, 
+      "ListCraftDesigns": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListCraftDesigns", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RoomService": {
+            "ListCraftDesigns": {
+              "CraftDesigns": {
+                "CraftDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "RoomService"
+      }, 
+      "ListMissileDesigns": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListMissileDesigns", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RoomService": {
+            "ListMissileDesigns": {
+              "MissileDesigns": {
+                "MissileDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "RoomService"
+      }, 
+      "ListRoomDesignPurchase": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListRoomDesignPurchase", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RoomService": {
+            "ListRoomDesignPurchase": {
+              "RoomDesignPurchases": {
+                "RoomDesignPurchase": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "RoomService"
+      }, 
+      "ListRoomDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListRoomDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RoomService": {
+            "ListRoomDesigns": {
+              "RoomDesigns": {
+                "RoomDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "RoomService"
+      }
+    }, 
+    "SeasonService": {
+      "ListAllSeasonDesigns": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllSeasonDesigns", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "SeasonService": {
+            "ListAllSeasonDesigns": {
+              "SeasonDesigns": {
+                "SeasonDesign": {}
+              }
+            }
+          }
+        }, 
+        "service": "SeasonService"
+      }
+    }, 
+    "SettingService": {
+      "ListAllNewsDesigns": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllNewsDesigns", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "SettingService": {
+            "ListAllNewsDesigns": {
+              "NewsDesigns": {
+                "NewsDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "SettingService"
+      }
+    }, 
+    "ShipService": {
+      "InspectShip2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "InspectShip2", 
+        "method": "GET", 
+        "query_parameters": {
+          "userId": "int", 
+          "accessToken": "str"
+        }, 
+        "response_structure": {
+          "ShipService": {
+            "InspectShip": {
+              "User": {}, 
+              "Ship": {
+                "Items": {}, 
+                "Characters": {}, 
+                "Rooms": {
+                  "Room": {}
+                }, 
+                "Researches": {
+                  "Research": {}
+                }, 
+                "Lifts": {}, 
+                "UserStarSystems": {
+                  "UserStarSystem": {}
+                }
+              }
+            }
+          }
+        }, 
+        "service": "ShipService"
+      }, 
+      "ListAllShipDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllShipDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "ShipService": {
+            "ListShipDesigns": {
+              "ShipDesigns": {
+                "ShipDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "ShipService"
+      }
+    }, 
+    "SituationService": {
+      "ListSituationDesigns": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListSituationDesigns", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "SituationService": {
+            "ListSituationDesigns": {
+              "properties": {
+                "version": "int"
+              }, 
+              "SituationDesigns": {
+                "SituationDesign": {}
+              }
+            }
+          }
+        }, 
+        "service": "SituationService"
+      }
+    }, 
+    "TaskService": {
+      "ListAllTaskDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllTaskDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "TaskService": {
+            "ListAllTaskDesigns": {
+              "TaskDesigns": {
+                "TaskDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "TaskService"
+      }
+    }, 
+    "TrainingService": {
+      "ListAllTrainingDesigns2": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListAllTrainingDesigns2", 
+        "method": "GET", 
+        "query_parameters": {
+          "languageKey": "str", 
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "TrainingService": {
+            "ListAllTrainingDesigns": {
+              "TrainingDesigns": {
+                "TrainingDesign": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "TrainingService"
+      }
+    }, 
+    "UserService": {
+      "DeviceLogin12": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "DeviceLogin12", 
+        "method": "POST", 
+        "query_parameters": {}, 
+        "response_structure": {
+          "UserService": {
+            "UserLogin": {
+              "User": {
+                "Alliance": {}, 
+                "UserSeason": {}
+              }
+            }
+          }
+        }, 
+        "service": "UserService"
+      }, 
+      "SearchUsers": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "SearchUsers", 
+        "method": "GET", 
+        "query_parameters": {
+          "searchString": "str"
+        }, 
+        "response_structure": {
+          "UserService": {
+            "SearchUsers": {
+              "Users": {
+                "User": {}
+              }
+            }
+          }
+        }, 
+        "service": "UserService"
+      }, 
+      "SteamLogin6": {
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "SteamLogin6", 
+        "method": "POST", 
+        "query_parameters": {}, 
+        "response_structure": {
+          "UserService": {
+            "UserLogin": {
+              "User": {
+                "Alliance": {}, 
+                "UserSeason": {}
+              }
+            }
+          }
+        }, 
+        "service": "UserService"
+      }
+    }
+  }, 
+  "entities": {
+    "AchievementDesign": {
+      "OrderIndex": "int", 
+      "RootAchievementDesignId": "int", 
+      "AchievementDesignId": "int", 
+      "AchievementReward": "int", 
+      "RewardString": "str", 
+      "AchievementTitle": "str", 
+      "GasReward": "int", 
+      "GuideArgument": "int", 
+      "GuideType": "str", 
+      "DurationType": "str", 
+      "SpriteId": "int", 
+      "AchievementKey": "str", 
+      "AchievementGoal": "int", 
+      "AchievementDescription": "str", 
+      "IsHidden": "bool", 
+      "ParentAchievementDesignId": "int", 
+      "AchievementType": "str", 
+      "MineralReward": "int"
+    }, 
+    "ActionType": {
+      "OrderIndex": "int", 
+      "ActionTypeParameterValue": "int", 
+      "ConditionTypeCategory": "str", 
+      "ActionTypeDescription": "str", 
+      "ActionTypeParameterRelativity": "str", 
+      "ActionTypeKey": "str", 
+      "ActionTypeId": "int", 
+      "ActionTypeName": "str", 
+      "ImageSpriteId": "int", 
+      "RoomType": "str", 
+      "ConditionTypeParameter": "str", 
+      "RequiredResearchDesignId": "int", 
+      "ColorString": "str", 
+      "ActionTypeCategory": "str"
+    }, 
+    "Alliance": {
+      "AllianceName": "str", 
+      "AllianceSpriteId": "int", 
+      "AllianceShipUserId": "int", 
+      "NumberOfApprovedMembers": "int", 
+      "AllianceId": "int", 
+      "ChampionshipScore": "int", 
+      "NumberOfMembers": "int", 
+      "DivisionDesignId": "int", 
+      "ChannelId": "int", 
+      "Score": "int", 
+      "Trophy": "int", 
+      "Credits": "int", 
+      "RequiresApproval": "bool", 
+      "EnableWars": "bool", 
+      "AllianceDescription": "str", 
+      "Ranking": "int", 
+      "MinTrophyRequired": "int", 
+      "ImmunityDate": "datetime", 
+      "AllianceCountryCode": "str"
+    }, 
+    "Animation": {
+      "AnimationId": "int", 
+      "Duration": "int", 
+      "AnimationSprites": "str", 
+      "Key": "str", 
+      "AnimationEffectType": "str"
+    }, 
+    "Background": {
+      "BackgroundType": "str", 
+      "HazardArgument": "int", 
+      "EnvironmentFloatArgument": "int", 
+      "MusicFileId": "int", 
+      "MaxHazardInterval": "int", 
+      "BackgroundId": "int", 
+      "FarObjectSpriteId": "str", 
+      "HazardEffectSpriteId": "int", 
+      "OrbitAnchorAlignment": "str", 
+      "EnvironmentIntArgument": "int", 
+      "MinHazardInterval": "int", 
+      "HazardIconSpriteId": "int", 
+      "HazardType": "str", 
+      "HazardChance": "int", 
+      "IsActive": "bool", 
+      "OrbitAnimationId": "int", 
+      "HazardCategory": "str", 
+      "BackgroundSpriteId": "int", 
+      "BackgroundEffectType": "str", 
+      "EnvironmentType": "str", 
+      "CloseObjectSpriteId": "str", 
+      "MediumObjectSpriteId": "str"
+    }, 
+    "ChallengeDesign": {
+      "PosterSpriteId": "int", 
+      "IsRealtime": "bool", 
+      "EndDate": "datetime", 
+      "ButtonAnimationId": "int", 
+      "RewardString": "str", 
+      "ChallengeArgument": "int", 
+      "MaxBattlePrize": "int", 
+      "Name": "str", 
+      "ChallengeDesignMetadata": "str", 
+      "OpponentShipIds": "str", 
+      "BasePrize": "int", 
+      "IsFirstFree": "bool", 
+      "Flags": "int", 
+      "ChallengeScoringArgument": "int", 
+      "StartDate": "datetime", 
+      "RequirementString": "str", 
+      "RootAchievementDesignId": "int", 
+      "MinBattlePrize": "int", 
+      "SpecialRuleType": "str", 
+      "SpecialRuleArgument": "int", 
+      "EntryFee": "int", 
+      "Description": "str", 
+      "Lives": "int", 
+      "ChallengeDesignId": "int", 
+      "ChallengeType": "str", 
+      "ChallengeScoringType": "str"
+    }, 
+    "Character": {
+      "HpImprovement": "int", 
+      "RepairImprovement": "int", 
+      "EngineImprovement": "int", 
+      "TrainingData": "str", 
+      "StaminaImprovement": "int", 
+      "ScienceImprovement": "int", 
+      "PilotImprovement": "int", 
+      "Level": "int", 
+      "Stamina": "int", 
+      "Fatigue": "int", 
+      "WeaponImprovement": "int", 
+      "AvailableDate": "datetime", 
+      "ShipId": "int", 
+      "Flags": "int", 
+      "AbilityImprovement": "int", 
+      "ItemIds": "str", 
+      "IsNew": "bool", 
+      "RoomId": "int", 
+      "CharacterDesignId": "int", 
+      "OwnerShipId": "int", 
+      "TrainingDesignId": "int", 
+      "CharacterName": "str", 
+      "AttackImprovement": "int", 
+      "TrainingEndDate": "datetime", 
+      "CharacterId": "int", 
+      "DeploymentDate": "datetime", 
+      "Xp": "int"
+    }, 
+    "CharacterAction": {
+      "ConditionTypeId": "int", 
+      "ActionTypeId": "int", 
+      "CharacterActionIndex": "int", 
+      "CharacterId": "int", 
+      "CharacterActionId": "int"
+    }, 
+    "CharacterDesign": {
+      "MaxCount": "int", 
+      "FinalEngine": "float", 
+      "FinalPilot": "int", 
+      "CharacterLegPartId": "int", 
+      "FinalWeapon": "float", 
+      "Hp": "int", 
+      "RootCharacterDesignId": "int", 
+      "Science": "float", 
+      "RunSpeed": "int", 
+      "Level": "int", 
+      "Engine": "float", 
+      "SpeechPitch": "int", 
+      "FireResistance": "int", 
+      "SpeechPhrases": "str", 
+      "XpRequirementScale": "int", 
+      "Attack": "float", 
+      "Flags": "int", 
+      "ProfileSpriteId": "int", 
+      "WalkingSpeed": "int", 
+      "FinalAttack": "float", 
+      "GenderType": "str", 
+      "SpecialAbilityType": "str", 
+      "ProgressionType": "str", 
+      "RaceType": "str", 
+      "SpeechVoice": "str", 
+      "FinalResearch": "int", 
+      "FinalScience": "float", 
+      "TrainingCapacity": "int", 
+      "CharacterDesignDescription": "str", 
+      "FinalHp": "int", 
+      "Research": "int", 
+      "Pilot": "float", 
+      "SpecialAbilityArgument": "int", 
+      "CollectionDesignId": "int", 
+      "EquipmentMask": "int", 
+      "FinalRepair": "float", 
+      "CharacterBodyPartId": "int", 
+      "MaxCharacterLevel": "int", 
+      "CharacterDesignName": "str", 
+      "Rarity": "str", 
+      "Repair": "float", 
+      "MinShipLevel": "int", 
+      "CharacterHeadPartId": "int", 
+      "Weapon": "float", 
+      "TapSoundFileId": "int", 
+      "CharacterDesignId": "int", 
+      "ActionSoundFileId": "int", 
+      "SpecialAbilityFinalArgument": "int", 
+      "SpeechRate": "int"
+    }, 
+    "CharacterDesignAction": {
+      "ActionTypeId": "int", 
+      "CharacterDesignActionIndex": "int", 
+      "ConditionTypeId": "int", 
+      "CharacterDesignId": "int", 
+      "CharacterDesignActionId": "int"
+    }, 
+    "CharacterPart": {
+      "StandardSpriteId": "int", 
+      "CharacterPartName": "str", 
+      "CharacterPartId": "int", 
+      "ActionFileId": "int", 
+      "StandardFileId": "int", 
+      "ActionSpriteId": "int", 
+      "StandardBorderFileId": "int", 
+      "ActionBorderFileId": "int", 
+      "CharacterPartType": "str"
+    }, 
+    "CollectionDesign": {
+      "IconSpriteId": "int", 
+      "MaxCombo": "int", 
+      "SpriteId": "int", 
+      "HaloAnimationId": "int", 
+      "CollectionDesignId": "int", 
+      "StepEnhancementValue": "int", 
+      "CollectionType": "str", 
+      "BaseEnhancementValue": "int", 
+      "CollectionDescription": "str", 
+      "MinCombo": "int", 
+      "EnhancementType": "str", 
+      "CollectionName": "str", 
+      "ColorString": "str", 
+      "Flags": "int"
+    }, 
+    "ConditionType": {
+      "OrderIndex": "int", 
+      "ConditionTypeAvailability": "int", 
+      "ConditionTypeComparison": "str", 
+      "ConditionTypeCategory": "str", 
+      "ConditionTypeId": "int", 
+      "ConditionTypeName": "str", 
+      "ConditionTypeParameterValue": "int", 
+      "ConditionTypeDescription": "str", 
+      "ImageSpriteId": "int", 
+      "RoomType": "str", 
+      "ConditionTypeParameter": "str", 
+      "ConditionTypeKey": "str", 
+      "RequiredResearchDesignId": "int", 
+      "ColorString": "str"
+    }, 
+    "CraftDesign": {
+      "Reload": "int", 
+      "FlightSpeed": "int", 
+      "Volley": "int", 
+      "Hp": "int", 
+      "CraftDesignId": "int", 
+      "CraftName": "str", 
+      "VolleyDelay": "int", 
+      "MissileDesignId": "int", 
+      "SpriteId": "int"
+    }, 
+    "DivisionDesign": {
+      "FinalsImmunityPercentage": "int", 
+      "BannerSpriteIds": "str", 
+      "MonthlyAchievementDesignIds": "str", 
+      "MaxRank": "int", 
+      "RewardStrings": "str", 
+      "DivisionName": "str", 
+      "MinRank": "int", 
+      "DivisionType": "str", 
+      "YearlyAchievementDesignIds": "str", 
+      "LogoSpriteId": "int", 
+      "BackgroundSpriteId": "int", 
+      "DivisionDesignId": "int"
+    }, 
+    "DrawDesign": {
+      "MaxCrewsDrawn": "int", 
+      "DrawName": "str", 
+      "MinCrewsDrawn": "int", 
+      "CostPercentageIncrease": "int", 
+      "CollectionDesignId": "int", 
+      "MaxItems": "int", 
+      "Cost": "str", 
+      "DrawSpriteId": "int", 
+      "MinCrewRarity": "int", 
+      "RequiredResearchDesignId": "int", 
+      "DrawDesignId": "int", 
+      "OrderIndex": "int", 
+      "BonusIncrease": "int", 
+      "MinItems": "int", 
+      "DrawType": "str", 
+      "BackgroundSpriteId": "int", 
+      "DrawDescription": "str", 
+      "MaxCrewRarity": "int", 
+      "MaxCostPercentageIncrease": "int"
+    }, 
+    "File": {
+      "FileDownloadCategory": "str", 
+      "DateUpdated": "datetime", 
+      "Size": "int", 
+      "AwsFilename": "str", 
+      "IsLanguageSpecific": "bool", 
+      "Filename": "str", 
+      "Id": "int"
+    }, 
+    "GetCatalogQuantity": {
+      "LimitedCatalogQuantity": "int"
+    }, 
+    "Item": {
+      "BonusEnhancementType": "str", 
+      "ItemDesignId": "int", 
+      "ItemId": "int", 
+      "ShipId": "int", 
+      "BonusEnhancementValue": "float", 
+      "Quantity": "int", 
+      "IsNew": "bool"
+    }, 
+    "ItemDesign": {
+      "MaxCount": "int", 
+      "Level": "int", 
+      "MinRoomLevel": "int", 
+      "ParentItemDesignId": "int", 
+      "Tags": "str", 
+      "Content": "str", 
+      "EnhancementValue": "float", 
+      "FairPrice": "int", 
+      "Metadata": "str", 
+      "Flags": "int", 
+      "BorderSpriteId": "int", 
+      "Ingredients": "str", 
+      "ActiveAnimationId": "int", 
+      "TrainingDesignId": "int", 
+      "OurPrice": "str", 
+      "ReloadTime": "str", 
+      "MarketPrice": "int", 
+      "BuildTime": "int", 
+      "GasCost": "int", 
+      "ItemSpace": "int", 
+      "ItemType": "str", 
+      "MineralCost": "int", 
+      "SoundFileId": "int", 
+      "LogoSpriteId": "int", 
+      "SituationDesignId": "int", 
+      "RoomDesignId": "int", 
+      "ItemDesignNameEN": "str", 
+      "Rank": "int", 
+      "RaceId": "int", 
+      "ItemDesignId": "int", 
+      "ManufactureCost": "str", 
+      "RootItemDesignId": "int", 
+      "ItemSubType": "str", 
+      "EquipSoundFileId": "int", 
+      "EnhancementType": "str", 
+      "CraftDesignId": "int", 
+      "Rarity": "str", 
+      "RequiredResearchDesignId": "int", 
+      "MissileDesignId": "int", 
+      "RequirementString": "str", 
+      "MinShipLevel": "int", 
+      "ParticleSpriteId": "int", 
+      "AnimationId": "int", 
+      "ItemDesignDescription": "str", 
+      "CharacterDesignId": "int", 
+      "Priority": "int", 
+      "ModuleArgument": "int", 
+      "DropChance": "int", 
+      "CharacterPartId": "int", 
+      "ImageSpriteId": "int", 
+      "ModuleType": "str", 
+      "ItemDesignKey": "str", 
+      "ItemDesignName": "str"
+    }, 
+    "ItemDesignAction": {
+      "ActionTypeId": "int", 
+      "ItemDesignActionId": "int", 
+      "ItemDesignActionIndex": "int", 
+      "ItemDesignId": "int", 
+      "ConditionTypeId": "int"
+    }, 
+    "League": {
+      "MinTrophy": "int", 
+      "LeagueId": "int", 
+      "MaxTrophy": "int", 
+      "LargeLogoSpriteId": "int", 
+      "LogoSpriteId": "int", 
+      "BackgroundSpriteId": "int", 
+      "GasReward": "int", 
+      "MineralReward": "int", 
+      "LeagueName": "str"
+    }, 
+    "Message": {
+      "UserSpriteId": "int", 
+      "MessageId": "int", 
+      "ShipDesignId": "int", 
+      "UserId": "int", 
+      "BorderSpriteId": "str", 
+      "AllianceSpriteId": "int", 
+      "ActivityType": "str", 
+      "AllianceName": "str", 
+      "MessageDate": "datetime", 
+      "SaleId": "str", 
+      "Argument": "str", 
+      "Message": "str", 
+      "MessageType": "str", 
+      "ActivityArgument": "str", 
+      "AllianceId": "int", 
+      "ChannelId": "int", 
+      "UserName": "str", 
+      "Trophy": "int"
+    }, 
+    "MissileDesign": {
+      "MissileType": "str", 
+      "FlightArgumentY": "int", 
+      "MaskAnimationId": "int", 
+      "HitSoundFileId": "int", 
+      "ExplosionType": "str", 
+      "HullPercentageDamage": "int", 
+      "HitAnimationId": "int", 
+      "LaunchSoundFileId": "int", 
+      "MaskHitAnimationId": "int", 
+      "ExplosionRadius": "int", 
+      "MaskLaunchAnimationId": "int", 
+      "LaunchAnimationId": "int", 
+      "BreachChance": "int", 
+      "MissileDesignId": "int", 
+      "Metadata": "str", 
+      "HullDamage": "float", 
+      "AnimationId": "int", 
+      "SystemDamage": "float", 
+      "Volley": "int", 
+      "VolleyDelay": "int", 
+      "SpriteId": "int", 
+      "ShieldDamage": "float", 
+      "StunLength": "int", 
+      "Speed": "int", 
+      "LogoSpriteId": "int", 
+      "FlightType": "str", 
+      "CharacterDamage": "float", 
+      "MissileDesignName": "str", 
+      "FireLength": "int", 
+      "FlightArgumentX": "int", 
+      "DirectSystemDamage": "float", 
+      "EMPLength": "int"
+    }, 
+    "MissionDesign": {
+      "MissionDescription": "str", 
+      "MissionDesignId": "int", 
+      "MissionDesignType": "str", 
+      "StoryAnimationId": "int", 
+      "MaxShipLevel": "int", 
+      "AvailableFrom": "datetime", 
+      "MaxAttemptsPerDay": "int", 
+      "MinDurationSinceLastEvent": "int", 
+      "Chance": "int", 
+      "Flags": "int", 
+      "RequirementString": "str", 
+      "MinShipLevel": "int", 
+      "AvailableTo": "datetime", 
+      "StarSystemId": "int", 
+      "ExplorationPercentage": "int", 
+      "IsSinglePlay": "bool", 
+      "RequiredMissionDesignId": "int", 
+      "Weight": "int", 
+      "Condition": "str", 
+      "MissionTitle": "str", 
+      "StoryDescription": "str", 
+      "BackgroundSpriteId": "int", 
+      "MissionDesignStatus": "str", 
+      "RequirementDescription": "str", 
+      "AvailableEveryXDays": "int"
+    }, 
+    "NewsDesign": {
+      "ExpiryDate": "datetime", 
+      "NewsDesignId": "int", 
+      "UserId": "int", 
+      "Link": "str", 
+      "Description": "str", 
+      "Title": "str", 
+      "FromDate": "datetime", 
+      "UpdateDate": "datetime", 
+      "SpriteId": "int"
+    }, 
+    "PromotionDesign": {
+      "SpeedUpDiscountPercentage": "int", 
+      "ButtonSpriteId": "int", 
+      "PurchaseSpriteId": "int", 
+      "SubTitle": "str", 
+      "Title": "str", 
+      "RewardString": "str", 
+      "PurchaseMask": "int", 
+      "Name": "str", 
+      "PromotionType": "str", 
+      "CostString": "str", 
+      "ToDate": "datetime", 
+      "FromDate": "datetime", 
+      "Metadata": "str", 
+      "Flags": "int", 
+      "OrderIndex": "int", 
+      "RequiredPromotionDesignId": "int", 
+      "RequirementString": "str", 
+      "IconSpriteId": "int", 
+      "TitleSpriteId": "int", 
+      "RewardStoreDiscountPercentage": "int", 
+      "ResourceConversionDiscountPercentage": "int", 
+      "RemainingQuantity": "int", 
+      "StarbuxBonusPercentage": "int", 
+      "SpriteId": "int", 
+      "CloseButtonSpriteId": "int", 
+      "ExtraCrewDraws": "int", 
+      "XPBonusPercentage": "int", 
+      "PackId": "str", 
+      "AvailableForDays": "int", 
+      "Description": "str", 
+      "BackgroundSpriteId": "int", 
+      "PromotionDesignId": "int", 
+      "AvailableEveryXDays": "int", 
+      "BonusFrameSpriteId": "int"
+    }, 
+    "Research": {
+      "ResearchState": "str", 
+      "ShipId": "int", 
+      "ResearchStartDate": "datetime", 
+      "ResearchId": "int", 
+      "ResearchDesignId": "int"
+    }, 
+    "ResearchDesign": {
+      "RootResearchDesignId": "int", 
+      "RequiredLabLevel": "int", 
+      "RequiredItemDesignId": "int", 
+      "Argument": "int", 
+      "StarbuxCost": "int", 
+      "VisibilityFlags": "str", 
+      "GasCost": "int", 
+      "ResearchName": "str", 
+      "ResearchTime": "int", 
+      "LogoSpriteId": "int", 
+      "ImageSpriteId": "int", 
+      "AvailabilityMask": "int", 
+      "ResearchDescription": "str", 
+      "ResearchDesignId": "int", 
+      "RequiredResearchDesignId": "int", 
+      "ResearchDesignType": "str"
+    }, 
+    "RewardDesign": {
+      "RewardName": "str", 
+      "RewardDescription": "str", 
+      "RewardType": "str", 
+      "AvailableFrom": "datetime", 
+      "ArgumentString": "str", 
+      "AvailableQuantity": "int", 
+      "Metadata": "str", 
+      "Flags": "int", 
+      "OrderIndex": "int", 
+      "RequirementString": "str", 
+      "AvailableTo": "datetime", 
+      "SpriteId": "int", 
+      "PriceString": "str", 
+      "BattlePassTierIndex": "int", 
+      "SeasonDesignId": "int", 
+      "BackgroundSpriteId": "int", 
+      "RewardDesignId": "int", 
+      "MaxPerUser": "int", 
+      "AvailableEveryXDays": "int", 
+      "Grids": "int"
+    }, 
+    "Room": {
+      "PreviousSkinKey": "int", 
+      "ManufactureStartDate": "datetime", 
+      "TargetManufactureString": "str", 
+      "ShipId": "int", 
+      "CurrentSkinKey": "int", 
+      "ManufactureString": "str", 
+      "CapacityUsed": "int", 
+      "UpgradeRoomDesignId": "int", 
+      "Column": "int", 
+      "RoomStatus": "str", 
+      "Row": "int", 
+      "SalvageString": "str", 
+      "ConstructionStartDate": "str", 
+      "ItemIds": "str", 
+      "PowerGenerated": "int", 
+      "RandomSeed": "int", 
+      "Manufactured": "int", 
+      "RoomDesignId": "int", 
+      "RoomId": "int"
+    }, 
+    "RoomDesign": {
+      "Range": "int", 
+      "RoomName": "str", 
+      "MaxCount": "int", 
+      "UpgradeFromRoomDesignId": "int", 
+      "MaxPowerGenerated": "int", 
+      "ConstructionSpriteId": "int", 
+      "Columns": "int", 
+      "Level": "int", 
+      "FlipOnEnemyShip": "bool", 
+      "RootRoomDesignId": "int", 
+      "ManufactureType": "str", 
+      "ImprovementAmounts": "int", 
+      "RoomShortName": "str", 
+      "CategoryType": "str", 
+      "RoomType": "str", 
+      "Metadata": "str", 
+      "RefillCostString": "str", 
+      "SortIndex": "int", 
+      "InteriorAssetId": "int", 
+      "Flags": "int", 
+      "Rotate": "bool", 
+      "MaxSystemPower": "int", 
+      "ReloadTime": "int", 
+      "RoomDescription": "str", 
+      "Capacity": "int", 
+      "DefaultDefenceBonus": "int", 
+      "ManufactureCapacity": "int", 
+      "ItemRank": "int", 
+      "PriceString": "str", 
+      "LogoSpriteId": "int", 
+      "RandomImprovements": "int", 
+      "TargetType": "str", 
+      "RoomDesignId": "int", 
+      "Rows": "int", 
+      "ManufactureRate": "float", 
+      "ConstructionTime": "int", 
+      "ExteriorAssetId": "int", 
+      "RefillUnitCost": "int", 
+      "SupportedGridTypes": "int", 
+      "EnhancementType": "str", 
+      "MissileDesignId": "int", 
+      "RequirementString": "str", 
+      "MinShipLevel": "int", 
+      "CooldownTime": "int", 
+      "ImageSpriteId": "int"
+    }, 
+    "RoomDesignPurchase": {
+      "RequirementString": "str", 
+      "RoomDesignPurchaseId": "int", 
+      "AvailabilityMask": "int", 
+      "Quantity": "int", 
+      "Level": "int", 
+      "RoomDesignId": "int"
+    }, 
+    "RoomDesignSprite": {
+      "RequirementString": "str", 
+      "AnimationId": "int", 
+      "RaceId": "int", 
+      "RoomEffectParameter": "int", 
+      "SpriteId": "int", 
+      "SkinDescription": "str", 
+      "SkinName": "str", 
+      "RoomEffectType": "str", 
+      "RoomSpriteType": "str", 
+      "SkinKey": "int", 
+      "RoomDesignSpriteId": "int", 
+      "RoomDesignId": "int", 
+      "Metadata": "str", 
+      "Flags": "int"
+    }, 
+    "SeasonDesign": {
+      "BannerSpriteId": "int", 
+      "EndDate": "datetime", 
+      "ButtonSpriteId": "int", 
+      "SubTitle": "str", 
+      "RewardString": "str", 
+      "SubtitleSpriteId": "int", 
+      "PrologueDescription": "str", 
+      "BannerBackgroundSpriteId": "int", 
+      "FromDate": "datetime", 
+      "Metadata": "str", 
+      "SeasonDescription": "str", 
+      "SeasonSpriteId": "int", 
+      "RequirementString": "str", 
+      "IconSpriteId": "int", 
+      "SeasonName": "str", 
+      "TitleSpriteId": "int", 
+      "SeasonType": "str", 
+      "CloseButtonSpriteId": "int", 
+      "SeasonDesignId": "int", 
+      "BackgroundSpriteId": "int", 
+      "TextFrameSpriteId": "int"
+    }, 
+    "Ship": {
+      "FromStarSystemId": "int", 
+      "StickerString": "str", 
+      "OriginNextStarSystemId": "int", 
+      "Hp": "int", 
+      "PowerScore": "int", 
+      "Tags": "str", 
+      "StatusStartDate": "datetime", 
+      "SkinItemDesignId": "int", 
+      "UniqueCharacterDraws": "int", 
+      "ShipId": "int", 
+      "StarSystemArrivalDate": "datetime", 
+      "ShipLevel": "int", 
+      "ShipName": "str", 
+      "ShipDesignId": "int", 
+      "Shield": "int", 
+      "UserId": "int", 
+      "StarSystemId": "int", 
+      "UpgradeStartDate": "datetime", 
+      "OriginalRaceId": "int", 
+      "HueValue": "float", 
+      "StandardCharacterDraws": "int", 
+      "UpgradeShipDesignId": "int", 
+      "SalvageArgument": "int", 
+      "ImmunityDate": "datetime", 
+      "ShipStatus": "str", 
+      "BrightnessValue": "float", 
+      "SaturationValue": "int", 
+      "UpdateDate": "datetime", 
+      "OriginStarSystemId": "int", 
+      "NextStarSystemId": "int"
+    }, 
+    "ShipDesign": {
+      "LiftSpriteId": "int", 
+      "ExteriorSpriteId": "int", 
+      "Hp": "int", 
+      "Mask": "str", 
+      "VisibilityFlags": "str", 
+      "Columns": "int", 
+      "UnlockCost": "str", 
+      "EquipmentCapacity": "int", 
+      "MiniShipSpriteId": "int", 
+      "LiftFileId": "int", 
+      "ExteriorFileId": "int", 
+      "BackgroundAssetId": "int", 
+      "UpgradeCost": "str", 
+      "ShipDesignId": "int", 
+      "ThrustScale": "float", 
+      "FlagY": "int", 
+      "FlagX": "int", 
+      "ThrustLineAnimationId": "int", 
+      "DoorFrameLeftSpriteId": "int", 
+      "MineralCost": "int", 
+      "AllowInteracial": "bool", 
+      "GasCapacity": "int", 
+      "LogoSpriteId": "int", 
+      "UpgradeOffsetRows": "int", 
+      "ShipType": "str", 
+      "RoomFrameSpriteId": "int", 
+      "Rows": "int", 
+      "ThrustParticleSpriteId": "int", 
+      "RaceId": "int", 
+      "StarbuxCost": "int", 
+      "ShipDesignName": "str", 
+      "RequiredShipDesignId": "int", 
+      "ForegroundAssetId": "int", 
+      "ShipLevel": "int", 
+      "RequiredResearchDesignId": "int", 
+      "InteriorFileId": "int", 
+      "RequirementString": "str", 
+      "InteriorSpriteId": "int", 
+      "EngineX": "int", 
+      "ShipDescription": "str", 
+      "RepairTime": "int", 
+      "UpgradeTime": "int", 
+      "DoorFrameRightSpriteId": "int", 
+      "RoomFrameFileId": "int", 
+      "EngineY": "int", 
+      "LogoFileId": "int", 
+      "DoorFrameRightFileId": "int", 
+      "UnlockFromShipDesignId": "int", 
+      "MineralCapacity": "int", 
+      "UpgradeOffsetColumns": "int", 
+      "DoorFrameLeftFileId": "int"
+    }, 
+    "SituationDesign": {
+      "RequirementString": "str", 
+      "IconSpriteId": "int", 
+      "EndDate": "datetime", 
+      "ChangeArgumentString": "str", 
+      "DailyOccurrenceLimit": "int", 
+      "ChangeType": "str", 
+      "SituationType": "str", 
+      "SituationDescription": "str", 
+      "TriggerType": "str", 
+      "FromDate": "datetime", 
+      "SituationName": "str", 
+      "SituationDesignId": "int", 
+      "Chance": "int", 
+      "Flags": "int"
+    }, 
+    "Sprite": {
+      "Height": "int", 
+      "Width": "int", 
+      "X": "int", 
+      "SpriteKey": "str", 
+      "Y": "int", 
+      "ImageFileId": "int", 
+      "SpriteId": "int"
+    }, 
+    "StarSystem": {
+      "RequirementString": "str", 
+      "StarSystemId": "int", 
+      "IconSpriteId": "int", 
+      "StarSystemDescription": "str", 
+      "X": "int", 
+      "Z": "int", 
+      "Y": "int", 
+      "RequirementDescription": "str", 
+      "ExplorationDuration": "int", 
+      "StarSystemTitle": "str"
+    }, 
+    "StarSystemLink": {
+      "ToStarSystemId": "int", 
+      "FromStarSystemId": "int", 
+      "TravelTime": "int", 
+      "StarSystemLinkId": "int", 
+      "IsTwoWay": "bool"
+    }, 
+    "StarSystemMarker": {
+      "CostType": "str", 
+      "FromStarSystemId": "int", 
+      "CompletionRemainingValue": "int", 
+      "OriginNextStarSystemId": "int", 
+      "Title": "str", 
+      "RewardString": "str", 
+      "MissionDesignId": "int", 
+      "IsRepeatable": "bool", 
+      "PurchaseFlags": "int", 
+      "MovementType": "str", 
+      "MarkerFlags": "int", 
+      "CompletionOriginalValue": "int", 
+      "ExpiryDate": "datetime", 
+      "MarkerType": "str", 
+      "CostString": "str", 
+      "ShipId": "int", 
+      "TravelStartDate": "datetime", 
+      "StarSystemArrivalDate": "datetime", 
+      "StarSystemMarkerGeneratorId": "str", 
+      "TravelTimeMultiplier": "int", 
+      "CompletionDate": "datetime", 
+      "Metadata": "str", 
+      "MissionEventId": "int", 
+      "RequirementString": "str", 
+      "UserId": "int", 
+      "StarSystemId": "int", 
+      "LastUpdateDate": "datetime", 
+      "CompletionValueType": "str", 
+      "TravelCoolDownTime": "int", 
+      "SpriteId": "int", 
+      "Description": "str", 
+      "NextStarSystemId": "int", 
+      "ShipIds": "str", 
+      "OriginStarSystemId": "int", 
+      "MarkerDesignId": "int", 
+      "StarSystemMarkerId": "int", 
+      "IsCollected": "bool"
+    }, 
+    "StarSystemMarkerGenerator": {
+      "CostType": "str", 
+      "FromStarSystemId": "int", 
+      "OriginNextStarSystemId": "int", 
+      "Title": "str", 
+      "ShipTags": "str", 
+      "Name": "str", 
+      "Tags": "str", 
+      "CompletionOriginalValue": "int", 
+      "MarkerRequirementString": "str", 
+      "MarkerType": "str", 
+      "CostString": "str", 
+      "TravelStartDate": "datetime", 
+      "NumberOfMarkers": "int", 
+      "Metadata": "str", 
+      "StartDate": "datetime", 
+      "SpriteId": "int", 
+      "BehaviorFlags": "int", 
+      "MarkerDesignId": "int", 
+      "NextStarSystemId": "int", 
+      "EndDate": "datetime", 
+      "RewardString": "str", 
+      "MovementType": "str", 
+      "GenerationFlags": "int", 
+      "MarkerFlags": "int", 
+      "StarSystemMarkerGeneratorId": "int", 
+      "TravelTimeMultiplier": "int", 
+      "MaxActiveMarkers": "int", 
+      "RequirementString": "str", 
+      "StarSystemId": "int", 
+      "GenerationInterval": "int", 
+      "CompletionValueType": "str", 
+      "TravelCoolDownTime": "int", 
+      "NumberOfShips": "int", 
+      "TravelDuration": "int", 
+      "Slots": "str", 
+      "Description": "str", 
+      "ShipIds": "str", 
+      "OriginStarSystemId": "int", 
+      "MarkerDuration": "int"
+    }, 
+    "TaskDesign": {
+      "RequirementString": "str", 
+      "AvailableTo": "datetime", 
+      "GlobalProgress": "int", 
+      "IconSpriteId": "int", 
+      "RewardDistributionString": "str", 
+      "RewardString": "str", 
+      "ObjectiveAmount": "int", 
+      "Name": "str", 
+      "TaskCategory": "str", 
+      "TaskDesignId": "int", 
+      "ObjectiveType": "str", 
+      "SeasonDesignId": "int", 
+      "Description": "str", 
+      "ObjectiveArgument": "str", 
+      "AvailableFrom": "datetime", 
+      "Flags": "int"
+    }, 
+    "TrainingDesign": {
+      "TrainingName": "str", 
+      "AbilityChance": "int", 
+      "Rank": "int", 
+      "Duration": "int", 
+      "RequiredRoomLevel": "int", 
+      "HpChance": "int", 
+      "AttackChance": "int", 
+      "MinimumGuarantee": "int", 
+      "RequiredResearchDesignId": "int", 
+      "TrainingAnimationStyle": "str", 
+      "TrainingDescription": "str", 
+      "StaminaChance": "int", 
+      "TrainingDesignId": "int", 
+      "PilotChance": "int", 
+      "TrainingSpriteId": "int", 
+      "GasCost": "int", 
+      "ScienceChance": "int", 
+      "XpChance": "int", 
+      "MineralCost": "int", 
+      "EngineChance": "int", 
+      "RequiredTrainingDesignId": "int", 
+      "WeaponChance": "int", 
+      "Fatigue": "int", 
+      "RepairChance": "int"
+    }, 
+    "User": {
+      "GoolePlayAuthCode": "str", 
+      "RewardsCollectable": "bool", 
+      "PassPoints": "int", 
+      "AllianceSupplyDonation": "int", 
+      "Name": "str", 
+      "PVPAttackLosses": "int", 
+      "ChampionshipScore": "int", 
+      "Email": "str", 
+      "UserType": "str", 
+      "Flags": "int", 
+      "PVPDefenceDraws": "int", 
+      "Ranking": "int", 
+      "LanguageKey": "str", 
+      "ChallengeWins": "int", 
+      "TrophyGained": "int", 
+      "GenderType": "str", 
+      "LastCatalogPurchaseDate": "datetime", 
+      "SituationOccurrences": "str", 
+      "NowggUserId": "str", 
+      "Id": "int", 
+      "GooglePlayAccessTokenExpiryDate": "str", 
+      "AllianceName": "str", 
+      "AllianceSpriteId": "int", 
+      "DailyMissionsAttempted": "str", 
+      "DailyPvPDefence": "int", 
+      "TournamentResetDate": "datetime", 
+      "HighestTrophy": "int", 
+      "AllianceScore": "int", 
+      "GameCenterFriendCount": "int", 
+      "AllianceQualifyDivisionDesignId": "int", 
+      "AuthenticationType": "str", 
+      "UnlockedShipDesignIds": "str", 
+      "Status": "int", 
+      "AllianceId": "int", 
+      "LoadingPercentage": "int", 
+      "CreationDate": "datetime", 
+      "Credits": "str", 
+      "FacebookTokenExpiryDate": "datetime", 
+      "UnlockedSkinKeys": "str", 
+      "LastVipClaimDate": "datetime", 
+      "BoostEndDate": "datetime", 
+      "ChallengeLosses": "int", 
+      "OwnerUserId": "int", 
+      "BoostAmount": "int", 
+      "LastAlertDate": "str", 
+      "BlockAuthAttemptsUntilDate": "datetime", 
+      "MatchingStatus": "str", 
+      "PurchaseRewardPoints": "int", 
+      "ChallengeDesignId": "int", 
+      "UpdateDate": "datetime", 
+      "CooldownExpiry": "datetime", 
+      "VipExpiryDate": "datetime", 
+      "PVPDefenceLosses": "int", 
+      "TotalSupplyDonation": "int", 
+      "AllianceMembership": "str", 
+      "PVPDefenceWins": "int", 
+      "SituationOccurrencesToday": "int", 
+      "LastPurchaseDate": "str", 
+      "DailyChallengeWinStreak": "int", 
+      "TournamentRewardPoints": "int", 
+      "DailyRewardStatus": "int", 
+      "ChatAppearance": "int", 
+      "EmailVerificationStatus": "str", 
+      "CrewDonated": "int", 
+      "PVPAttackWins": "int", 
+      "ShipDesignId": "int", 
+      "IconSpriteId": "int", 
+      "ActivatedPromotions": "str", 
+      "CompletedMissionDesigns": "str", 
+      "CompletedMissionEventIds": "str", 
+      "CrewReceived": "int", 
+      "TournamentBonusScore": "int", 
+      "UsedRewardPoints": "int", 
+      "GooglePlayIdToken": "str", 
+      "FreeStarbuxReceivedToday": "int", 
+      "DailyPVPAttacks": "int", 
+      "RaceType": "str", 
+      "LastChallengeDesignId": "int", 
+      "CaptainCharacterDesignId": "int", 
+      "FacebookToken": "str", 
+      "LeagueType": "str", 
+      "ExploredStarSystemIds": "str", 
+      "LastRewardActionDate": "datetime", 
+      "GameCenterName": "str", 
+      "UnlockedCharacterDesignIds": "str", 
+      "TaskRerollCount": "int", 
+      "LastHeartBeatDate": "datetime", 
+      "TipStatus": "int", 
+      "AllianceJoinDate": "datetime", 
+      "LastBoostDate": "datetime", 
+      "Trophy": "int", 
+      "DrawsUsedToday": "int", 
+      "HeroBonusChance": "int", 
+      "ProfileImageUrl": "str", 
+      "SteamId": "str", 
+      "LastLoginDate": "datetime", 
+      "PVPAttackDraws": "int", 
+      "GooglePlayName": "str", 
+      "TutorialStatus": "int", 
+      "UnreadMessageCount": "str"
+    }, 
+    "UserLogin": {
+      "UserId": "int", 
+      "accessToken": "str", 
+      "PreviousLastLoginDate": "datetime"
+    }, 
+    "UserMarker": {
+      "UserMarkerId": "int", 
+      "UserId": "int", 
+      "StarSystemMarkerId": "int", 
+      "PurchaseFlags": "int", 
+      "MarkerProgressValue": "int", 
+      "IsCollected": "bool", 
+      "LastUpdateDate": "datetime"
+    }, 
+    "UserSeason": {
+      "PurchaseVIPDate": "datetime", 
+      "Points": "int", 
+      "UserId": "int", 
+      "SeasonDesignId": "int", 
+      "UnlockedRewardDesignIds": "str", 
+      "UserSeasonId": "int", 
+      "PurchaseVIPStatus": "str"
+    }, 
+    "UserStarSystem": {
+      "UserId": "int", 
+      "StarSystemId": "int", 
+      "ExplorationPercentage": "int", 
+      "UserStarSystemId": "int"
+    }
+  }
+}

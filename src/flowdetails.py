@@ -15,7 +15,7 @@ class PssFlowDetails:
         self.__query_parameters: _Dict[str, str] = details['query_parameters']
         self.__response_structure: ResponseStructure = details['response_structure']
         self.__service: str = details['service']
-        self.__original_flow: _HTTPFlow = details['original_flow']
+        self.__original_flow: _HTTPFlow = details.get('original_flow')
 
     def __repr__(self) -> str:
         return f'<PssFlowDetails {self.service}/{self.endpoint}>'

@@ -6,7 +6,10 @@ from colorama import Fore as _Fore
 from colorama import init as _colorama_init
 from contexttimer import Timer as _Timer
 
+from src import merge as _merge
 from src import parse as _parse
+
+
 
 if __name__ == '__main__':
     """
@@ -32,7 +35,7 @@ if __name__ == '__main__':
         _sys.exit(ERR_INPUT_NOT_FOUND)
 
     with _Timer() as t:
-        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Input files: {args.flows}')
+        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Input files:')
         for in_ in args.in_:
             print(f'{_Fore.YELLOW} >>> -{_Fore.RESET} {in_}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Output file: {args.outfile}')
@@ -44,11 +47,11 @@ if __name__ == '__main__':
 
             shutil.copyfile(args.in_[0], args.outfile)
         else:
-            result = _parse.read_structure_json(args.in_[0])
+            result = _merge.read_structure_json(args.in_[0])
             for merge_with in args.in_[1:]:
-                result = _parse.merge_organized_flows(
+                result = _merge.merge_api_structures(
                     result,
-                    _parse.read_structure_json(merge_with)
+                    _merge.read_structure_json(merge_with)
                 )
             _parse.store_structure_json(
                 args.outfile,
