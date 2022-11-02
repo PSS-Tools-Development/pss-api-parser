@@ -155,6 +155,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             service_imports.update(parameter['type'] for parameter in parameters)
 
             parameter_definitions = []
+            parameter_definitions_with_default_value = []
             parameter_raw_definitions = []
             raw_endpoint_call_parameters = []
             for parameter in parameters:
@@ -171,10 +172,12 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 else:
                     default_value = parameter.get('default_value')
                     if default_value:
-                        parameter_definitions.append(f'{param_def} = {default_value}')
+                        parameter_definitions_with_default_value.append(f'{param_def} = {default_value}')
                     else:
                         parameter_definitions.append(param_def)
                     raw_endpoint_call_parameters.append(parameter_name)
+
+            parameter_definitions += parameter_definitions_with_default_value
 
             service['endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
