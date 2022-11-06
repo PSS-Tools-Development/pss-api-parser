@@ -172,6 +172,7 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> NestedDict:
                 else:
                     result['query_parameters'][split_param[0]] = None
 
+    content = flow.request.content.decode('utf-8') or None
     result['content'] = flow.request.content.decode('utf-8') or None
     result['content_structure'] = {}
     result['content_type'] = ''
@@ -182,7 +183,7 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> NestedDict:
             result['content_type'] = 'xml'
         except:
             pass
-        if 'content_type' not in result:
+        if not result.get('content_type'):
             try:
                 result['content_structure'] = __convert_json_to_dict(_json.loads(result['content']))
                 result['content_type'] = 'json'
