@@ -1,6 +1,8 @@
+from datetime import datetime as _datetime
 import json as _json
 import os as _os
 import re as _re
+from typing import Any as _Any
 from typing import Dict as _Dict
 from typing import List as _List
 from typing import Set as _Set
@@ -172,7 +174,6 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> NestedDict:
                 else:
                     result['query_parameters'][split_param[0]] = None
 
-    content = flow.request.content.decode('utf-8') or None
     result['content'] = flow.request.content.decode('utf-8') or None
     result['content_structure'] = {}
     result['content_type'] = ''
@@ -228,8 +229,11 @@ def __convert_xml_to_dict(root: _ElementTree.Element) -> _ResponseStructure:
     return {root.tag: result}
 
 
-def __determine_data_type(value: str, property_name: str = None) -> str:
-    if value:
+def __determine_data_type(value: _Any, property_name: str = None) -> str:
+    if value is None:
+        return 'none'
+
+    if isinstance(value, str):
         int_value = None
         float_value = None
 
@@ -268,8 +272,14 @@ def __determine_data_type(value: str, property_name: str = None) -> str:
             pass
 
         return 'str'
-
-    return 'none'
+    elif isinstance(value, bool):
+        return 'bool'
+    elif isinstance(value, float):
+        return 'float'
+    elif isinstance(value, int):
+        return 'int'
+    elif isinstance(value, _datetime):
+        return 'datetime'
 
 
 def __get_object_structures_from_response_structure(response_structure: _ResponseStructure) -> _Dict[str, _List[_PssObjectStructure]]:
