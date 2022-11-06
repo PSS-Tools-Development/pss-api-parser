@@ -191,6 +191,9 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> NestedDict:
             except:
                 pass
 
+    if result['content_structure']:
+        if result['content_type'] == 'json':
+            result['parameters'] = __get_parameters_from_content_json(result['content_structure'])
     result['response'] = flow.response.content.decode('utf-8') or None
     result['response_structure'] = {}
     if result['response']:
@@ -304,6 +307,16 @@ def __get_object_structures_from_flows(flows: _List[_PssFlowDetails]) -> _Dict[s
         for property_name, property_type in object_structure.properties.items():
             if property_type == 'none':
                 object_structure.properties[property_name] = 'str'
+    return result
+
+
+def __get_parameters_from_content_json(content: NestedDict) -> _Dict[str, str]:
+    result = {}
+    for key, value in content.items():
+        if isinstance(value, dict):
+            result.update(__get_parameters_from_content_json(value))
+        else:
+            result[key] = value
     return result
 
 
