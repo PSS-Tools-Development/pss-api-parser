@@ -191,9 +191,10 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> NestedDict:
             except:
                 pass
 
+    result['content_parameters'] = {}
     if result['content_structure']:
         if result['content_type'] == 'json':
-            result['parameters'] = __get_parameters_from_content_json(result['content_structure'])
+            result['content_parameters'] = __get_parameters_from_content_json(result['content_structure'])
     result['response'] = flow.response.content.decode('utf-8') or None
     result['response_structure'] = {}
     if result['response']:
