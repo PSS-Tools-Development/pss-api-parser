@@ -2,6 +2,7 @@
   "endpoints": {
     "AchievementService": {
       "ListAchievementDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAchievementDesigns2", 
@@ -27,6 +28,7 @@
     }, 
     "AllianceService": {
       "ListAlliancesByChampionshipScoreRanking": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAlliancesByChampionshipScoreRanking", 
@@ -48,6 +50,7 @@
         "service": "AllianceService"
       }, 
       "ListAlliancesByRanking": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAlliancesByRanking", 
@@ -68,6 +71,7 @@
         "service": "AllianceService"
       }, 
       "ListUsers2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListUsers2", 
@@ -96,6 +100,7 @@
         "service": "AllianceService"
       }, 
       "SearchAlliances": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "SearchAlliances", 
@@ -120,6 +125,7 @@
     }, 
     "AnimationService": {
       "ListAnimations": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAnimations", 
@@ -144,6 +150,7 @@
     }, 
     "BackgroundService": {
       "ListBackgrounds": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListBackgrounds", 
@@ -168,6 +175,7 @@
     }, 
     "ChallengeService": {
       "ListAllChallengeDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllChallengeDesigns2", 
@@ -193,6 +201,7 @@
     }, 
     "CharacterService": {
       "ListAllCharacterDesignActions": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllCharacterDesignActions", 
@@ -215,6 +224,7 @@
         "service": "CharacterService"
       }, 
       "ListAllCharacterDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllCharacterDesigns2", 
@@ -242,6 +252,7 @@
         "service": "CharacterService"
       }, 
       "ListAllDrawDesigns": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllDrawDesigns", 
@@ -267,6 +278,7 @@
     }, 
     "CollectionService": {
       "ListAllCollectionDesigns": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllCollectionDesigns", 
@@ -292,6 +304,7 @@
     }, 
     "DivisionService": {
       "ListAllDivisionDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllDivisionDesigns2", 
@@ -317,6 +330,7 @@
     }, 
     "FileService": {
       "ListFiles4": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListFiles4", 
@@ -340,6 +354,7 @@
         "service": "FileService"
       }, 
       "ListSprites2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListSprites2", 
@@ -365,6 +380,7 @@
     }, 
     "GalaxyService": {
       "GoTo": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "GoTo", 
@@ -411,6 +427,7 @@
         "service": "GalaxyService"
       }, 
       "ListMarkerGeneratorDesigns": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListMarkerGeneratorDesigns", 
@@ -434,6 +451,7 @@
         "service": "GalaxyService"
       }, 
       "ListStarSystemLinks": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListStarSystemLinks", 
@@ -456,6 +474,7 @@
         "service": "GalaxyService"
       }, 
       "ListStarSystemMarkers": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListStarSystemMarkers", 
@@ -476,6 +495,7 @@
         "service": "GalaxyService"
       }, 
       "ListStarSystems": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListStarSystems", 
@@ -499,6 +519,7 @@
         "service": "GalaxyService"
       }, 
       "UpdateMarkerMovement": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "UpdateMarkerMovement", 
@@ -522,6 +543,7 @@
     }, 
     "ItemService": {
       "ListItemDesignActions": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListItemDesignActions", 
@@ -544,6 +566,7 @@
         "service": "ItemService"
       }, 
       "ListItemDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListItemDesigns2", 
@@ -569,6 +592,7 @@
     }, 
     "LadderService": {
       "ListUsersByChampionshipScoreRanking": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListUsersByChampionshipScoreRanking", 
@@ -590,6 +614,7 @@
         "service": "LadderService"
       }, 
       "ListUsersByRanking": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListUsersByRanking", 
@@ -614,6 +639,7 @@
     }, 
     "LeagueService": {
       "ListLeagues2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListLeagues2", 
@@ -640,6 +666,7 @@
     }, 
     "LiveOpsService": {
       "GetCatalogQuantity": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "GetCatalogQuantity", 
@@ -653,6 +680,7 @@
         "service": "LiveOpsService"
       }, 
       "GetTodayLiveOps": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "GetTodayLiveOps", 
@@ -671,6 +699,7 @@
         "service": "LiveOpsService"
       }, 
       "GetTodayLiveOps2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "GetTodayLiveOps2", 
@@ -691,6 +720,7 @@
     }, 
     "MessageService": {
       "ListActiveMarketplaceMessages5": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListActiveMarketplaceMessages5", 
@@ -715,6 +745,7 @@
         "service": "MessageService"
       }, 
       "ListMessagesForChannelKey": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListMessagesForChannelKey", 
@@ -737,6 +768,7 @@
     }, 
     "MissionService": {
       "ListAllMissionDesigns4": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllMissionDesigns4", 
@@ -764,6 +796,7 @@
     }, 
     "PromotionService": {
       "FixUserPromotions": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "FixUserPromotions", 
@@ -784,6 +817,7 @@
         "service": "PromotionService"
       }, 
       "ListAllPromotionDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllPromotionDesigns2", 
@@ -809,6 +843,7 @@
     }, 
     "ResearchService": {
       "ListAllResearchDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllResearchDesigns2", 
@@ -834,6 +869,7 @@
     }, 
     "RewardService": {
       "ListAllRewardDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllRewardDesigns2", 
@@ -859,6 +895,7 @@
     }, 
     "RoomDesignSpriteService": {
       "ListRoomDesignSprites": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListRoomDesignSprites", 
@@ -883,6 +920,7 @@
     }, 
     "RoomService": {
       "ListActionTypes2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListActionTypes2", 
@@ -906,6 +944,7 @@
         "service": "RoomService"
       }, 
       "ListConditionTypes2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListConditionTypes2", 
@@ -929,6 +968,7 @@
         "service": "RoomService"
       }, 
       "ListCraftDesigns": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListCraftDesigns", 
@@ -951,6 +991,7 @@
         "service": "RoomService"
       }, 
       "ListMissileDesigns": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListMissileDesigns", 
@@ -973,6 +1014,7 @@
         "service": "RoomService"
       }, 
       "ListRoomDesignPurchase": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListRoomDesignPurchase", 
@@ -995,6 +1037,7 @@
         "service": "RoomService"
       }, 
       "ListRoomDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListRoomDesigns2", 
@@ -1020,6 +1063,7 @@
     }, 
     "SeasonService": {
       "ListAllSeasonDesigns": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllSeasonDesigns", 
@@ -1042,6 +1086,7 @@
     }, 
     "SettingService": {
       "GetLatestVersion3": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "GetLatestVersion3", 
@@ -1060,6 +1105,7 @@
         "service": "SettingService"
       }, 
       "ListAllNewsDesigns": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllNewsDesigns", 
@@ -1085,6 +1131,7 @@
     }, 
     "ShipService": {
       "InspectShip2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "InspectShip2", 
@@ -1117,6 +1164,7 @@
         "service": "ShipService"
       }, 
       "ListAllShipDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllShipDesigns2", 
@@ -1142,6 +1190,7 @@
     }, 
     "SituationService": {
       "ListSituationDesigns": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListSituationDesigns", 
@@ -1167,6 +1216,7 @@
     }, 
     "TaskService": {
       "ListAllTaskDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllTaskDesigns2", 
@@ -1192,6 +1242,7 @@
     }, 
     "TrainingService": {
       "ListAllTrainingDesigns2": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "ListAllTrainingDesigns2", 
@@ -1217,8 +1268,45 @@
     }, 
     "UserService": {
       "DeviceLogin12": {
-        "content_structure": {}, 
-        "content_type": "", 
+        "content_parameters": {
+          "AccessToken": "str", 
+          "AdvertisingKey": "str", 
+          "Checksum": "str", 
+          "ClientBuild": "int", 
+          "ClientDateTime": "datetime", 
+          "ClientVersion": "str", 
+          "DeviceKey": "str", 
+          "DeviceName": "str", 
+          "DeviceType": "int", 
+          "IsJailBroken": "bool", 
+          "LanguageKey": "str", 
+          "Locale": "str", 
+          "OSBuild": "int", 
+          "OsVersion": "str", 
+          "RefreshToken": "str", 
+          "Signal": "bool"
+        }, 
+        "content_structure": {
+          "AccessToken": "str", 
+          "AdvertisingKey": "str", 
+          "Checksum": "str", 
+          "ClientDateTime": "datetime", 
+          "DeviceKey": "str", 
+          "DeviceType": "int", 
+          "IsJailBroken": "bool", 
+          "LanguageKey": "str", 
+          "RefreshToken": "str", 
+          "Signal": "bool", 
+          "UserDeviceInfo": {
+            "ClientBuild": "int", 
+            "ClientVersion": "str", 
+            "DeviceName": "str", 
+            "Locale": "str", 
+            "OSBuild": "int", 
+            "OsVersion": "str"
+          }
+        }, 
+        "content_type": "json", 
         "endpoint": "DeviceLogin12", 
         "method": "POST", 
         "query_parameters": {}, 
@@ -1235,6 +1323,7 @@
         "service": "UserService"
       }, 
       "SearchUsers": {
+        "content_parameters": {}, 
         "content_structure": {}, 
         "content_type": "", 
         "endpoint": "SearchUsers", 
@@ -1254,8 +1343,47 @@
         "service": "UserService"
       }, 
       "SteamLogin6": {
-        "content_structure": {}, 
-        "content_type": "", 
+        "content_parameters": {
+          "AccessToken": "str", 
+          "AdvertisingKey": "str", 
+          "Checksum": "str", 
+          "ClientBuild": "int", 
+          "ClientDateTime": "str", 
+          "ClientVersion": "str", 
+          "DeviceKey": "str", 
+          "DeviceName": "str", 
+          "DeviceType": "int", 
+          "IsJailBroken": "bool", 
+          "LanguageKey": "str", 
+          "Locale": "str", 
+          "OSBuild": "int", 
+          "OsVersion": "str", 
+          "RefreshToken": "str", 
+          "Signal": "bool", 
+          "Ticket": "str"
+        }, 
+        "content_structure": {
+          "AccessToken": "str", 
+          "AdvertisingKey": "str", 
+          "Checksum": "str", 
+          "ClientDateTime": "str", 
+          "DeviceKey": "str", 
+          "DeviceType": "int", 
+          "IsJailBroken": "bool", 
+          "LanguageKey": "str", 
+          "RefreshToken": "str", 
+          "Signal": "bool", 
+          "Ticket": "str", 
+          "UserDeviceInfo": {
+            "ClientBuild": "int", 
+            "ClientVersion": "str", 
+            "DeviceName": "str", 
+            "Locale": "str", 
+            "OSBuild": "int", 
+            "OsVersion": "str"
+          }
+        }, 
+        "content_type": "json", 
         "endpoint": "SteamLogin6", 
         "method": "POST", 
         "query_parameters": {}, 
@@ -1397,7 +1525,7 @@
       "CharacterDesignId": "int", 
       "CharacterId": "int", 
       "CharacterName": "str", 
-      "DeploymentDate": "datetime", 
+      "DeploymentDate": "str", 
       "EngineImprovement": "int", 
       "Fatigue": "int", 
       "Flags": "int", 
@@ -1415,7 +1543,7 @@
       "StaminaImprovement": "int", 
       "TrainingData": "str", 
       "TrainingDesignId": "int", 
-      "TrainingEndDate": "datetime", 
+      "TrainingEndDate": "str", 
       "WeaponImprovement": "int", 
       "Xp": "int"
     }, 
@@ -1880,7 +2008,7 @@
       "ConstructionStartDate": "str", 
       "CurrentSkinKey": "int", 
       "ItemIds": "str", 
-      "ManufactureStartDate": "datetime", 
+      "ManufactureStartDate": "str", 
       "ManufactureString": "str", 
       "Manufactured": "int", 
       "PowerGenerated": "int", 
