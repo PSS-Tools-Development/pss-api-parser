@@ -151,10 +151,11 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
         for endpoint_name, endpoint_definition in endpoints.items():
             name_snake_case = _utils.convert_camel_to_snake_case(endpoint_name)
             xml_parent_tag_name, return_type = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
-            parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition['content_parameters'])
+            parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition.get('content_parameters', {}))
             service_imports.update(parameter['type'] for parameter in parameters)
 
             parameter_definitions = []
+            parameter_definitions_self = []
             parameter_definitions_with_default_value = []
             parameter_raw_definitions = []
             raw_endpoint_call_parameters = []
@@ -168,8 +169,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 parameter_raw_definitions.append(param_def)
 
                 if parameter['self_field']:
-                    raw_endpoint_call_parameter = f'{parameter_name}=self.{parameter_name}'
-                    raw_endpoint_call_parameters.append(raw_endpoint_call_parameter)
+                    raw_endpoint_call_parameters.append(f'self.{parameter_name}')
                 else:
                     default_value = parameter.get('default_value')
                     if default_value:
@@ -177,14 +177,13 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                     else:
                         parameter_definitions.append(param_def)
 
-                    raw_endpoint_call_parameter = f'{parameter_name}={parameter_name}'
-                    raw_endpoint_call_parameters.append(raw_endpoint_call_parameter)
+                    raw_endpoint_call_parameters.append(parameter_name)
 
-            parameter_definitions += parameter_definitions_with_default_value
+            parameter_definitions.extend(parameter_definitions_with_default_value)
 
             service['endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
-                'content_structure': _json.dumps(_json.loads(endpoint_definition['content_structure']), indent=0, separators=(',',':')),
+                'content_structure': _json.dumps(_json.loads(endpoint_definition['content_structure'] or '{}'), indent=0, separators=(',',':')),
                 'content_type': endpoint_definition['content_type'],
                 'method': endpoint_definition['method'],
                 'name': endpoint_name,
