@@ -42,22 +42,17 @@ if __name__ == '__main__':
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Compressed storage: {"No" if args.uncompressed else "Yes"}')
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Merging parsed flows...')
 
-        if len(args.in_) == 1:
-            import shutil
-
-            shutil.copyfile(args.in_[0], args.outfile)
-        else:
-            result = _merge.read_structure_json(args.in_[0])
-            for merge_with in args.in_[1:]:
-                result = _merge.merge_api_structures(
-                    result,
-                    _merge.read_structure_json(merge_with)
-                )
-            _parse.store_structure_json(
-                args.outfile,
+        result = _merge.read_structure_json(args.in_[0])
+        for merge_with in args.in_[1:]:
+            result = _merge.merge_api_structures(
                 result,
-                (not args.uncompressed)
+                _merge.read_structure_json(merge_with)
             )
+        _parse.store_structure_json(
+            args.outfile,
+            result,
+            (not args.uncompressed)
+        )
 
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Done in {t.elapsed}s')
         _sys.exit(0)
