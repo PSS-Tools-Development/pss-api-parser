@@ -18,8 +18,9 @@ IMPORTS = {
     'List': 'from typing import List as _List',
 }
 
-
-
+FORCED_ENUMS_GENERATION = [
+    'DeviceType'
+]
 
 
 # -----
@@ -37,9 +38,13 @@ def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_da
     for entity in entities_data:
         for property in entity['properties']:
             potential_enum_names.append(property['name'])
+
+    potential_enum_names += FORCED_ENUMS_GENERATION
     potential_enum_names = set(potential_enum_names)
+
     parsed_enum_names = set(enums_data.keys())
     used_enum_names = potential_enum_names.intersection(potential_enum_names, parsed_enum_names)
+
     result = {key: value for key, value in enums_data.items() if key in used_enum_names}
     return result
 
@@ -66,12 +71,41 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
 
         enum_definition['enum_values'] = []
         for value_name in enum_value_names:
-            enum_definition['enum_values'].append({
-                'name': 'None_' if value_name == 'None' else value_name,
-                'value': parsed_enums_data[enum_name]['values'][value_name]
-            })
+            if value_name != 'None':
+                enum_definition['enum_values'].append({
+                    'name': value_name,
+                    'name_upper': _utils.convert_camel_to_snake_case(value_name).upper(),
+                    'value': parsed_enums_data[enum_name]['values'][value_name],
+                })
         result.append(enum_definition)
     return result
+
+
+def __generate_custom_enums_data() -> list:
+    return [
+        {
+            'name': 'LanguageKey',
+            'name_snake_case': 'language_key',
+            'type': 'str',
+            'enum_values': [
+                {
+                    'name': 'German',
+                    'name_upper': 'GERMAN',
+                    'value': 'de',
+                },
+                {
+                    'name': 'English',
+                    'name_upper': 'ENGLISH',
+                    'value': 'en',
+                },
+                {
+                    'name': 'French',
+                    'name_upper': 'FRENCH',
+                    'value': 'fr',
+                }
+            ]
+        },
+    ]
 
 
 def __prepare_entities_data(entities_data: dict) -> list:
@@ -121,6 +155,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             service_imports.update(parameter['type'] for parameter in parameters)
 
             parameter_definitions = []
+            parameter_definitions_with_default_value = []
             parameter_raw_definitions = []
             raw_endpoint_call_parameters = []
             for parameter in parameters:
@@ -133,14 +168,19 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 parameter_raw_definitions.append(param_def)
 
                 if parameter['self_field']:
-                    raw_endpoint_call_parameters.append(f'self.{parameter_name}')
+                    raw_endpoint_call_parameter = f'{parameter_name}=self.{parameter_name}'
+                    raw_endpoint_call_parameters.append(raw_endpoint_call_parameter)
                 else:
                     default_value = parameter.get('default_value')
                     if default_value:
-                        parameter_definitions.append(f'{param_def} = {default_value}')
+                        parameter_definitions_with_default_value.append(f'{param_def} = {default_value}')
                     else:
                         parameter_definitions.append(param_def)
-                    raw_endpoint_call_parameters.append(parameter_name)
+
+                    raw_endpoint_call_parameter = f'{parameter_name}={parameter_name}'
+                    raw_endpoint_call_parameters.append(raw_endpoint_call_parameter)
+
+            parameter_definitions += parameter_definitions_with_default_value
 
             service['endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
@@ -168,9 +208,6 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
         service['imports'] = sorted(list(set(service['imports'])))
         result.append(service)
     return result
-
-
-
 
 
 # -----
@@ -201,15 +238,25 @@ def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: s
     if enums_data:
         filtered_enums_data = filter_enums_data(enums_data, services_data, entities_data)
         prepared_enums_data = prepare_parsed_enums_data(filtered_enums_data)
-    else:
-        filtered_enums_data = None
-        prepared_enums_data = None
+        custom_enums_data = __generate_custom_enums_data()
 
-    generate_files_from_data(services_data, entities_data, prepared_enums_data, target_path, force_overwrite)
+        all_enums_data = prepared_enums_data + custom_enums_data
+    else:
+        all_enums_data = None
+
+    generate_files_from_data(services_data, entities_data,
+                             all_enums_data, target_path, force_overwrite)
 
 
 def __generate_client_file(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    client_base_template = env.get_template('client_base.jinja2')
     client_template = env.get_template('client.jinja2')
+
+    _utils.create_file(
+        _os.path.join(target_path, 'client_base.py'),
+        format_source(client_base_template.render(services=services_data)),
+        overwrite=True,
+    )
 
     _utils.create_file(
         _os.path.join(target_path, 'client.py'),
@@ -244,6 +291,7 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
 
 def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
     service_template = env.get_template('service.jinja2')
+    service_base_template = env.get_template('service_base.jinja2')
     services_init_template = env.get_template('services_init.jinja2')
     service_raw_template = env.get_template('service_raw.jinja2')
     services_raw_init_template = env.get_template('services_raw_init.jinja2')
@@ -270,8 +318,15 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
     _utils.create_file(
         _os.path.join(services_path, '__init__.py'),
         format_source(services_init_template.render(services=services_data)),
-        overwrite=True,
+        overwrite=force_overwrite,
     )
+
+    _utils.create_file(
+        _os.path.join(services_path, 'service_base.py'),
+        format_source(service_base_template.render()),
+        overwrite=force_overwrite,
+    )
+
     _utils.create_file(
         _os.path.join(services_raw_path, '__init__.py'),
         format_source(services_raw_init_template.render(services=services_data)),
@@ -281,8 +336,10 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
 
 def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
     entity_template = env.get_template('entity.jinja2')
+    entity_base_template = env.get_template('entity_base.jinja2')
     entities_init_template = env.get_template('entities_init.jinja2')
     entity_raw_template = env.get_template('entity_raw.jinja2')
+    entity_base_raw_template = env.get_template('entity_base_raw.jinja2')
     entities_raw_init_template = env.get_template('entities_raw_init.jinja2')
 
     entities_path = _os.path.join(target_path, 'entities')
@@ -307,7 +364,13 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     _utils.create_file(
         _os.path.join(entities_path, '__init__.py'),
         format_source(entities_init_template.render(entities=entities_data)),
-        overwrite=True,
+        overwrite=force_overwrite,
+    )
+
+    _utils.create_file(
+        _os.path.join(entities_path, 'entity_base.py'),
+        format_source(entity_base_template.render()),
+        overwrite=force_overwrite,
     )
 
     _utils.create_file(
@@ -316,8 +379,11 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
         overwrite=True
     )
 
-
-
+    _utils.create_file(
+        _os.path.join(entities_raw_path, 'entity_base_raw.py'),
+        format_source(entity_base_raw_template.render()),
+        overwrite=True,
+    )
 
 
 # -----

@@ -12,6 +12,9 @@
                 "query_parameters": {
                     "str: param_name": "str: param_type"
                 },
+                "content_parameters": {
+                    "str: param_name": "str: param_type"
+                },
                 "response_structure":
                 {
                     // # Nested dictionary

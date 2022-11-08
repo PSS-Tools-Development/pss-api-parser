@@ -61,7 +61,10 @@ def parse_pss_datetime(dt: str) -> _datetime:
     try:
         return _datetime.strptime(dt, '%Y-%m-%dT%H:%M:%S')
     except:
-        return _datetime.strptime(dt, '%Y-%m-%dT%H:%M:%S.%f')
+        try:
+            return _datetime.strptime(dt, '%Y-%m-%dT%H:%M:%S.%f')
+        except:
+            return _datetime.strptime(dt, '%Y-%m-%dT%H:%M:%S.%fZ')
 
 
 def read_json(file_path: str) -> _Union[list, dict]:
