@@ -142,10 +142,12 @@ def store_structure_json(file_path: str, flow_details: ApiOrganizedFlows, compre
 
 def __convert_api_structured_flows_to_dict(flows: ApiOrganizedFlows) -> ApiOrganizedFlowsDict:
     result = {}
-    for service, endpoints in flows['endpoints'].items():
-        for endpoint, flow_details in endpoints.items():
+    for service in sorted(flows.get('endpoints', {}).keys()):
+        endpoints = flows[service]
+        for endpoint in sorted(endpoints.keys()):
+            flow_details = endpoints[endpoint]
             result.setdefault('endpoints', {}).setdefault(service, {})[endpoint] = dict(flow_details[0])
-    temp_entities = {object_structure.object_type_name: object_structure.properties for object_structure in flows['entities']}
+    temp_entities = {object_structure.object_type_name: object_structure.properties for object_structure in sorted(flows.get('entities', []))}
     result['entities'] = {key: temp_entities[key] for key in sorted(temp_entities.keys())}
     return result
 
