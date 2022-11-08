@@ -23,7 +23,6 @@ from . import utils as _utils
 
 ApiOrganizedFlows = _Dict[str, _Dict[str, _Union[_List[_PssFlowDetails], _List[_PssObjectStructure]]]]
 ApiOrganizedFlowsDict = _Dict[str, 'ApiOrganizedFlowsDict']
-NestedDict = _Dict[str, _Union[str, 'NestedDict']]
 
 __PSS_BOOL_VALUES = ('true', 'false', 'True', 'False')
 
@@ -86,7 +85,6 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiOrganizedFlows
     Returns a dictionary with the parsed services and endpoints.
     """
     print(f'Reading file: {file_path}')
-    start_timer = 0
 
     with _Timer() as timer:
         flows = sorted(__read_flows_from_file(file_path), key=lambda x: str(x))
@@ -147,12 +145,12 @@ def __convert_api_structured_flows_to_dict(flows: ApiOrganizedFlows) -> ApiOrgan
         for endpoint in sorted(endpoints.keys()):
             flow_details = endpoints[endpoint]
             result.setdefault('endpoints', {}).setdefault(service, {})[endpoint] = dict(flow_details[0])
-    temp_entities = {object_structure.object_type_name: object_structure.properties for object_structure in sorted(flows.get('entities', []))}
-    result['entities'] = {key: temp_entities[key] for key in sorted(temp_entities.keys())}
+    result['entities'] = {object_structure.object_type_name: object_structure.properties for object_structure in sorted(flows.get('entities', []))}
+    result = _utils.get_ordered_dict(result)
     return result
 
 
-def __convert_flow_to_dict(flow: _HTTPFlow) -> NestedDict:
+def __convert_flow_to_dict(flow: _HTTPFlow) -> _utils.NestedDict:
     result = {}
     result['method'] = flow.request.method  # GET/POST
     if '?' in flow.request.path:

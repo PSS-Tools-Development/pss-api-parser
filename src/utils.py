@@ -3,7 +3,11 @@ import json as _json
 import keyword as _keyword
 import os as _os
 import re as _re
+from typing import Dict as _Dict
 from typing import Union as _Union
+
+
+NestedDict = _Dict[str, _Union[str, 'NestedDict']]
 
 
 def append_underscore_if_keyword(s: str) -> str:
@@ -39,6 +43,18 @@ def create_file(path: str, contents: str, overwrite: bool = False) -> None:
     if overwrite or not _os.path.exists(path):
         with open(path, 'w') as fp:
             fp.write(contents or '')
+
+
+def get_ordered_dict(d: NestedDict) -> NestedDict:
+    result = {}
+    for key in sorted(d.keys()):
+        value = d[key]
+        if isinstance(value, list):
+            value.sort()
+        elif isinstance(value, dict):
+            value = get_ordered_dict(value)
+        result[key] = value
+    return result
 
 
 def parse_pss_datetime(dt: str) -> _datetime:
