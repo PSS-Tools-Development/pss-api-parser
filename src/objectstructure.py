@@ -4,7 +4,7 @@ from typing import Dict as _Dict
 class PssObjectStructure:
     def __init__(self, object_type_name: str, properties: _Dict[str, str]) -> None:
         self.object_type_name: str = object_type_name
-        self.properties = properties
+        self.properties = {key: properties[key] for key in sorted(properties.keys())}
 
     def __repr__(self) -> str:
         return f'<PssObjectStructure "{self.object_type_name}">'
