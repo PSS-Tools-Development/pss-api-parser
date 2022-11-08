@@ -30,8 +30,17 @@ async def {{endpoint.name_snake_case}}(production_server: str{% if endpoint.para
 {% endfor %}
         **params
     }
-    result = await _core.get_entities_from_path(_{{endpoint.return_type}}, '{{endpoint.xml_parent_tag_name}}', production_server, {{endpoint.base_path_name}}_BASE_PATH, **params)
+{% if endpoint.method == 'POST' and endpoint.content_type %}
+    content = _core.create_request_content(__{{ endpoint.name_screaming_snake_case }}_REQUEST_CONTENT_STRUCTURE, params, {{ endpoint.content_type }})
+{% else %}
+    content = None
+{% endif %}
+    result = await _core.get_entities_from_path(_{{ endpoint.return_type }}, '{{ endpoint.xml_parent_tag_name }}', production_server, {{ endpoint.base_path_name }}_BASE_PATH, {{ endpoint.method }}, request_content=content, **params)
     return result
 
+{% if endpoint.content_type %}
+__{{ endpoint.name_screaming_snake_case }}_REQUEST_CONTENT_STRUCTURE: str = {{ endpoint.content_structure }}
+
+{% endif%}
 
 {% endfor %}

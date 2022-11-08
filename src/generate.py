@@ -117,7 +117,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
         for endpoint_name, endpoint_definition in endpoints.items():
             name_snake_case = _utils.convert_camel_to_snake_case(endpoint_name)
             xml_parent_tag_name, return_type = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
-            parameters = __extract_parameters(endpoint_definition['query_parameters'])
+            parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition['content_parameters'])
             service_imports.update(parameter['type'] for parameter in parameters)
 
             parameter_definitions = []
@@ -144,13 +144,17 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
 
             service['endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
+                'content_structure': _json.dumps(_json.loads(endpoint_definition['content_structure']), indent=0, separators=(',',':')),
+                'content_type': endpoint_definition['content_type'],
+                'method': endpoint_definition['method'],
                 'name': endpoint_name,
+                'name_screaming_snake_case': name_snake_case.upper(),
                 'name_snake_case': name_snake_case,
                 'name_snake_case_without_version': name_snake_case.rstrip(_string.digits).rstrip('_'),
                 'parameter_definitions': ', '.join(parameter_definitions),
                 'parameter_raw_definitions': ', '.join(parameter_raw_definitions),
-                'raw_endpoint_call_parameters': ', '.join(raw_endpoint_call_parameters),
                 'parameters': parameters,
+                'raw_endpoint_call_parameters': ', '.join(raw_endpoint_call_parameters),
                 'return_type': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
             })
