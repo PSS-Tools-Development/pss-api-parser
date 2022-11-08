@@ -3,17 +3,20 @@ from typing import Union as _Union
 
 from mitmproxy.http import HTTPFlow as _HTTPFlow
 
+from . import utils as _utils
+
 ResponseStructure = _Dict[str, _Union[str, 'ResponseStructure']]
 
 
 class PssFlowDetails:
     def __init__(self, details: dict) -> None:
-        self.__content_structure: ResponseStructure = details['content_structure']
+        self.__content_parameters: _utils.NestedDict = details.get('content_parameters', {})
+        self.__content_structure: _utils.NestedDict = details['content_structure']
         self.__content_type: str = details['content_type']
         self.__endpoint: str = details['endpoint']
         self.__method: str = details['method']
         self.__query_parameters: _Dict[str, str] = details['query_parameters']
-        self.__response_structure: ResponseStructure = details['response_structure']
+        self.__response_structure: _utils.NestedDict = details['response_structure']
         self.__service: str = details['service']
         self.__original_flow: _HTTPFlow = details.get('original_flow')
 
@@ -24,7 +27,11 @@ class PssFlowDetails:
         return self.__repr__()
 
     @property
-    def content_structure(self) -> ResponseStructure:
+    def content_parameters(self) -> _utils.NestedDict:
+        return self.__content_parameters
+
+    @property
+    def content_structure(self) -> _utils.NestedDict:
         return self.__content_structure
 
     @property
@@ -48,7 +55,7 @@ class PssFlowDetails:
         return self.__query_parameters
 
     @property
-    def response_structure(self) -> ResponseStructure:
+    def response_structure(self) -> _utils.NestedDict:
         return self.__response_structure
 
     @property
@@ -68,6 +75,7 @@ class PssFlowDetails:
 
     def __iter__(self):
         result = {
+            'content_parameters': self.content_parameters,
             'content_structure': self.content_structure,
             'content_type': self.content_type,
             'endpoint': self.endpoint,

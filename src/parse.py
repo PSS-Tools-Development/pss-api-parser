@@ -16,7 +16,6 @@ from mitmproxy.io import tnetstring as _tnetstring
 
 from . import utils as _utils
 from .flowdetails import PssFlowDetails as _PssFlowDetails
-from .flowdetails import ResponseStructure as _ResponseStructure
 from .objectstructure import PssObjectStructure as _PssObjectStructure
 
 # ----- Constants and type definitions -----
@@ -203,7 +202,7 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> _utils.NestedDict:
     return result
 
 
-def __convert_json_to_dict(loaded_json: _ResponseStructure) -> _ResponseStructure:
+def __convert_json_to_dict(loaded_json: _utils.NestedDict) -> _utils.NestedDict:
     if not loaded_json:
         return {}
 
@@ -216,7 +215,7 @@ def __convert_json_to_dict(loaded_json: _ResponseStructure) -> _ResponseStructur
     return result
 
 
-def __convert_xml_to_dict(root: _ElementTree.Element) -> _ResponseStructure:
+def __convert_xml_to_dict(root: _ElementTree.Element) -> _utils.NestedDict:
     if root is None:
         return {}
 
@@ -285,7 +284,7 @@ def __determine_data_type(value: _Any, property_name: str = None) -> str:
         return 'datetime'
 
 
-def __get_object_structures_from_response_structure(response_structure: _ResponseStructure) -> _Dict[str, _List[_PssObjectStructure]]:
+def __get_object_structures_from_response_structure(response_structure: _utils.NestedDict) -> _Dict[str, _List[_PssObjectStructure]]:
     result: _Dict[str, _List[_PssObjectStructure]] = {}
     for key, value in response_structure.items():
         if isinstance(value, dict):
@@ -323,17 +322,18 @@ def __get_parameters_from_content_json(content: _utils.NestedDict) -> _Dict[str,
 def __merge_flows(flow1: _PssFlowDetails, flow2: _PssFlowDetails) -> _PssFlowDetails:
     query_parameters = __merge_type_dictionaries(flow1.query_parameters, flow2.query_parameters)
     content_structure = __merge_type_dictionaries(flow1.content_structure, flow2.content_structure)
+    content_parameters = __merge_type_dictionaries(flow1.content_parameters, flow2.content_parameters)
     response_structure = __merge_type_dictionaries(flow1.response_structure, flow2.response_structure)
 
     result = {
         'content_structure': content_structure,
-        'content_type': flow1.content_type,
-        'endpoint': flow1.endpoint,
-        'method': flow1.method,
+        'content_type': flow1.content_type or flow2.content_type,
+        'endpoint': flow1.endpoint or flow2.endpoint,
+        'method': flow1.method or flow2.method,
         'query_parameters': query_parameters,
         'response_structure': response_structure,
-        'service': flow1.service,
-        'original_flow': flow1.original_flow
+        'service': flow1.service or flow2.service,
+        'original_flow': flow1.original_flow or flow2.original_flow
     }
     return _PssFlowDetails(result)
 

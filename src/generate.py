@@ -155,7 +155,6 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             service_imports.update(parameter['type'] for parameter in parameters)
 
             parameter_definitions = []
-            parameter_definitions_self = []
             parameter_definitions_with_default_value = []
             parameter_raw_definitions = []
             raw_endpoint_call_parameters = []
@@ -183,7 +182,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
 
             service['endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
-                'content_structure': _json.dumps(_json.loads(endpoint_definition['content_structure'] or '{}'), indent=0, separators=(',',':')),
+                'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',',':')),
                 'content_type': endpoint_definition['content_type'],
                 'method': endpoint_definition['method'],
                 'name': endpoint_name,

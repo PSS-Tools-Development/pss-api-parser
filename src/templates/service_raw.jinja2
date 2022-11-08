@@ -29,7 +29,7 @@ async def {{ endpoint.name_snake_case }}(production_server: str{% if endpoint.pa
         **params
     }
 {% if endpoint.method == 'POST' and endpoint.content_type %}
-    content = _core.create_request_content(__{{ endpoint.name_screaming_snake_case }}_REQUEST_CONTENT_STRUCTURE, params, {{ endpoint.content_type }})
+    content = _core.create_request_content(__{{ endpoint.name_screaming_snake_case }}_REQUEST_CONTENT_STRUCTURE, params, '{{ endpoint.content_type }}')
 {% else %}
     content = None
 {% endif %}
@@ -37,7 +37,7 @@ async def {{ endpoint.name_snake_case }}(production_server: str{% if endpoint.pa
     return result
 
 {% if endpoint.content_type %}
-__{{ endpoint.name_screaming_snake_case }}_REQUEST_CONTENT_STRUCTURE: str = {{ endpoint.content_structure }}
+__{{ endpoint.name_screaming_snake_case }}_REQUEST_CONTENT_STRUCTURE: str = '{{ endpoint.content_structure }}'
 
 {% endif%}
 
