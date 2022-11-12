@@ -3,7 +3,9 @@
   "AuthorizeFirebaseToken",
   "CreateMission",
   "FindUserRanking",
+  "FixUserPromotions",
   "GetShipByUserId",
+  "GoTo",
   "HeartBeat",
   "ListAchievementsOfAUser",
   "ListAllCharactersOfUser",
@@ -27,6 +29,7 @@
   "SpeedUpTravelling",
   "PurchaseFromMarker",
   "SteamLogin3",
+  "UpdateMarkerMovement",
   "UserGameCenterAuthorize",
   "UserSteamAuthorize"
 ]
