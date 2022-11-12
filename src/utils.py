@@ -4,6 +4,7 @@ import keyword as _keyword
 import os as _os
 import re as _re
 from typing import Dict as _Dict
+from typing import Optional as _Optional
 from typing import Union as _Union
 
 
@@ -39,10 +40,12 @@ def create_path(path: str) -> None:
         _os.mkdir(path)
 
 
-def create_file(path: str, contents: str, overwrite: bool = False) -> None:
+def create_file(path: str, contents: str, overwrite: bool = False) -> _Optional[str]:
     if overwrite or not _os.path.exists(path):
         with open(path, 'w') as fp:
             fp.write(contents or '')
+        return path
+    return None
 
 
 def get_ordered_dict(d: NestedDict) -> NestedDict:
