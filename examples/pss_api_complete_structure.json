@@ -717,6 +717,31 @@
         "service": "LiveOpsService"
       }
     },
+    "MarketService": {
+      "ListSalesByItemDesignId": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListSalesByItemDesignId",
+        "method": "GET",
+        "query_parameters": {
+          "itemDesignId": "int",
+          "saleStatus": "str",
+          "from": "int",
+          "to": "int"
+        },
+        "response_structure": {
+          "MarketService": {
+            "ListSalesByItemDesignId": {
+              "Sales": {
+                "Sale": {}
+              }
+            }
+          }
+        },
+        "service": "MessageService"
+      }
+    },
     "MessageService": {
       "ListActiveMarketplaceMessages5": {
         "content_parameters": {},
@@ -2092,6 +2117,23 @@
       "SkinKey": "int",
       "SkinName": "str",
       "SpriteId": "int"
+    },
+    "Sale": {
+      "BuyerShipId": "int",
+      "BuyerShipName": "str",
+      "CharacterDesignId": "int",
+      "CharacterId": "int",
+      "CurrencyType": "str",
+      "CurrencyValue": "int",
+      "ItemDesignId": "int",
+      "ItemId": "int",
+      "Quantity": "int",
+      "SaleId": "int",
+      "SaleStatus": "str",
+      "SellerShipId": "int",
+      "SellerShipName": "str",
+      "StarbuxValue": "int",
+      "StatusDate": "datetime"
     },
     "SeasonDesign": {
       "BackgroundSpriteId": "int",
