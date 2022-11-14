@@ -16,6 +16,7 @@ from . import utils as _utils
 IMPORTS = {
     'datetime': 'from datetime import datetime as _datetime',
     'List': 'from typing import List as _List',
+    'Tuple': 'from typing import List as _Tuple',
 }
 
 FORCED_ENUMS_GENERATION = [
@@ -138,7 +139,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
 def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> list:
     result = []
     for service_name, endpoints in endpoints_data.items():
-        service_imports = {'List'}
+        service_imports = {'List', 'Tuple'}
 
         service = {
             'endpoints': [],
@@ -150,7 +151,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
 
         for endpoint_name, endpoint_definition in endpoints.items():
             name_snake_case = _utils.convert_camel_to_snake_case(endpoint_name)
-            xml_parent_tag_name, return_type = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
+            xml_parent_tag_name, return_types = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
             parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition.get('content_parameters', {}))
             service_imports.update(parameter['type'] for parameter in parameters)
 
@@ -180,10 +181,18 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
 
             parameter_definitions.extend(parameter_definitions_with_default_value)
 
+            entity_types = [f'_{return_type}' for return_type in return_types]
+            entity_types_str = ', '.join(entity_types)
+            if len(return_types) > 1:
+                return_type = f'_Tuple[{entity_types_str}]'
+            else:
+                return_type = f'_List[{entity_types_str}]'
+
             service['endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
                 'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',',':')),
                 'content_type': endpoint_definition['content_type'],
+                'entity_types_str': f'[{entity_types_str}]',
                 'method': endpoint_definition['method'],
                 'name': endpoint_name,
                 'name_screaming_snake_case': name_snake_case.upper(),
@@ -193,12 +202,13 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'parameter_raw_definitions': ', '.join(parameter_raw_definitions),
                 'parameters': parameters,
                 'raw_endpoint_call_parameters': ', '.join(raw_endpoint_call_parameters),
-                'return_type': return_type,
+                'return_type_str': return_type,
                 'xml_parent_tag_name': xml_parent_tag_name,
             })
 
-            if return_type:
-                service['entity_types'].append(return_type)
+            if return_types:
+                service['entity_types'].extend(return_types)
+
         for service_import in service_imports:
             if service_import in IMPORTS:
                 service['imports'].append(IMPORTS[service_import])
@@ -466,7 +476,7 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
         keys = list(response_structure.keys())
         entity_types = [key for key in keys if key in entity_names]
         if entity_types:
-            result = (parent_tag_name, entity_types[0])
+            result = (parent_tag_name, entity_types)
         else:
             for key, value in response_structure.items():
                 result = __get_return_type(value, entity_names, key)
