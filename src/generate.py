@@ -21,7 +21,7 @@ BUILTIN_TYPES = list(_parse.TYPE_ORDER_LOOKUP.keys())
 IMPORTS = {
     'datetime': 'from datetime import datetime as _datetime',
     'List': 'from typing import List as _List',
-    'Tuple': 'from typing import List as _Tuple',
+    'Tuple': 'from typing import Tuple as _Tuple',
 }
 
 FIX_ENTITY_PROPERTY_TYPES = [
@@ -30,6 +30,10 @@ FIX_ENTITY_PROPERTY_TYPES = [
 
 FORCED_ENUMS_GENERATION = [
     'DeviceType'
+]
+
+RESERVED_PROPERTY_NAMES = [
+    'id'
 ]
 
 
@@ -143,28 +147,37 @@ def __prepare_entities_data(entities_data: dict) -> list:
         for property_name, property_type in entity_properties.items():
             is_built_in_type = property_type in BUILTIN_TYPES
             is_collection = False
-            if is_built_in_type:
-                if property_type in FIX_ENTITY_PROPERTY_TYPES:
-                    property_type = f'_{property_type}'
-            else:
+            property_typehint = property_type
+            if not is_built_in_type:
                 property_type, is_collection = __find_entity_name_for_property_type(property_type, entities_data.keys())
                 if not property_type:
                     continue # Skip properties that are neither of an builtin type nor of a know entity type
                 entity_imports.add(property_type)
+            if property_type in FIX_ENTITY_PROPERTY_TYPES:
+                property_typehint = f'_{property_type}'
             property_names.append(property_name)
+
+            property_name_snake_case = _utils.convert_camel_to_snake_case(property_name)
+            if property_name_snake_case in RESERVED_PROPERTY_NAMES:
+                property_name_snake_case += '_'
             properties.append({
                 'builtin': is_built_in_type,
                 'is_collection': is_collection,
                 'name': property_name,
-                'name_snake_case': _utils.convert_camel_to_snake_case(property_name),
-                'type': property_type
+                'name_snake_case': property_name_snake_case,
+                'type': property_type,
+                'typehint': property_typehint,
             })
         id_property = __find_id_property(property_names, entity_name)
+        id_property_name = _utils.convert_camel_to_snake_case(id_property)
+        if id_property_name in RESERVED_PROPERTY_NAMES:
+            id_property_name += '_'
         name_property = __find_name_property(property_names, entity_name)
+
         result.append({
             'base_class_name': 'EntityWithIdBase' if id_property else 'EntityBase',
             'entity_imports': entity_imports,
-            'id_property_name': _utils.convert_camel_to_snake_case(id_property),
+            'id_property_name': id_property_name,
             'name': entity_name,
             'name_property_name': _utils.convert_camel_to_snake_case(name_property),
             'name_snake_case': _utils.convert_camel_to_snake_case(entity_name),
@@ -232,7 +245,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'base_path_name': name_snake_case.upper(),
                 'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',',':')),
                 'content_type': endpoint_definition['content_type'],
-                'entity_types_str': f'({entity_types_str})',
+                'entity_types_str': f'({entity_types_str}{"," if len(entity_types) == 1 else ""})',
                 'method': endpoint_definition['method'],
                 'name': endpoint_name,
                 'name_screaming_snake_case': name_snake_case.upper(),
