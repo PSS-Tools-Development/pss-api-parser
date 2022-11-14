@@ -232,7 +232,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'base_path_name': name_snake_case.upper(),
                 'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',',':')),
                 'content_type': endpoint_definition['content_type'],
-                'entity_types_str': f'[{entity_types_str}]',
+                'entity_types_str': f'({entity_types_str})',
                 'method': endpoint_definition['method'],
                 'name': endpoint_name,
                 'name_screaming_snake_case': name_snake_case.upper(),
