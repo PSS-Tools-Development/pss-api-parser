@@ -332,9 +332,9 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
 
 
 def __generate_enums_files(enums_data: list, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    int_enum_template = env.get_template('enum_int.jinja2')
-    str_enum_template = env.get_template('enum_str.jinja2')
-    enum_init_template = env.get_template('enum_init.jinja2')
+    int_enum_template = env.get_template('enums/enum_int.jinja2')
+    str_enum_template = env.get_template('enums/enum_str.jinja2')
+    enum_init_template = env.get_template('enums/enum_init.jinja2')
     enums_path = _os.path.join(target_path, 'enums')
 
     _utils.create_path(target_path)
@@ -356,11 +356,11 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
 
 
 def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    service_template = env.get_template('service.jinja2')
-    service_base_template = env.get_template('service_base.jinja2')
-    services_init_template = env.get_template('services_init.jinja2')
-    service_raw_template = env.get_template('service_raw.jinja2')
-    services_raw_init_template = env.get_template('services_raw_init.jinja2')
+    service_template = env.get_template('services/service.jinja2')
+    service_base_template = env.get_template('services/service_base.jinja2')
+    services_init_template = env.get_template('services/services_init.jinja2')
+    service_raw_template = env.get_template('services/service_raw.jinja2')
+    services_raw_init_template = env.get_template('services/services_raw_init.jinja2')
 
     services_path = _os.path.join(target_path, 'services')
     services_raw_path = _os.path.join(services_path, 'raw')
@@ -401,12 +401,12 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
 
 
 def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    entity_template = env.get_template('entity.jinja2')
-    entity_base_template = env.get_template('entity_base.jinja2')
-    entities_init_template = env.get_template('entities_init.jinja2')
-    entity_raw_template = env.get_template('entity_raw.jinja2')
-    entity_base_raw_template = env.get_template('entity_base_raw.jinja2')
-    entities_raw_init_template = env.get_template('entities_raw_init.jinja2')
+    entity_template = env.get_template('entities/entity.jinja2')
+    entity_base_template = env.get_template('entities/entity_base.jinja2')
+    entities_init_template = env.get_template('entities/entities_init.jinja2')
+    entity_raw_template = env.get_template('entities/entity_raw.jinja2')
+    entity_base_raw_template = env.get_template('entities/entity_base_raw.jinja2')
+    entities_raw_init_template = env.get_template('entities/entities_raw_init.jinja2')
 
     entities_path = _os.path.join(target_path, 'entities')
     entities_raw_path = _os.path.join(entities_path, 'raw')
