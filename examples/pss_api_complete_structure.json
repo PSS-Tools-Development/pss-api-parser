@@ -634,7 +634,7 @@
           }
         },
         "service": "LadderService"
-    }
+      }
     },
     "LeagueService": {
       "ListLeagues2": {
@@ -725,8 +725,8 @@
         "endpoint": "ListSalesByItemDesignId",
         "method": "GET",
         "query_parameters": {
-          "itemDesignId": "int",
           "from": "int",
+          "itemDesignId": "int",
           "saleStatus": "str",
           "to": "int"
         },
@@ -739,7 +739,7 @@
             }
           }
         },
-        "service": "MessageService"
+        "service": "MarketService"
       }
     },
     "MessageService": {
