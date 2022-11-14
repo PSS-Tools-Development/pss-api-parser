@@ -252,8 +252,13 @@ def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: s
     else:
         all_enums_data = None
 
-    generate_files_from_data(services_data, entities_data,
-                             all_enums_data, target_path, force_overwrite)
+    generate_files_from_data(
+        services_data,
+        entities_data,
+        all_enums_data,
+        target_path,
+        force_overwrite
+    )
 
 
 def __generate_client_file(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
