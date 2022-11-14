@@ -12,7 +12,6 @@ from xml.etree import ElementTree as _ElementTree
 from contexttimer import Timer as _Timer
 from mitmproxy.http import HTTPFlow as _HTTPFlow
 from mitmproxy.io import FlowReader as _FlowReader
-from mitmproxy.io import tnetstring as _tnetstring
 
 from . import utils as _utils
 from .flowdetails import PssFlowDetails as _PssFlowDetails
@@ -27,7 +26,7 @@ __PSS_BOOL_VALUES = ('true', 'false', 'True', 'False')
 
 __RX_PARAMETER_CHECK: _re.Pattern = _re.compile('\d.*', )
 
-__TYPE_ORDER_LOOKUP: _Dict[str, int] = {
+TYPE_ORDER_LOOKUP: _Dict[str, int] = {
     'str': 5,
     'float': 4,
     'int': 3,
@@ -353,8 +352,8 @@ def __merge_type_dictionaries(d1: dict, d2: dict) -> dict:
         elif not isinstance(type1, str) or not isinstance(type2, str):
             pass
         else:
-            type1_value = __TYPE_ORDER_LOOKUP.get(type1, 100)
-            type2_value = __TYPE_ORDER_LOOKUP.get(type2, 100)
+            type1_value = TYPE_ORDER_LOOKUP.get(type1, 100)
+            type2_value = TYPE_ORDER_LOOKUP.get(type2, 100)
             if type1_value >= type2_value:
                 result[name] = type1
             else:

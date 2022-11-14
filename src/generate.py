@@ -2,6 +2,7 @@ import json as _json
 import os as _os
 import string as _string
 from typing import Dict as _Dict
+from typing import Iterable as _Iterable
 from typing import List as _List
 from typing import Optional as _Optional
 from typing import Tuple as _Tuple
@@ -11,13 +12,21 @@ from jinja2 import Environment as _Environment
 from jinja2 import PackageLoader as _PackageLoader
 
 from . import enums as _enums
+from . import parse as _parse
 from . import utils as _utils
+
+
+BUILTIN_TYPES = list(_parse.TYPE_ORDER_LOOKUP.keys())
 
 IMPORTS = {
     'datetime': 'from datetime import datetime as _datetime',
     'List': 'from typing import List as _List',
     'Tuple': 'from typing import List as _Tuple',
 }
+
+FIX_ENTITY_PROPERTY_TYPES = [
+    'datetime'
+]
 
 FORCED_ENUMS_GENERATION = [
     'DeviceType'
@@ -82,6 +91,22 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
     return result
 
 
+def __find_entity_name_for_property_type(property_type: str, entity_names: _Iterable[str]) -> _Tuple[str, bool]:
+    """
+    Returns the matching entity name and if it's likely to be a collection of that entity.
+    """
+    likely_match = property_type
+    likely_collection = False
+    if property_type.endswith('s'):
+        likely_match = likely_match[:-1]
+        likely_collection = True
+    if likely_match in entity_names:
+        return (likely_match, likely_collection)
+    if property_type in entity_names:
+        return (property_type, False)
+    return (None, None)
+
+
 def __generate_custom_enums_data() -> list:
     return [
         {
@@ -114,9 +139,22 @@ def __prepare_entities_data(entities_data: dict) -> list:
     for entity_name, entity_properties in entities_data.items():
         properties = []
         property_names = []
+        entity_imports = set()
         for property_name, property_type in entity_properties.items():
+            is_built_in_type = property_type in BUILTIN_TYPES
+            is_collection = False
+            if is_built_in_type:
+                if property_type in FIX_ENTITY_PROPERTY_TYPES:
+                    property_type = f'_{property_type}'
+            else:
+                property_type, is_collection = __find_entity_name_for_property_type(property_type, entities_data.keys())
+                if not property_type:
+                    continue # Skip properties that are neither of an builtin type nor of a know entity type
+                entity_imports.add(property_type)
             property_names.append(property_name)
             properties.append({
+                'builtin': is_built_in_type,
+                'is_collection': is_collection,
                 'name': property_name,
                 'name_snake_case': _utils.convert_camel_to_snake_case(property_name),
                 'type': property_type
@@ -125,6 +163,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
         name_property = __find_name_property(property_names, entity_name)
         result.append({
             'base_class_name': 'EntityWithIdBase' if id_property else 'EntityBase',
+            'entity_imports': entity_imports,
             'id_property_name': _utils.convert_camel_to_snake_case(id_property),
             'name': entity_name,
             'name_property_name': _utils.convert_camel_to_snake_case(name_property),
@@ -134,6 +173,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
         })
     result.sort(key=lambda d: d['name'])
     return result
+
 
 
 def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> list:
@@ -405,6 +445,7 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
 
 
 def format_source(content: str) -> str:
+    return content
     return _autopep8.fix_code(content)
 
 

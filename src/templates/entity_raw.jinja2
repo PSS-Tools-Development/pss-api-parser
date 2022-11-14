@@ -2,8 +2,12 @@
     This file has been generated automatically
 """
 
-from datetime import datetime
+from datetime import datetime as _datetime
+from typing import List as _List
 
+{% for entity_type in entity.entity_imports %}
+from ...entities import {{ entity_type }} as _{{ entity_type }}
+{% endfor %}
 from ...types import EntityInfo as _EntityInfo
 from ...utils import parse as _parse
 
@@ -13,5 +17,13 @@ class {{ entity.name }}Raw:
 
     def __init__(self, {{ entity.name_snake_case }}_info: _EntityInfo) -> None:
 {% for property in entity.properties %}
+{% if property.builtin %}
         self.{{ property.name_snake_case }}: {{ property.type }} = _parse.pss_{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}'))
+{% else %}
+{% if property.is_collection %}
+        self.{{ property.name_snake_case }}: _List[_{{ property.type }}] = [_{{ property.type }}(child_info) for child_info in {{ entity.name_snake_case }}_info.get('{{ property.name }}')]
+{% else %}
+        self.{{ property.name_snake_case }}: _{{ property.type }} = _{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}'))
+{% endif %}
+{% endif %}
 {% endfor %}
