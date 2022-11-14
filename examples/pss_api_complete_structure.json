@@ -622,8 +622,7 @@
         "query_parameters": {
           "accessToken": "str",
           "from": "int",
-          "to": "str",
-          "to100": "str"
+          "to": "int"
         },
         "response_structure": {
           "LadderService": {
@@ -2118,6 +2117,23 @@
       "SkinKey": "int",
       "SkinName": "str",
       "SpriteId": "int"
+    },
+    "Sale": {
+      "BuyerShipId": "int",
+      "BuyerShipName": "str",
+      "CharacterDesignId": "int",
+      "CharacterId": "int",
+      "CurrencyType": "str",
+      "CurrencyValue": "int",
+      "ItemDesignId": "int",
+      "ItemId": "int",
+      "Quantity": "int",
+      "SaleId": "int",
+      "SaleStatus": "str",
+      "SellerShipId": "int",
+      "SellerShipName": "str",
+      "StarbuxValue": "int",
+      "StatusDate": "datetime"
     },
     "SeasonDesign": {
       "BackgroundSpriteId": "int",
