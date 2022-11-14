@@ -15,7 +15,6 @@ from . import enums as _enums
 from . import parse as _parse
 from . import utils as _utils
 
-
 BUILTIN_TYPES = list(_parse.TYPE_ORDER_LOOKUP.keys())
 
 IMPORTS = {
@@ -101,13 +100,17 @@ def __find_entity_name_for_property_type(property_type: str, entity_names: _Iter
     """
     likely_match = property_type
     likely_collection = False
+
     if property_type.endswith('s'):
         likely_match = likely_match[:-1]
         likely_collection = True
+
     if likely_match in entity_names:
         return (likely_match, likely_collection)
+
     if property_type in entity_names:
         return (property_type, False)
+
     return (None, None)
 
 
@@ -151,8 +154,9 @@ def __prepare_entities_data(entities_data: dict) -> list:
             if not is_built_in_type:
                 property_type, is_collection = __find_entity_name_for_property_type(property_type, entities_data.keys())
                 if not property_type:
-                    continue # Skip properties that are neither of an builtin type nor of a know entity type
+                    continue  # Skip properties that are neither of an builtin type nor of a know entity type
                 entity_imports.add(property_type)
+                property_typehint = property_type
             if property_type in FIX_ENTITY_PROPERTY_TYPES:
                 property_typehint = f'_{property_type}'
             property_names.append(property_name)
@@ -186,7 +190,6 @@ def __prepare_entities_data(entities_data: dict) -> list:
         })
     result.sort(key=lambda d: d['name'])
     return result
-
 
 
 def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> list:
@@ -243,7 +246,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
 
             service['endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
-                'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',',':')),
+                'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',', ':')),
                 'content_type': endpoint_definition['content_type'],
                 'entity_types_str': f'({entity_types_str}{"," if len(entity_types) == 1 else ""})',
                 'method': endpoint_definition['method'],

@@ -26,7 +26,7 @@ endif
 
 .PHONY: lint
 lint: ## Auto-lint the generated code
-	autopep8 --in-place --recursive $(PSSAPI_DIRECTORY)
+	autopep8 --in-place --max-line-length 200 --recursive $(PSSAPI_DIRECTORY)
 	autoflake --in-place --remove-all-unused-imports --ignore-init-module-imports --recursive $(PSSAPI_DIRECTORY)
 
 .PHONY: check
