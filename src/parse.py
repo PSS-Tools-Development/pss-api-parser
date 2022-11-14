@@ -325,6 +325,7 @@ def __merge_flows(flow1: _PssFlowDetails, flow2: _PssFlowDetails) -> _PssFlowDet
     response_structure = __merge_type_dictionaries(flow1.response_structure, flow2.response_structure)
 
     result = {
+        'content_parameters': content_parameters,
         'content_structure': content_structure,
         'content_type': flow1.content_type or flow2.content_type,
         'endpoint': flow1.endpoint or flow2.endpoint,
