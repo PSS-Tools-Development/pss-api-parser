@@ -445,7 +445,6 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
 
 
 def format_source(content: str) -> str:
-    return content
     return _autopep8.fix_code(content)
 
 
