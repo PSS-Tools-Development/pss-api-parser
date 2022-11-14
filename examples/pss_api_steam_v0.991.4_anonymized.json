@@ -16,9 +16,6 @@
             "ListAchievementDesigns": {
               "AchievementDesigns": {
                 "AchievementDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -138,9 +135,6 @@
             "ListAnimations": {
               "Animations": {
                 "Animation": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -163,9 +157,6 @@
             "ListBackgrounds": {
               "Backgrounds": {
                 "Background": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -189,9 +180,6 @@
             "ListAllChallengeDesigns": {
               "ChallengeDesigns": {
                 "ChallengeDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -214,9 +202,6 @@
             "ListAllCharacterDesignActions": {
               "CharacterDesignActions": {
                 "CharacterDesignAction": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -242,9 +227,6 @@
                     "CharacterPart": {}
                   }
                 }
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -266,9 +248,6 @@
             "ListAllDrawDesigns": {
               "DrawDesigns": {
                 "DrawDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -292,9 +271,6 @@
             "ListAllCollectionDesigns": {
               "CollectionDesigns": {
                 "CollectionDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -318,9 +294,6 @@
             "ListAllDivisionDesigns": {
               "DivisionDesigns": {
                 "DivisionDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -344,9 +317,6 @@
             "ListFiles": {
               "Files": {
                 "File": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -368,9 +338,6 @@
             "ListSprites": {
               "Sprites": {
                 "Sprite": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -379,53 +346,6 @@
       }
     }, 
     "GalaxyService": {
-      "GoTo": {
-        "content_parameters": {}, 
-        "content_structure": {}, 
-        "content_type": "", 
-        "endpoint": "GoTo", 
-        "method": "POST", 
-        "query_parameters": {
-          "accessToken": "str", 
-          "checksum": "str", 
-          "clientDateTime": "str", 
-          "starSystemId": "int"
-        }, 
-        "response_structure": {
-          "GalaxyService": {
-            "GoTo": {
-              "Ship": {
-                "Characters": {
-                  "Character": {
-                    "CharacterActions": {
-                      "CharacterAction": {}
-                    }, 
-                    "FrameToAttackOrRepair": {}, 
-                    "IsPrestiging": {}, 
-                    "Items": {
-                      "Item": {}
-                    }
-                  }
-                }, 
-                "Items": {
-                  "Item": {}
-                }, 
-                "Lifts": {}, 
-                "Researches": {
-                  "Research": {}
-                }, 
-                "Rooms": {
-                  "Room": {}
-                }, 
-                "UserStarSystems": {
-                  "UserStarSystem": {}
-                }
-              }
-            }
-          }
-        }, 
-        "service": "GalaxyService"
-      }, 
       "ListMarkerGeneratorDesigns": {
         "content_parameters": {}, 
         "content_structure": {}, 
@@ -441,9 +361,6 @@
             "ListMarkerGeneratorDesigns": {
               "StarSystemMarkerGenerators": {
                 "StarSystemMarkerGenerator": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -464,9 +381,6 @@
             "ListStarSystemLinks": {
               "StarSystemLinks": {
                 "StarSystemLink": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -509,9 +423,6 @@
             "ListStarSystems": {
               "StarSystems": {
                 "StarSystem": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -534,9 +445,6 @@
             "ListItemDesignActions": {
               "ItemDesignActions": {
                 "ItemDesignAction": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -558,9 +466,6 @@
             "ListItemDesigns": {
               "ItemDesigns": {
                 "ItemDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -631,9 +536,6 @@
             "ListLeagues": {
               "Leagues": {
                 "League": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -742,9 +644,6 @@
                 "MissionDesign": {
                   "InstantMissionEvents": {}
                 }
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -768,9 +667,6 @@
             "ListAllPromotionDesigns": {
               "PromotionDesigns": {
                 "PromotionDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -794,9 +690,6 @@
             "ListAllResearchDesigns": {
               "ResearchDesigns": {
                 "ResearchDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -820,9 +713,6 @@
             "ListAllRewardDesigns": {
               "RewardDesigns": {
                 "RewardDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -845,9 +735,6 @@
             "ListRoomDesignSprites": {
               "RoomDesignSprites": {
                 "RoomDesignSprite": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -871,9 +758,6 @@
             "ListActionTypes": {
               "ActionTypes": {
                 "ActionType": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -895,9 +779,6 @@
             "ListConditionTypes": {
               "ConditionTypes": {
                 "ConditionType": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -918,9 +799,6 @@
             "ListCraftDesigns": {
               "CraftDesigns": {
                 "CraftDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -941,9 +819,6 @@
             "ListMissileDesigns": {
               "MissileDesigns": {
                 "MissileDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -964,9 +839,6 @@
             "ListRoomDesignPurchase": {
               "RoomDesignPurchases": {
                 "RoomDesignPurchase": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -988,9 +860,6 @@
             "ListRoomDesigns": {
               "RoomDesigns": {
                 "RoomDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -1056,9 +925,6 @@
             "ListAllNewsDesigns": {
               "NewsDesigns": {
                 "NewsDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -1082,9 +948,6 @@
             "ListShipDesigns": {
               "ShipDesigns": {
                 "ShipDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -1108,9 +971,6 @@
             "ListSituationDesigns": {
               "SituationDesigns": {
                 "SituationDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -1134,9 +994,6 @@
             "ListAllTaskDesigns": {
               "TaskDesigns": {
                 "TaskDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -1160,9 +1017,6 @@
             "ListAllTrainingDesigns": {
               "TrainingDesigns": {
                 "TrainingDesign": {}
-              }, 
-              "properties": {
-                "version": "int"
               }
             }
           }
@@ -1310,42 +1164,6 @@
       "SpecialRuleType": "str", 
       "StartDate": "datetime"
     }, 
-    "Character": {
-      "AbilityImprovement": "int", 
-      "AttackImprovement": "int", 
-      "AvailableDate": "datetime", 
-      "CharacterDesignId": "int", 
-      "CharacterId": "int", 
-      "CharacterName": "str", 
-      "DeploymentDate": "str", 
-      "EngineImprovement": "int", 
-      "Fatigue": "int", 
-      "Flags": "int", 
-      "HpImprovement": "int", 
-      "IsNew": "bool", 
-      "ItemIds": "str", 
-      "Level": "int", 
-      "OwnerShipId": "int", 
-      "PilotImprovement": "int", 
-      "RepairImprovement": "int", 
-      "RoomId": "int", 
-      "ScienceImprovement": "int", 
-      "ShipId": "int", 
-      "Stamina": "int", 
-      "StaminaImprovement": "int", 
-      "TrainingData": "str", 
-      "TrainingDesignId": "int", 
-      "TrainingEndDate": "str", 
-      "WeaponImprovement": "int", 
-      "Xp": "int"
-    }, 
-    "CharacterAction": {
-      "ActionTypeId": "int", 
-      "CharacterActionId": "int", 
-      "CharacterActionIndex": "int", 
-      "CharacterId": "int", 
-      "ConditionTypeId": "int"
-    }, 
     "CharacterDesign": {
       "ActionSoundFileId": "int", 
       "Attack": "float", 
@@ -1355,6 +1173,7 @@
       "CharacterDesignName": "str", 
       "CharacterHeadPartId": "int", 
       "CharacterLegPartId": "int", 
+      "CharacterParts": "CharacterParts", 
       "CollectionDesignId": "int", 
       "Engine": "float", 
       "EquipmentMask": "int", 
@@ -1504,15 +1323,6 @@
     }, 
     "GetCatalogQuantity": {
       "LimitedCatalogQuantity": "int"
-    }, 
-    "Item": {
-      "BonusEnhancementType": "str", 
-      "BonusEnhancementValue": "float", 
-      "IsNew": "bool", 
-      "ItemDesignId": "int", 
-      "ItemId": "int", 
-      "Quantity": "int", 
-      "ShipId": "int"
     }, 
     "ItemDesign": {
       "ActiveAnimationId": "int", 
@@ -1681,6 +1491,7 @@
       "Condition": "str", 
       "ExplorationPercentage": "int", 
       "Flags": "int", 
+      "InstantMissionEvents": "InstantMissionEvents", 
       "IsSinglePlay": "bool", 
       "MaxAttemptsPerDay": "int", 
       "MaxShipLevel": "int", 
@@ -1746,13 +1557,6 @@
       "ToDate": "datetime", 
       "XPBonusPercentage": "int"
     }, 
-    "Research": {
-      "ResearchDesignId": "int", 
-      "ResearchId": "int", 
-      "ResearchStartDate": "datetime", 
-      "ResearchState": "str", 
-      "ShipId": "int"
-    }, 
     "ResearchDesign": {
       "Argument": "int", 
       "AvailabilityMask": "int", 
@@ -1792,27 +1596,6 @@
       "RewardType": "str", 
       "SeasonDesignId": "int", 
       "SpriteId": "int"
-    }, 
-    "Room": {
-      "CapacityUsed": "int", 
-      "Column": "int", 
-      "ConstructionStartDate": "str", 
-      "CurrentSkinKey": "int", 
-      "ItemIds": "str", 
-      "ManufactureStartDate": "str", 
-      "ManufactureString": "str", 
-      "Manufactured": "int", 
-      "PowerGenerated": "int", 
-      "PreviousSkinKey": "int", 
-      "RandomSeed": "int", 
-      "RoomDesignId": "int", 
-      "RoomId": "int", 
-      "RoomStatus": "str", 
-      "Row": "int", 
-      "SalvageString": "str", 
-      "ShipId": "int", 
-      "TargetManufactureString": "str", 
-      "UpgradeRoomDesignId": "int"
     }, 
     "RoomDesign": {
       "Capacity": "int", 
@@ -2003,38 +1786,6 @@
       "TournamentSpriteId": "int", 
       "TrainingDesignVersion": "int", 
       "VipDesignVersion": "int"
-    }, 
-    "Ship": {
-      "BrightnessValue": "float", 
-      "FromStarSystemId": "int", 
-      "Hp": "int", 
-      "HueValue": "float", 
-      "ImmunityDate": "datetime", 
-      "NextStarSystemId": "int", 
-      "OriginNextStarSystemId": "int", 
-      "OriginStarSystemId": "int", 
-      "OriginalRaceId": "int", 
-      "PowerScore": "int", 
-      "SalvageArgument": "int", 
-      "SaturationValue": "int", 
-      "Shield": "int", 
-      "ShipDesignId": "int", 
-      "ShipId": "int", 
-      "ShipLevel": "int", 
-      "ShipName": "str", 
-      "ShipStatus": "str", 
-      "SkinItemDesignId": "int", 
-      "StandardCharacterDraws": "int", 
-      "StarSystemArrivalDate": "datetime", 
-      "StarSystemId": "int", 
-      "StatusStartDate": "datetime", 
-      "StickerString": "str", 
-      "Tags": "str", 
-      "UniqueCharacterDraws": "int", 
-      "UpdateDate": "datetime", 
-      "UpgradeShipDesignId": "int", 
-      "UpgradeStartDate": "datetime", 
-      "UserId": "int"
     }, 
     "ShipDesign": {
       "AllowInteracial": "bool", 
@@ -2258,6 +2009,7 @@
     }, 
     "User": {
       "ActivatedPromotions": "str", 
+      "Alliance": "Alliance", 
       "AllianceId": "int", 
       "AllianceJoinDate": "datetime", 
       "AllianceMembership": "str", 
@@ -2351,6 +2103,7 @@
       "UnlockedSkinKeys": "str", 
       "UpdateDate": "datetime", 
       "UsedRewardPoints": "int", 
+      "UserSeason": "UserSeason", 
       "UserType": "str", 
       "VipExpiryDate": "datetime"
     }, 
@@ -2362,12 +2115,6 @@
       "UnlockedRewardDesignIds": "str", 
       "UserId": "int", 
       "UserSeasonId": "int"
-    }, 
-    "UserStarSystem": {
-      "ExplorationPercentage": "int", 
-      "StarSystemId": "int", 
-      "UserId": "int", 
-      "UserStarSystemId": "int"
     }
   }
 }

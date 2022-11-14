@@ -634,7 +634,7 @@
           }
         },
         "service": "LadderService"
-      }
+    }
     },
     "LeagueService": {
       "ListLeagues2": {
@@ -1587,6 +1587,7 @@
       "CharacterDesignName": "str",
       "CharacterHeadPartId": "int",
       "CharacterLegPartId": "int",
+      "CharacterParts": "CharacterParts",
       "CollectionDesignId": "int",
       "Engine": "float",
       "EquipmentMask": "int",
@@ -1914,6 +1915,7 @@
       "Condition": "str",
       "ExplorationPercentage": "int",
       "Flags": "int",
+      "InstantMissionEvents": "InstantMissionEvents",
       "IsSinglePlay": "bool",
       "MaxAttemptsPerDay": "int",
       "MaxShipLevel": "int",
@@ -2282,15 +2284,20 @@
     },
     "Ship": {
       "BrightnessValue": "float",
+      "Characters": "Characters",
       "FromStarSystemId": "int",
       "Hp": "int",
       "HueValue": "float",
       "ImmunityDate": "datetime",
+      "Items": "Items",
+      "Lifts": "Lifts",
       "NextStarSystemId": "int",
       "OriginNextStarSystemId": "int",
       "OriginStarSystemId": "int",
       "OriginalRaceId": "int",
       "PowerScore": "int",
+      "Researches": "Researches",
+      "Rooms": "Rooms",
       "SalvageArgument": "int",
       "SaturationValue": "int",
       "Shield": "int",
@@ -2310,7 +2317,8 @@
       "UpdateDate": "datetime",
       "UpgradeShipDesignId": "int",
       "UpgradeStartDate": "datetime",
-      "UserId": "int"
+      "UserId": "int",
+      "UserStarSystems": "UserStarSystems"
     },
     "ShipDesign": {
       "AllowInteracial": "bool",
@@ -2535,6 +2543,7 @@
     },
     "User": {
       "ActivatedPromotions": "str",
+      "Alliance": "Alliance",
       "AllianceId": "int",
       "AllianceJoinDate": "datetime",
       "AllianceMembership": "str",
@@ -2632,11 +2641,13 @@
       "UnreadMessageCount": "str",
       "UpdateDate": "datetime",
       "UsedRewardPoints": "int",
+      "UserSeason": "UserSeason",
       "UserType": "str",
       "VipExpiryDate": "datetime"
     },
     "UserLogin": {
       "PreviousLastLoginDate": "datetime",
+      "User": "User",
       "UserId": "int",
       "accessToken": "str"
     },

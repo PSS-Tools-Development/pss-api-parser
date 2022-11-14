@@ -152,8 +152,6 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> _utils.NestedDict:
         path, query_string = (flow.request.path, None)
 
     result['service'], result['endpoint'] = path.split('/')[1:]
-    if 'Alliance' in result['service']:
-        i = 0
 
     result['query_parameters'] = {}
     if query_string:
@@ -288,10 +286,11 @@ def __get_object_structures_from_response_structure(response_structure: _utils.N
     result: _Dict[str, _List[_PssObjectStructure]] = {}
     for key, value in response_structure.items():
         if isinstance(value, dict):
-            properties = value.get('properties')
+            properties = value.pop('properties', None)
             if properties and 'version' not in properties:
+                for child in response_structure[key].keys():
+                    properties[child] = child
                 result[key] = _PssObjectStructure(key, properties)
-                response_structure[key].pop('properties')
             result.update(__get_object_structures_from_response_structure(value))
     return result
 
@@ -353,8 +352,8 @@ def __merge_type_dictionaries(d1: dict, d2: dict) -> dict:
         elif not isinstance(type1, str) or not isinstance(type2, str):
             pass
         else:
-            type1_value = __TYPE_ORDER_LOOKUP[type1]
-            type2_value = __TYPE_ORDER_LOOKUP[type2]
+            type1_value = __TYPE_ORDER_LOOKUP.get(type1, 100)
+            type2_value = __TYPE_ORDER_LOOKUP.get(type2, 100)
             if type1_value >= type2_value:
                 result[name] = type1
             else:

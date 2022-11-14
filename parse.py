@@ -37,7 +37,7 @@ if __name__ == '__main__':
     with _Timer() as t:
         output_directory = args.out.rstrip('/')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Function: {args.function}')
-        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Input file(s): {args.in_}')
+        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Input file(s):')
         for in_file in args.in_:
             print(f'{_Fore.YELLOW} ---{_Fore.RESET} {in_file}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Output path: {output_directory}')
