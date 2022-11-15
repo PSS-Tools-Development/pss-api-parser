@@ -8,10 +8,9 @@ help: ## Display this help screen
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: env
-env: ## Create virtualenv and install dependencies
-	python3 -m venv venv
-	./venv/bin/pip install --upgrade pip
-	./venv/bin/pip install -r requirements.txt
+init: ## Install dependencies
+	pip install --upgrade pip
+	pip install -r requirements.txt
 
 .PHONY: pssapi
 pssapi: gen lint check ## Generate, auto-lint pssapi.py and check errors
