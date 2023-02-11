@@ -37,7 +37,7 @@ def convert_snake_to_lower_camel_case(s: str) -> str:
 
 def create_path(path: str) -> None:
     if not _os.path.exists(path):
-        _os.mkdir(path)
+        _os.makedirs(path)
 
 
 def create_file(path: str, contents: str, overwrite: bool = False) -> _Optional[str]:
