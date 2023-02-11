@@ -285,6 +285,10 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
         trim_blocks=True
     )
 
+    target_path = target_path.strip('/').strip('\\')
+    if target_path[-6:].lower() != 'pssapi':
+        target_path = _os.path.join(target_path, 'pssapi')
+
     __generate_services_files(services_data, target_path, env, force_overwrite)
     __generate_client_file(services_data, target_path, env, force_overwrite)
     __generate_entities_files(entities_data, target_path, env, force_overwrite)
