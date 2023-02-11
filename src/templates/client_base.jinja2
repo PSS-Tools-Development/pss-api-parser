@@ -42,7 +42,7 @@ class PssApiClientBase:
 {% for service in services %}
 
     @property
-    def {{ service.name_snake_case }}(self) -> '_service.{{ service.name }}':
+    def {{ service.name_snake_case }}(self) -> '_services.{{ service.name }}':
         return self.__{{ service.name_snake_case }}
 {% endfor %}
 
