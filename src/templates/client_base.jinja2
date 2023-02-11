@@ -47,16 +47,19 @@ class PssApiClientBase:
 {% endfor %}
 
 
-    async def get_production_server(self) -> str:
+    async def get_production_server(self, use_cache: bool = True) -> str:
         if self.__production_server:
             return self.__production_server
 
-        with self.__production_server_cache_lock:
-            utc_now = _utils.get_utc_now()
-            if not self.__production_server_cached or self.__production_server_cached_at is None or (self.__production_server_cached_at - utc_now).total_seconds() >= PssApiClientBase.__PRODUCTION_SERVER_CACHE_DURATION:
-                self.__production_server_cached_at = utc_now
-                self.__production_server_cached = (await _core.get_production_server())
-            return self.__production_server_cached
+        if self.__cache_production_server and use_cache:
+            with self.__production_server_cache_lock:
+                utc_now = _utils.get_utc_now()
+                if not self.__production_server_cached or self.__production_server_cached_at is None or (self.__production_server_cached_at - utc_now).total_seconds() >= PssApiClientBase.__PRODUCTION_SERVER_CACHE_DURATION:
+                    self.__production_server_cached_at = utc_now
+                    self.__production_server_cached = await _core.get_production_server()
+                return self.__production_server_cached
+        else:
+            return (await _core.get_production_server())
 
 
     def _update_services(self) -> None:
