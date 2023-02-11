@@ -443,6 +443,7 @@ def __generate_fixed_files(target_path: str, env: _Environment, force_overwrite:
     __generate_constants_file(target_path, env, force_overwrite)
     __generate_core_file(target_path, env, force_overwrite)
     __generate_utils_submodule(target_path, env, force_overwrite)
+    __generate_types_file(target_path, env, force_overwrite)
 
 
 def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
@@ -487,6 +488,18 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
         _os.path.join(services_raw_path, '__init__.py'),
         services_raw_init_template.render(services=services_data),
         overwrite=True
+    )
+
+
+def __generate_types_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    types_template = env.get_template('types.jinja2')
+
+    _utils.create_path(target_path)
+
+    _utils.create_file(
+        _os.path.join(target_path, 'types.py'),
+        types_template.render(),
+        overwrite=force_overwrite,
     )
 
 
