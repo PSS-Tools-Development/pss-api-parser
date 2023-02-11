@@ -291,9 +291,7 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
     if enums_data:
         __generate_enums_files(enums_data, target_path, env, force_overwrite)
 
-    __generate_constants_file(target_path, env, force_overwrite)
-    __generate_core_file(target_path, env, force_overwrite)
-    __generate_utils_submodule(target_path, env, force_overwrite)
+    __generate_fixed_files(target_path, env, force_overwrite)
 
 
 def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
@@ -439,6 +437,12 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
         enum_init_template.render(enums=enums_data),
         overwrite=force_overwrite,
     )
+
+
+def __generate_fixed_files(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    __generate_constants_file(target_path, env, force_overwrite)
+    __generate_core_file(target_path, env, force_overwrite)
+    __generate_utils_submodule(target_path, env, force_overwrite)
 
 
 def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
