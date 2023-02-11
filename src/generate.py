@@ -520,23 +520,25 @@ def __generate_utils_submodule(target_path: str, env: _Environment, force_overwr
     utils_init_template = env.get_template('utils/utils_init.jinja2')
     utils_datetime_template = env.get_template('utils/utils_datetime.jinja2')
     utils_parse_template = env.get_template('utils/utils_parse.jinja2')
+    utils_path = _os.path.join(target_path, 'utils')
 
     _utils.create_path(target_path)
+    _utils.create_path(utils_path)
 
     _utils.create_file(
-        _os.path.join(utils_init_template, '__init__.py'),
+        _os.path.join(utils_path, '__init__.py'),
         utils_init_template.render(),
         overwrite=force_overwrite,
     )
 
     _utils.create_file(
-        _os.path.join(utils_datetime_template, 'datetime.py'),
+        _os.path.join(utils_path, 'datetime.py'),
         utils_datetime_template.render(),
         overwrite=force_overwrite,
     )
 
     _utils.create_file(
-        _os.path.join(utils_parse_template, 'parse.py'),
+        _os.path.join(utils_path, 'parse.py'),
         utils_parse_template.render(),
         overwrite=force_overwrite
     )
