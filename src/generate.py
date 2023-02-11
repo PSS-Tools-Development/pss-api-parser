@@ -291,6 +291,7 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
     if enums_data:
         __generate_enums_files(enums_data, target_path, env, force_overwrite)
 
+    __generate_constants_file(target_path, env, force_overwrite)
     __generate_core_file(target_path, env, force_overwrite)
     __generate_utils_submodule(target_path, env, force_overwrite)
 
@@ -339,6 +340,18 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
     )
 
 
+def __generate_constants_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    constants_template = env.get_template('constants.jinja2')
+
+    _utils.create_path(target_path)
+
+    _utils.create_file(
+        _os.path.join(target_path, 'constants.py'),
+        constants_template.render(),
+        overwrite=force_overwrite,
+    )
+
+
 def __generate_core_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
     core_template = env.get_template('core.jinja2')
 
@@ -347,7 +360,7 @@ def __generate_core_file(target_path: str, env: _Environment, force_overwrite: b
     _utils.create_file(
         _os.path.join(target_path, 'core.py'),
         core_template.render(),
-        overwrite=True,
+        overwrite=force_overwrite,
     )
 
 
