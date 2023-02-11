@@ -442,8 +442,21 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
 def __generate_fixed_files(target_path: str, env: _Environment, force_overwrite: bool) -> None:
     __generate_constants_file(target_path, env, force_overwrite)
     __generate_core_file(target_path, env, force_overwrite)
+    __generate_pssapi_init_file(target_path, env, force_overwrite)
     __generate_utils_submodule(target_path, env, force_overwrite)
     __generate_types_file(target_path, env, force_overwrite)
+
+
+def __generate_pssapi_init_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    pssapi_init_template = env.get_template('pssapi_init.jinja2')
+
+    _utils.create_path(target_path)
+
+    _utils.create_file(
+        _os.path.join(target_path, '__init__.py'),
+        pssapi_init_template.render(),
+        overwrite=force_overwrite,
+    )
 
 
 def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
