@@ -291,6 +291,8 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
     if enums_data:
         __generate_enums_files(enums_data, target_path, env, force_overwrite)
 
+    __generate_utils_submodule(target_path, env, force_overwrite)
+
 
 def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
     if force_overwrite is None:
@@ -331,6 +333,58 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
         _os.path.join(target_path, 'client.py'),
         client_template.render(services=services_data),
         overwrite=force_overwrite,
+    )
+
+
+def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    entity_template = env.get_template('entities/entity.jinja2')
+    entity_base_template = env.get_template('entities/entity_base.jinja2')
+    entities_init_template = env.get_template('entities/entities_init.jinja2')
+    entity_raw_template = env.get_template('entities/entity_raw.jinja2')
+    entity_base_raw_template = env.get_template('entities/entity_base_raw.jinja2')
+    entities_raw_init_template = env.get_template('entities/entities_raw_init.jinja2')
+
+    entities_path = _os.path.join(target_path, 'entities')
+    entities_raw_path = _os.path.join(entities_path, 'raw')
+
+    _utils.create_path(entities_path)
+    _utils.create_path(entities_raw_path)
+
+    for entity in entities_data:
+        _utils.create_file(
+            _os.path.join(entities_path, entity['name_snake_case'] + '.py'),
+            entity_template.render(entity=entity),
+            overwrite=force_overwrite,
+        )
+
+        _utils.create_file(
+            _os.path.join(entities_raw_path, entity['name_snake_case'] + '_raw.py'),
+            entity_raw_template.render(entity=entity),
+            overwrite=True
+        )
+
+    _utils.create_file(
+        _os.path.join(entities_path, '__init__.py'),
+        entities_init_template.render(entities=entities_data),
+        overwrite=force_overwrite,
+    )
+
+    _utils.create_file(
+        _os.path.join(entities_path, 'entity_base.py'),
+        entity_base_template.render(),
+        overwrite=force_overwrite,
+    )
+
+    _utils.create_file(
+        _os.path.join(entities_raw_path, '__init__.py'),
+        entities_raw_init_template.render(entities=entities_data),
+        overwrite=True
+    )
+
+    _utils.create_file(
+        _os.path.join(entities_raw_path, 'entity_base_raw.py'),
+        entity_base_raw_template.render(),
+        overwrite=True,
     )
 
 
@@ -403,56 +457,31 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
     )
 
 
-def __generate_entities_files(entities_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    entity_template = env.get_template('entities/entity.jinja2')
-    entity_base_template = env.get_template('entities/entity_base.jinja2')
-    entities_init_template = env.get_template('entities/entities_init.jinja2')
-    entity_raw_template = env.get_template('entities/entity_raw.jinja2')
-    entity_base_raw_template = env.get_template('entities/entity_base_raw.jinja2')
-    entities_raw_init_template = env.get_template('entities/entities_raw_init.jinja2')
+def __generate_utils_submodule(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    utils_init_template = env.get_template('utils/utils_init.jinja2')
+    utils_datetime_template = env.get_template('utils/utils_datetime.jinja2')
+    utils_parse_template = env.get_template('utils/utils_parse.jinja2')
 
-    entities_path = _os.path.join(target_path, 'entities')
-    entities_raw_path = _os.path.join(entities_path, 'raw')
-
-    _utils.create_path(entities_path)
-    _utils.create_path(entities_raw_path)
-
-    for entity in entities_data:
-        _utils.create_file(
-            _os.path.join(entities_path, entity['name_snake_case'] + '.py'),
-            entity_template.render(entity=entity),
-            overwrite=force_overwrite,
-        )
-
-        _utils.create_file(
-            _os.path.join(entities_raw_path, entity['name_snake_case'] + '_raw.py'),
-            entity_raw_template.render(entity=entity),
-            overwrite=True
-        )
+    _utils.create_path(target_path)
 
     _utils.create_file(
-        _os.path.join(entities_path, '__init__.py'),
-        entities_init_template.render(entities=entities_data),
+        _os.path.join(utils_init_template, '__init__.py'),
+        utils_init_template.render(),
         overwrite=force_overwrite,
     )
 
     _utils.create_file(
-        _os.path.join(entities_path, 'entity_base.py'),
-        entity_base_template.render(),
+        _os.path.join(utils_datetime_template, 'datetime.py'),
+        utils_datetime_template.render(),
         overwrite=force_overwrite,
     )
 
     _utils.create_file(
-        _os.path.join(entities_raw_path, '__init__.py'),
-        entities_raw_init_template.render(entities=entities_data),
-        overwrite=True
+        _os.path.join(utils_parse_template, 'parse.py'),
+        utils_parse_template.render(),
+        overwrite=force_overwrite
     )
 
-    _utils.create_file(
-        _os.path.join(entities_raw_path, 'entity_base_raw.py'),
-        entity_base_raw_template.render(),
-        overwrite=True,
-    )
 
 
 # -----
