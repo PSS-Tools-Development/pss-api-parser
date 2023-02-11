@@ -324,6 +324,8 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
     client_base_template = env.get_template('client_base.jinja2')
     client_template = env.get_template('client.jinja2')
 
+    _utils.create_path(target_path)
+
     _utils.create_file(
         _os.path.join(target_path, 'client_base.py'),
         client_base_template.render(services=services_data),
@@ -360,6 +362,7 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     entities_path = _os.path.join(target_path, 'entities')
     entities_raw_path = _os.path.join(entities_path, 'raw')
 
+    _utils.create_path(target_path)
     _utils.create_path(entities_path)
     _utils.create_path(entities_raw_path)
 
