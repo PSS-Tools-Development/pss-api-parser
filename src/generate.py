@@ -203,10 +203,18 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             'imports': [],
             'name': service_name,
             'name_snake_case': _utils.convert_camel_to_snake_case(service_name),
+            'raw_endpoints': [],
         }
+
+        endpoint_max_versions = {}
 
         for endpoint_name, endpoint_definition in endpoints.items():
             name_snake_case = _utils.convert_camel_to_snake_case(endpoint_name)
+            name_snake_case_without_version = name_snake_case.rstrip(_string.digits).rstrip('_')
+            if name_snake_case != name_snake_case_without_version:
+                version = int(name_snake_case[len(name_snake_case_without_version)-len(name_snake_case):].strip('_'))
+            else:
+                version = 1
             xml_parent_tag_name, return_types = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
             parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition.get('content_parameters', {}))
             service_imports.update(parameter['type'] for parameter in parameters)
@@ -244,7 +252,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             else:
                 return_type = f'_List[{entity_types_str}]'
 
-            service['endpoints'].append({
+            service['raw_endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
                 'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',', ':')),
                 'content_type': endpoint_definition['content_type'],
@@ -253,17 +261,22 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'name': endpoint_name,
                 'name_screaming_snake_case': name_snake_case.upper(),
                 'name_snake_case': name_snake_case,
-                'name_snake_case_without_version': name_snake_case.rstrip(_string.digits).rstrip('_'),
+                'name_snake_case_without_version': name_snake_case_without_version,
                 'parameter_definitions': ', '.join(parameter_definitions),
                 'parameter_raw_definitions': ', '.join(parameter_raw_definitions),
                 'parameters': parameters,
                 'raw_endpoint_call_parameters': ', '.join(raw_endpoint_call_parameters),
                 'return_type_str': return_type,
+                'version': version,
                 'xml_parent_tag_name': xml_parent_tag_name,
             })
 
+            endpoint_max_versions[name_snake_case_without_version] = max(endpoint_max_versions.get(name_snake_case_without_version, 0), version)
+
             if return_types:
                 service['entity_types'].extend(return_types)
+
+        service['endpoints'] = [endpoint for endpoint in service['raw_endpoints'] if endpoint['version'] == endpoint_max_versions[endpoint['name_snake_case_without_version']]]
 
         for service_import in service_imports:
             if service_import in IMPORTS:
@@ -285,7 +298,7 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
         trim_blocks=True
     )
 
-    target_path = target_path.strip('/').strip('\\')
+    target_path = target_path.rstrip('/').rstrip('\\')
     if target_path[-6:].lower() != 'pssapi':
         target_path = _os.path.join(target_path, 'pssapi')
 

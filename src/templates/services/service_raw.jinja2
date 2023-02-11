@@ -13,14 +13,14 @@ from ...entities import {{ entity_type }} as _{{ entity_type }}
 
 # ---------- Constants ----------
 
-{% for endpoint in service.endpoints %}
+{% for endpoint in service.raw_endpoints %}
 {{ endpoint.base_path_name }}_BASE_PATH: str = '{{ service.name }}/{{ endpoint.name }}'
 {% endfor %}
 
 
 # ---------- Endpoints ----------
 
-{% for endpoint in service.endpoints %}
+{% for endpoint in service.raw_endpoints %}
 async def {{ endpoint.name_snake_case }}(production_server: str{% if endpoint.parameter_raw_definitions %}, {{ endpoint.parameter_raw_definitions }}{% endif %}, **params) -> {{ endpoint.return_type_str }}:
     params = {
 {% for parameter in endpoint.parameters %}
