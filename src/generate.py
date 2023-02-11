@@ -302,6 +302,8 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
     if target_path[-6:].lower() != 'pssapi':
         target_path = _os.path.join(target_path, 'pssapi')
 
+    _utils.create_path(target_path)
+
     __generate_services_files(services_data, target_path, env, force_overwrite)
     __generate_client_file(services_data, target_path, env, force_overwrite)
     __generate_entities_files(entities_data, target_path, env, force_overwrite)
@@ -340,8 +342,6 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
     client_base_template = env.get_template('client_base.jinja2')
     client_template = env.get_template('client.jinja2')
 
-    _utils.create_path(target_path)
-
     _utils.create_file(
         _os.path.join(target_path, 'client_base.py'),
         client_base_template.render(services=services_data),
@@ -358,8 +358,6 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
 def __generate_constants_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
     constants_template = env.get_template('constants.jinja2')
 
-    _utils.create_path(target_path)
-
     _utils.create_file(
         _os.path.join(target_path, 'constants.py'),
         constants_template.render(),
@@ -369,8 +367,6 @@ def __generate_constants_file(target_path: str, env: _Environment, force_overwri
 
 def __generate_core_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
     core_template = env.get_template('core.jinja2')
-
-    _utils.create_path(target_path)
 
     _utils.create_file(
         _os.path.join(target_path, 'core.py'),
@@ -390,7 +386,6 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
     entities_path = _os.path.join(target_path, 'entities')
     entities_raw_path = _os.path.join(entities_path, 'raw')
 
-    _utils.create_path(target_path)
     _utils.create_path(entities_path)
     _utils.create_path(entities_raw_path)
 
@@ -438,7 +433,6 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
     enum_init_template = env.get_template('enums/enum_init.jinja2')
     enums_path = _os.path.join(target_path, 'enums')
 
-    _utils.create_path(target_path)
     _utils.create_path(enums_path)
 
     for enum in enums_data:
@@ -467,8 +461,6 @@ def __generate_fixed_files(target_path: str, env: _Environment, force_overwrite:
 def __generate_pssapi_init_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
     pssapi_init_template = env.get_template('pssapi_init.jinja2')
 
-    _utils.create_path(target_path)
-
     _utils.create_file(
         _os.path.join(target_path, '__init__.py'),
         pssapi_init_template.render(),
@@ -486,7 +478,6 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
     services_path = _os.path.join(target_path, 'services')
     services_raw_path = _os.path.join(services_path, 'raw')
 
-    _utils.create_path(target_path)
     _utils.create_path(services_path)
     _utils.create_path(services_raw_path)
 
@@ -524,8 +515,6 @@ def __generate_services_files(services_data: dict, target_path: str, env: _Envir
 def __generate_types_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
     types_template = env.get_template('types.jinja2')
 
-    _utils.create_path(target_path)
-
     _utils.create_file(
         _os.path.join(target_path, 'types.py'),
         types_template.render(),
@@ -539,7 +528,6 @@ def __generate_utils_submodule(target_path: str, env: _Environment, force_overwr
     utils_parse_template = env.get_template('utils/utils_parse.jinja2')
     utils_path = _os.path.join(target_path, 'utils')
 
-    _utils.create_path(target_path)
     _utils.create_path(utils_path)
 
     _utils.create_file(
