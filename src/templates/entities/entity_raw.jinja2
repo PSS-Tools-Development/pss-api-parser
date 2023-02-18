@@ -40,3 +40,24 @@ class {{ entity.name }}Raw:
 {% endif %}
         return self._{{ property.name_snake_case }}
 {% endfor %}
+
+
+    def __dict__(self):
+        return {
+{% for property in entity.properties %}
+{% if property.builtin %}
+            '{{ property.name }}': self.{{ property.name_snake_case }},
+{% else %}
+{% if property.is_collection %}
+            '{{ property.name }}': [dict(child) for child in self.{{ property.name_snake_case }}],
+{% else %}
+            '{{ property.name }}': dict(self.{{ property.name_snake_case }}),
+{% endif %}
+{% endif %}
+{% endfor %}
+        }
+
+
+    def __iter__(self):
+        for key, value in self.__dict__().items():
+            yield key, value
