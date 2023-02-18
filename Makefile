@@ -31,3 +31,7 @@ lint: ## Auto-lint the generated code
 .PHONY: check
 check: ## Check Python syntax commons errors of the generated code
 	flake8 $(PSSAPI_DIRECTORY) --count --ignore=E501 --exclude __init__.py --show-source --statistics
+
+.PHONY: requirements
+requirements: ## Compile requirements.txt with pip-tools
+	CUSTOM_COMPILE_COMMAND="make requirements" pip-compile requirements.in
