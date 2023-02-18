@@ -21,12 +21,27 @@ class {{ entity.name }}Raw:
 {% endif%}
 {% for property in entity.properties %}
 {% if property.builtin %}
-        self.{{ property.name_snake_case }}: {{ property.typehint }} = _parse.pss_{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}'))
+        self._{{ property.name_snake_case }}: {{ property.typehint }} = _parse.pss_{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}'))
 {% else %}
 {% if property.is_collection %}
-        self.{{ property.name_snake_case }}: _List[_{{ property.typehint }}] = [_{{ property.type }}(child_info) for child_info in {{ entity.name_snake_case }}_info.get('{{ property.name }}')] if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else []
+        self._{{ property.name_snake_case }}: _List[_{{ property.typehint }}] = [_{{ property.type }}(child_info) for child_info in {{ entity.name_snake_case }}_info.get('{{ property.name }}')] if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else []
 {% else %}
-        self.{{ property.name_snake_case }}: _{{ property.typehint }} = _{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}')) if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else None
+        self._{{ property.name_snake_case }}: _{{ property.typehint }} = _{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}')) if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else None
 {% endif %}
 {% endif %}
+{% endfor %}
+
+{% for property in entity.properties %}
+
+    @property
+{% if property.builtin %}
+    def {{ property.name_snake_case }}(self) -> {{ property.typehint }}:
+{% else %}
+{% if property.is_collection %}
+    def {{ property.name_snake_case }}(self) -> _List[_{{ property.typehint }}]:
+{% else %}
+    def {{ property.name_snake_case }}(self) -> _{{ property.typehint }}:
+{% endif %}
+{% endif %}
+        return self._{{ property.name_snake_case }}
 {% endfor %}
