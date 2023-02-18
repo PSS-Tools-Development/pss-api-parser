@@ -3,7 +3,7 @@
 """
 
 from datetime import datetime as _datetime
-from typing import List as _List
+from typing import Any as _Any, Dict as _Dict, List as _List
 
 import pssapi.entities as _entities
 from ...types import EntityInfo as _EntityInfo
@@ -14,6 +14,7 @@ class {{ entity.name }}Raw:
     XML_NODE_NAME: str = '{{ entity.xml_node_name }}'
 
     def __init__(self, {{ entity.name_snake_case }}_info: _EntityInfo) -> None:
+        self._dict: _Dict[str, _Any] = None
 {% for property in entity.properties %}
 {% if property.builtin %}
         self._{{ property.name_snake_case }}: {{ property.typehint }} = _parse.pss_{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}'))
@@ -33,9 +34,9 @@ class {{ entity.name }}Raw:
     def {{ property.name_snake_case }}(self) -> {{ property.typehint }}:
 {% else %}
 {% if property.is_collection %}
-    def {{ property.name_snake_case }}(self) -> _List[_{{ property.typehint }}]:
+    def {{ property.name_snake_case }}(self) -> _List['_{{ property.typehint }}']:
 {% else %}
-    def {{ property.name_snake_case }}(self) -> _{{ property.typehint }}:
+    def {{ property.name_snake_case }}(self) -> '_{{ property.typehint }}':
 {% endif %}
 {% endif %}
         return self._{{ property.name_snake_case }}
@@ -59,16 +60,18 @@ class {{ entity.name }}Raw:
 
 
     def __dict__(self):
-        return {
+        if not self._dict:
+            self._dict = {
 {% for property in entity.properties %}
 {% if property.builtin %}
-            '{{ property.name }}': self.{{ property.name_snake_case }},
+                '{{ property.name }}': self.{{ property.name_snake_case }},
 {% else %}
 {% if property.is_collection %}
-            '{{ property.name }}': [dict(child) for child in self.{{ property.name_snake_case }}],
+                '{{ property.name }}': [dict(child) for child in self.{{ property.name_snake_case }}],
 {% else %}
-            '{{ property.name }}': dict(self.{{ property.name_snake_case }}),
+                '{{ property.name }}': dict(self.{{ property.name_snake_case }}),
 {% endif %}
 {% endif %}
 {% endfor %}
-        }
+            }
+        return self._dict
