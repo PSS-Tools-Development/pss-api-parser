@@ -28,7 +28,7 @@ class ServiceBase(object):
 
 
 class CacheableServiceBase(ServiceBase):
-    def __init__(self, client: _client.PssApiClient, enable_endpoint_cache: bool) -> None:
+    def __init__(self, client: _client.PssApiClient, enable_endpoint_cache: bool = True) -> None:
         super().__init__(client)
         self._SERVICE_CACHE: _Dict[str, _Dict[int, _Any]] = {}
         self._enable_endpoint_cache: bool = enable_endpoint_cache or False
