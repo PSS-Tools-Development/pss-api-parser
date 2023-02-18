@@ -20,9 +20,7 @@ class EntityBaseRaw(_ABC):
 
 
     def __getitem__(self, key):
-        if not key in self.__dict__().keys():
-            raise KeyError()
-        return self.__dict__[key]
+        return self.__dict__()[key]
 
 
     def __hash__(self):
