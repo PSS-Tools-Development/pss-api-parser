@@ -3,3 +3,39 @@ from abc import ABC as _ABC
 
 class EntityBaseRaw(_ABC):
     XML_NODE_NAME: str = None
+
+
+    def _key():
+        return tuple()
+
+
+    def __dict__(self):
+        return {}
+
+
+    def __eq__(self, other):
+        if isinstance(other, type(self)):
+            return other._key() == self._key()
+        return False
+
+
+    def __hash__(self):
+        return hash(self._key())
+
+
+    def __iter__(self):
+        for key, value in self.__dict__().items():
+            yield key, value
+
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+
+    def __repr__(self):
+        attributes = ', '.join(f'{key}={value}' for key, value in self.__iter__())
+        return f'<{type(self).__name} {attributes}>'
+
+
+    def __str__(self):
+        return self.__repr__()

@@ -148,6 +148,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
         property_names = []
         entity_imports = set()
         for property_name, property_type in entity_properties.items():
+            is_entity_type = False
             is_built_in_type = property_type in BUILTIN_TYPES
             is_collection = False
             property_typehint = property_type
@@ -155,10 +156,13 @@ def __prepare_entities_data(entities_data: dict) -> list:
                 property_type, is_collection = __find_entity_name_for_property_type(property_type, entities_data.keys())
                 if not property_type:
                     continue  # Skip properties that are neither of an builtin type nor of a know entity type
+                is_entity_type = True
                 entity_imports.add(property_type)
                 property_typehint = property_type
             if property_type in FIX_ENTITY_PROPERTY_TYPES:
                 property_typehint = f'_{property_type}'
+            if is_entity_type:
+                property_typehint = f'entities.{property_typehint.strip("_")}'
             property_names.append(property_name)
 
             property_name_snake_case = _utils.convert_camel_to_snake_case(property_name)
