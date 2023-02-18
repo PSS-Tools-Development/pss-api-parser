@@ -42,6 +42,22 @@ class {{ entity.name }}Raw:
 {% endfor %}
 
 
+    def _key(self):
+        return (
+{% for property in entity.properties %}
+{% if property.builtin %}
+            self.{{ property.name_snake_case }},
+{% else %}
+{% if property.is_collection %}
+            tuple(child._key() for child in self.{{ property.name_snake_case }}),
+{% else %}
+            self.{{ property.name_snake_case }}._key(),
+{% endif %}
+{% endif %}
+{% endfor %}
+        )
+
+
     def __dict__(self):
         return {
 {% for property in entity.properties %}
@@ -56,8 +72,3 @@ class {{ entity.name }}Raw:
 {% endif %}
 {% endfor %}
         }
-
-
-    def __iter__(self):
-        for key, value in self.__dict__().items():
-            yield key, value
