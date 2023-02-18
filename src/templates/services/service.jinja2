@@ -3,13 +3,13 @@
 {% endfor %}
 
 from .raw import {{ service.name }}Raw as _{{ service.name }}Raw
-from .service_base import ServiceBase as _ServiceBase
+import pssapi.services.service_base as _service_base
 {% for entity_type in service.entity_types %}
 from ..entities import {{ entity_type }} as _{{ entity_type }}
 {% endfor %}
 
 
-class {{ service.name }}(_ServiceBase):
+class {{ service.name }}(_service_base.ServiceBase):
 {% for endpoint in service.endpoints %}
     async def {{ endpoint.name_snake_case_without_version }}(self{% if endpoint.parameter_definitions %}, {{ endpoint.parameter_definitions }}{% endif %}) -> {{ endpoint.return_type_str }}:
         production_server = await self.get_production_server()
