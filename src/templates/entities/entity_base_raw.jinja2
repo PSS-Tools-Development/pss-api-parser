@@ -5,11 +5,12 @@ class EntityBaseRaw(_ABC):
     XML_NODE_NAME: str = None
 
 
+    @staticmethod
     def _key():
         return tuple()
 
-
-    def __dict__(self):
+    @staticmethod
+    def __dict__():
         return {}
 
 
