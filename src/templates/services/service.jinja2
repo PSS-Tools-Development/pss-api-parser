@@ -12,7 +12,8 @@ from ..entities import {{ entity_type }} as _{{ entity_type }}
 class {{ service.name }}(_ServiceBase):
 {% for endpoint in service.endpoints %}
     async def {{ endpoint.name_snake_case_without_version }}(self{% if endpoint.parameter_definitions %}, {{ endpoint.parameter_definitions }}{% endif %}) -> {{ endpoint.return_type_str }}:
-        result = await _{{ service.name }}Raw.{{ endpoint.name_snake_case }}(self.production_server{% if endpoint.raw_endpoint_call_parameters %}, {{ endpoint.raw_endpoint_call_parameters }}{% endif %})
+        production_server = await self.get_production_server()
+        result = await _{{ service.name }}Raw.{{ endpoint.name_snake_case }}(production_server{% if endpoint.raw_endpoint_call_parameters %}, {{ endpoint.raw_endpoint_call_parameters }}{% endif %})
         return result
 
 {% endfor %}

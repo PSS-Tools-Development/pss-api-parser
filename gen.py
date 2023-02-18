@@ -20,10 +20,10 @@ if __name__ == '__main__':
     ERR_ENUMS_NOT_FOUND = 2
 
     parser = _argparse.ArgumentParser()
-    parser.add_argument('--structure', type=str, required=True, help='Path to the structure JSON file to be used')
-    parser.add_argument('--enums', type=str, required=False, help='Path to the enumerations JSON file to be used')
-    parser.add_argument('--out', type=str, required=True, help='Target directory for the generated files')
-    parser.add_argument('--overwrite', action='store_true', default=False, help='Overwrite all files (by default only raw files will be overwritten)')
+    parser.add_argument('--structure', type=str, required=True, help='Path to the structure JSON file to be used.')
+    parser.add_argument('--enums', type=str, required=False, help='Path to the enumerations JSON file to be used.')
+    parser.add_argument('--out', type=str, required=True, help='Target directory for the generated files. The full path will be created and a folder "pssapi" will be created in the target folder.')
+    parser.add_argument('--overwrite', action='store_true', default=False, help='Overwrite all files (by default only raw files will be overwritten).')
     args = parser.parse_args()
 
     if not _os.path.isfile(args.structure):

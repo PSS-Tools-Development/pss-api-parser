@@ -203,10 +203,18 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             'imports': [],
             'name': service_name,
             'name_snake_case': _utils.convert_camel_to_snake_case(service_name),
+            'raw_endpoints': [],
         }
+
+        endpoint_max_versions = {}
 
         for endpoint_name, endpoint_definition in endpoints.items():
             name_snake_case = _utils.convert_camel_to_snake_case(endpoint_name)
+            name_snake_case_without_version = name_snake_case.rstrip(_string.digits).rstrip('_')
+            if name_snake_case != name_snake_case_without_version:
+                version = int(name_snake_case[len(name_snake_case_without_version)-len(name_snake_case):].strip('_'))
+            else:
+                version = 1
             xml_parent_tag_name, return_types = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
             parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition.get('content_parameters', {}))
             service_imports.update(parameter['type'] for parameter in parameters)
@@ -244,7 +252,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             else:
                 return_type = f'_List[{entity_types_str}]'
 
-            service['endpoints'].append({
+            service['raw_endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
                 'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',', ':')),
                 'content_type': endpoint_definition['content_type'],
@@ -253,17 +261,22 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'name': endpoint_name,
                 'name_screaming_snake_case': name_snake_case.upper(),
                 'name_snake_case': name_snake_case,
-                'name_snake_case_without_version': name_snake_case.rstrip(_string.digits).rstrip('_'),
+                'name_snake_case_without_version': name_snake_case_without_version,
                 'parameter_definitions': ', '.join(parameter_definitions),
                 'parameter_raw_definitions': ', '.join(parameter_raw_definitions),
                 'parameters': parameters,
                 'raw_endpoint_call_parameters': ', '.join(raw_endpoint_call_parameters),
                 'return_type_str': return_type,
+                'version': version,
                 'xml_parent_tag_name': xml_parent_tag_name,
             })
 
+            endpoint_max_versions[name_snake_case_without_version] = max(endpoint_max_versions.get(name_snake_case_without_version, 0), version)
+
             if return_types:
                 service['entity_types'].extend(return_types)
+
+        service['endpoints'] = [endpoint for endpoint in service['raw_endpoints'] if endpoint['version'] == endpoint_max_versions[endpoint['name_snake_case_without_version']]]
 
         for service_import in service_imports:
             if service_import in IMPORTS:
@@ -285,11 +298,19 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
         trim_blocks=True
     )
 
+    target_path = target_path.rstrip('/').rstrip('\\')
+    if target_path[-6:].lower() != 'pssapi':
+        target_path = _os.path.join(target_path, 'pssapi')
+
+    _utils.create_path(target_path)
+
     __generate_services_files(services_data, target_path, env, force_overwrite)
     __generate_client_file(services_data, target_path, env, force_overwrite)
     __generate_entities_files(entities_data, target_path, env, force_overwrite)
     if enums_data:
         __generate_enums_files(enums_data, target_path, env, force_overwrite)
+
+    __generate_fixed_files(target_path, env, force_overwrite)
 
 
 def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
@@ -334,72 +355,23 @@ def __generate_client_file(services_data: dict, target_path: str, env: _Environm
     )
 
 
-def __generate_enums_files(enums_data: list, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    int_enum_template = env.get_template('enums/enum_int.jinja2')
-    str_enum_template = env.get_template('enums/enum_str.jinja2')
-    enum_init_template = env.get_template('enums/enum_init.jinja2')
-    enums_path = _os.path.join(target_path, 'enums')
-
-    _utils.create_path(target_path)
-    _utils.create_path(enums_path)
-
-    for enum in enums_data:
-        template = int_enum_template if enum['type'] == _enums.TYPE_INT_ENUM else str_enum_template
-        _utils.create_file(
-            _os.path.join(enums_path, enum['name_snake_case'] + '.py'),
-            template.render(enum=enum),
-            overwrite=force_overwrite,
-        )
+def __generate_constants_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    constants_template = env.get_template('constants.jinja2')
 
     _utils.create_file(
-        _os.path.join(enums_path, '__init__.py'),
-        enum_init_template.render(enums=enums_data),
+        _os.path.join(target_path, 'constants.py'),
+        constants_template.render(),
         overwrite=force_overwrite,
     )
 
 
-def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
-    service_template = env.get_template('services/service.jinja2')
-    service_base_template = env.get_template('services/service_base.jinja2')
-    services_init_template = env.get_template('services/services_init.jinja2')
-    service_raw_template = env.get_template('services/service_raw.jinja2')
-    services_raw_init_template = env.get_template('services/services_raw_init.jinja2')
-
-    services_path = _os.path.join(target_path, 'services')
-    services_raw_path = _os.path.join(services_path, 'raw')
-
-    _utils.create_path(target_path)
-    _utils.create_path(services_path)
-    _utils.create_path(services_raw_path)
-
-    for service in services_data:
-        _utils.create_file(
-            _os.path.join(services_path, service['name_snake_case'] + '.py'),
-            service_template.render(service=service),
-            overwrite=force_overwrite,
-        )
-        _utils.create_file(
-            _os.path.join(services_raw_path, service['name_snake_case'] + '_raw.py'),
-            service_raw_template.render(service=service),
-            overwrite=True
-        )
+def __generate_core_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    core_template = env.get_template('core.jinja2')
 
     _utils.create_file(
-        _os.path.join(services_path, '__init__.py'),
-        services_init_template.render(services=services_data),
+        _os.path.join(target_path, 'core.py'),
+        core_template.render(),
         overwrite=force_overwrite,
-    )
-
-    _utils.create_file(
-        _os.path.join(services_path, 'service_base.py'),
-        service_base_template.render(),
-        overwrite=force_overwrite,
-    )
-
-    _utils.create_file(
-        _os.path.join(services_raw_path, '__init__.py'),
-        services_raw_init_template.render(services=services_data),
-        overwrite=True
     )
 
 
@@ -453,6 +425,129 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
         entity_base_raw_template.render(),
         overwrite=True,
     )
+
+
+def __generate_enums_files(enums_data: list, target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    int_enum_template = env.get_template('enums/enum_int.jinja2')
+    str_enum_template = env.get_template('enums/enum_str.jinja2')
+    enum_init_template = env.get_template('enums/enum_init.jinja2')
+    enums_path = _os.path.join(target_path, 'enums')
+
+    _utils.create_path(enums_path)
+
+    for enum in enums_data:
+        template = int_enum_template if enum['type'] == _enums.TYPE_INT_ENUM else str_enum_template
+        _utils.create_file(
+            _os.path.join(enums_path, enum['name_snake_case'] + '.py'),
+            template.render(enum=enum),
+            overwrite=force_overwrite,
+        )
+
+    _utils.create_file(
+        _os.path.join(enums_path, '__init__.py'),
+        enum_init_template.render(enums=enums_data),
+        overwrite=force_overwrite,
+    )
+
+
+def __generate_fixed_files(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    __generate_constants_file(target_path, env, force_overwrite)
+    __generate_core_file(target_path, env, force_overwrite)
+    __generate_pssapi_init_file(target_path, env, force_overwrite)
+    __generate_utils_submodule(target_path, env, force_overwrite)
+    __generate_types_file(target_path, env, force_overwrite)
+
+
+def __generate_pssapi_init_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    pssapi_init_template = env.get_template('pssapi_init.jinja2')
+
+    _utils.create_file(
+        _os.path.join(target_path, '__init__.py'),
+        pssapi_init_template.render(),
+        overwrite=force_overwrite,
+    )
+
+
+def __generate_services_files(services_data: dict, target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    service_template = env.get_template('services/service.jinja2')
+    service_base_template = env.get_template('services/service_base.jinja2')
+    services_init_template = env.get_template('services/services_init.jinja2')
+    service_raw_template = env.get_template('services/service_raw.jinja2')
+    services_raw_init_template = env.get_template('services/services_raw_init.jinja2')
+
+    services_path = _os.path.join(target_path, 'services')
+    services_raw_path = _os.path.join(services_path, 'raw')
+
+    _utils.create_path(services_path)
+    _utils.create_path(services_raw_path)
+
+    for service in services_data:
+        _utils.create_file(
+            _os.path.join(services_path, service['name_snake_case'] + '.py'),
+            service_template.render(service=service),
+            overwrite=force_overwrite,
+        )
+        _utils.create_file(
+            _os.path.join(services_raw_path, service['name_snake_case'] + '_raw.py'),
+            service_raw_template.render(service=service),
+            overwrite=True
+        )
+
+    _utils.create_file(
+        _os.path.join(services_path, '__init__.py'),
+        services_init_template.render(services=services_data),
+        overwrite=force_overwrite,
+    )
+
+    _utils.create_file(
+        _os.path.join(services_path, 'service_base.py'),
+        service_base_template.render(),
+        overwrite=force_overwrite,
+    )
+
+    _utils.create_file(
+        _os.path.join(services_raw_path, '__init__.py'),
+        services_raw_init_template.render(services=services_data),
+        overwrite=True
+    )
+
+
+def __generate_types_file(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    types_template = env.get_template('types.jinja2')
+
+    _utils.create_file(
+        _os.path.join(target_path, 'types.py'),
+        types_template.render(),
+        overwrite=force_overwrite,
+    )
+
+
+def __generate_utils_submodule(target_path: str, env: _Environment, force_overwrite: bool) -> None:
+    utils_init_template = env.get_template('utils/utils_init.jinja2')
+    utils_datetime_template = env.get_template('utils/utils_datetime.jinja2')
+    utils_parse_template = env.get_template('utils/utils_parse.jinja2')
+    utils_path = _os.path.join(target_path, 'utils')
+
+    _utils.create_path(utils_path)
+
+    _utils.create_file(
+        _os.path.join(utils_path, '__init__.py'),
+        utils_init_template.render(),
+        overwrite=force_overwrite,
+    )
+
+    _utils.create_file(
+        _os.path.join(utils_path, 'datetime.py'),
+        utils_datetime_template.render(),
+        overwrite=force_overwrite,
+    )
+
+    _utils.create_file(
+        _os.path.join(utils_path, 'parse.py'),
+        utils_parse_template.render(),
+        overwrite=force_overwrite
+    )
+
 
 
 # -----
