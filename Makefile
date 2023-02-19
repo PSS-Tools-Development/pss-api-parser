@@ -1,6 +1,7 @@
 PSSAPI_DIRECTORY = ../pssapi.py/pssapi/
 STRUCTURE_FILE = examples/pss_api_complete_structure.json
 ENUMS_FILE = examples/pss_v0.992_dump_enums.json
+CACHEABLE_FILE = examples/pss_api_cacheable_endpoints.json
 OVERWRITE = 1
 
 .PHONY: help
@@ -19,9 +20,9 @@ pssapi: gen ## Generate, auto-lint pssapi.py and check errors
 .PHONY: gen
 gen: ## Generate the code
 ifeq ($(OVERWRITE), 1)
-	python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --out $(PSSAPI_DIRECTORY) --overwrite
+	python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --cacheable ${CACHEABLE_FILE} --out $(PSSAPI_DIRECTORY) --overwrite
 else
-	python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --out $(PSSAPI_DIRECTORY)
+	python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --cacheable ${CACHEABLE_FILE} --out $(PSSAPI_DIRECTORY)
 endif
 
 .PHONY: requirements

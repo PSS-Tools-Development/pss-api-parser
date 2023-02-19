@@ -8,6 +8,7 @@ from colorama import init as _colorama_init
 from contexttimer import Timer as _Timer
 
 from src import generate as _generate
+from src.enums import ProgrammingLanguage
 
 if __name__ == '__main__':
     """
@@ -26,6 +27,7 @@ if __name__ == '__main__':
     parser.add_argument('--cacheable', type=str, required=False, help='Path to the cacheable endpoints JSON file to be used.')
     parser.add_argument('--out', type=str, required=True, help='Target directory for the generated files. The full path will be created and a folder "pssapi" will be created in the target folder.')
     parser.add_argument('--overwrite', action='store_true', default=False, help='Overwrite all files (by default only raw files will be overwritten).')
+    parser.add_argument('--language', type=str, required=False, default='python', help='Target language to be used (python by default)')
     args = parser.parse_args()
 
     if not _os.path.isfile(args.structure):
@@ -36,6 +38,10 @@ if __name__ == '__main__':
         print(f'{_Fore.RED}ERROR: Enumerations JSON file does not exist!{_Fore.RESET}')
         _sys.exit(ERR_ENUMS_NOT_FOUND)
 
+    target_language = ProgrammingLanguage.PYTHON
+    if args.language:
+        target_language = ProgrammingLanguage(args.language)
+
     with _Timer() as t:
         output_directory = args.out.rstrip('/')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Endpoints: {args.structure}')
@@ -44,6 +50,7 @@ if __name__ == '__main__':
         if args.cacheable:
             print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Cacheable Endpoints: {args.cacheable}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Output path: {output_directory}')
+        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Target language: {target_language}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Overwrite: {"Yes" if args.overwrite else "No"}')
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Generating code...')
 
@@ -52,6 +59,7 @@ if __name__ == '__main__':
             args.enums,
             args.cacheable,
             output_directory,
+            target_language,
             force_overwrite=args.overwrite,
         )
 

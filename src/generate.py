@@ -302,10 +302,11 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
 # -----
 
 
-def generate_files_from_data(services_data: list, entities_data: list, enums_data: list, target_path: str, force_overwrite: bool) -> None:
+def generate_files_from_data(services_data: list, entities_data: list, enums_data: list, target_path: str, force_overwrite: bool, target_language: _enums.ProgrammingLanguage) -> None:
+    template_dir = f'templates/{target_language.template_dir()}'
     env = _Environment(
-        loader=_PackageLoader('src'),
-        trim_blocks=True
+        loader=_PackageLoader('src', template_dir),
+        trim_blocks=True,
     )
 
     target_path = target_path.rstrip('/').rstrip('\\')
@@ -323,7 +324,7 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
     __generate_fixed_files(target_path, env, force_overwrite)
 
 
-def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, cacheable_endpoints_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
+def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, cacheable_endpoints_file_path: str, target_path: str, target_language: _enums.ProgrammingLanguage = _enums.ProgrammingLanguage.PYTHON, force_overwrite: bool = False) -> None:
     if force_overwrite is None:
         raise Exception('Parameter \'force_overwrite\' must not be None!')
     parsed_api_data = read_data(parsed_api_data_file_path)
@@ -345,7 +346,8 @@ def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: s
         entities_data,
         all_enums_data,
         target_path,
-        force_overwrite
+        force_overwrite,
+        target_language
     )
 
 

@@ -1,5 +1,6 @@
 import json as _json
 import re as _re
+from enum import StrEnum, auto
 from typing import Dict as _Dict
 from typing import Union as _Union
 
@@ -20,6 +21,13 @@ RX_CSHARP_ACCESS_MODIFIERS = '|'.join(CSHARP_ACCESS_MODIFIERS)
 MARKER_ENUM_DEFINITION_PREFIX = '// Namespace: SavySoda.PixelStarships.Model.SharedModel.Enums'
 RX_ENUM_DEFINITION: _re.Pattern = _re.compile(f'({RX_CSHARP_ACCESS_MODIFIERS}) enum ([^\.]*?) ')
 RX_ENUM_VALUE_DEFINITION = f'({RX_CSHARP_ACCESS_MODIFIERS}) const {{0}} (.*?) = (.*?);'  # {0} should receive the name of the enum
+
+
+class ProgrammingLanguage(StrEnum):
+    PYTHON = auto()
+
+    def template_dir(self):
+        return self.value
 
 
 def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
