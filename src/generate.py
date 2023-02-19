@@ -62,9 +62,9 @@ def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_da
     return result
 
 
-def prepare_parsed_api_data(parsed_api_data: dict) -> _Tuple[list, list]:
+def prepare_parsed_api_data(parsed_api_data: dict, cacheable_endpoints: dict) -> _Tuple[list, list]:
     known_entity_names = set(parsed_api_data['entities'].keys())
-    services = __prepare_services_data(parsed_api_data['endpoints'], known_entity_names)
+    services = __prepare_services_data(parsed_api_data['endpoints'], known_entity_names, cacheable_endpoints)
     entities = __prepare_entities_data(parsed_api_data['entities'])
     return services, entities
 
@@ -196,15 +196,18 @@ def __prepare_entities_data(entities_data: dict) -> list:
     return result
 
 
-def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> list:
+def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cacheable_endpoints: dict) -> list:
     result = []
     for service_name, endpoints in endpoints_data.items():
         service_imports = {'List', 'Tuple'}
+        service_cacheable_endpoints = cacheable_endpoints.get(service_name, {})
+        has_cacheable_endpoints = len(service_cacheable_endpoints) > 0
 
         service = {
             'endpoints': [],
             'entity_types': [],
             'imports': [],
+            'is_cacheable': has_cacheable_endpoints,
             'name': service_name,
             'name_snake_case': _utils.convert_camel_to_snake_case(service_name),
             'raw_endpoints': [],
@@ -213,8 +216,9 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
         endpoint_max_versions = {}
 
         for endpoint_name, endpoint_definition in endpoints.items():
+            endpoint_name_without_version = endpoint_name.rstrip(_string.digits)
             name_snake_case = _utils.convert_camel_to_snake_case(endpoint_name)
-            name_snake_case_without_version = name_snake_case.rstrip(_string.digits).rstrip('_')
+            name_snake_case_without_version = _utils.convert_camel_to_snake_case(endpoint_name_without_version)
             if name_snake_case != name_snake_case_without_version:
                 version = int(name_snake_case[len(name_snake_case_without_version)-len(name_snake_case):].strip('_'))
             else:
@@ -222,6 +226,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
             xml_parent_tag_name, return_types = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
             parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition.get('content_parameters', {}))
             service_imports.update(parameter['type'] for parameter in parameters)
+            endpoint_data_version_property_name = service_cacheable_endpoints.get(endpoint_name_without_version, None)
 
             parameter_definitions = []
             parameter_definitions_with_default_value = []
@@ -260,6 +265,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set) -> li
                 'base_path_name': name_snake_case.upper(),
                 'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',', ':')),
                 'content_type': endpoint_definition['content_type'],
+                'data_version_property_name': endpoint_data_version_property_name,
                 'entity_types_str': f'({entity_types_str}{"," if len(entity_types) == 1 else ""})',
                 'method': endpoint_definition['method'],
                 'name': endpoint_name,
@@ -317,11 +323,12 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
     __generate_fixed_files(target_path, env, force_overwrite)
 
 
-def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
+def generate_source_code(parsed_api_data_file_path: str, enums_data_file_path: str, cacheable_endpoints_file_path: str, target_path: str, force_overwrite: bool = False) -> None:
     if force_overwrite is None:
         raise Exception('Parameter \'force_overwrite\' must not be None!')
     parsed_api_data = read_data(parsed_api_data_file_path)
-    services_data, entities_data = prepare_parsed_api_data(parsed_api_data)
+    cacheable_endpoints = read_data(cacheable_endpoints_file_path)
+    services_data, entities_data = prepare_parsed_api_data(parsed_api_data, cacheable_endpoints)
 
     enums_data = read_data(enums_data_file_path) if enums_data_file_path else None
     if enums_data:

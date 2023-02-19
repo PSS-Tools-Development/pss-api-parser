@@ -22,6 +22,7 @@ if __name__ == '__main__':
     parser = _argparse.ArgumentParser()
     parser.add_argument('--structure', type=str, required=True, help='Path to the structure JSON file to be used.')
     parser.add_argument('--enums', type=str, required=False, help='Path to the enumerations JSON file to be used.')
+    parser.add_argument('--cacheable', type=str, required=False, help='Path to the cacheable endpoints JSON file to be used.')
     parser.add_argument('--out', type=str, required=True, help='Target directory for the generated files. The full path will be created and a folder "pssapi" will be created in the target folder.')
     parser.add_argument('--overwrite', action='store_true', default=False, help='Overwrite all files (by default only raw files will be overwritten).')
     args = parser.parse_args()
@@ -39,6 +40,8 @@ if __name__ == '__main__':
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Endpoints: {args.structure}')
         if args.enums:
             print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Enumerations: {args.enums}')
+        if args.cacheable:
+            print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Cacheable Endpoints: {args.cacheable}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Output path: {output_directory}')
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Overwrite: {"Yes" if args.overwrite else "No"}')
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Generating code...')
@@ -46,6 +49,7 @@ if __name__ == '__main__':
         _generate.generate_source_code(
             args.structure,
             args.enums,
+            args.cacheable,
             output_directory,
             force_overwrite=args.overwrite,
         )
