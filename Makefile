@@ -10,10 +10,11 @@ help: ## Display this help screen
 .PHONY: env
 init: ## Install dependencies
 	pip install --upgrade pip
+	pip install pip-tools
 	pip install -r requirements.txt
 
 .PHONY: pssapi
-pssapi: gen lint check ## Generate, auto-lint pssapi.py and check errors
+pssapi: gen ## Generate, auto-lint pssapi.py and check errors
 
 .PHONY: gen
 gen: ## Generate the code
@@ -22,15 +23,6 @@ ifeq ($(OVERWRITE), 1)
 else
 	python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --out $(PSSAPI_DIRECTORY)
 endif
-
-.PHONY: lint
-lint: ## Auto-lint the generated code
-	autopep8 --in-place --max-line-length 200 --recursive $(PSSAPI_DIRECTORY)
-	autoflake --in-place --remove-all-unused-imports --ignore-init-module-imports --recursive $(PSSAPI_DIRECTORY)
-
-.PHONY: check
-check: ## Check Python syntax commons errors of the generated code
-	flake8 $(PSSAPI_DIRECTORY) --count --ignore=E501 --exclude __init__.py --show-source --statistics
 
 .PHONY: requirements
 requirements: ## Compile requirements.txt with pip-tools
