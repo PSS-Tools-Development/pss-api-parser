@@ -60,6 +60,10 @@ def cache_endpoint(version_property_name: str):
                     if endpoint_cache:
                         service_cache[endpoint_name] = {}
                     service_cache.setdefault(endpoint_name, {})[endpoint_data_version] = data
+                if isinstance(data, list):
+                    return list(data)
+                if isinstance(data, dict):
+                    return dict(data)
                 return data
             else:
                 return await func(*args, **kwargs)
