@@ -10,7 +10,7 @@ from ..types import EntityInfo as _EntityInfo
 from ..utils import parse as _parse
 
 
-class {{ entity.name }}(_{{ entity.base_class_name }}, _{{ entity.name }}Raw):
+class {{ entity.name }}(_{{ entity.name }}Raw, _{{ entity.base_class_name }}):
     def __init__(self, {{ entity.name_snake_case }}_info: _EntityInfo) -> None:
         super().__init__({{ entity.name_snake_case }}_info)
 
