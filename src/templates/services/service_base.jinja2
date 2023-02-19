@@ -53,8 +53,7 @@ def cache_endpoint(version_property_name: str):
                 endpoint_data_version = latest_version[version_property_name]
 
                 endpoint_cache = service_cache.get(endpoint_name, {})
-                if endpoint_cache:
-                    data = endpoint_cache.get(endpoint_data_version)
+                data = endpoint_cache.get(endpoint_data_version)
 
                 if not data:
                     data = await func(self, *args, **kwargs)
