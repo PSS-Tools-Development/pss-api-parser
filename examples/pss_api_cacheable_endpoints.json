@@ -1,0 +1,83 @@
+{
+    "AchievementService": {
+        "ListAchievementDesigns": "AchievementDesignVersion"
+    },
+    "AnimationService": {
+        "ListAnimations": "AnimationVersion"
+    },
+    "BackgroundService": {
+        "ListBackgrounds": "BackgroundVersion"
+    },
+    "ChallengeService": {
+        "ListAllChallengeDesigns": "ChallengeDesignVersion"
+    },
+    "CharacterService": {
+        "ListAllCharacterDesignActions": "CharacterDesignActionVersion",
+        "ListAllCharacterDesigns": "CharacterDesignVersion",
+        "ListAllDrawDesigns": "DrawDesignVersion"
+    },
+    "CollectionService": {
+        "ListAllCollectionDesigns": "CollectionDesignVersion"
+    },
+    "DivisionService": {
+        "ListAllDivisionDesigns": "DivisionDesignVersion"
+    },
+    "FileService": {
+        "ListFiles": "FileVersion",
+        "ListSprites": "SpriteVersion"
+    },
+    "GalaxyService": {
+        "ListMarkerGeneratorDesigns": "MarkerGeneratorDesignVersion",
+        "ListStarSystemLinks": "StarSystemLinkVersion",
+        "ListStarSystems": "StarSystemVersion",
+        "ListPlanets": "PlanetVersion"
+    },
+    "ItemService" : {
+        "ListItemDesigns": "ItemDesignVersion",
+        "ListItemDesignActions": "ItemDesignActionVersion"
+    },
+    "LeagueService": {
+        "ListLeagues": "LeagueVersion"
+    },
+    "MissionService": {
+        "ListAllMissionDesigns": "MissionDesignVersion"
+    },
+    "PromotionService": {
+        "ListAllPromotionDesigns": "PromotionDesignVersion"
+    },
+    "ResearchService": {
+        "ListAllResearchDesigns": "ResearchDesignVersion"
+    },
+    "RewardService": {
+        "ListAllRewardDesigns": "RewardDesignVersion"
+    },
+    "RoomDesignSpriteService": {
+        "ListRoomDesignSprite": "RoomDesignSpriteVersion"
+    },
+    "RoomService": {
+        "ListActionTypes": "ActionTypeVersion",
+        "ListConditionTypes": "ConditionTypeVersion",
+        "ListCraftDesigns": "CraftDesignVersion",
+        "ListMissileDesigns": "MissileDesignVersion",
+        "ListRoomDesignPurchase": "RoomDesignPurchaseVersion",
+        "ListRoomDesigns": "RoomDesignVersion"
+    },
+    "SeasonService": {
+        "ListAllSeasonDesigns": "SeasonDesignVersion"
+    },
+    "SettingService": {
+        "ListAllNewsDesigns": "NewsDesignVersion"
+    },
+    "ShipService": {
+        "ListAllShipDesigns": "ShipDesignVersion"
+    },
+    "SituationService": {
+        "ListSituationDesigns": "SituationDesignVersion"
+    },
+    "TaskService": {
+        "ListAllTaskDesigns": "TaskDesignVersion"
+    },
+    "TrainingService": {
+        "ListAllTrainingDesigns": "TrainingDesignVersion"
+    }
+}

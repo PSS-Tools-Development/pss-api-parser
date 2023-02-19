@@ -1,0 +1,5 @@
+{
+    "ServiceName": {
+        "OriginalEndpointNameWithoutVersion": "EndpointDataVersionPropertyName"
+    }
+}
