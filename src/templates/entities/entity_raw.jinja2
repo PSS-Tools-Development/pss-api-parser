@@ -14,7 +14,7 @@ class {{ entity.name }}Raw:
     XML_NODE_NAME: str = '{{ entity.xml_node_name }}'
 
     def __init__(self, {{ entity.name_snake_case }}_info: _EntityInfo) -> None:
-        self._dict: _Dict[str, _Any] = None
+        self._dict: _Dict[str, _Any] = {{ '{}' }}
 {% for property in entity.properties %}
 {% if property.builtin %}
         self._{{ property.name_snake_case }}: {{ property.typehint }} = _parse.pss_{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}'))
