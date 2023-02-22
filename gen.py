@@ -64,10 +64,10 @@ if __name__ == '__main__':
         )
 
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Linting code with autopep8...')
-        subprocess.run(["autopep8", "--in-place", "--max-line-length", "200", "--recursive", output_directory],  check=True)
+        subprocess.run(["autopep8", output_directory],  check=True)
 
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Linting code with autoflake...')
-        subprocess.run(["autoflake", "--in-place", "--remove-all-unused-imports", "--ignore-init-module-imports", "--recursive", output_directory],  check=True)
+        subprocess.run(["autoflake", output_directory],  check=True)
 
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Checking code with flake8...')
         subprocess.run(["flake8", output_directory, "--ignore=E501", "--exclude", "__init__.py", "--show-source", "--statistics"], check=True)
