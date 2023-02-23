@@ -69,7 +69,7 @@ class {{ entity.name }}Raw:
 {% if property.is_collection %}
                 '{{ property.name }}': [dict(child) for child in self.{{ property.name_snake_case }}],
 {% else %}
-                '{{ property.name }}': dict(self.{{ property.name_snake_case }}),
+                '{{ property.name }}': dict(self.{{ property.name_snake_case }}) if self.{{ property.name_snake_case }} else None,
 {% endif %}
 {% endif %}
 {% endfor %}
