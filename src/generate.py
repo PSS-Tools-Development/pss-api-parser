@@ -254,6 +254,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
 
             parameter_definitions.extend(parameter_definitions_with_default_value)
 
+            # TODO: Change how this works. return_types will hold a dictionary in the future.
             entity_types = [f'_{return_type}' for return_type in return_types]
             entity_types_str = ', '.join(entity_types)
             if len(return_types) > 1:
@@ -645,12 +646,15 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
         keys = list(response_structure.keys())
         entity_types = [key for key in keys if key in entity_names]
         if entity_types:
-            result = (parent_tag_name, entity_types)
+            if len(entity_types) == 1 and f'{entity_types[0]}s' == parent_tag_name:
+                result = (parent_tag_name, [(entity_types[0], 'List')])
+            elif len(entity_types) > 1:
+                result = (parent_tag_name, [(entity_type, None) for entity_type in entity_types])
         else:
             for key, value in response_structure.items():
                 result = __get_return_type(value, entity_names, key)
                 if result[1]:  # At least 1 known entity type has been found
                     break
                 else:
-                    result = (parent_tag_name, None)
+                    result = (parent_tag_name, [])
     return result
