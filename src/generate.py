@@ -661,12 +661,12 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
             return (parent_tag_name, entity_types)
 
 
-def __get_return_type_for_python(return_types: _Tuple[str, _List[_Tuple[str, str, bool]]]) -> str:
+def __get_return_type_for_python(return_types: _List[_Tuple[str, str, bool]]) -> str:
     if not return_types:
         return ''
     
     result = []
-    for entity_name, parent_tag, is_list in return_types[1]:
+    for entity_name, parent_tag, is_list in return_types:
         if is_list:
             result.append(f'_List[_{entity_name}]')
         else:

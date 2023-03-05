@@ -106,25 +106,25 @@ def test___get_return_type__multiple_entity_types_and_collections():
 
 
 def test__get_return_type_for_python__multiple_entity_collections():
-    return_types = ('ListUsers', [('Message', 'Messages', True), ('User', 'Users', True)])
+    return_types = [('Message', 'Messages', True), ('User', 'Users', True)]
     expected_result = '_Tuple[_List[_Message], _List[_User]]'
     assert _generate.__get_return_type_for_python(return_types) == expected_result
 
 
 def test__get_return_type_for_python__multiple_entity_types():
-    return_types = ('InspectShip', [('Ship', 'InspectShip', False), ('User', 'InspectShip', False)])
+    return_types = [('Ship', 'InspectShip', False), ('User', 'InspectShip', False)]
     expected_result = '_Tuple[_Ship, _User]'
     assert _generate.__get_return_type_for_python(return_types) == expected_result
 
 
 def test__get_return_type_for_python__multiple_entity_types_and_collections():
-    return_types = ('DummyEndpoint', [('Ship', 'DummyEndpoint', False), ('User', 'Users', True)])
+    return_types = [('Ship', 'DummyEndpoint', False), ('User', 'Users', True)]
     expected_result = '_Tuple[_Ship, _List[_User]]'
     assert _generate.__get_return_type_for_python(return_types) == expected_result
 
 
 def test__get_return_type_for_python__single_entity_collection():
-    return_types = ('ListAlliancesByRanking', [('Alliance', 'Alliances', True)])
+    return_types = [('Alliance', 'Alliances', True)]
     expected_result = '_List[_Alliance]'
     assert _generate.__get_return_type_for_python(return_types) == expected_result
 
