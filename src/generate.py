@@ -223,7 +223,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
                 version = int(name_snake_case[len(name_snake_case_without_version)-len(name_snake_case):].strip('_'))
             else:
                 version = 1
-            xml_parent_tag_name, return_types = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
+            xml_parent_tag_name, return_types = __get_return_type(endpoint_definition['response_structure'], endpoint_name_without_version, known_entity_names)
             parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition.get('content_parameters', {}))
             service_imports.update(parameter['type'] for parameter in parameters)
             endpoint_data_version_property_name = service_cacheable_endpoints.get(endpoint_name_without_version, None)
@@ -254,13 +254,9 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
 
             parameter_definitions.extend(parameter_definitions_with_default_value)
 
-            # TODO: Change how this works. return_types will hold a dictionary in the future.
-            entity_types = [f'_{return_type}' for return_type in return_types]
+            entity_types = [f'_{return_type[0]}' for return_type in return_types]
             entity_types_str = ', '.join(entity_types)
-            if len(return_types) > 1:
-                return_type = f'_Tuple[{entity_types_str}]'
-            else:
-                return_type = f'_List[{entity_types_str}]'
+            return_type = __get_return_type_for_python(return_types)
 
             service['raw_endpoints'].append({
                 'base_path_name': name_snake_case.upper(),
@@ -285,7 +281,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
             endpoint_max_versions[name_snake_case_without_version] = max(endpoint_max_versions.get(name_snake_case_without_version, 0), version)
 
             if return_types:
-                service['entity_types'].extend(return_types)
+                service['entity_types'].extend(return_type[0] for return_type in return_types)
 
         service['endpoints'] = [endpoint for endpoint in service['raw_endpoints'] if endpoint['version'] == endpoint_max_versions[endpoint['name_snake_case_without_version']]]
 
@@ -636,25 +632,46 @@ def __get_endpoint_raw_parameter_definitions(parameters: _List[dict]) -> _List[s
     return result
 
 
-def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, str]:
+def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, _List[_Tuple[str, str, bool]]]:
     """ The return type will be determined by crawling through dict 'response_structure' until there's
         a match of tag name and any known entity_name. All matching tag names on that depth will
         be considered for the response type. If there's only one entity type, a list of that entity
         type will be returned. If there are multiple, the return type is a Tuple of those entity types."""
-    result = (parent_tag_name, None)
+    
     if isinstance(response_structure, dict):
+        child_types = []
         keys = list(response_structure.keys())
         entity_types = [key for key in keys if key in entity_names]
         if entity_types:
-            if len(entity_types) == 1 and f'{entity_types[0]}s' == parent_tag_name:
-                result = (parent_tag_name, [(entity_types[0], 'List')])
-            elif len(entity_types) > 1:
-                result = (parent_tag_name, [(entity_type, None) for entity_type in entity_types])
+            child_types = [(parent_tag_name, [(entity_type, parent_tag_name, True) for entity_type in entity_types])]
+        
+        child_types.extend([__get_return_type(response_structure[key], entity_names, key) for key in keys if key not in entity_types])
+        return_types = []
+        for return_type in child_types:
+            if return_type:
+                return_parent_tag_name, entity_types = return_type
+                entity_types = [(entity_type[0], entity_type[1], f'{entity_type[0]}s' == entity_type[1]) for entity_type in entity_types]
+                return_types.append((return_parent_tag_name, entity_types))
+        if len(return_types) < 1:
+            pass # ???
+        elif len(return_types) == 1:
+            return return_types[0]
         else:
-            for key, value in response_structure.items():
-                result = __get_return_type(value, entity_names, key)
-                if result[1]:  # At least 1 known entity type has been found
-                    break
-                else:
-                    result = (parent_tag_name, [])
-    return result
+            entity_types = [entity_type for _, return_type in return_types for entity_type in return_type]
+            return (parent_tag_name, entity_types)
+
+
+def __get_return_type_for_python(return_types: _Tuple[str, _List[_Tuple[str, str, bool]]]) -> str:
+    if not return_types:
+        return ''
+    
+    result = []
+    for entity_name, parent_tag, is_list in return_types[1]:
+        if is_list:
+            result.append(f'_List[_{entity_name}]')
+        else:
+            result.append(f'_{entity_name}')
+    if len(result) > 1:
+        return f'_Tuple[{", ".join(result)}]'
+    else:
+        return result[0]
