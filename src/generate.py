@@ -223,7 +223,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
                 version = int(name_snake_case[len(name_snake_case_without_version)-len(name_snake_case):].strip('_'))
             else:
                 version = 1
-            xml_parent_tag_name, return_types = __get_return_type(endpoint_definition['response_structure'], endpoint_name_without_version, known_entity_names)
+            xml_parent_tag_name, return_types = __get_return_type(endpoint_definition['response_structure'], known_entity_names)
             parameters = __extract_parameters(endpoint_definition['query_parameters'] or endpoint_definition.get('content_parameters', {}))
             service_imports.update(parameter['type'] for parameter in parameters)
             endpoint_data_version_property_name = service_cacheable_endpoints.get(endpoint_name_without_version, None)
@@ -254,7 +254,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
 
             parameter_definitions.extend(parameter_definitions_with_default_value)
 
-            entity_types = [f'_{return_type[0]}' for return_type in return_types]
+            entity_types = [f'(_{return_type[0]}, \'{return_type[1]}\', {return_type[2]})' for return_type in return_types]
             entity_types_str = ', '.join(entity_types)
             return_type = __get_return_type_for_python(return_types)
 
@@ -263,6 +263,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
                 'content_structure': _json.dumps(endpoint_definition['content_structure'], separators=(',', ':')),
                 'content_type': endpoint_definition['content_type'],
                 'data_version_property_name': endpoint_data_version_property_name,
+                'entity_tags': '',
                 'entity_types_str': f'({entity_types_str}{"," if len(entity_types) == 1 else ""})',
                 'method': endpoint_definition['method'],
                 'name': endpoint_name,
@@ -307,6 +308,8 @@ def generate_files_from_data(services_data: list, entities_data: list, enums_dat
     )
 
     target_path = target_path.rstrip('/').rstrip('\\')
+    if target_path[-10:].lower() != 'src/pssapi':
+        target_path = _os.path.join(target_path, 'src/pssapi')
     if target_path[-6:].lower() != 'pssapi':
         target_path = _os.path.join(target_path, 'pssapi')
 

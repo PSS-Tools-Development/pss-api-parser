@@ -74,7 +74,6 @@ def test___get_return_type__multiple_entity_types():
 
 
 def test___get_return_type__multiple_entity_types_and_collections():
-    
     response_structure = {
         "DummyService": {
             "DummyEndpoint": {
@@ -105,25 +104,43 @@ def test___get_return_type__multiple_entity_types_and_collections():
     assert __return_type_tuples_equal(result, expected_result)
 
 
-def test__get_return_type_for_python__multiple_entity_collections():
+def test___get_return_type__get_latest_version_3():
+    response_structure = {
+        "SettingService": {
+            "GetLatestSetting": {
+                "Setting": {}
+            }
+        }
+    }
+    entity_names = ['Setting']
+    expected_result = ('GetLatestSetting', [('Setting', 'GetLatestSetting', False)])
+
+    result = _generate.__get_return_type(response_structure, entity_names)
+    assert __return_type_tuples_equal(result, expected_result)
+
+
+
+
+
+def test___get_return_type_for_python__multiple_entity_collections():
     return_types = [('Message', 'Messages', True), ('User', 'Users', True)]
     expected_result = '_Tuple[_List[_Message], _List[_User]]'
     assert _generate.__get_return_type_for_python(return_types) == expected_result
 
 
-def test__get_return_type_for_python__multiple_entity_types():
+def test___get_return_type_for_python__multiple_entity_types():
     return_types = [('Ship', 'InspectShip', False), ('User', 'InspectShip', False)]
     expected_result = '_Tuple[_Ship, _User]'
     assert _generate.__get_return_type_for_python(return_types) == expected_result
 
 
-def test__get_return_type_for_python__multiple_entity_types_and_collections():
+def test___get_return_type_for_python__multiple_entity_types_and_collections():
     return_types = [('Ship', 'DummyEndpoint', False), ('User', 'Users', True)]
     expected_result = '_Tuple[_Ship, _List[_User]]'
     assert _generate.__get_return_type_for_python(return_types) == expected_result
 
 
-def test__get_return_type_for_python__single_entity_collection():
+def test___get_return_type_for_python__single_entity_collection():
     return_types = [('Alliance', 'Alliances', True)]
     expected_result = '_List[_Alliance]'
     assert _generate.__get_return_type_for_python(return_types) == expected_result
