@@ -86,7 +86,7 @@ async def __get_data_from_url(url: str, method: str, content: str = None, **para
     # filter parameters with a None value and format datetime
     filtered_params = {}
     for (key, value) in params.items():
-        if not value:
+        if value is None:
             continue
 
         if (isinstance(value, _datetime)):
