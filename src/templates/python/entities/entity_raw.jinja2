@@ -52,7 +52,7 @@ class {{ entity.name }}Raw:
 {% if property.is_collection %}
             tuple(child._key() for child in self.{{ property.name_snake_case }}),
 {% else %}
-            self.{{ property.name_snake_case }}._key(),
+            self.{{ property.name_snake_case }}._key() if self.{{ property.name_snake_case }} else None,
 {% endif %}
 {% endif %}
 {% endfor %}
