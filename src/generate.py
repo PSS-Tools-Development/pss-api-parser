@@ -649,12 +649,17 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
             child_types = [(parent_tag_name, [(entity_type, parent_tag_name, True) for entity_type in entity_types])]
         
         child_types.extend([__get_return_type(response_structure[key], entity_names, key) for key in keys if key not in entity_types])
+        
         return_types = []
         for return_type in child_types:
             if return_type:
                 return_parent_tag_name, entity_types = return_type
-                entity_types = [(entity_type[0], entity_type[1], f'{entity_type[0]}s' == entity_type[1]) for entity_type in entity_types]
+                # 0 -> entity name
+                # 1 -> parent tag name
+                # f'{entity_type[0]}s' == entity_type[1] -> is_list
+                entity_types = [(entity_type[0], entity_type[1] if f'{entity_type[0]}s' == entity_type[1] else entity_type[0], f'{entity_type[0]}s' == entity_type[1]) for entity_type in entity_types]
                 return_types.append((return_parent_tag_name, entity_types))
+        
         if len(return_types) < 1:
             pass # ???
         elif len(return_types) == 1:
