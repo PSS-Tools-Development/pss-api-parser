@@ -20,7 +20,7 @@ class {{ entity.name }}Raw:
         self._{{ property.name_snake_case }}: {{ property.typehint }} = _parse.pss_{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}'))
 {% else %}
 {% if property.is_collection %}
-        self._{{ property.name_snake_case }}: _List[_{{ property.typehint }}] = [_{{ property.typehint }}(child_info[1]) for child_info in {{ entity.name_snake_case }}_info.get('{{ property.name }}').items()] if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else []
+        self._{{ property.name_snake_case }}: _List[_{{ property.typehint }}] = [_{{ property.typehint }}(child_info) for child_info in {{ entity.name_snake_case }}_info.get('{{ property.name }}')] if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else []
 {% else %}
         self._{{ property.name_snake_case }}: _{{ property.typehint }} = _{{ property.typehint }}({{ entity.name_snake_case }}_info.get('{{ property.name }}')) if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else None
 {% endif %}
