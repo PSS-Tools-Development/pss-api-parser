@@ -1,4 +1,11 @@
-from .entity_base import *
+from .entity_base import EntityBase
 {% for entity in entities %}
-from .{{ entity.name_snake_case }} import *
+from .{{ entity.name_snake_case }} import {{ entity.name }}
 {% endfor %}
+
+__all__ = [
+    'EntityBase',
+{% for entity in entities %}
+    '{{ entity.name }}',
+{% endfor %}
+]

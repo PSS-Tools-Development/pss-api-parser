@@ -1,3 +1,9 @@
 {% for enum in enums %}
 from .{{ enum.name_snake_case }} import {{ enum.name }}
 {% endfor %}
+
+__all__ = [
+{% for enum in enums %}
+    '{{ enum.name }}',
+{% endfor %}
+]

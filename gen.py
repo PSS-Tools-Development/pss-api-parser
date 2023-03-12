@@ -70,7 +70,7 @@ if __name__ == '__main__':
         subprocess.run(["autoflake", output_directory],  check=True)
 
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Checking code with flake8...')
-        subprocess.run(["flake8", output_directory, "--ignore=E501", "--exclude", "__init__.py", "--show-source", "--statistics"], check=True)
+        subprocess.run(["flake8", output_directory, "--ignore=E501", "--show-source", "--statistics"], check=True)
 
         print(f'{_Fore.GREEN} >>>{_Fore.RESET} Done in {t.elapsed}s')
         _sys.exit(0)
