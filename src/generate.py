@@ -7,7 +7,6 @@ from typing import List as _List
 from typing import Optional as _Optional
 from typing import Tuple as _Tuple
 
-import autopep8 as _autopep8
 from jinja2 import Environment as _Environment
 from jinja2 import PackageLoader as _PackageLoader
 
@@ -566,10 +565,6 @@ def __generate_utils_submodule(target_path: str, env: _Environment, force_overwr
 # -----
 # ----- Utility -----
 # -----
-
-
-def format_source(content: str) -> str:
-    return _autopep8.fix_code(content)
 
 
 def read_data(file_path: str) -> dict:

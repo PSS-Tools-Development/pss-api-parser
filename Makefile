@@ -12,7 +12,7 @@ help: ## Display this help screen
 init: ## Install dependencies
 	pip install --upgrade pip
 	pip install pip-tools
-	pip install -r requirements.txt
+	pip-sync requirements.txt
 
 .PHONY: pssapi
 pssapi: gen ## Generate, auto-lint pssapi.py and check errors
@@ -27,4 +27,4 @@ endif
 
 .PHONY: requirements
 requirements: ## Compile requirements.txt with pip-tools
-	CUSTOM_COMPILE_COMMAND="make requirements" pip-compile requirements.in
+	CUSTOM_COMPILE_COMMAND="make requirements" pip-compile --resolver=backtracking requirements.in
