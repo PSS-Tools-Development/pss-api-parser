@@ -1039,23 +1039,6 @@
       }
     }, 
     "MessageService": {
-      "ActionMessage": {
-        "content_parameters": {}, 
-        "content_structure": {}, 
-        "content_type": "", 
-        "endpoint": "ActionMessage", 
-        "method": "GET", 
-        "query_parameters": {
-          "accessToken": "str", 
-          "messageId": "int"
-        }, 
-        "response_structure": {
-          "MessageService": {
-            "ActionMessage": {}
-          }
-        }, 
-        "service": "MessageService"
-      }, 
       "CollectReward2": {
         "content_parameters": {}, 
         "content_structure": {}, 
