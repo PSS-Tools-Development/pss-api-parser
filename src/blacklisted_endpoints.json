@@ -1,4 +1,5 @@
 [
+  "ActionMessage",
   "AddGamecenterFriends",
   "AuthorizeFirebaseToken",
   "CreateMission",
