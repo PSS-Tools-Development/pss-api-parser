@@ -27,11 +27,11 @@ __PSS_BOOL_VALUES = ('true', 'false', 'True', 'False')
 __RX_PARAMETER_CHECK: _re.Pattern = _re.compile('\d.*', )
 
 TYPE_ORDER_LOOKUP: _Dict[str, int] = {
-    'str': 5,
-    'float': 4,
-    'int': 3,
-    'bool': 2,
-    'datetime': 1,
+    'float': 5,
+    'int': 4,
+    'bool': 3,
+    'datetime': 2,
+    'str': 1,
     'none': 0,
 }
 
