@@ -65,12 +65,12 @@ if __name__ == '__main__':
                 print(f'{_Fore.BLUE} >>>{_Fore.RESET} Stored parsed services, endpoints and entities at: {output_file_path}')
         elif args.function == 'enums':
             print(f'{_Fore.BLUE} >>>{_Fore.RESET} Parsing dumped enumerations...')
-            input_file_name_with_extension = _os.path.split(args.in_)[1]
+            input_file_name_with_extension = _os.path.split(args.in_[0])[1]
             output_file_name = _os.path.splitext(input_file_name_with_extension)[0]
             output_file_name += '_enums.json'
             output_file_path = _os.path.join(output_directory, output_file_name)
             parsed_enums = _enums.parse_csharp_dump_file(
-                args.in_
+                args.in_[0]
             )
             _enums.store_enum_file(
                 parsed_enums,
