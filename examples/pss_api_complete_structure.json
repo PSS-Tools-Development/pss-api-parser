@@ -317,6 +317,54 @@
           }
         },
         "service": "CharacterService"
+      },
+      "PrestigeCharacterFrom": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "PrestigeCharacterFrom",
+        "method": "GET",
+        "query_parameters": {
+          "characterDesignId": "int",
+          "languageKey": "str"
+        },
+        "response_structure": {
+          "CharacterService": {
+            "PrestigeCharacterFrom": {
+              "Prestiges": {
+                "Prestige": {}
+              },
+              "properties": {
+                "timestamp": "datetime"
+              }
+            }
+          }
+        },
+        "service": "CharacterService"
+      },
+      "PrestigeCharacterTo": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "PrestigeCharacterTo",
+        "method": "GET",
+        "query_parameters": {
+          "characterDesignId": "int",
+          "languageKey": "str"
+        },
+        "response_structure": {
+          "CharacterService": {
+            "PrestigeCharacterTo": {
+              "Prestiges": {
+                "Prestige": {}
+              },
+              "properties": {
+                "timestamp": "datetime"
+              }
+            }
+          }
+        },
+        "service": "CharacterService"
       }
     },
     "CollectionService": {
@@ -2613,6 +2661,11 @@
       "Title": "str",
       "UpdateDate": "datetime",
       "UserId": "int"
+    },
+    "Prestige": {
+      "CharacterDesignId1": "int",
+      "CharacterDesignId2": "int",
+      "ToCharacterDesignId": "int"
     },
     "PromotionDesign": {
       "AvailableEveryXDays": "int",
