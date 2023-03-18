@@ -77,7 +77,7 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
                     found_marker = False
                     enum_name = rx_enum_value_custom = None
                 else:  # Search for values
-                    if '[XmlEnumAttribute]' in line:
+                    if '[XmlEnumAttribute]' in line or '[XmlEnum(' in line:
                         likely_str = True
                     elif 'const' in line:
                         match = rx_enum_value_custom.search(line)
