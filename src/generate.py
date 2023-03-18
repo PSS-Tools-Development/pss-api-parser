@@ -78,7 +78,10 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
             'type': parsed_enums_data[enum_name]['type']
         }
 
-        sorted_enum_values = sorted(parsed_enums_data[enum_name]['values'].items(), key=lambda item: item[1] or 0 if parsed_enums_data[enum_name]['type'] == _enums.TYPE_INT_ENUM else '')
+        if parsed_enums_data[enum_name]['type'] == _enums.TYPE_INT_ENUM:
+            sorted_enum_values = sorted(parsed_enums_data[enum_name]['values'].items(), key=lambda item: item[1] or 0)
+        elif parsed_enums_data[enum_name]['type'] == _enums.TYPE_STR_ENUM:
+            sorted_enum_values = sorted(parsed_enums_data[enum_name]['values'].items(), key=lambda item: item[1] or '')
         enum_value_names = [key for key, value in sorted_enum_values if value not in ignore_value_names]
 
         enum_definition['enum_values'] = []
