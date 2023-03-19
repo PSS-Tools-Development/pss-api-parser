@@ -1157,30 +1157,6 @@
           }
         },
         "service": "ResearchService"
-      },
-      "SpeedUpResearchUsingBoostGauge": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "SpeedUpResearchUsingBoostGauge",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "clientDateTime": "str",
-          "researchId": "int"
-        },
-        "response_structure": {
-          "ResearchService": {
-            "SpeedUpResearchUsingBoostGauge": {
-              "Research": {},
-              "User": {
-                "Alliance": {},
-                "UserSeason": {}
-              }
-            }
-          }
-        },
-        "service": "ResearchService"
       }
     },
     "RewardService": {
