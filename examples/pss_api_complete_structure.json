@@ -46,30 +46,6 @@
         },
         "service": "AllianceService"
       },
-      "InteractWithStarbaseRoom": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "InteractWithStarbaseRoom",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "checksum": "str",
-          "clientDateTime": "str",
-          "roomId": "int"
-        },
-        "response_structure": {
-          "AllianceService": {
-            "InteractWithStarbaseRoom": {
-              "User": {
-                "Alliance": {},
-                "UserSeason": {}
-              }
-            }
-          }
-        },
-        "service": "AllianceService"
-      },
       "ListAlliancesByChampionshipScoreRanking": {
         "content_parameters": {},
         "content_structure": {},
