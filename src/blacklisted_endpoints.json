@@ -6,6 +6,7 @@
   "FindUserRanking",
   "FixUserPromotions",
   "HeartBeat",
+  "InteractWithStarbaseRoom",
   "ListAchievementsOfAUser",
   "ListAllCharactersOfUser",
   "ListAllResearches",
