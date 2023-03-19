@@ -89,6 +89,26 @@
         },
         "service": "AllianceService"
       },
+      "ListAlliancesWithDivision": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListAlliancesWithDivision",
+        "method": "GET",
+        "query_parameters": {
+          "divisionDesignId": "int"
+        },
+        "response_structure": {
+          "AllianceService": {
+            "ListAlliancesWithDivision": {
+              "Alliances": {
+                "Alliance": {}
+              }
+            }
+          }
+        },
+        "service": "AllianceService"
+      },
       "ListUsers2": {
         "content_parameters": {},
         "content_structure": {},
