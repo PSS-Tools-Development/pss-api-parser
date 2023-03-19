@@ -4,6 +4,7 @@
   "AddStarbux",
   "AuthorizeFirebaseToken",
   "CollectAllResources",
+  "CollectDailyReward",
   "CollectMarker",
   "CollectReward",
   "FindUserRanking",

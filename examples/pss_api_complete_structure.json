@@ -1599,28 +1599,6 @@
       }
     },
     "UserService": {
-      "CollectDailyReward2": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "CollectDailyReward2",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "argument": "int",
-          "dailyRewardStatus": "str"
-        },
-        "response_structure": {
-          "UserService": {
-            "CollectDailyReward": {
-              "Items": {
-                "Item": {}
-              }
-            }
-          }
-        },
-        "service": "UserService"
-      },
       "DeviceLogin12": {
         "content_parameters": {
           "AccessToken": "str",
