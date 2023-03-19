@@ -1105,40 +1105,6 @@
           }
         },
         "service": "MissionService"
-      },
-      "SelectInstantMission3": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "SelectInstantMission3",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "checksum": "str",
-          "clientDateTime": "str",
-          "clientNumber": "int",
-          "messageId": "int",
-          "missionDesignId": "int",
-          "missionEventId": "int"
-        },
-        "response_structure": {
-          "MissionService": {
-            "SelectInstantMission": {
-              "Battle": {
-                "Crafts": {},
-                "Missiles": {}
-              },
-              "MissionEvents": {
-                "MissionEvent": {}
-              },
-              "User": {
-                "Alliance": {},
-                "UserSeason": {}
-              }
-            }
-          }
-        },
-        "service": "MissionService"
       }
     },
     "PromotionService": {

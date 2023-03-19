@@ -25,6 +25,7 @@
   "ListUserMarkers",
   "ListUserStarSystems",
   "PurchaseFromMarker",
+  "SelectInstantMission3",
   "SteamLogin3",
   "UpdateMarkerMovement",
   "UserGameCenterAuthorize",
