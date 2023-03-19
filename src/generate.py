@@ -92,6 +92,12 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
                     'name_upper': _utils.convert_camel_to_snake_case(value_name).upper(),
                     'value': parsed_enums_data[enum_name]['values'][value_name],
                 })
+            else:
+                enum_definition['enum_values'].append({
+                    'name': 'None',
+                    'name_upper': 'NONE',
+                    'value': parsed_enums_data[enum_name]['values'][value_name] or 'None',
+                })
         result.append(enum_definition)
     return result
 
