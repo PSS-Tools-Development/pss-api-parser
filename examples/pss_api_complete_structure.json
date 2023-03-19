@@ -1030,26 +1030,6 @@
       }
     },
     "MessageService": {
-      "CollectReward2": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "CollectReward2",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "checksum": "int",
-          "clientDateTime": "str",
-          "messageId": "int"
-        },
-        "response_structure": {
-          "CollectReward": {
-            "Item": {},
-            "Message": {}
-          }
-        },
-        "service": "MessageService"
-      },
       "ListActiveMarketplaceMessages5": {
         "content_parameters": {},
         "content_structure": {},
