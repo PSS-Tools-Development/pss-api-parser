@@ -1211,28 +1211,6 @@
       }
     },
     "RoomService": {
-      "CollectAllResources": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "CollectAllResources",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "collectDate": "str",
-          "itemType": "str"
-        },
-        "response_structure": {
-          "RoomService": {
-            "CollectResources": {
-              "Items": {
-                "Item": {}
-              }
-            }
-          }
-        },
-        "service": "RoomService"
-      },
       "ListActionTypes2": {
         "content_parameters": {},
         "content_structure": {},
