@@ -1709,30 +1709,6 @@
         },
         "service": "UserService"
       },
-      "PurchaseCatalog2": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "PurchaseCatalog2",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "argument": "int",
-          "checksum": "int",
-          "clientDateTime": "str"
-        },
-        "response_structure": {
-          "UserService": {
-            "PurchaseCatalog": {
-              "User": {
-                "Alliance": {},
-                "UserSeason": {}
-              }
-            }
-          }
-        },
-        "service": "UserService"
-      },
       "SearchUsers": {
         "content_parameters": {},
         "content_structure": {},

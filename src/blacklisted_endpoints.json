@@ -29,6 +29,7 @@
   "ListUserMarkers",
   "ListUserStarSystems",
   "MoveRoom",
+  "PurchaseCatalog",
   "PurchaseFromMarker",
   "RebuildAmmo",
   "SelectInstantMission",
