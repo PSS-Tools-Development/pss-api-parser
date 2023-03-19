@@ -3,6 +3,7 @@
   "AddGamecenterFriends",
   "AuthorizeFirebaseToken",
   "CollectMarker2",
+  "CollectReward2",
   "FindUserRanking",
   "FixUserPromotions",
   "HeartBeat",
