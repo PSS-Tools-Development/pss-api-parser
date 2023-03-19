@@ -1,6 +1,7 @@
 [
   "ActionMessage",
   "AddGamecenterFriends",
+  "AddStarbux",
   "AuthorizeFirebaseToken",
   "CollectAllResources",
   "CollectMarker",

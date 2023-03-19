@@ -1599,31 +1599,6 @@
       }
     },
     "UserService": {
-      "AddStarbux2": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "AddStarbux2",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "checksum": "int",
-          "clientDateTime": "str",
-          "quantity": "int"
-        },
-        "response_structure": {
-          "AddStarbux": {},
-          "UserService": {
-            "AddStarbux": {
-              "User": {
-                "Alliance": {},
-                "UserSeason": {}
-              }
-            }
-          }
-        },
-        "service": "UserService"
-      },
       "CollectDailyReward2": {
         "content_parameters": {},
         "content_structure": {},
