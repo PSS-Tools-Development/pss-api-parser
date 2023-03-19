@@ -1211,6 +1211,25 @@
       }
     },
     "RoomService": {
+      "GetMissileDesign": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetMissileDesign",
+        "method": "GET",
+        "query_parameters": {
+          "languageKey": "str",
+          "missileDesignId": "int"
+        },
+        "response_structure": {
+          "RoomService": {
+            "GetMissileDesign": {
+              "MissileDesign": {}
+            }
+          }
+        },
+        "service": "RoomService"
+      },
       "ListActionTypes2": {
         "content_parameters": {},
         "content_structure": {},
