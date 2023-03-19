@@ -1042,6 +1042,8 @@
           "itemDesignId": "int",
           "itemSubType": "str",
           "rarity": "str",
+          "skip": "int",
+          "take": "int",
           "userId": "int"
         },
         "response_structure": {
