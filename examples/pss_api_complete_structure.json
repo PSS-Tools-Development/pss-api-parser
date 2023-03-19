@@ -691,6 +691,29 @@
         },
         "service": "GalaxyService"
       },
+      "ListPlanets": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListPlanets",
+        "method": "GET",
+        "query_parameters": {
+          "designVersion": "int"
+        },
+        "response_structure": {
+          "GalaxyService": {
+            "ListPlanets": {
+              "Planets": {
+                "Planet": {}
+              },
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        },
+        "service": "GalaxyService"
+      },
       "ListStarSystemLinks": {
         "content_parameters": {},
         "content_structure": {},
@@ -2612,6 +2635,9 @@
       "Title": "str",
       "UpdateDate": "datetime",
       "UserId": "int"
+    },
+    "Planet": {
+
     },
     "Prestige": {
       "CharacterDesignId1": "int",
