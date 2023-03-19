@@ -2,6 +2,7 @@
   "ActionMessage",
   "AddGamecenterFriends",
   "AuthorizeFirebaseToken",
+  "CollectMarker2",
   "CreateMission",
   "FindUserRanking",
   "FixUserPromotions",
