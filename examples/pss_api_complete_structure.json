@@ -1108,27 +1108,6 @@
       }
     },
     "PromotionService": {
-      "FixUserPromotions": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "FixUserPromotions",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str"
-        },
-        "response_structure": {
-          "PromotionService": {
-            "FixUserPromotions": {
-              "User": {
-                "Alliance": {},
-                "UserSeason": {}
-              }
-            }
-          }
-        },
-        "service": "PromotionService"
-      },
       "ListAllPromotionDesigns2": {
         "content_parameters": {},
         "content_structure": {},
