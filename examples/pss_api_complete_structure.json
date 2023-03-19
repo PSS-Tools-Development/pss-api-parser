@@ -1460,23 +1460,6 @@
       }
     },
     "ShipService": {
-      "GetCurrentResources": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "GetCurrentResources",
-        "method": "GET",
-        "query_parameters": {
-          "accessToken": "str",
-          "userId": "int"
-        },
-        "response_structure": {
-          "ShipService": {
-            "GetCurrentResources": {}
-          }
-        },
-        "service": "ShipService"
-      },
       "InspectShip2": {
         "content_parameters": {},
         "content_structure": {},
