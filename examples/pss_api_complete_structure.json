@@ -1230,6 +1230,25 @@
         },
         "service": "RoomService"
       },
+      "GetRoomDesign": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetRoomDesign",
+        "method": "GET",
+        "query_parameters": {
+          "languageKey": "str",
+          "roomDesignId": "int"
+        },
+        "response_structure": {
+          "RoomService": {
+            "GetRoomDesign": {
+              "RoomDesign": {}
+            }
+          }
+        },
+        "service": "RoomService"
+      },
       "ListActionTypes2": {
         "content_parameters": {},
         "content_structure": {},
