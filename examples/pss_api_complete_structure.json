@@ -1389,34 +1389,6 @@
           }
         },
         "service": "RoomService"
-      },
-      "RebuildAmmo2": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "RebuildAmmo2",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "ammoCategory": "str",
-          "checksum": "str",
-          "clientDateTime": "str"
-        },
-        "response_structure": {
-          "RoomService": {
-            "RebuildAmmo": {
-              "Items": {},
-              "Rooms": {
-                "Room": {
-                  "RoomActions": {
-                    "RoomAction": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "service": "RoomService"
       }
     },
     "SeasonService": {
