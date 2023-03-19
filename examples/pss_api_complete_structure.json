@@ -321,8 +321,7 @@
         "endpoint": "PrestigeCharacterFrom",
         "method": "GET",
         "query_parameters": {
-          "characterDesignId": "int",
-          "languageKey": "str"
+          "characterDesignId": "int"
         },
         "response_structure": {
           "CharacterService": {
@@ -345,8 +344,7 @@
         "endpoint": "PrestigeCharacterTo",
         "method": "GET",
         "query_parameters": {
-          "characterDesignId": "int",
-          "languageKey": "str"
+          "characterDesignId": "int"
         },
         "response_structure": {
           "CharacterService": {
