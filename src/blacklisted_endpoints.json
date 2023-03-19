@@ -25,6 +25,7 @@
   "ListTasksOfAUser",
   "ListUserMarkers",
   "ListUserStarSystems",
+  "MoveRoom",
   "PurchaseFromMarker",
   "SelectInstantMission3",
   "SpeedUpResearchUsingBoostGauge",

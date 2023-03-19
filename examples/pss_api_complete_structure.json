@@ -1390,27 +1390,6 @@
         },
         "service": "RoomService"
       },
-      "MoveRoom": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "MoveRoom",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "column": "int",
-          "roomId": "int",
-          "row": "int"
-        },
-        "response_structure": {
-          "RoomService": {
-            "MoveRoom": {
-              "Room": {}
-            }
-          }
-        },
-        "service": "RoomService"
-      },
       "RebuildAmmo2": {
         "content_parameters": {},
         "content_structure": {},
