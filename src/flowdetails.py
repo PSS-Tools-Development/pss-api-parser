@@ -12,9 +12,9 @@ class PssFlowDetails:
     def __init__(self, details: dict) -> None:
         self.__content_parameters: _utils.NestedDict = details.get('content_parameters', {})
         self.__content_structure: _utils.NestedDict = details.get('content_structure', {})
-        self.__content_type: str = details['content_type']
-        self.__endpoint: str = details['endpoint']
-        self.__method: str = details['method']
+        self.__content_type: str = details.get('content_type')
+        self.__endpoint: str = details.get('endpoint')
+        self.__method: str = details.get('method')
         self.__query_parameters: _Dict[str, str] = details.get('query_parameters', {})
         self.__response_structure: _utils.NestedDict = details.get('response_structure', {})
         self.__service: str = details['service']

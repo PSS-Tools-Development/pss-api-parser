@@ -156,6 +156,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
         property_names = []
         entity_imports = set()
         for property_name, property_type in entity_properties.items():
+            property_type = property_type or 'str'
             is_entity_type = False
             is_built_in_type = property_type in BUILTIN_TYPES
             is_collection = False
@@ -597,7 +598,7 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
             result.append({
                 'name': name,
                 'name_snake_case': _utils.append_underscore_if_keyword(_utils.convert_camel_to_snake_case(name)),
-                'type': 'str' if parameter_type == 'none' else parameter_type,
+                'type': parameter_type or 'str',
                 'default_value': default_value,
                 'self_field': self_field,
             })
