@@ -1,6 +1,6 @@
 PSSAPI_DIRECTORY = ../pssapi.py/src/pssapi/
 STRUCTURE_FILE = examples/pss_api_complete_structure.json
-ENUMS_FILE = examples/pss_steam_v0.994.1.8792_dump_enums.json
+ENUMS_FILE = examples/pss_enums.json
 CACHEABLE_FILE = examples/pss_api_cacheable_endpoints.json
 OVERWRITE = 1
 
