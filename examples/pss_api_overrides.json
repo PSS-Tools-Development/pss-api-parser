@@ -143,12 +143,10 @@
     },
     "MessageService": {
       "ListActiveMarketplaceMessages5": {
-        "endpoint": "ListActiveMarketplaceMessages5",
         "query_parameters": {
           "skip": "int",
           "take": "int"
-        },
-        "service": "MessageService"
+        }
       },
       "ListSalesByItemDesignId": {
         "content_parameters": {},
