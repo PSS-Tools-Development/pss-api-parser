@@ -1,4 +1,14 @@
 bin/
+examples/*
+!examples/pss_enums.json
+!examples/pss_api_cacheable_endpoints.json
+!examples/pss_api_complete_structure.json
+!examples/pss_api_steam_anonymized.flows
+!examples/pss_api_steam_anonymized.json
+!examples/pss_steam_dump.cs
+
+
+# VS Code
 .vscode/
 .idea/
 
