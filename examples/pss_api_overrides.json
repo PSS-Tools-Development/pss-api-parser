@@ -141,13 +141,9 @@
         "service": "HistoryService"
       }
     },
-    "MarketService": {
+    "MessageService": {
       "ListActiveMarketplaceMessages5": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
         "endpoint": "ListActiveMarketplaceMessages5",
-        "method": "GET",
         "query_parameters": {
           "skip": "int",
           "take": "int"
