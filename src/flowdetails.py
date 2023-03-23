@@ -11,12 +11,12 @@ ResponseStructure = _Dict[str, _Union[str, 'ResponseStructure']]
 class PssFlowDetails:
     def __init__(self, details: dict) -> None:
         self.__content_parameters: _utils.NestedDict = details.get('content_parameters', {})
-        self.__content_structure: _utils.NestedDict = details['content_structure']
+        self.__content_structure: _utils.NestedDict = details.get('content_structure', {})
         self.__content_type: str = details['content_type']
         self.__endpoint: str = details['endpoint']
         self.__method: str = details['method']
-        self.__query_parameters: _Dict[str, str] = details['query_parameters']
-        self.__response_structure: _utils.NestedDict = details['response_structure']
+        self.__query_parameters: _Dict[str, str] = details.get('query_parameters', {})
+        self.__response_structure: _utils.NestedDict = details.get('response_structure', {})
         self.__service: str = details['service']
         self.__original_flow: _HTTPFlow = details.get('original_flow')
 

@@ -27,12 +27,12 @@ __PSS_BOOL_VALUES = ('true', 'false', 'True', 'False')
 __RX_PARAMETER_CHECK: _re.Pattern = _re.compile('\d.*', )
 
 TYPE_ORDER_LOOKUP: _Dict[str, int] = {
-    'float': 5,
-    'int': 4,
-    'bool': 3,
-    'datetime': 2,
-    'str': 1,
-    'none': 0,
+    'str': 5,
+    'float': 4,
+    'int': 3,
+    'bool': 2,
+    'datetime': 1,
+    None: 0,
 }
 
 
@@ -45,7 +45,7 @@ def merge_object_structures(structure1: _PssObjectStructure, structure2: _PssObj
         return structure1
     if structure1.object_type_name != structure2.object_type_name:
         raise Exception('object type names do not match.')
-    properties = __merge_type_dictionaries(structure1.properties, structure2.properties)
+    properties = merge_type_dictionaries(structure1.properties, structure2.properties)
     return _PssObjectStructure(structure1.object_type_name, properties)
 
 
@@ -94,26 +94,26 @@ def parse_flows_file(file_path: str, verbose: bool = False) -> ApiStructure:
         return result
 
 
-def singularize_entities(organized_flows: ApiStructure) -> _Set[_PssObjectStructure]:
+def singularize_entities(organized_flows: ApiStructure, second_overrides_first: bool = False) -> _Set[_PssObjectStructure]:
     result: _Set[_PssFlowDetails] = set()
     for _, endpoints in organized_flows.items():
         for _, endpoint_flows in endpoints.items():
             merged_flow = endpoint_flows[0]
             if len(endpoint_flows) > 1:
                 for flow2 in endpoint_flows[1:]:
-                    merged_flow = __merge_flows(merged_flow, flow2)
+                    merged_flow = merge_flows(merged_flow, flow2, second_overrides_first=second_overrides_first)
             result.add(merged_flow)
     return result
 
 
-def singularize_flows(organized_flows: ApiStructure) -> _Set[_PssFlowDetails]:
+def singularize_flows(organized_flows: ApiStructure, second_overrides_first: bool = False) -> _Set[_PssFlowDetails]:
     result: _Set[_PssFlowDetails] = set()
     for _, endpoints in organized_flows.items():
         for _, endpoint_flows in endpoints.items():
             merged_flow = endpoint_flows[0]
             if len(endpoint_flows) > 1:
                 for flow2 in endpoint_flows[1:]:
-                    merged_flow = __merge_flows(merged_flow, flow2)
+                    merged_flow = merge_flows(merged_flow, flow2, second_overrides_first=second_overrides_first)
             result.add(merged_flow)
     return result
 
@@ -222,7 +222,7 @@ def __convert_xml_to_dict(root: _ElementTree.Element) -> _utils.NestedDict:
     for child in root:
         child_dict = __convert_xml_to_dict(child)
         if child.tag in result:
-            result[child.tag]['properties'] = __merge_type_dictionaries(result[child.tag]['properties'], child_dict[child.tag]['properties'])
+            result[child.tag]['properties'] = merge_type_dictionaries(result[child.tag]['properties'], child_dict[child.tag]['properties'])
         else:
             result[child.tag] = child_dict[child.tag]
     return {root.tag: result}
@@ -230,7 +230,7 @@ def __convert_xml_to_dict(root: _ElementTree.Element) -> _utils.NestedDict:
 
 def __determine_data_type(value: _Any, property_name: str = None) -> str:
     if value is None:
-        return 'none'
+        return None
 
     if isinstance(value, str):
         int_value = None
@@ -269,8 +269,11 @@ def __determine_data_type(value: _Any, property_name: str = None) -> str:
             return 'datetime'
         except:
             pass
-
-        return 'str'
+        
+        if value:
+            return 'str'
+        else:
+            return None
     elif isinstance(value, bool):
         return 'bool'
     elif isinstance(value, float):
@@ -286,10 +289,13 @@ def __get_object_structures_from_response_structure(response_structure: _utils.N
     for key, value in response_structure.items():
         if isinstance(value, dict):
             properties = value.pop('properties', None)
-            if properties and 'version' not in properties:
-                for child in response_structure[key].keys():
-                    properties[child] = child
-                result[key] = _PssObjectStructure(key, properties)
+            if properties:
+                if 'version' in properties:
+                    value['properties'] = properties
+                else:
+                    for child in response_structure[key].keys():
+                        properties[child] = child
+                    result[key] = _PssObjectStructure(key, properties)
             result.update(__get_object_structures_from_response_structure(value))
     return result
 
@@ -300,10 +306,7 @@ def __get_object_structures_from_flows(flows: _List[_PssFlowDetails]) -> _Dict[s
         current_object_structures = __get_object_structures_from_response_structure(flow.response_structure)
         for object_name, object_structure in current_object_structures.items():
             result[object_name] = merge_object_structures(object_structure, result.get(object_name))
-    for object_structure in result.values():
-        for property_name, property_type in object_structure.properties.items():
-            if property_type == 'none':
-                object_structure.properties[property_name] = 'str'
+            
     return result
 
 
@@ -317,40 +320,51 @@ def __get_parameters_from_content_json(content: _utils.NestedDict) -> _Dict[str,
     return result
 
 
-def __merge_flows(flow1: _PssFlowDetails, flow2: _PssFlowDetails) -> _PssFlowDetails:
-    query_parameters = __merge_type_dictionaries(flow1.query_parameters, flow2.query_parameters)
-    content_structure = __merge_type_dictionaries(flow1.content_structure, flow2.content_structure)
-    content_parameters = __merge_type_dictionaries(flow1.content_parameters, flow2.content_parameters)
-    response_structure = __merge_type_dictionaries(flow1.response_structure, flow2.response_structure)
+def merge_flows(flow1: _PssFlowDetails, flow2: _PssFlowDetails, second_overrides_first: bool = False) -> _PssFlowDetails:
+    query_parameters = merge_type_dictionaries(flow1.query_parameters, flow2.query_parameters, second_overrides_first=second_overrides_first)
+    content_structure = merge_type_dictionaries(flow1.content_structure, flow2.content_structure, second_overrides_first=second_overrides_first)
+    content_parameters = merge_type_dictionaries(flow1.content_parameters, flow2.content_parameters, second_overrides_first=second_overrides_first)
+    response_structure = merge_type_dictionaries(flow1.response_structure, flow2.response_structure, second_overrides_first=second_overrides_first)
 
     result = {
         'content_parameters': content_parameters,
         'content_structure': content_structure,
-        'content_type': flow1.content_type or flow2.content_type,
-        'endpoint': flow1.endpoint or flow2.endpoint,
-        'method': flow1.method or flow2.method,
+        'content_type': flow2.content_type or flow1.content_type if second_overrides_first else flow1.content_type or flow2.content_type,
+        'endpoint': flow2.endpoint or flow1.endpoint if second_overrides_first else flow1.endpoint or flow2.endpoint,
+        'method': flow2.method or flow1.method if second_overrides_first else flow1.method or flow2.method,
         'query_parameters': query_parameters,
         'response_structure': response_structure,
-        'service': flow1.service or flow2.service,
-        'original_flow': flow1.original_flow or flow2.original_flow
+        'service': flow2.service or flow1.service if second_overrides_first else flow1.service or flow2.service,
+        'original_flow': flow2.original_flow or flow1.original_flow if second_overrides_first else flow1.original_flow or flow2.original_flow
     }
     return _PssFlowDetails(result)
 
 
-def __merge_type_dictionaries(d1: dict, d2: dict) -> dict:
+def merge_type_dictionaries(d1: dict, d2: dict, second_overrides_first: bool = False) -> dict:
+    if d1 and not d2:
+        return dict(d1)
+    if not d1 and d2:
+        return dict(d2)
+    
     result = {}
     result_names = set(d1.keys()).union(set(d2.keys()))
     for name in result_names:
-        type1 = d1.get(name, 'str')
-        type2 = d2.get(name, 'str')
-        if isinstance(type1, dict) and isinstance(type2, dict):
-            result[name] = __merge_type_dictionaries(type1, type2)
+        type1 = d1.get(name)
+        type2 = d2.get(name)
+        if type1 is None:
+            result[name] = type2
+        elif type2 is None:
+            result[name] = type1
+        elif isinstance(type1, dict) and isinstance(type2, dict):
+            result[name] = merge_type_dictionaries(type1, type2)
         elif isinstance(type1, dict):
             result[name] = type1
         elif isinstance(type2, dict):
             result[name] = type2
         elif not isinstance(type1, str) or not isinstance(type2, str):
             pass
+        elif second_overrides_first:
+            result[name] = type2
         else:
             type1_value = TYPE_ORDER_LOOKUP.get(type1, 100)
             type2_value = TYPE_ORDER_LOOKUP.get(type2, 100)

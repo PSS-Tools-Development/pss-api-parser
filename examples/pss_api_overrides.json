@@ -1,0 +1,254 @@
+{
+  "endpoints": {
+    "AllianceService": {
+      "ListAlliancesWithDivision": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListAlliancesWithDivision",
+        "method": "GET",
+        "query_parameters": {
+          "divisionDesignId": "int"
+        },
+        "response_structure": {
+          "AllianceService": {
+            "ListAlliancesWithDivision": {
+              "Alliances": {
+                "Alliance": {}
+              }
+            }
+          }
+        },
+        "service": "AllianceService"
+      }
+    },
+    "CharacterService": {
+      "ListAllDrawDesigns": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListAllDrawDesigns",
+        "method": "GET",
+        "query_parameters": {
+          "designVersion": "int",
+          "languageKey": "str"
+        },
+        "response_structure": {
+          "CharacterService": {
+            "ListAllDrawDesigns": {
+              "DrawDesigns": {
+                "DrawDesign": {}
+              },
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        },
+        "service": "CharacterService"
+      },
+      "PrestigeCharacterFrom": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "PrestigeCharacterFrom",
+        "method": "GET",
+        "query_parameters": {
+          "characterDesignId": "int"
+        },
+        "response_structure": {
+          "CharacterService": {
+            "PrestigeCharacterFrom": {
+              "Prestiges": {
+                "Prestige": {}
+              },
+              "properties": {
+                "timestamp": "datetime"
+              }
+            }
+          }
+        },
+        "service": "CharacterService"
+      },
+      "PrestigeCharacterTo": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "PrestigeCharacterTo",
+        "method": "GET",
+        "query_parameters": {
+          "characterDesignId": "int"
+        },
+        "response_structure": {
+          "CharacterService": {
+            "PrestigeCharacterTo": {
+              "Prestiges": {
+                "Prestige": {}
+              },
+              "properties": {
+                "timestamp": "datetime"
+              }
+            }
+          }
+        },
+        "service": "CharacterService"
+      }
+    },
+    "GalaxyService": {
+      "ListPlanets": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListPlanets",
+        "method": "GET",
+        "query_parameters": {
+          "designVersion": "int"
+        },
+        "response_structure": {
+          "GalaxyService": {
+            "ListPlanets": {
+              "Planets": {
+                "Planet": {}
+              },
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        },
+        "service": "GalaxyService"
+      }
+    },
+    "HistoryService": {
+      "PriceHistory": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "PriceHistory",
+        "method": "GET",
+        "query_parameters": {
+          "itemDesignId": "int"
+        },
+        "response_structure": {
+          "HistoryService": {
+            "PriceHistory": {
+              "Histories": {
+                "History": {}
+              }
+            }
+          }
+        },
+        "service": "HistoryService"
+      }
+    },
+    "MarketService": {
+      "ListActiveMarketplaceMessages5": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListActiveMarketplaceMessages5",
+        "method": "GET",
+        "query_parameters": {
+          "skip": "int",
+          "take": "int"
+        },
+        "service": "MessageService"
+      },
+      "ListSalesByItemDesignId": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListSalesByItemDesignId",
+        "method": "GET",
+        "query_parameters": {
+          "from": "int",
+          "itemDesignId": "int",
+          "saleStatus": "str",
+          "to": "int"
+        },
+        "response_structure": {
+          "MarketService": {
+            "ListSalesByItemDesignId": {
+              "Sales": {
+                "Sale": {}
+              }
+            }
+          }
+        },
+        "service": "MarketService"
+      }
+    },
+    "RoomService": {
+      "GetMissileDesign": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetMissileDesign",
+        "method": "GET",
+        "query_parameters": {
+          "languageKey": "str",
+          "missileDesignId": "int"
+        },
+        "response_structure": {
+          "RoomService": {
+            "GetMissileDesign": {
+              "MissileDesign": {}
+            }
+          }
+        },
+        "service": "RoomService"
+      },
+      "GetRoomDesign": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetRoomDesign",
+        "method": "GET",
+        "query_parameters": {
+          "languageKey": "str",
+          "roomDesignId": "int"
+        },
+        "response_structure": {
+          "RoomService": {
+            "GetRoomDesign": {
+              "RoomDesign": {}
+            }
+          }
+        },
+        "service": "RoomService"
+      }
+    }
+  },
+  "entities": {
+    "History": {
+      "Argument": "int",
+      "Date": "datetime",
+      "HistoryId": "int",
+      "HistoryType": "str",
+      "Value": "int"
+    },
+    "Planet": {},
+    "Prestige": {
+      "CharacterDesignId1": "int",
+      "CharacterDesignId2": "int",
+      "ToCharacterDesignId": "int"
+    },
+    "Sale": {
+      "BuyerShipId": "int",
+      "BuyerShipName": "str",
+      "CharacterDesignId": "int",
+      "CharacterId": "int",
+      "CurrencyType": "str",
+      "CurrencyValue": "int",
+      "ItemDesignId": "int",
+      "ItemId": "int",
+      "Quantity": "int",
+      "SaleId": "int",
+      "SaleStatus": "str",
+      "SellerShipId": "int",
+      "SellerShipName": "str",
+      "StarbuxValue": "int",
+      "StatusDate": "datetime"
+    }
+  }
+}

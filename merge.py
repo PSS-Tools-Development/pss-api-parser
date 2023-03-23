@@ -23,6 +23,7 @@ if __name__ == '__main__':
 
     parser = _argparse.ArgumentParser()
     parser.add_argument('--in', dest='in_', type=str, nargs='+', required=True, help='Path(s) to the flows file(s) to be merged')
+    parser.add_argument('--overrides', type=str, required=False, help='Path to the overrides file')
     parser.add_argument('--outfile', type=str, required=True, help='Target file path for the merged flows file')
     parser.add_argument('--uncompressed', action='store_true', help='Preserve whitespace in the output file')
     args = parser.parse_args()
@@ -48,6 +49,9 @@ if __name__ == '__main__':
                 result,
                 _merge.read_structure_json(merge_with)
             )
+        if args.overrides:
+            overrides = _merge.read_structure_json(args.overrides)
+            result = _merge.apply_overrides(result, overrides)
         _parse.store_structure_json(
             args.outfile,
             result,

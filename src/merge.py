@@ -14,6 +14,54 @@ NestedDict = _Dict[str, _Union[str, 'NestedDict']]
 
 
 
+def apply_overrides(structure: ApiStructure, overrides: ApiStructure) -> ApiStructure:
+    result = {
+        'endpoints': override_organized_flows(structure.get('endpoints'), overrides.get('endpoints')),
+        'entities': override_object_structures(structure.get('entities'), overrides.get('entities'))
+    }
+    return result
+
+
+def override_organized_flows(flows: ApiStructure, overrides: ApiStructure) -> ApiStructure:
+    if flows and not overrides:
+        return flows
+    if not flows and overrides:
+        return overrides
+    
+    result = dict(flows)
+
+    for service, endpoints in overrides.items():
+        if service in result.keys():
+            for endpoint, flow_details in endpoints.items():
+                if endpoint in result[service]:
+                    result.setdefault(service, {})[endpoint] = [_parse.merge_flows(flows[service][endpoint][0], flow_details[0], second_overrides_first=True)]
+                else:
+                    result.setdefault(service, {})[endpoint] = flow_details
+        else:
+            result[service] = endpoints
+    
+    return result
+
+
+def override_object_structures(object_structures: _List[_PssObjectStructure], overrides: _List[_PssObjectStructure]) -> _List[_PssObjectStructure]:
+    objects_dict = {object_structure.object_type_name: object_structure for object_structure in object_structures}
+    overrides_dict = {object_structure.object_type_name: object_structure for object_structure in overrides}
+
+    object_structure_names = sorted(list(set(objects_dict.keys()).union(set(overrides_dict.keys()))))
+    result = []
+    for object_name in object_structure_names:
+        object_1 = objects_dict.get(object_name)
+        object_2 = overrides_dict.get(object_name)
+        if object_1 and object_2:
+            result.append(_PssObjectStructure(object_1.object_type_name, _parse.merge_type_dictionaries(object_1.properties, object_2.properties, second_overrides_first=True)))
+        elif object_1:
+            result.append(object_1)
+        elif object_2:
+            result.append(object_2)
+
+    return result
+
+
 def convert_entities_dict_to_object_structures(entities: _Dict[str, _Dict[str, str]]) -> _List[_PssObjectStructure]:
     result = {_PssObjectStructure(entity_name, properties) for entity_name, properties in entities.items()}
     return result
@@ -55,7 +103,7 @@ def merge_organized_flows(flows_1: ApiStructure, flows_2: ApiStructure) -> ApiSt
     return result
 
 
-def merge_object_structures(object_structures_1: _List[_PssObjectStructure], object_structures_2: _List[_PssObjectStructure]) -> _List[_PssObjectStructure]:
+def merge_object_structures(object_structures_1: _List[_PssObjectStructure], object_structures_2: _List[_PssObjectStructure], override_object_structures_1: bool = False) -> _List[_PssObjectStructure]:
     if object_structures_1 and not object_structures_2:
         return list(object_structures_1)
     if not object_structures_1 and object_structures_2:
@@ -83,7 +131,7 @@ def merge_structure_jsons(file_path_1: str, file_path_2: str) -> ApiStructure:
     return merge_api_structures(structure_1, structure_2)
 
 
-def merge_api_structures(structure_1: ApiStructure, structure_2: ApiStructure) -> ApiStructure:
+def merge_api_structures(structure_1: ApiStructure, structure_2: ApiStructure, overrides: ApiStructure = None) -> ApiStructure:
     if structure_1 and not structure_2:
         return dict(structure_1)
     if not structure_1 and structure_2:
