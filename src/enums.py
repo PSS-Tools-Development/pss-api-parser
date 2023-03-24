@@ -2,12 +2,14 @@ import json as _json
 import re as _re
 from enum import StrEnum, auto
 from typing import Dict as _Dict
+from typing import List as _List
 from typing import Union as _Union
 
 from . import utils as _utils
 
 EnumDefinition = _Dict[str, _Union[str, _Dict[str, _Union[int, str]]]]
 TYPE_INT_ENUM = 'IntEnum'
+TYPE_INT_FLAG = 'IntFlag'
 TYPE_STR_ENUM = 'StrEnum'
 
 CSHARP_ACCESS_MODIFIERS = [
@@ -89,6 +91,13 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
                                 enum_value_value = None
                             result[enum_name]['values'][enum_value_name] = enum_value_value
                         likely_str = False
+    
+    for enum_name in result.keys():
+        if result[enum_name]['type'] == TYPE_INT_ENUM:
+            enum_name_lower = enum_name.lower()
+            if enum_name_lower.endswith(('flag', 'flags', 'flagtype', 'flagstype')):
+                result[enum_name]['type'] = TYPE_INT_FLAG
+
     return result
 
 

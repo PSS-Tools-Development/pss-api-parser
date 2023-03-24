@@ -438,7 +438,7 @@
     }
   }, 
   "ChallengeFlags": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "IsRealTime": 1, 
@@ -655,7 +655,7 @@
     }
   }, 
   "CharacterDesignFlagType": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "IsCrew": 1, 
@@ -699,7 +699,7 @@
     }
   }, 
   "CharacterFlags": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "Favourite": 1
     }
@@ -884,7 +884,7 @@
     }
   }, 
   "DeviceFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "Guid": 1
@@ -1117,7 +1117,7 @@
     }
   }, 
   "ItemDesignFlagType": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "AllowTrading": 1, 
@@ -1338,7 +1338,7 @@
     }
   }, 
   "MissionDesignFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "HideWhenRequirementNotSatisfied": 1, 
@@ -1371,7 +1371,7 @@
     }
   }, 
   "MissionEventFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "ShowOptionIfRequirementNotMet": 1
@@ -1401,7 +1401,7 @@
     }
   }, 
   "PromotionDesignFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "ShowSplash": 1, 
@@ -1558,7 +1558,7 @@
     }
   }, 
   "RoomFlags": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "RequirePower": 1, 
@@ -1624,7 +1624,7 @@
     }
   }, 
   "RoomDesignSpriteFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "HideIfRequirementNotMet": 1
@@ -1676,7 +1676,7 @@
     }
   }, 
   "SettingFlags": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "IMACFullScreenSettingFlag": 1, 
@@ -1733,14 +1733,14 @@
     }
   }, 
   "ABTestingFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "A": 1, 
       "B": 2
     }
   }, 
   "FeatureFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "Galaxy": 1, 
@@ -1758,7 +1758,7 @@
     }
   }, 
   "VisibilityFlags": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "HideWhenNotSatisfied": 1, 
@@ -1818,7 +1818,7 @@
     }
   }, 
   "SituationDesignFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "AffectAttackingShip": 1, 
@@ -1839,7 +1839,7 @@
     }
   }, 
   "MarkerFlag": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "Global": 1, 
@@ -1874,13 +1874,13 @@
     }
   }, 
   "GenerationFlags": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0
     }
   }, 
   "BehaviorFlags": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0
     }
@@ -1963,7 +1963,7 @@
     }
   }, 
   "TaskDesignFlagsType": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 1
     }
@@ -2122,7 +2122,7 @@
     }
   }, 
   "UserFlags": {
-    "type": "IntEnum", 
+    "type": "IntFlag", 
     "values": {
       "None": 0, 
       "AllowForceBTest": 1

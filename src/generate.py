@@ -82,6 +82,7 @@ def prepare_parsed_api_data(parsed_api_data: dict, cacheable_endpoints: dict) ->
 def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinition]) -> list:
     result = []
     ignore_value_names = ['None', 'Unknown']
+    int_enum_types = (_enums.TYPE_INT_ENUM, _enums.TYPE_INT_FLAG)
     for enum_name in sorted(parsed_enums_data.keys()):
         enum_definition = {
             'name': enum_name,
@@ -89,7 +90,7 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
             'type': parsed_enums_data[enum_name]['type']
         }
 
-        if parsed_enums_data[enum_name]['type'] == _enums.TYPE_INT_ENUM:
+        if parsed_enums_data[enum_name]['type'] in int_enum_types:
             sorted_enum_values = sorted(parsed_enums_data[enum_name]['values'].items(), key=lambda item: item[1] or 0)
         elif parsed_enums_data[enum_name]['type'] == _enums.TYPE_STR_ENUM:
             sorted_enum_values = sorted(parsed_enums_data[enum_name]['values'].items(), key=lambda item: item[1] or '')
@@ -484,6 +485,7 @@ def __generate_entities_files(entities_data: dict, target_path: str, env: _Envir
 
 def __generate_enums_files(enums_data: list, target_path: str, env: _Environment, force_overwrite: bool) -> None:
     int_enum_template = env.get_template('enums/enum_int.jinja2')
+    int_flag_template = env.get_template('enums/enum_int_flag.jinja2')
     str_enum_template = env.get_template('enums/enum_str.jinja2')
     enum_init_template = env.get_template('enums/enum_init.jinja2')
     enums_path = _os.path.join(target_path, 'enums')
@@ -491,7 +493,12 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
     _utils.create_path(enums_path)
 
     for enum in enums_data:
-        template = int_enum_template if enum['type'] == _enums.TYPE_INT_ENUM else str_enum_template
+        if enum['type'] == _enums.TYPE_INT_ENUM:
+            template = int_enum_template
+        if enum['type'] == _enums.TYPE_INT_FLAG:
+            template = int_flag_template
+        else:
+            template = str_enum_template
         _utils.create_file(
             _os.path.join(enums_path, enum['name_snake_case'] + '.py'),
             template.render(enum=enum),
