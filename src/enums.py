@@ -68,12 +68,6 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
                         for enum_value_name in result[enum_name]['values'].keys():
                             if result[enum_name]['values'][enum_value_name] is not None:
                                 result[enum_name]['values'][enum_value_name] = enum_value_name
-                    elif result[enum_name]['type'] == TYPE_INT_ENUM:
-                        for enum_value_name in tuple(result[enum_name]['values'].keys()):
-                            fixed_enum_value_name = _utils.convert_snake_to_camel_case(enum_value_name)
-                            if fixed_enum_value_name != enum_value_name:
-                                result[enum_name]['values'][fixed_enum_value_name] = result[enum_name]['values'][enum_value_name]
-                                result[enum_name]['values'].pop(enum_value_name)
                     found_marker = False
                     enum_name = rx_enum_value_custom = None
                 else:  # Search for values
