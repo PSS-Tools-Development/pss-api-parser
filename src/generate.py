@@ -40,7 +40,7 @@ RESERVED_PROPERTY_NAMES = [
 # -----
 
 
-def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_data: list, entities_data: list) -> _Dict[str, _enums.EnumDefinition]:
+def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_data: _List[dict], entities_data: _List[dict]) -> _Dict[str, _enums.EnumDefinition]:
     potential_enum_names = []
     for service in services_data:
         for endpoint in service['endpoints']:
@@ -50,6 +50,12 @@ def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_da
     for entity in entities_data:
         for property in entity['properties']:
             potential_enum_names.append(property['name'])
+            if property['name'].lower()[:4] == 'flag':
+                flag_enum_name = f'{entity["name"]}Flag'
+                potential_enum_names.append(flag_enum_name)
+                potential_enum_names.append(f'{flag_enum_name}s')
+                potential_enum_names.append(f'{flag_enum_name}Type')
+                potential_enum_names.append(f'{flag_enum_name}sType')
 
     potential_enum_names += FORCED_ENUMS_GENERATION
     potential_enum_names = set(potential_enum_names)
@@ -61,7 +67,7 @@ def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_da
     return result
 
 
-def prepare_parsed_api_data(parsed_api_data: dict, cacheable_endpoints: dict) -> _Tuple[list, list]:
+def prepare_parsed_api_data(parsed_api_data: dict, cacheable_endpoints: dict) -> _Tuple[_List[dict], _List[dict]]:
     known_entity_names = set(parsed_api_data['entities'].keys())
     services = __prepare_services_data(parsed_api_data['endpoints'], known_entity_names, cacheable_endpoints)
     entities = __prepare_entities_data(parsed_api_data['entities'])
@@ -205,7 +211,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
     return result
 
 
-def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cacheable_endpoints: dict) -> list:
+def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cacheable_endpoints: dict) -> _List[dict]:
     result = []
     for service_name, endpoints in endpoints_data.items():
         service_imports = {'List', 'Tuple'}
