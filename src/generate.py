@@ -30,6 +30,11 @@ FORCED_ENUMS_GENERATION = [
     'DeviceType'
 ]
 
+POSSIBLE_ENUM_TYPES = [
+    'int',
+    'str',
+]
+
 RESERVED_PROPERTY_NAMES = [
     'id'
 ]
@@ -110,7 +115,7 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
 
 def __find_entity_name_for_property_type(property_type: str, entity_names: _Iterable[str]) -> _Tuple[str, bool]:
     """
-    Returns the matching entity name and if it's likely to be a collection of that entity.
+    Returns the matching enum name and if it's likely to be a collection of that entity.
     """
     likely_match = property_type
     likely_collection = False
@@ -126,6 +131,28 @@ def __find_entity_name_for_property_type(property_type: str, entity_names: _Iter
         return (property_type, False)
 
     return (None, None)
+
+
+def __find_enum_name_for_property_name(property_name: str, entity_name: str, enum_names: _Iterable[str]) -> _Optional[str]:
+    """
+    Returns the matching entity name or None if none matching could be found.
+    """
+    if property_name in enum_names:
+        return property_name
+
+    if property_name.lower().startswith('flag'):
+        likely_flag_matches = (
+            f'{entity_name}Flag',
+            f'{entity_name}Flags',
+            f'{entity_name}FlagType',
+            f'{entity_name}FlagsType',
+        )
+    
+        for likely_match in likely_flag_matches:
+            if likely_match in enum_names:
+                return likely_match
+
+    return None
 
 
 def __generate_custom_enums_data() -> list:
@@ -170,7 +197,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
             if not is_built_in_type:
                 property_type, is_collection = __find_entity_name_for_property_type(property_type, entities_data.keys())
                 if not property_type:
-                    continue  # Skip properties that are neither of an builtin type nor of a know entity type
+                    continue  # Skip properties that are neither of an builtin type nor of a known entity type
                 is_entity_type = True
                 entity_imports.add(property_type)
                 property_typehint = property_type
