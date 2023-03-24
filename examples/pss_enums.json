@@ -2,8 +2,8 @@
   "AccessTokenType": {
     "type": "IntEnum", 
     "values": {
-      "Access": 0, 
-      "Public": 1
+      "ACCESS": 0, 
+      "PUBLIC": 1
     }
   }, 
   "GuideType": {
@@ -108,18 +108,18 @@
   "InteractionType": {
     "type": "IntEnum", 
     "values": {
-      "UserAsSeller": 0, 
-      "UserAsBuyer": 1
+      "USER_AS_SELLER": 0, 
+      "USER_AS_BUYER": 1
     }
   }, 
   "SimilarityType": {
     "type": "IntEnum", 
     "values": {
-      "Username": 0, 
-      "Email": 1, 
-      "Password": 2, 
-      "IpAddress": 3, 
-      "Device": 4
+      "USERNAME": 0, 
+      "EMAIL": 1, 
+      "PASSWORD": 2, 
+      "IP_ADDRESS": 3, 
+      "DEVICE": 4
     }
   }, 
   "AssetType": {
@@ -441,10 +441,10 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Isrealtime": 1, 
-      "Isfirstfree": 2, 
-      "Issingleplay": 4, 
-      "Ismanualcommandenabled": 8
+      "IsRealTime": 1, 
+      "IsFirstFree": 2, 
+      "IsSinglePlay": 4, 
+      "IsManualCommandEnabled": 8
     }
   }, 
   "ChannelType": {
@@ -658,11 +658,11 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Iscrew": 1, 
-      "Cancreateviaprestige": 2, 
-      "Isprize": 4, 
-      "Iscaptain": 8, 
-      "Availableindropship": 16
+      "IsCrew": 1, 
+      "CanCreateViaPrestige": 2, 
+      "IsPrize": 4, 
+      "IsCaptain": 8, 
+      "AvailableInDropship": 16
     }
   }, 
   "CharacterStatus": {
@@ -688,14 +688,14 @@
     "values": {
       "Stand": 0, 
       "Walking": 1, 
-      "Walkingtocenterpointtocalllift": 2, 
-      "Movingbylift": 3, 
-      "Calllift": 4, 
-      "Waitforlift": 5, 
-      "Walktolift": 6, 
-      "Repairyourroom": 7, 
-      "Attackenemyroom": 8, 
-      "Attackenemycharacter": 9
+      "WalkingToCenterPointToCallLift": 2, 
+      "MovingByLift": 3, 
+      "CallLift": 4, 
+      "WaitForLift": 5, 
+      "WalkToLift": 6, 
+      "RepairYourRoom": 7, 
+      "AttackEnemyRoom": 8, 
+      "AttackEnemyCharacter": 9
     }
   }, 
   "CharacterFlags": {
@@ -747,9 +747,9 @@
   "ConcurrencyTransactionOperation": {
     "type": "IntEnum", 
     "values": {
-      "Create": 0, 
-      "Update": 1, 
-      "Delete": 2
+      "CREATE": 0, 
+      "UPDATE": 1, 
+      "DELETE": 2
     }
   }, 
   "ConditionTypeCategory": {
@@ -788,8 +788,8 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Targetroom": 1, 
-      "Targetcharacter": 2
+      "TargetRoom": 1, 
+      "TargetCharacter": 2
     }
   }, 
   "ConditionTypeParameter": {
@@ -825,7 +825,7 @@
       "None": 0, 
       "Mod": 1, 
       "Translator": 2, 
-      "Communitymanager": 3
+      "CommunityManager": 3
     }
   }, 
   "CraftAttackType": {
@@ -878,9 +878,9 @@
   "DataValidationErrorType": {
     "type": "IntEnum", 
     "values": {
-      "Error": 0, 
-      "Warning": 1, 
-      "Suggestion": 2
+      "ERROR": 0, 
+      "WARNING": 1, 
+      "SUGGESTION": 2
     }
   }, 
   "DeviceFlag": {
@@ -893,16 +893,16 @@
   "DeviceType": {
     "type": "StrEnum", 
     "values": {
-      "DeviceTypeIPhone": "DeviceTypeIPhone", 
-      "DeviceTypeAndroid": "DeviceTypeAndroid", 
-      "DeviceTypeMac": "DeviceTypeMac", 
       "DeviceiOSWidget": "DeviceiOSWidget", 
-      "DeviceTypeSteam": "DeviceTypeSteam", 
-      "DeviceTypeWindows": "DeviceTypeWindows", 
-      "DeviceTypeGeneric": "DeviceTypeGeneric", 
-      "DeviceTypeAndroidWeb": "DeviceTypeAndroidWeb", 
-      "DeviceTypeWeb": "DeviceTypeWeb", 
-      "DeviceTypeWebTrail": "DeviceTypeWebTrail"
+      "IPhone": "DeviceTypeIPhone", 
+      "Android": "DeviceTypeAndroid", 
+      "Mac": "DeviceTypeMac", 
+      "Steam": "DeviceTypeSteam", 
+      "Windows": "DeviceTypeWindows", 
+      "Generic": "DeviceTypeGeneric", 
+      "AndroidWeb": "DeviceTypeAndroidWeb", 
+      "Web": "DeviceTypeWeb", 
+      "WebTrail": "DeviceTypeWebTrail"
     }
   }, 
   "DeviceTypeEnum": {
@@ -937,21 +937,21 @@
     "type": "IntEnum", 
     "values": {
       "Normal": 0, 
-      "Wechat": 2, 
-      "Qq": 1
+      "QQ": 1, 
+      "Wechat": 2
     }
   }, 
   "FileDownloadCategory": {
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Newgame": 1, 
-      "Mainscene": 2, 
-      "Battlescene": 3, 
-      "Characterscene": 4, 
-      "Scratchyscene": 5, 
-      "Warscene": 6, 
-      "Battlepass": 7
+      "NewGame": 1, 
+      "MainScene": 2, 
+      "BattleScene": 3, 
+      "CharacterScene": 4, 
+      "ScratchyScene": 5, 
+      "WarScene": 6, 
+      "BattlePass": 7
     }
   }, 
   "FileType": {
@@ -959,9 +959,9 @@
     "values": {
       "File": 0, 
       "Sprite": 1, 
+      "TextureAtlas": 2, 
       "Sound": 3, 
-      "Textureatlas": 2, 
-      "Assetbundle": 4
+      "AssetBundle": 4
     }
   }, 
   "AccessType": {
@@ -989,8 +989,8 @@
     "type": "IntEnum", 
     "values": {
       "Db": 0, 
-      "Invalid": 2, 
-      "Googlesheets": 1
+      "GoogleSheets": 1, 
+      "Invalid": 2
     }
   }, 
   "HistoryType": {
@@ -1008,8 +1008,8 @@
   "FitType": {
     "type": "IntEnum", 
     "values": {
-      "Zoomout": 0, 
-      "Zoomin": 1
+      "ZoomOut": 0, 
+      "ZoomIn": 1
     }
   }, 
   "AmmoCategory": {
@@ -1120,24 +1120,24 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
+      "AllowTrading": 1, 
+      "DropshipReward": 2, 
+      "ChallengeReward": 4, 
+      "PvpReward": 8, 
+      "InstantReward": 16, 
+      "MissionReward": 32, 
       "Consumable": 64, 
+      "AlignToTop": 128, 
+      "AllowDonation": 256, 
       "Giftable": 512, 
-      "Allowtrading": 1, 
-      "Dropshipreward": 2, 
-      "Challengereward": 4, 
-      "Pvpreward": 8, 
-      "Instantreward": 16, 
-      "Missionreward": 32, 
-      "Aligntotop": 128, 
-      "Allowdonation": 256, 
-      "Useoncrew": 1024, 
-      "Recyclingbuild": 2048, 
-      "Useditem": 4096, 
-      "Allowmanufacture": 8192, 
-      "Taskprize": 16384, 
-      "Uniquecontentreward": 32768, 
-      "Useonroom": 65536, 
-      "Dontshowrewards": 131072
+      "UseOnCrew": 1024, 
+      "RecyclingBuild": 2048, 
+      "UsedItem": 4096, 
+      "AllowManufacture": 8192, 
+      "TaskPrize": 16384, 
+      "UniqueContentReward": 32768, 
+      "UseOnRoom": 65536, 
+      "DontShowRewards": 131072
     }
   }, 
   "LiftStatus": {
@@ -1145,9 +1145,9 @@
     "values": {
       "Stand": 0, 
       "Moving": 1, 
-      "Carryingcharacter": 2, 
-      "Waitingforcharactertogoin": 3, 
-      "Waitingforcharactertogoout": 4
+      "CarryingCharacter": 2, 
+      "WaitingForCharacterToGoIn": 3, 
+      "WaitingForCharacterToGoOut": 4
     }
   }, 
   "MapEventType": {
@@ -1194,12 +1194,12 @@
     "type": "IntEnum", 
     "values": {
       "All": 0, 
+      "SpeedUps": 1, 
       "Immunity": 2, 
       "Training": 3, 
       "Xp": 4, 
       "Situation": 5, 
-      "Other": 6, 
-      "Speedups": 1
+      "Other": 6
     }
   }, 
   "MarketFilterRewardType": {
@@ -1235,7 +1235,7 @@
       "All": 0, 
       "Room": 1, 
       "Ship": 2, 
-      "Ai": 3
+      "AI": 3
     }
   }, 
   "MessageType": {
@@ -1341,12 +1341,12 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
+      "HideWhenRequirementNotSatisfied": 1, 
+      "GalaxyExclusive": 2, 
+      "ShownWhenUnexplored": 4, 
+      "DisableHPCheck": 8, 
       "Votes": 16, 
-      "Hidewhenrequirementnotsatisfied": 1, 
-      "Galaxyexclusive": 2, 
-      "Shownwhenunexplored": 4, 
-      "Disablehpcheck": 8, 
-      "Ignorestarsystem": 32
+      "IgnoreStarSystem": 32
     }
   }, 
   "MissionEventType": {
@@ -1374,17 +1374,17 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Showoptionifrequirementnotmet": 1
+      "ShowOptionIfRequirementNotMet": 1
     }
   }, 
   "HackType": {
     "type": "IntEnum", 
     "values": {
-      "Transferstarbux": 1, 
-      "Multipleaccounts": 2, 
-      "Toomanybattles": 4, 
-      "Nobattleafterquize": 8, 
-      "Toomanyunattempquize": 16
+      "TransferStarbux": 1, 
+      "MultipleAccounts": 2, 
+      "TooManyBattles": 4, 
+      "NoBattleAfterQuize": 8, 
+      "TooManyUnattempQuize": 16
     }
   }, 
   "PromotionType": {
@@ -1404,11 +1404,11 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
+      "ShowSplash": 1, 
+      "ShowBadge": 2, 
       "Stacks": 4, 
-      "Showsplash": 1, 
-      "Showbadge": 2, 
-      "Singlepurchase": 8, 
-      "Singlepurchaseperday": 16
+      "SinglePurchase": 8, 
+      "SinglePurchasePerDay": 16
     }
   }, 
   "QuizType": {
@@ -1439,9 +1439,9 @@
   "RedemptionCodeType": {
     "type": "IntEnum", 
     "values": {
-      "General": 0, 
-      "Consumption": 1, 
-      "Mixin": 2
+      "GENERAL": 0, 
+      "CONSUMPTION": 1, 
+      "MIXIN": 2
     }
   }, 
   "ResearchDesignType": {
@@ -1561,12 +1561,12 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Requirepower": 1, 
-      "Requiretarget": 2, 
-      "Requireitem": 4, 
-      "Allowdesignswitch": 8, 
-      "Displaywhenmissingrequirements": 16, 
-      "Dontallowupgrade": 32
+      "RequirePower": 1, 
+      "RequireTarget": 2, 
+      "RequireItem": 4, 
+      "AllowDesignSwitch": 8, 
+      "DisplayWhenMissingRequirements": 16, 
+      "DontAllowUpgrade": 32
     }
   }, 
   "CrewSacrificePoints": {
@@ -1627,7 +1627,7 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Hideifrequirementnotmet": 1
+      "HideIfRequirementNotMet": 1
     }
   }, 
   "RoomStatus": {
@@ -1679,35 +1679,35 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Imacfullscreensettingflag": 1, 
-      "Chinamode": 2, 
-      "Useonesignal": 4, 
-      "Usefirebasemessaging": 8, 
-      "Useredis": 16, 
-      "Syncserver": 32, 
-      "Newtournamentchanges": 64, 
-      "Downloadalldesigns": 128, 
-      "Useheartbeatwebsocket": 256, 
-      "Useshipsnapshot": 512, 
-      "Userediscompression": 1024, 
-      "Useconcurrencyredlock": 2048, 
-      "Usemarketsnipingdelay": 4096, 
-      "Useliveops": 8192, 
-      "Usehistorycache": 16384, 
-      "Legendaryleague": 32768, 
-      "Allowoneglobalmerchantship": 65536, 
-      "Allowoneglobalnpcship": 131072, 
-      "Useopensearch": 262144, 
-      "Useclientbattlefinalisationonlogin": 524288, 
-      "Allowtestpaymentindevelopment": 1048576, 
-      "Forceclientlanguagekey": 2097152, 
-      "Userecaptcha": 4194304, 
-      "Use2Faforwebadmin": 8388608, 
-      "Useawss3": 16777216, 
-      "Usealiyunoss": 33554432, 
-      "Checkage": 67108864, 
-      "Donotcheckipaddress": 134217728, 
-      "Allowadminloginduringmaintenance": 268435456
+      "IMACFullScreenSettingFlag": 1, 
+      "ChinaMode": 2, 
+      "UseOneSignal": 4, 
+      "UseFirebaseMessaging": 8, 
+      "UseRedis": 16, 
+      "SyncServer": 32, 
+      "NewTournamentChanges": 64, 
+      "DownloadAllDesigns": 128, 
+      "UseHeartbeatWebsocket": 256, 
+      "UseShipSnapshot": 512, 
+      "UseRedisCompression": 1024, 
+      "UseConcurrencyRedLock": 2048, 
+      "UseMarketSnipingDelay": 4096, 
+      "UseLiveOps": 8192, 
+      "UseHistoryCache": 16384, 
+      "LegendaryLeague": 32768, 
+      "AllowOneGlobalMerchantShip": 65536, 
+      "AllowOneGlobalNPCShip": 131072, 
+      "UseOpenSearch": 262144, 
+      "UseClientBattleFinalisationOnLogin": 524288, 
+      "AllowTestPaymentInDevelopment": 1048576, 
+      "ForceClientLanguageKey": 2097152, 
+      "UseRecaptcha": 4194304, 
+      "Use2FAForWebAdmin": 8388608, 
+      "UseAWSS3": 16777216, 
+      "UseAliyunOSS": 33554432, 
+      "CheckAge": 67108864, 
+      "DoNotCheckIPAddress": 134217728, 
+      "AllowAdminLoginDuringMaintenance": 268435456
     }
   }, 
   "SaleType": {
@@ -1735,36 +1735,36 @@
   "ABTestingFlag": {
     "type": "IntEnum", 
     "values": {
-      "Abtestingflaga": 1, 
-      "Abtestingflagb": 2
+      "A": 1, 
+      "B": 2
     }
   }, 
   "FeatureFlag": {
     "type": "IntEnum", 
     "values": {
-      "Featureflagnone": 0, 
-      "Featureflaggalaxy": 1, 
-      "Featureflagroomrearm": 2, 
-      "Featureflagshoptopbar": 4, 
-      "Featureflagappsflyer": 8, 
-      "Featureflagbranch": 16
+      "None": 0, 
+      "Galaxy": 1, 
+      "RoomRearm": 2, 
+      "ShopTopbar": 4, 
+      "Appsflyer": 8, 
+      "Branch": 16
     }
   }, 
   "ChecksumType": {
     "type": "IntEnum", 
     "values": {
-      "Buildkeychecksum": 0, 
-      "Hardcodedchecksum": 1
+      "BuildKeyChecksum": 0, 
+      "HardcodedChecksum": 1
     }
   }, 
   "VisibilityFlags": {
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Hidewhennotsatisfied": 1, 
-      "Showwhennotsatisfied": 2, 
-      "Alwaysshow": 3, 
-      "Alwayshide": 4
+      "HideWhenNotSatisfied": 1, 
+      "ShowWhenNotSatisfied": 2, 
+      "AlwaysShow": 3, 
+      "AlwaysHide": 4
     }
   }, 
   "ShipType": {
@@ -1821,12 +1821,12 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
+      "AffectAttackingShip": 1, 
+      "AffectDefendingShip": 2, 
+      "AffectPvP": 4, 
+      "AffectPvE": 8, 
       "Votes": 16, 
-      "Affectattackingship": 1, 
-      "Affectdefendingship": 2, 
-      "Affectpvp": 4, 
-      "Affectpve": 8, 
-      "Affecttournament": 32
+      "AffectTournament": 32
     }
   }, 
   "TriggerType": {
@@ -1844,12 +1844,12 @@
       "None": 0, 
       "Global": 1, 
       "User": 2, 
-      "Displayonmission": 4, 
-      "Displayonsysteminfo": 8, 
-      "Createmarkerifexists": 16, 
-      "Createmarkerifexistskeepexisting": 32, 
-      "Usetravelmultiplier": 64, 
-      "Deleteshipidafterdefeat": 128
+      "DisplayOnMission": 4, 
+      "DisplayOnSystemInfo": 8, 
+      "CreateMarkerIfExists": 16, 
+      "CreateMarkerIfExistsKeepExisting": 32, 
+      "UseTravelMultiplier": 64, 
+      "DeleteShipIdAfterDefeat": 128
     }
   }, 
   "MarkerType": {
@@ -1915,37 +1915,37 @@
       "None": null, 
       "Scan": 1, 
       "Train": 2, 
+      "LevelUpCrew": 3, 
+      "UpgradeRooms": 4, 
+      "WinPVPBattles": 5, 
+      "RecruitCrew": 6, 
+      "TravelLength": 7, 
+      "WinGroundBattles": 8, 
+      "CollectFloatingStarbux": 9, 
+      "WinDailyMissions": 10, 
+      "WinChallengeEvent": 11, 
+      "BlendCrew": 12, 
+      "EjectItems": 13, 
+      "PurchaseStarbux": 14, 
+      "DonateCrew": 15, 
+      "PrestigeCharacter": 16, 
+      "WinMissionDesign": 17, 
+      "DestroyShipOfRace": 18, 
       "Doves": 19, 
-      "Levelupcrew": 3, 
-      "Upgraderooms": 4, 
-      "Winpvpbattles": 5, 
-      "Recruitcrew": 6, 
-      "Travellength": 7, 
-      "Wingroundbattles": 8, 
-      "Collectfloatingstarbux": 9, 
-      "Windailymissions": 10, 
-      "Winchallengeevent": 11, 
-      "Blendcrew": 12, 
-      "Ejectitems": 13, 
-      "Purchasestarbux": 14, 
-      "Donatecrew": 15, 
-      "Prestigecharacter": 16, 
-      "Winmissiondesign": 17, 
-      "Destroyshipofrace": 18, 
-      "Winmissionevent": 20, 
-      "Successfulsales": 21, 
-      "Battlereport": 22, 
-      "Deployminingdronecount": 23, 
-      "Craftitemcount": 24, 
-      "Sellitemcount": 25, 
-      "Recycleitemcount": 26, 
-      "Useitemcount": 27, 
-      "Exploresystemcount": 28, 
-      "Travelsystemcount": 29, 
-      "Collectgeneratedmineralcount": 30, 
-      "Collectgeneratedgascount": 31, 
-      "Donatesupplycount": 32, 
-      "Revengebattlecount": 33
+      "WinMissionEvent": 20, 
+      "SuccessfulSales": 21, 
+      "BattleReport": 22, 
+      "DeployMiningDroneCount": 23, 
+      "CraftItemCount": 24, 
+      "SellItemCount": 25, 
+      "RecycleItemCount": 26, 
+      "UseItemCount": 27, 
+      "ExploreSystemCount": 28, 
+      "TravelSystemCount": 29, 
+      "CollectGeneratedMineralCount": 30, 
+      "CollectGeneratedGasCount": 31, 
+      "DonateSupplyCount": 32, 
+      "RevengeBattleCount": 33
     }
   }, 
   "TaskCategory": {
@@ -1955,11 +1955,11 @@
       "Standard": 1, 
       "Competition": 2, 
       "Global": 3, 
-      "Battlepassdaily": 4, 
-      "Battlepassseason": 5, 
-      "Battlepassdailytemplate": 6, 
-      "Battlepassseasontemplate": 7, 
-      "Battlepassdailyreroll": 8
+      "BattlePassDaily": 4, 
+      "BattlePassSeason": 5, 
+      "BattlePassDailyTemplate": 6, 
+      "BattlePassSeasonTemplate": 7, 
+      "BattlePassDailyReroll": 8
     }
   }, 
   "TaskDesignFlagsType": {
@@ -2029,9 +2029,9 @@
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Itemdesign": 1, 
-      "Roomdesign": 2, 
-      "Characterdesign": 3
+      "ItemDesign": 1, 
+      "RoomDesign": 2, 
+      "CharacterDesign": 3
     }
   }, 
   "SyncStatus": {
@@ -2093,39 +2093,39 @@
   "UpdateUserType": {
     "type": "IntEnum", 
     "values": {
-      "UpdateHeartBeatDate": 1
+      "UPDATE_HEART_BEAT_DATE": 1
     }
   }, 
   "GoogleSubscriptionNotificationType": {
     "type": "IntEnum", 
     "values": {
-      "SubscriptionRecovered": 1, 
-      "SubscriptionRenewed": 2, 
-      "SubscriptionCanceled": 3, 
-      "SubscriptionPurchased": 4, 
-      "SubscriptionOnHold": 5, 
-      "SubscriptionInGracePeriod": 6, 
-      "SubscriptionRestarted": 7, 
-      "SubscriptionPriceChangeConfirmed": 8, 
-      "SubscriptionDeferred": 9, 
-      "SubscriptionPaused": 10, 
-      "SubscriptionPauseScheduleChanged": 11, 
-      "SubscriptionRevoked": 12, 
-      "SubscriptionExpired": 13
+      "SUBSCRIPTION_RECOVERED": 1, 
+      "SUBSCRIPTION_RENEWED": 2, 
+      "SUBSCRIPTION_CANCELED": 3, 
+      "SUBSCRIPTION_PURCHASED": 4, 
+      "SUBSCRIPTION_ON_HOLD": 5, 
+      "SUBSCRIPTION_IN_GRACE_PERIOD": 6, 
+      "SUBSCRIPTION_RESTARTED": 7, 
+      "SUBSCRIPTION_PRICE_CHANGE_CONFIRMED": 8, 
+      "SUBSCRIPTION_DEFERRED": 9, 
+      "SUBSCRIPTION_PAUSED": 10, 
+      "SUBSCRIPTION_PAUSE_SCHEDULE_CHANGED": 11, 
+      "SUBSCRIPTION_REVOKED": 12, 
+      "SUBSCRIPTION_EXPIRED": 13
     }
   }, 
   "GoogleOneTimeProductNotificationType": {
     "type": "IntEnum", 
     "values": {
-      "OneTimeProductPurchased": 1, 
-      "OneTimeProductCanceled": 2
+      "ONE_TIME_PRODUCT_PURCHASED": 1, 
+      "ONE_TIME_PRODUCT_CANCELED": 2
     }
   }, 
   "UserFlags": {
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Allowforcebtest": 1
+      "AllowForceBTest": 1
     }
   }, 
   "EmailVerificationStatus": {
@@ -2208,18 +2208,18 @@
       "Banned": "Banned", 
       "Backer": "Backer", 
       "Mission": "Mission", 
-      "UserTypePaying": "UserTypePaying", 
-      "UserTypeJailBroken": "UserTypeJailBroken", 
-      "UserTypeAlliance": "UserTypeAlliance", 
-      "UserTypeModerator": "UserTypeModerator", 
-      "UserTypeTemplate": "UserTypeTemplate", 
-      "UserTypeCommunityManager": "UserTypeCommunityManager", 
       "SyncUser": "SyncUser", 
-      "UserTypeDesigner": "UserTypeDesigner", 
-      "UserTypeLiveOps": "UserTypeLiveOps", 
-      "UserTypeTest": "UserTypeTest", 
-      "UserTypeDisabled": "UserTypeDisabled", 
-      "UserTypeRobot": "UserTypeRobot"
+      "Paying": "UserTypePaying", 
+      "JailBroken": "UserTypeJailBroken", 
+      "Alliance": "UserTypeAlliance", 
+      "Moderator": "UserTypeModerator", 
+      "Template": "UserTypeTemplate", 
+      "CommunityManager": "UserTypeCommunityManager", 
+      "Designer": "UserTypeDesigner", 
+      "LiveOps": "UserTypeLiveOps", 
+      "Test": "UserTypeTest", 
+      "Disabled": "UserTypeDisabled", 
+      "Robot": "UserTypeRobot"
     }
   }, 
   "GenderType": {
@@ -2259,29 +2259,29 @@
   "UserStatus": {
     "type": "IntEnum", 
     "values": {
-      "Likedfacebook": 1, 
-      "Followedtwitter": 2, 
-      "Changedusername": 4, 
-      "Manuallybannedfromchat": 8, 
-      "Mutepublicchat": 16, 
-      "Mutedonation": 32, 
-      "Disableads": 64, 
-      "Activatefirstscratchy": 128, 
-      "Drawfirstcharacterwithstarbux": 256, 
-      "Drawfirstcharacterintutorial": 512, 
-      "Purchasedtournamentboxsmall": 1024, 
-      "Purchasedtournamentboxmedium": 2048, 
-      "Purchasedtournamentboxlarge": 4096, 
-      "Btest": 8192, 
-      "Unsubscribedfrommailinglist": 16384, 
-      "Bannedfrommarket": 32768, 
-      "Pevent": 65536, 
-      "Peventsenttofirebase": 131072, 
-      "Disablegalaxymap": 262144, 
-      "Subscriptioningraceperiod": 524288, 
-      "Subscriptionaccountonhold": 1048576, 
-      "Subscribetofirebase": 2097152, 
-      "Allowpublictokengeneration": 4194304
+      "LikedFacebook": 1, 
+      "FollowedTwitter": 2, 
+      "ChangedUsername": 4, 
+      "ManuallyBannedFromChat": 8, 
+      "MutePublicChat": 16, 
+      "MuteDonation": 32, 
+      "DisableAds": 64, 
+      "ActivateFirstScratchy": 128, 
+      "DrawFirstCharacterWithStarbux": 256, 
+      "DrawFirstCharacterInTutorial": 512, 
+      "PurchasedTournamentBoxSmall": 1024, 
+      "PurchasedTournamentBoxMedium": 2048, 
+      "PurchasedTournamentBoxLarge": 4096, 
+      "BTest": 8192, 
+      "UnsubscribedFromMailingList": 16384, 
+      "BannedFromMarket": 32768, 
+      "PEvent": 65536, 
+      "PEventSentToFirebase": 131072, 
+      "DisableGalaxyMap": 262144, 
+      "SubscriptionInGracePeriod": 524288, 
+      "SubscriptionAccountOnHold": 1048576, 
+      "SubscribeToFirebase": 2097152, 
+      "AllowPublicTokenGeneration": 4194304
     }
   }, 
   "RewardVideoIntention": {
@@ -2289,96 +2289,96 @@
     "values": {
       "None": 0, 
       "Starbux": 1, 
-      "Rushroomconstruction": 2, 
-      "Rushroommanufacture": 3, 
-      "Rushresearch": 4, 
-      "Rushshipupgrade": 5, 
-      "Miningboost": 6, 
-      "Boostgauge": 7
+      "RushRoomConstruction": 2, 
+      "RushRoomManufacture": 3, 
+      "RushResearch": 4, 
+      "RushShipUpgrade": 5, 
+      "MiningBoost": 6, 
+      "BoostGauge": 7
     }
   }, 
   "TUTORIAL_STEP": {
     "type": "IntEnum", 
     "values": {
-      "TutorialStepNone": 0, 
-      "TutorialStepWelcome": 1, 
-      "TutorialStepBrowseWeaponsRooms": 2, 
-      "TutorialStepPurchaseMiningLazer": 3, 
-      "TutorialStepPlaceMiningLazerRoom": 4, 
-      "TutorialStepWaitForConstruction": 5, 
-      "TutorialStepPlacedMiningLazerRoom": 6, 
-      "TutorialStepCollectMineral": 7, 
-      "TutorialStepOtherWaysToEarnMinerals": 8, 
-      "TutorialStepWelcomeStarsystem": 9, 
-      "TutorialStepBootcampMission": 10, 
-      "TutorialStepAttack": 11, 
-      "TutorialStepWelcomeToBattle": 12, 
-      "TutorialStepBattleEnergyBar": 13, 
-      "TutorialStepBattleTapLeft": 14, 
-      "TutorialStepBattleTapRight": 15, 
-      "TutorialStepBattleAim": 16, 
-      "TutorialStepBattlePowerRoom": 17, 
-      "TutorialStepBattleProcess": 18, 
-      "TutorialStepWonFirstBattle": 19, 
-      "TutorialStepUpgradeCrew": 20, 
-      "TutorialStepTapCrewUpgrade": 21, 
-      "TutorialStepConfirmCrewUpgrade": 22, 
-      "TutorialStepCrewUpgraded": 23, 
-      "TutorialStepCrewDescription": 24, 
-      "TutorialStepUpgradeBedroom": 25, 
-      "TutorialStepSelectBedroom": 26, 
-      "TutorialStepTapRoomUpgrade": 27, 
-      "TutorialStepTapRoomUpgradeConfirm": 28, 
-      "TutorialStepTapRoomUpgradeConfirm2": 29, 
-      "TutorialStepRoomUpgrading": 30, 
-      "TutorialStepRecruit": 31, 
-      "TutorialStepRecruitTapCharacter": 32, 
-      "TutorialStepRecruitTapRecruit": 33, 
-      "TutorialStepAchievement": 34, 
-      "TutorialStepAchievementTapTrophy": 35, 
-      "TutorialStepAchievementTapAchievement": 36, 
-      "TutorialStepAchievementTapCollect": 37, 
-      "TutorialStepAchievementTapClose": 38, 
-      "TutorialStepCrewAssignJob": 39, 
-      "TutorialStepCrewSelect": 40, 
-      "TutorialStepCrewDrag": 41, 
-      "TutorialStepCrewAssigned": 42, 
-      "TutorialStepCrewGunner": 43, 
-      "TutorialStepFinishedBasics": 44, 
-      "TutorialStepFinishedBasics2": 45, 
-      "TutorialStepFinishedFreeExplore": 46, 
-      "TutorialStepPowerIntro": 47, 
-      "TutorialStepPowerReduceEngine": 48, 
-      "TutorialStepPowerBar": 49, 
-      "TutorialStepPowerIncreaseLazer": 50, 
-      "TutorialStepPowerMonitor": 51, 
-      "TutorialStepUpgradeShip": 52, 
-      "TutorialStepTapShipButton": 53, 
-      "TutorialStepTapShipUpgrade": 54, 
-      "TutorialStepShipUpgrading": 55, 
-      "TutorialStepShipUpgraded": 56, 
-      "TutorialStepMoreRooms": 57, 
-      "TutorialStepGoodLuck": 58, 
-      "TutorialStepOptions": 59, 
-      "TutorialStepEnd": 60
+      "_NONE": 0, 
+      "_WELCOME": 1, 
+      "_BROWSE_WEAPONS_ROOMS": 2, 
+      "_PURCHASE_MINING_LAZER": 3, 
+      "_PLACE_MINING_LAZER_ROOM": 4, 
+      "_WAIT_FOR_CONSTRUCTION": 5, 
+      "_PLACED_MINING_LAZER_ROOM": 6, 
+      "_COLLECT_MINERAL": 7, 
+      "_OTHER_WAYS_TO_EARN_MINERALS": 8, 
+      "_WELCOME_STARSYSTEM": 9, 
+      "_BOOTCAMP_MISSION": 10, 
+      "_ATTACK": 11, 
+      "_WELCOME_TO_BATTLE": 12, 
+      "_BATTLE_ENERGY_BAR": 13, 
+      "_BATTLE_TAP_LEFT": 14, 
+      "_BATTLE_TAP_RIGHT": 15, 
+      "_BATTLE_AIM": 16, 
+      "_BATTLE_POWER_ROOM": 17, 
+      "_BATTLE_PROCESS": 18, 
+      "_WON_FIRST_BATTLE": 19, 
+      "_UPGRADE_CREW": 20, 
+      "_TAP_CREW_UPGRADE": 21, 
+      "_CONFIRM_CREW_UPGRADE": 22, 
+      "_CREW_UPGRADED": 23, 
+      "_CREW_DESCRIPTION": 24, 
+      "_UPGRADE_BEDROOM": 25, 
+      "_SELECT_BEDROOM": 26, 
+      "_TAP_ROOM_UPGRADE": 27, 
+      "_TAP_ROOM_UPGRADE_CONFIRM": 28, 
+      "_TAP_ROOM_UPGRADE_CONFIRM2": 29, 
+      "_ROOM_UPGRADING": 30, 
+      "_RECRUIT": 31, 
+      "_RECRUIT_TAP_CHARACTER": 32, 
+      "_RECRUIT_TAP_RECRUIT": 33, 
+      "_ACHIEVEMENT": 34, 
+      "_ACHIEVEMENT_TAP_TROPHY": 35, 
+      "_ACHIEVEMENT_TAP_ACHIEVEMENT": 36, 
+      "_ACHIEVEMENT_TAP_COLLECT": 37, 
+      "_ACHIEVEMENT_TAP_CLOSE": 38, 
+      "_CREW_ASSIGN_JOB": 39, 
+      "_CREW_SELECT": 40, 
+      "_CREW_DRAG": 41, 
+      "_CREW_ASSIGNED": 42, 
+      "_CREW_GUNNER": 43, 
+      "_FINISHED_BASICS": 44, 
+      "_FINISHED_BASICS_2": 45, 
+      "_FINISHED_FREE_EXPLORE": 46, 
+      "_POWER_INTRO": 47, 
+      "_POWER_REDUCE_ENGINE": 48, 
+      "_POWER_BAR": 49, 
+      "_POWER_INCREASE_LAZER": 50, 
+      "_POWER_MONITOR": 51, 
+      "_UPGRADE_SHIP": 52, 
+      "_TAP_SHIP_BUTTON": 53, 
+      "_TAP_SHIP_UPGRADE": 54, 
+      "_SHIP_UPGRADING": 55, 
+      "_SHIP_UPGRADED": 56, 
+      "_MORE_ROOMS": 57, 
+      "_GOOD_LUCK": 58, 
+      "_OPTIONS": 59, 
+      "_END": 60
     }
   }, 
   "ReportType": {
     "type": "IntEnum", 
     "values": {
       "None": 0, 
+      "TopSpenders": 1, 
       "Trophy": 2, 
+      "LastLoginDate": 3, 
       "Admin": 4, 
-      "Everyone": 5, 
-      "Topspenders": 1, 
-      "Lastlogindate": 3
+      "Everyone": 5
     }
   }, 
   "PurchaseVIPStatus": {
     "type": "IntEnum", 
     "values": {
       "None": 0, 
-      "Vip": 1
+      "VIP": 1
     }
   }, 
   "LeagueType": {
