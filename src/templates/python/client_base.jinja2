@@ -19,7 +19,7 @@ class PssApiClientBase:
         production_server: str = None,
         use_cache: bool = True
     ):
-        self.__device_type: _enums.DeviceType = device_type or _enums.DeviceType.DEVICE_TYPE_ANDROID
+        self.__device_type: _enums.DeviceType = device_type or _enums.DeviceType.ANDROID
         self.__language_key: _enums.LanguageKey = language_key or _enums.LanguageKey.ENGLISH
         self.__production_server: str = production_server or None # if it's none, it'll be checked and cached for any API call
         self.__use_cache: bool = use_cache or False
