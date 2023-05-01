@@ -1901,6 +1901,29 @@
           }
         }, 
         "service": "RoomService"
+      },
+      "ListRoomDesignPurchase": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListRoomDesignPurchase",
+        "method": "GET",
+        "query_parameters": {
+          "designVersion": "int"
+        },
+        "response_structure": {
+          "RoomService": {
+            "ListRoomDesignPurchase": {
+              "RoomDesignPurchases": {
+                "RoomDesignPurchase": {}
+              },
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        },
+        "service": "RoomService"
       }
     }, 
     "SeasonService": {

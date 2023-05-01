@@ -95,7 +95,7 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
     for enum_name in result.keys():
         if result[enum_name]['type'] == TYPE_INT_ENUM:
             enum_name_lower = enum_name.lower()
-            if enum_name_lower.endswith(('flag', 'flags', 'flagtype', 'flagstype')):
+            if enum_name_lower.endswith(('flag', 'flags', 'flagtype', 'flagstype')) and :
                 result[enum_name]['type'] = TYPE_INT_FLAG
 
     return result
@@ -110,3 +110,10 @@ def store_enum_file(enum_definitions: _Dict[str, EnumDefinition], store_at: str,
         separators = (', ', ': ')
     with open(store_at, 'w') as fp:
         _json.dump(enum_definitions, fp, indent=indent, separators=separators)
+
+
+def is_int_flag(enum_name: str, enum_definition: EnumDefinition) -> bool:
+    if not enum_name.lower().endswith(('flag', 'flags', 'flagtype', 'flagstype')):
+        return False
+    for enum_value in enum_definition['values']:
+        
