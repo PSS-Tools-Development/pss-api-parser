@@ -1878,6 +1878,29 @@
         }, 
         "service": "RoomService"
       }, 
+      "ListRoomDesignPurchase": {
+        "content_parameters": {}, 
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "ListRoomDesignPurchase", 
+        "method": "GET", 
+        "query_parameters": {
+          "designVersion": "int"
+        }, 
+        "response_structure": {
+          "RoomService": {
+            "ListRoomDesignPurchase": {
+              "RoomDesignPurchases": {
+                "RoomDesignPurchase": {}
+              }, 
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        }, 
+        "service": "RoomService"
+      }, 
       "ListRoomDesigns2": {
         "content_parameters": {}, 
         "content_structure": {}, 
@@ -1900,29 +1923,6 @@
             }
           }
         }, 
-        "service": "RoomService"
-      },
-      "ListRoomDesignPurchase": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "ListRoomDesignPurchase",
-        "method": "GET",
-        "query_parameters": {
-          "designVersion": "int"
-        },
-        "response_structure": {
-          "RoomService": {
-            "ListRoomDesignPurchase": {
-              "RoomDesignPurchases": {
-                "RoomDesignPurchase": {}
-              },
-              "properties": {
-                "version": "int"
-              }
-            }
-          }
-        },
         "service": "RoomService"
       }
     }, 
@@ -2368,6 +2368,23 @@
                 "Friend": {}
               }
             }
+          }
+        }, 
+        "service": "UserService"
+      }, 
+      "RemoveFriend": {
+        "content_parameters": {}, 
+        "content_structure": {}, 
+        "content_type": "", 
+        "endpoint": "RemoveFriend", 
+        "method": "POST", 
+        "query_parameters": {
+          "accessToken": "str", 
+          "friendUserId": "int"
+        }, 
+        "response_structure": {
+          "UserService": {
+            "RemoveFriend": {}
           }
         }, 
         "service": "UserService"
