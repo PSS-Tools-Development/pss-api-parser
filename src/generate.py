@@ -116,7 +116,7 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
 
 def __find_entity_name_for_property_type(property_type: str, entity_names: _Iterable[str]) -> _Tuple[str, bool]:
     """
-    Returns the matching enum name and if it's likely to be a collection of that entity.
+    Returns the matching entity name and if it's likely to be a collection of that entity.
     """
     likely_match = property_type
     likely_collection = False
@@ -495,7 +495,7 @@ def __generate_enums_files(enums_data: list, target_path: str, env: _Environment
     for enum in enums_data:
         if enum['type'] == _enums.TYPE_INT_ENUM:
             template = int_enum_template
-        if enum['type'] == _enums.TYPE_INT_FLAG:
+        elif enum['type'] == _enums.TYPE_INT_FLAG:
             template = int_flag_template
         else:
             template = str_enum_template
