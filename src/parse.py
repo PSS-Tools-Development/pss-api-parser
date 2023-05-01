@@ -387,5 +387,5 @@ def __read_flows_from_file(file_path: str) -> _List[_PssFlowDetails]:
 
     blacklisted_services = _utils.read_json('src/blacklisted_services.json')
     blacklisted_endpoints = _utils.read_json('src/blacklisted_endpoints.json')
-    result = [flow for flow in flow_details if flow.service not in blacklisted_services and not any(endpoint in flow.endpoint for endpoint in blacklisted_endpoints)]
+    result = [flow for flow in flow_details if flow.service not in blacklisted_services and not any(flow.endpoint.startswith(endpoint) for endpoint in blacklisted_endpoints)]
     return result
