@@ -93,10 +93,8 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
                         likely_str = False
     
     for enum_name in result.keys():
-        if result[enum_name]['type'] == TYPE_INT_ENUM:
-            enum_name_lower = enum_name.lower()
-            if is_int_flag(enum_name, result[enum_name]):
-                result[enum_name]['type'] = TYPE_INT_FLAG
+        if result[enum_name]['type'] == TYPE_INT_ENUM and is_int_flag(enum_name, result[enum_name]):
+            result[enum_name]['type'] = TYPE_INT_FLAG
 
     return result
 
