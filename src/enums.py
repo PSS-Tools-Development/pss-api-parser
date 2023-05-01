@@ -95,7 +95,7 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
     for enum_name in result.keys():
         if result[enum_name]['type'] == TYPE_INT_ENUM:
             enum_name_lower = enum_name.lower()
-            if enum_name_lower.endswith(('flag', 'flags', 'flagtype', 'flagstype')) and :
+            if is_int_flag(enum_name, result[enum_name]):
                 result[enum_name]['type'] = TYPE_INT_FLAG
 
     return result
@@ -115,5 +115,12 @@ def store_enum_file(enum_definitions: _Dict[str, EnumDefinition], store_at: str,
 def is_int_flag(enum_name: str, enum_definition: EnumDefinition) -> bool:
     if not enum_name.lower().endswith(('flag', 'flags', 'flagtype', 'flagstype')):
         return False
+    former_value = None
     for enum_value in enum_definition['values']:
-        
+        if former_value is None:
+            former_value = enum_value
+        if not former_value or former_value * 2 == enum_value:
+            former_value = enum_value
+        else:
+            return False
+    return True
