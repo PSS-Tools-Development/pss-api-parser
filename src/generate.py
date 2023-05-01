@@ -713,13 +713,13 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
                 return_types.append((return_parent_tag_name, entity_types))
         
         if len(return_types) < 1:
-            return (None, [])
+            return (None, []) # No return type
         elif len(return_types) == 1:
             return return_types[0]
         else:
             entity_types = [entity_type for _, return_type in return_types for entity_type in return_type]
             return (parent_tag_name, entity_types)
-    return None
+    return (None, [])
 
 
 def __get_return_type_for_python(return_types: _List[_Tuple[str, str, bool]]) -> str:
