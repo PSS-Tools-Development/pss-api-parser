@@ -116,9 +116,10 @@ def is_int_flag(enum_name: str, enum_definition: EnumDefinition) -> bool:
     if not enum_name.lower().endswith(('flag', 'flags', 'flagtype', 'flagstype')):
         return False
     former_value = None
-    for enum_value in enum_definition['values']:
+    for enum_value in enum_definition['values'].values():
         if former_value is None:
             former_value = enum_value
+            continue
         if not former_value or former_value * 2 == enum_value:
             former_value = enum_value
         else:
