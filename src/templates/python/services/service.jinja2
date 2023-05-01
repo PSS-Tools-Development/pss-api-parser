@@ -17,9 +17,13 @@ class {{ service.name }}(_service_base.ServiceBase):
 {% if endpoint.data_version_property_name %}
     @_service_base.cache_endpoint('{{ endpoint.data_version_property_name }}')
 {% endif %}
-    async def {{ endpoint.name_snake_case_without_version }}(self{% if endpoint.parameter_definitions %}, {{ endpoint.parameter_definitions }}{% endif %}) -> {{ endpoint.return_type_str }}:
+    async def {{ endpoint.name_snake_case_without_version }}(self{% if endpoint.parameter_definitions %}, {{ endpoint.parameter_definitions }}{% endif %}) -> {{ endpoint.return_type_str or 'None' }}:
         production_server = await self.get_production_server()
+{% if endpoint.return_type_str %}
         result = await _{{ service.name }}Raw.{{ endpoint.name_snake_case }}(production_server{% if endpoint.raw_endpoint_call_parameters %}, {{ endpoint.raw_endpoint_call_parameters }}{% endif %})
         return result
+{% else %}
+        await _{{ service.name }}Raw.{{ endpoint.name_snake_case }}(production_server{% if endpoint.raw_endpoint_call_parameters %}, {{ endpoint.raw_endpoint_call_parameters }}{% endif %})
+{% endif %}
 
 {% endfor %}

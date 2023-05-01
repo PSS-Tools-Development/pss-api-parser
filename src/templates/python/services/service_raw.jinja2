@@ -21,7 +21,7 @@ from ...entities import {{ entity_type }} as _{{ entity_type }}
 # ---------- Endpoints ----------
 
 {% for endpoint in service.raw_endpoints %}
-async def {{ endpoint.name_snake_case }}(production_server: str{% if endpoint.parameter_raw_definitions %}, {{ endpoint.parameter_raw_definitions }}{% endif %}, **params) -> {{ endpoint.return_type_str }}:
+async def {{ endpoint.name_snake_case }}(production_server: str{% if endpoint.parameter_raw_definitions %}, {{ endpoint.parameter_raw_definitions }}{% endif %}, **params) -> {{ endpoint.return_type_str or 'None' }}:
     params = {
 {% for parameter in endpoint.parameters %}
         '{{ parameter.name }}': {{ parameter.name_snake_case }},
@@ -34,7 +34,9 @@ async def {{ endpoint.name_snake_case }}(production_server: str{% if endpoint.pa
 {% else %}
     result = await _core.get_entities_from_path({{ endpoint.entity_types_str }}, '{{ endpoint.xml_parent_tag_name }}', production_server, {{ endpoint.base_path_name }}_BASE_PATH, '{{ endpoint.method }}', **params)
 {% endif %}
+{% if endpoint.return_type_str %}
     return result
+{% endif %}
 
 {% if endpoint.content_type %}
 __{{ endpoint.name_screaming_snake_case }}_REQUEST_CONTENT_STRUCTURE: str = '{{ endpoint.content_structure }}'
