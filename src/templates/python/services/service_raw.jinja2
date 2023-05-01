@@ -30,9 +30,9 @@ async def {{ endpoint.name_snake_case }}(production_server: str{% if endpoint.pa
     }
 {% if endpoint.method == 'POST' and endpoint.content_type %}
     content = _core.create_request_content(__{{ endpoint.name_screaming_snake_case }}_REQUEST_CONTENT_STRUCTURE, params, '{{ endpoint.content_type }}')
-    result = await _core.get_entities_from_path({{ endpoint.entity_types_str }}, '{{ endpoint.xml_parent_tag_name }}', production_server, {{ endpoint.base_path_name }}_BASE_PATH, '{{ endpoint.method }}', request_content=content, **params)
+    {% if endpoint.return_type_str %}result = {% endif %}await _core.get_entities_from_path({{ endpoint.entity_types_str }}, '{{ endpoint.xml_parent_tag_name }}', production_server, {{ endpoint.base_path_name }}_BASE_PATH, '{{ endpoint.method }}', request_content=content, **params)
 {% else %}
-    result = await _core.get_entities_from_path({{ endpoint.entity_types_str }}, '{{ endpoint.xml_parent_tag_name }}', production_server, {{ endpoint.base_path_name }}_BASE_PATH, '{{ endpoint.method }}', **params)
+    {% if endpoint.return_type_str %}result = {% endif %}await _core.get_entities_from_path({{ endpoint.entity_types_str }}, '{{ endpoint.xml_parent_tag_name }}', production_server, {{ endpoint.base_path_name }}_BASE_PATH, '{{ endpoint.method }}', **params)
 {% endif %}
 {% if endpoint.return_type_str %}
     return result
