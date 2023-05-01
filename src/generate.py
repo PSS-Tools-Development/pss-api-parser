@@ -105,10 +105,17 @@ def prepare_parsed_enums_data(parsed_enums_data: _Dict[str, _enums.EnumDefinitio
                     'value': parsed_enums_data[enum_name]['values'][value_name],
                 })
             else:
+                value = parsed_enums_data[enum_name]['values'][value_name]
+                if value is None:
+                    if parsed_enums_data[enum_name]['type'] == _enums.TYPE_STR_ENUM:
+                        value = 'None'
+                    else:
+                        value = 0
+
                 enum_definition['enum_values'].append({
                     'name': 'None',
                     'name_upper': 'NONE',
-                    'value': parsed_enums_data[enum_name]['values'][value_name] if not None else 'None',
+                    'value': value,
                 })
         result.append(enum_definition)
     return result
