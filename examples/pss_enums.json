@@ -1758,7 +1758,7 @@
     }
   }, 
   "VisibilityFlags": {
-    "type": "IntFlag", 
+    "type": "IntEnum", 
     "values": {
       "None": 0, 
       "HideWhenNotSatisfied": 1, 
