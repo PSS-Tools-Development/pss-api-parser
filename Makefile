@@ -10,9 +10,7 @@ help: ## Display this help screen
 
 .PHONY: init
 init: ## Install dependencies
-	pip install --upgrade pip
-	pip install pip-tools
-	pip-sync requirements.txt
+	poetry install
 
 .PHONY: pssapi
 pssapi: gen ## Generate, auto-lint pssapi.py and check errors
@@ -20,11 +18,7 @@ pssapi: gen ## Generate, auto-lint pssapi.py and check errors
 .PHONY: gen
 gen: ## Generate the code
 ifeq ($(OVERWRITE), 1)
-	python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --cacheable ${CACHEABLE_FILE} --out $(PSSAPI_DIRECTORY) --overwrite
+	poetry run python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --cacheable ${CACHEABLE_FILE} --out $(PSSAPI_DIRECTORY) --overwrite
 else
-	python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --cacheable ${CACHEABLE_FILE} --out $(PSSAPI_DIRECTORY)
+	poetry run python gen.py --structure $(STRUCTURE_FILE) --enums $(ENUMS_FILE) --cacheable ${CACHEABLE_FILE} --out $(PSSAPI_DIRECTORY)
 endif
-
-.PHONY: requirements
-requirements: ## Compile requirements.txt with pip-tools
-	CUSTOM_COMPILE_COMMAND="make requirements" pip-compile --resolver=backtracking requirements.in
