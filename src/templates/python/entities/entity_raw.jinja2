@@ -51,7 +51,8 @@ class {{ entity.name }}Raw:
 
 
     def _key(self):
-        return (
+{% if entity.properties %}   
+        return (         
 {% for property in entity.properties %}
 {% if property.builtin %}
             self.{{ property.name_snake_case }},
@@ -64,6 +65,9 @@ class {{ entity.name }}Raw:
 {% endif %}
 {% endfor %}
         )
+{% else %}
+        return tuple()
+{% endif %}
 
 
     def __dict__(self):
