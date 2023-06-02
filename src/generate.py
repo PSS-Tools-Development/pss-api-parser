@@ -55,7 +55,8 @@ def filter_enums_data(enums_data: _Dict[str, _enums.EnumDefinition], services_da
     for entity in entities_data:
         for property in entity['properties']:
             potential_enum_names.append(property['name'])
-            if property['name'].lower()[:4] == 'flag':
+            property_name_lower = property['name'].lower()
+            if property_name_lower[:4] == 'flag' or property_name_lower[-5:] == 'flags':
                 flag_enum_name = f'{entity["name"]}Flag'
                 potential_enum_names.append(flag_enum_name)
                 potential_enum_names.append(f'{flag_enum_name}s')
