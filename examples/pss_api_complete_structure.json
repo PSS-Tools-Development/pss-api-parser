@@ -1478,6 +1478,29 @@
         },
         "service": "MessageService"
       },
+      "ListSalesByItemDesignId": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListSalesByItemDesignId",
+        "method": "GET",
+        "query_parameters": {
+          "from": "int",
+          "itemDesignId": "int",
+          "saleStatus": "str",
+          "to": "int"
+        },
+        "response_structure": {
+          "MarketService": {
+            "ListSalesByItemDesignId": {
+              "Sales": {
+                "Sale": {}
+              }
+            }
+          }
+        },
+        "service": "MarketService"
+      },
       "SendMessage3": {
         "content_parameters": {
           "AccessToken": "str",
@@ -1497,6 +1520,50 @@
           "MessageService": {
             "SendMessage": {
               "Message": {}
+            }
+          },
+          "SendMessage": {}
+        },
+        "service": "MessageService"
+      },
+      "SendPrivateMessage3": {
+        "content_parameters": {
+          "AccessToken": "str",
+          "Message": "str",
+          "ToUserId": "int"
+        },
+        "content_structure": {
+          "AccessToken": "str",
+          "Message": "str",
+          "ToUserId": "int"
+        },
+        "content_type": "json",
+        "endpoint": "SendPrivateMessage3",
+        "method": "POST",
+        "query_parameters": {},
+        "response_structure": {
+          "MessageService": {
+            "SendMessage": {
+              "Message": {}
+            }
+          }
+        },
+        "service": "MessageService"
+      },
+      "UpdateUnreadMessages": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "UpdateUnreadMessages",
+        "method": "POST",
+        "query_parameters": {
+          "accessToken": "str",
+          "toUserId": "int"
+        },
+        "response_structure": {
+          "MessageService": {
+            "UpdateUnreadMessages": {
+              "Friend": {}
             }
           }
         },
@@ -1706,6 +1773,30 @@
         "method": "GET",
         "query_parameters": {
           "designVersion": "int"
+        },
+        "response_structure": {
+          "RoomDesignSpriteService": {
+            "ListRoomDesignSprites": {
+              "RoomDesignSprites": {
+                "RoomDesignSprite": {}
+              },
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        },
+        "service": "RoomDesignSpriteService"
+      },
+      "ListRoomDesignSprites2": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListRoomDesignSprites2",
+        "method": "GET",
+        "query_parameters": {
+          "designVersion": "int",
+          "languageKey": "str"
         },
         "response_structure": {
           "RoomDesignSpriteService": {
@@ -2528,6 +2619,34 @@
           }
         },
         "service": "UserService"
+      },
+      "UserEmailPasswordAuthorize4": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "UserEmailPasswordAuthorize4",
+        "method": "POST",
+        "query_parameters": {
+          "accessToken": "str",
+          "checksum": "str",
+          "clientDateTime": "str",
+          "deviceKey": "str",
+          "email": "str",
+          "isWeb": "bool",
+          "languageKey": "str",
+          "password": "str"
+        },
+        "response_structure": {
+          "UserService": {
+            "UserEmailPasswordAuthorize": {
+              "User": {
+                "Alliance": {},
+                "UserSeason": {}
+              }
+            }
+          }
+        },
+        "service": "UserService"
       }
     }
   },
@@ -2582,6 +2701,7 @@
       "DivisionDesignId": "int",
       "EnableWars": "bool",
       "ImmunityDate": "datetime",
+      "MinScoreContribution": "int",
       "MinTrophyRequired": "int",
       "NumberOfApprovedMembers": "int",
       "NumberOfMembers": "int",
@@ -2639,7 +2759,7 @@
       "AttackingAllianceName": "str",
       "AttackingAllianceSpriteId": "int",
       "AttackingShipId": "int",
-      "AttackingShipName": null,
+      "AttackingShipName": "str",
       "AttackingShipXml": "str",
       "AttackingUserId": "int",
       "AttackingUserTrophy": "int",
@@ -2663,7 +2783,7 @@
       "DefendingClientEndFrame": "int",
       "DefendingClientOutcomeType": "str",
       "DefendingShipId": "int",
-      "DefendingShipName": null,
+      "DefendingShipName": "str",
       "DefendingShipXml": "str",
       "DefendingUserId": "int",
       "DefendingUserTrophy": "int",
@@ -2722,21 +2842,26 @@
       "AbilityImprovement": "int",
       "AttackImprovement": "int",
       "AvailableDate": "datetime",
+      "BattleCharacterHp": "int",
+      "BloodlustFrame": "int",
       "CharacterActions": "CharacterActions",
       "CharacterDesignId": "int",
       "CharacterId": "int",
       "CharacterName": "str",
       "DeploymentDate": "datetime",
+      "DesignatedRoomId": "int",
       "EngineImprovement": "int",
       "Fatigue": "int",
       "Flags": "int",
       "FrameToAttackOrRepair": "FrameToAttackOrRepair",
       "HpImprovement": "int",
+      "InvulnerabilityFrame": "int",
       "IsNew": "bool",
       "IsPrestiging": "IsPrestiging",
       "ItemIds": "str",
       "Items": "Items",
       "Level": "int",
+      "OriginRoomId": "int",
       "OwnerShipId": "int",
       "OwnerUsername": "str",
       "PilotImprovement": "int",
@@ -2744,13 +2869,19 @@
       "RoomId": "int",
       "ScienceImprovement": "int",
       "ShipId": "int",
+      "SkillPoints": "int",
       "Stamina": "int",
       "StaminaImprovement": "int",
+      "TargetRoomId": "int",
       "TrainingData": "str",
       "TrainingDesignId": "int",
       "TrainingEndDate": "datetime",
       "WeaponImprovement": "int",
-      "Xp": "int"
+      "XCoordinate": "int",
+      "XCoordinateShipRelative": "int",
+      "Xp": "int",
+      "YCoordinate": "int",
+      "YCoordinateShipRelative": "int"
     },
     "CharacterAction": {
       "ActionTypeId": "int",
@@ -2863,6 +2994,7 @@
       "RoomType": "str"
     },
     "CraftDesign": {
+      "AttackDistance": "int",
       "CraftAttackType": "str",
       "CraftDesignId": "int",
       "CraftName": "str",
@@ -2943,21 +3075,26 @@
       "Value": "int"
     },
     "Item": {
+      "ActionFrame": "int",
+      "BattleHp": "int",
       "BonusEnhancementType": "str",
       "BonusEnhancementValue": "str",
       "IsNew": "bool",
       "ItemDesignId": "int",
       "ItemId": "int",
       "Quantity": "int",
-      "ShipId": "int"
+      "ShipId": "int",
+      "SkinKey": "int"
     },
     "ItemDesign": {
       "ActiveAnimationId": "int",
       "AnimationId": "int",
       "BorderSpriteId": "int",
+      "BuildPrice": "int",
       "BuildTime": "int",
       "CharacterDesignId": "int",
       "CharacterPartId": "int",
+      "Circulation": "int",
       "Content": "str",
       "CraftDesignId": "int",
       "DropChance": "int",
@@ -3005,7 +3142,8 @@
       "SituationDesignId": "int",
       "SoundFileId": "int",
       "Tags": "str",
-      "TrainingDesignId": "int"
+      "TrainingDesignId": "int",
+      "TransactionVolume": "int"
     },
     "ItemDesignAction": {
       "ActionTypeId": "int",
@@ -3201,7 +3339,7 @@
       "Name": "str",
       "OrderIndex": "int",
       "PackId": "str",
-      "ProductKey": null,
+      "ProductKey": "str",
       "PromotionDesignId": "int",
       "PromotionType": "str",
       "PurchaseMask": "int",
@@ -3269,25 +3407,46 @@
       "SpriteId": "int"
     },
     "Room": {
+      "AssignedPower": "int",
       "CapacityUsed": "int",
+      "CenterX": "int",
+      "CenterY": "int",
       "Column": "int",
       "ConstructionStartDate": "datetime",
+      "CurrentCapacity": "int",
       "CurrentSkinKey": "int",
+      "DisableCount": "int",
+      "IsPowerAIActive": "bool",
+      "IsSetItemAIActive": "bool",
+      "IsTargetAIActive": "bool",
       "ItemIds": "str",
+      "ItemSkinKey": "int",
+      "LocalCenterX": "int",
+      "LocalCenterY": "int",
       "ManufactureStartDate": "datetime",
       "ManufactureString": "str",
       "Manufactured": "int",
       "PowerGenerated": "int",
       "PreviousSkinKey": "int",
+      "Progress": "int",
+      "ProtectRoomFrame": "int",
       "RandomSeed": "int",
       "RoomActions": "RoomActions",
       "RoomDesignId": "int",
       "RoomId": "int",
       "RoomStatus": "str",
       "Row": "int",
+      "RunRoomAction": "bool",
       "SalvageString": "str",
       "ShipId": "int",
+      "SkinKey": "int",
+      "SystemPower": "int",
+      "TargetCraftId": "int",
       "TargetManufactureString": "str",
+      "TargetRoomId": "int",
+      "TopLeftX": "int",
+      "TopLeftY": "int",
+      "TotalDamage": "int",
       "UpgradeRoomDesignId": "int"
     },
     "RoomAction": {
@@ -3298,6 +3457,7 @@
       "RoomId": "int"
     },
     "RoomDesign": {
+      "ActivationDelay": "int",
       "Capacity": "int",
       "CategoryType": "str",
       "Columns": "int",
@@ -3323,6 +3483,7 @@
       "MaxPowerGenerated": "int",
       "MaxSystemPower": "int",
       "Metadata": "str",
+      "MinRange": "int",
       "MinShipLevel": "int",
       "MissileDesignId": "int",
       "PriceString": "str",
@@ -3409,6 +3570,9 @@
       "TextFrameSpriteId": "int",
       "TitleSpriteId": "int"
     },
+    "SendMessage": {
+      "errorMessage": "str"
+    },
     "Setting": {
       "ABTestingRollout": "int",
       "ABTestingStartDate": "datetime",
@@ -3445,6 +3609,7 @@
       "DailyRewardType": "str",
       "DivisionDesignVersion": "int",
       "DrawDesignVersion": "int",
+      "EngineEfficiencyLoss": "float",
       "FeatureMask": "int",
       "FileVersion": "int",
       "Flags": "int",
@@ -3477,9 +3642,13 @@
       "LoadingTitleSpriteId": "int",
       "LootModifiers": "str",
       "MaintenanceMessage": null,
+      "MaintenanceTitle": null,
       "MarkerGeneratorDesignVersion": "int",
       "MaxBoostDuration": "int",
       "MaxDailyDraws": "int",
+      "MaxRedemptionCount": "int",
+      "MaxRedemptionCountPerMonth": "int",
+      "MerchantShipExteriorSpriteId": "int",
       "MerchantShipSpriteId": "int",
       "MinimumClientVersion": "str",
       "MinimumVersion": "str",
@@ -3522,6 +3691,7 @@
       "ShipDesignVersion": "int",
       "SituationDesignVersion": "int",
       "SituationTags": "str",
+      "SkinVersion": "int",
       "SpriteVersion": "int",
       "StarSystemLinkVersion": "int",
       "StarSystemVersion": "int",
@@ -3540,6 +3710,8 @@
     },
     "Ship": {
       "BrightnessValue": "float",
+      "CenterX": "int",
+      "CenterY": "int",
       "Characters": "Characters",
       "FromStarSystemId": "int",
       "Hp": "float",
@@ -3547,6 +3719,7 @@
       "ImmunityDate": "datetime",
       "Items": "Items",
       "Lifts": "Lifts",
+      "NextAndroidCharacterId": "int",
       "NextStarSystemId": "int",
       "OriginNextStarSystemId": "int",
       "OriginStarSystemId": "int",
@@ -3570,6 +3743,8 @@
       "StatusStartDate": "datetime",
       "StickerString": "str",
       "Tags": null,
+      "TopLeftX": "int",
+      "TopLeftY": "int",
       "UniqueCharacterDraws": "int",
       "UpdateDate": "datetime",
       "UpgradeShipDesignId": "int",
@@ -3828,6 +4003,7 @@
       "CrewDonated": "int",
       "CrewReceived": "int",
       "DailyChallengeWinStreak": "int",
+      "DailyHeartbeatSeconds": "int",
       "DailyMissionsAttempted": "str",
       "DailyPVPAttacks": "int",
       "DailyPvPDefence": "int",
@@ -3891,6 +4067,7 @@
       "TournamentBonusScore": "int",
       "TournamentResetDate": "datetime",
       "TournamentRewardPoints": "int",
+      "TrailUserId": "str",
       "Trophy": "int",
       "TrophyGained": "int",
       "TutorialStatus": "int",
@@ -3908,7 +4085,8 @@
       "RequireReload": "str",
       "User": "User",
       "UserId": "str",
-      "errorMessage": "str"
+      "errorMessage": "str",
+      "refreshToken": "str"
     },
     "UserLogin": {
       "PreviousLastLoginDate": "datetime",
