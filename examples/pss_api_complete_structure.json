@@ -1288,8 +1288,7 @@
         "query_parameters": {
           "accessToken": "str",
           "from": "int",
-          "to": "int",
-          "to100": null
+          "to": "int"
         },
         "response_structure": {
           "LadderService": {
