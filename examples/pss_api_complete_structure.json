@@ -2396,6 +2396,30 @@
         },
         "service": "UserService"
       },
+      "ListSkins": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListSkins",
+        "method": "GET",
+        "query_parameters": {
+          "designVersion": "int",
+          "languageKey": "str"
+        },
+        "response_structure": {
+          "UserService": {
+            "ListSkins": {
+              "SkinSets": {
+                "SkinSet": {}
+              },
+              "Skins": {
+                "Skin": {}
+              }
+            }
+          }
+        },
+        "service": "UserService"
+      },
       "RemoveFriend": {
         "content_parameters": {},
         "content_structure": {},
@@ -2862,7 +2886,7 @@
       "FinalAttack": "float",
       "FinalEngine": "float",
       "FinalHp": "int",
-      "FinalPilot": "int",
+      "FinalPilot": "float",
       "FinalRepair": "float",
       "FinalResearch": "int",
       "FinalScience": "float",
@@ -3775,6 +3799,38 @@
       "SituationType": "str",
       "TriggerType": "str"
     },
+    "Skin": {
+      "AnimationId": "int",
+      "ApprovalFlags": "str",
+      "DateUpdated": "datetime",
+      "Flags": "int",
+      "Metadata": "str",
+      "OriginalAnimationId": "int",
+      "OriginalSpriteId": "int",
+      "RaceId": "int",
+      "RequirementString": null,
+      "RootId": "int",
+      "SkinDescription": "str",
+      "SkinId": "int",
+      "SkinName": "str",
+      "SkinSetId": "int",
+      "SkinType": "str",
+      "SpriteId": "int",
+      "SpriteType": "str",
+      "UserId": "int"
+    },
+    "SkinSet": {
+      "ApprovalFlags": "str",
+      "CostString": null,
+      "DateUpdated": "datetime",
+      "Flags": "int",
+      "Metadata": null,
+      "RequirementString": "str",
+      "SkinSetDescription": "str",
+      "SkinSetId": "int",
+      "SkinSetName": "str",
+      "SpriteId": "int"
+    },
     "Sprite": {
       "Height": "int",
       "ImageFileId": "int",
@@ -3929,6 +3985,7 @@
     },
     "User": {
       "ActivatedPromotions": "str",
+      "AdsPlatformUserId": null,
       "Alliance": "Alliance",
       "AllianceId": "int",
       "AllianceJoinDate": "datetime",
@@ -4031,6 +4088,7 @@
       "UpdateDate": "datetime",
       "UsedRewardPoints": "int",
       "UserSeason": "UserSeason",
+      "UserSourceAdsPlatformType": "str",
       "UserType": "str",
       "VipExpiryDate": "datetime"
     },
