@@ -23,19 +23,24 @@ if __name__ == '__main__':
     parser.add_argument('--out', type=str, required=True, help='Target directory for the anonymized flows file')
     args = parser.parse_args()
 
-    if not _os.path.isfile(args.in_):
-        print(f'{_Fore.RED}ERROR: Flows JSON file does not exist!{_Fore.RESET}')
-        _sys.exit(ERR_INPUT_NOT_FOUND)
-
     with _Timer() as t:
-        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Input file(s): {args.in_}')
+        input_files = []
+        print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Input file(s):')
         for input_file_path in args.in_:
-            print(f'{_Fore.YELLOW} >>>{_Fore.RESET}  - {input_file_path}')
+            if not _os.path.isfile(input_file_path):
+                print(f'{_Fore.RED} >>> ERROR:{_Fore.RESET} Ignoring non-existent flows JSON file: {input_file_path}')
+            else:
+                print(f'{_Fore.YELLOW} >>>{_Fore.RESET}  - {input_file_path}')
+                input_files.append(input_file_path)
         print(f'{_Fore.YELLOW} >>>{_Fore.RESET} Output path: {args.out}')
+
+        if not input_files:
+            print(f'{_Fore.RED} >>> ERROR:{_Fore.RESET} No valid input files specified, exiting.')
+            _sys.exit(ERR_INPUT_NOT_FOUND)
+        
         print(f'{_Fore.BLUE} >>>{_Fore.RESET} Anonymizing captured flows...')
-
-
-        for input_file_path in args.in_:
+        for input_file_path in input_files:
+            print(f'{_Fore.BLUE} >>>{_Fore.RESET} Anonymizing file: {input_file_path}')
             input_file_name_with_extension = _os.path.split(input_file_path)[1]
             output_file_name = f'{_os.path.splitext(input_file_name_with_extension)[0]}_anonymized.flows'
             output_file_path = _os.path.join(args.out, output_file_name)
