@@ -86,6 +86,7 @@
   "UpdateMarkerMovement",
   "UpdateShipSkin",
   "UpdateShipStickers",
+  "UpdateUnreadMessages",
   "UpgradeCharacter",
   "UpgradeRoom",
   "UserGameCenterAuthorize",

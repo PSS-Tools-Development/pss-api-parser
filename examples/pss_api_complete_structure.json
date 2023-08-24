@@ -1477,29 +1477,6 @@
         },
         "service": "MessageService"
       },
-      "ListSalesByItemDesignId": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "ListSalesByItemDesignId",
-        "method": "GET",
-        "query_parameters": {
-          "from": "int",
-          "itemDesignId": "int",
-          "saleStatus": "str",
-          "to": "int"
-        },
-        "response_structure": {
-          "MarketService": {
-            "ListSalesByItemDesignId": {
-              "Sales": {
-                "Sale": {}
-              }
-            }
-          }
-        },
-        "service": "MarketService"
-      },
       "SendMessage3": {
         "content_parameters": {
           "AccessToken": "str",
@@ -1520,8 +1497,7 @@
             "SendMessage": {
               "Message": {}
             }
-          },
-          "SendMessage": {}
+          }
         },
         "service": "MessageService"
       },
@@ -1544,25 +1520,6 @@
           "MessageService": {
             "SendMessage": {
               "Message": {}
-            }
-          }
-        },
-        "service": "MessageService"
-      },
-      "UpdateUnreadMessages": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "UpdateUnreadMessages",
-        "method": "POST",
-        "query_parameters": {
-          "accessToken": "str",
-          "toUserId": "int"
-        },
-        "response_structure": {
-          "MessageService": {
-            "UpdateUnreadMessages": {
-              "Friend": {}
             }
           }
         },
@@ -3568,9 +3525,6 @@
       "SubtitleSpriteId": "int",
       "TextFrameSpriteId": "int",
       "TitleSpriteId": "int"
-    },
-    "SendMessage": {
-      "errorMessage": "str"
     },
     "Setting": {
       "ABTestingRollout": "int",
