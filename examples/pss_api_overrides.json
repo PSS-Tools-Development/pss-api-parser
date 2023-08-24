@@ -147,29 +147,6 @@
           "skip": "int",
           "take": "int"
         }
-      },
-      "ListSalesByItemDesignId": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "ListSalesByItemDesignId",
-        "method": "GET",
-        "query_parameters": {
-          "from": "int",
-          "itemDesignId": "int",
-          "saleStatus": "str",
-          "to": "int"
-        },
-        "response_structure": {
-          "MarketService": {
-            "ListSalesByItemDesignId": {
-              "Sales": {
-                "Sale": {}
-              }
-            }
-          }
-        },
-        "service": "MarketService"
       }
     },
     "RoomService": {
