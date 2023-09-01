@@ -4,9 +4,9 @@ from .{{ entity.name_snake_case }} import {{ entity.name }}
 {% endfor %}
 
 __all__ = [
-    'EntityWithIdBase',
-    'EntityBase',
+    EntityWithIdBase.__name__,
+    EntityBase.__name__,
 {% for entity in entities %}
-    '{{ entity.name }}',
+    {{ entity.name }}.__name__,
 {% endfor %}
 ]

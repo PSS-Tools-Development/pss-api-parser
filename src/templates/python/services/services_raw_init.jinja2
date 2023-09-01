@@ -4,6 +4,6 @@ from . import {{ service.name_snake_case }}_raw as {{ service.name }}Raw
 
 __all__ = [
 {% for service in services %}
-    '{{ service.name }}Raw',
+    {{ service.name }}Raw.__name__,
 {% endfor %}
 ]

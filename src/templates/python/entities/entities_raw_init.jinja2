@@ -5,8 +5,8 @@ from .{{ entity.name_snake_case }}_raw import {{ entity.name }}Raw
 {% endfor %}
 
 __all__ = [
-    'EntityBaseRaw',
+    EntityBaseRaw.__name__,
 {% for entity in entities %}
-    '{{ entity.name }}Raw',
+    {{ entity.name }}Raw.__name__,
 {% endfor %}
 ]

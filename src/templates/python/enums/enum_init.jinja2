@@ -4,6 +4,6 @@ from .{{ enum.name_snake_case }} import {{ enum.name }}
 
 __all__ = [
 {% for enum in enums %}
-    '{{ enum.name }}',
+    {{ enum.name }}.__name__,
 {% endfor %}
 ]
