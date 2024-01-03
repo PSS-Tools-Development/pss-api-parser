@@ -916,6 +916,269 @@
           }
         },
         "service": "DesignService"
+      },
+      "ListAllDesigns5": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListAllDesigns5",
+        "method": "GET",
+        "query_parameters": {
+          "LanguageKey": "str",
+          "ListAchievementDesignVersion": "int",
+          "ListActionTypeVersion": "int",
+          "ListAllChallengeDesignVersion": "int",
+          "ListAllCharacterDesignActionVersion": "int",
+          "ListAllCharacterDesignVersion": "int",
+          "ListAllCollectionDesignVersion": "int",
+          "ListAllDivisionDesignVersion": "int",
+          "ListAllDrawDesignVersion": "int",
+          "ListAllMissionDesignVersion": "int",
+          "ListAllNewsDesignVersion": "int",
+          "ListAllPromotionDesignVersion": "int",
+          "ListAllResearchDesignVersion": "int",
+          "ListAllRewardDesignVersion": "int",
+          "ListAllShipDesignVersion": "int",
+          "ListAllSituationDesignVersion": "int",
+          "ListAllTaskDesignVersion": "int",
+          "ListAllTrainingDesignVersion": "int",
+          "ListAnimationVersion": "int",
+          "ListAssetVersion": "int",
+          "ListBackgroundVersion": "int",
+          "ListConditionTypeVersion": "int",
+          "ListCraftDesignVersion": "int",
+          "ListFileVersion": "int",
+          "ListItemDesignActionVersion": "int",
+          "ListItemDesignVersion": "int",
+          "ListLeagueVersion": "int",
+          "ListMarkerGeneratorDesignVersion": "int",
+          "ListMissileDesignVersion": "int",
+          "ListRoomDesignPurchaseVersion": "int",
+          "ListRoomDesignSpriteVersion": "int",
+          "ListRoomDesignVersion": "int",
+          "ListSeasonDesignVersion": "int",
+          "ListSkinVersion": "int",
+          "ListSpriteVersion": "int",
+          "ListStarSystemLinkVersion": "int",
+          "ListStarSystemVersion": "int"
+        },
+        "response_structure": {
+          "DesignService": {
+            "ListAllDesigns": {
+              "AchievementDesigns": {
+                "AchievementDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Animations": {
+                "Animation": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Assets": {
+                "Asset": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Backgrounds": {
+                "Background": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ChallengeDesigns": {
+                "ChallengeDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "CharacterDesignActions": {
+                "CharacterDesignAction": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "CharacterDesigns": {
+                "CharacterDesign": {
+                  "CharacterParts": {
+                    "CharacterPart": {}
+                  }
+                },
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "CollectionDesigns": {
+                "CollectionDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "CraftDesigns": {
+                "CraftDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "DivisionDesigns": {
+                "DivisionDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "DrawDesigns": {
+                "DrawDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Files": {
+                "File": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ItemDesignActions": {
+                "ItemDesignAction": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ItemDesigns": {
+                "ItemDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Leagues": {
+                "League": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "MissileDesigns": {
+                "MissileDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "MissionDesigns": {
+                "MissionDesign": {
+                  "InstantMissionEvents": {}
+                },
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "NewsDesigns": {
+                "NewsDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "PromotionDesigns": {
+                "PromotionDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ResearchDesigns": {
+                "ResearchDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "RewardDesigns": {
+                "RewardDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "RoomDesignPurchases": {
+                "RoomDesignPurchase": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "RoomDesignSprites": {
+                "RoomDesignSprite": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "RoomDesigns": {
+                "RoomDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "SeasonDesigns": {
+                "SeasonDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ShipDesigns": {
+                "ShipDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "SituationDesigns": {
+                "SituationDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "SkinSets": {
+                "SkinSet": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Skins": {
+                "Skin": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Sprites": {
+                "Sprite": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "StarSystemLinks": {
+                "StarSystemLink": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "StarSystemMarkerGenerators": {
+                "StarSystemMarkerGenerator": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "StarSystems": {
+                "StarSystem": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "TrainingDesigns": {
+                "TrainingDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              }
+            }
+          }
+        },
+        "service": "DesignService"
       }
     },
     "DivisionService": {
@@ -1948,6 +2211,34 @@
           }
         },
         "service": "RoomService"
+      },
+      "SpeedUpRoomConstructionUsingBoostGauge": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "SpeedUpRoomConstructionUsingBoostGauge",
+        "method": "POST",
+        "query_parameters": {
+          "accessToken": "str",
+          "clientDateTime": "str",
+          "roomId": "int"
+        },
+        "response_structure": {
+          "RoomService": {
+            "SpeedUpRoomConstructionUsingBoostGauge": {
+              "Room": {
+                "RoomActions": {
+                  "RoomAction": {}
+                }
+              },
+              "User": {
+                "Alliance": {},
+                "UserSeason": {}
+              }
+            }
+          }
+        },
+        "service": "RoomService"
       }
     },
     "SeasonService": {
@@ -1979,6 +2270,25 @@
         "content_structure": {},
         "content_type": "",
         "endpoint": "GetLatestVersion3",
+        "method": "GET",
+        "query_parameters": {
+          "deviceType": "str",
+          "languageKey": "str"
+        },
+        "response_structure": {
+          "SettingService": {
+            "GetLatestSetting": {
+              "Setting": {}
+            }
+          }
+        },
+        "service": "SettingService"
+      },
+      "GetLatestVersion4": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetLatestVersion4",
         "method": "GET",
         "query_parameters": {
           "deviceType": "str",
@@ -2104,6 +2414,42 @@
         },
         "service": "ShipService"
       },
+      "InspectStarbase": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "InspectStarbase",
+        "method": "GET",
+        "query_parameters": {
+          "accessToken": "str",
+          "userId": "int"
+        },
+        "response_structure": {
+          "ShipService": {
+            "InspectStarbase": {
+              "Ship": {
+                "Characters": {},
+                "Items": {},
+                "Lifts": {},
+                "Researches": {
+                  "Research": {}
+                },
+                "Rooms": {
+                  "Room": {}
+                },
+                "UserStarSystems": {
+                  "UserStarSystem": {}
+                }
+              },
+              "User": {},
+              "UserFleetCollections": {
+                "UserFleetCollection": {}
+              }
+            }
+          }
+        },
+        "service": "ShipService"
+      },
       "ListAllShipDesigns2": {
         "content_parameters": {},
         "content_structure": {},
@@ -2163,6 +2509,7 @@
         "endpoint": "ListAllTaskDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2260,6 +2607,35 @@
           "UserService": {
             "DeclineFriendRequest": {
               "Friend": {}
+            }
+          }
+        },
+        "service": "UserService"
+      },
+      "DeviceLogin11": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "DeviceLogin11",
+        "method": "POST",
+        "query_parameters": {
+          "advertisingKey": "str",
+          "checksum": "str",
+          "clientDateTime": "datetime",
+          "device_key": "str",
+          "device_type": "str",
+          "is_jail_broken": "bool",
+          "language_key": "str",
+          "refresh_token": "str",
+          "signal": "bool"
+        },
+        "response_structure": {
+          "UserService": {
+            "UserLogin": {
+              "User": {
+                "Alliance": {},
+                "UserSeason": {}
+              }
             }
           }
         },
@@ -2916,6 +3292,7 @@
       "SpeechPitch": "int",
       "SpeechRate": "int",
       "SpeechVoice": null,
+      "Tags": null,
       "TapSoundFileId": "int",
       "TrainingCapacity": "int",
       "WalkingSpeed": "int",
@@ -3483,6 +3860,7 @@
       "Rows": "int",
       "SortIndex": "int",
       "SupportedGridTypes": "int",
+      "Tags": "str",
       "TargetType": "str",
       "UpgradeFromRoomDesignId": "int"
     },
@@ -3618,6 +3996,7 @@
       "LoadingSubtitleSpriteId": "int",
       "LoadingTitleSpriteId": "int",
       "LootModifiers": "str",
+      "MaintenanceDate": "datetime",
       "MaintenanceMessage": null,
       "MaintenanceTitle": null,
       "MarkerGeneratorDesignVersion": "int",
@@ -3627,6 +4006,8 @@
       "MaxRedemptionCountPerMonth": "int",
       "MerchantShipExteriorSpriteId": "int",
       "MerchantShipSpriteId": "int",
+      "MinPurchaseRewardPointsForStarbuxTrading": "int",
+      "MinTrophiesForStarbuxTrading": "int",
       "MinimumClientVersion": "str",
       "MinimumVersion": "str",
       "MissileDesignVersion": "int",
@@ -3808,6 +4189,7 @@
       "OriginalAnimationId": "int",
       "OriginalSpriteId": "int",
       "RaceId": "int",
+      "ReferenceId": "int",
       "RequirementString": null,
       "RootId": "int",
       "SkinDescription": "str",
@@ -4066,6 +4448,7 @@
       "RaceType": "str",
       "Ranking": "int",
       "RewardsCollectable": "bool",
+      "RewardsCollectableAmount": "int",
       "ShipDesignId": "int",
       "SituationOccurrences": "str",
       "SituationOccurrencesToday": "int",
@@ -4098,6 +4481,14 @@
       "UserId": "str",
       "errorMessage": "str",
       "refreshToken": "str"
+    },
+    "UserFleetCollection": {
+      "CollectionDate": "datetime",
+      "RewardsString": "str",
+      "RoomId": "int",
+      "StartDate": "datetime",
+      "UserFleetCollectionId": "int",
+      "UserId": "int"
     },
     "UserLogin": {
       "PreviousLastLoginDate": "datetime",
