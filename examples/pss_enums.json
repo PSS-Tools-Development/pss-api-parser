@@ -205,7 +205,10 @@
       "MarketSaleRequirementNotMet": "MarketSaleRequirementNotMet", 
       "CollectFleetGift": "CollectFleetGift", 
       "TrailLoginWithEmailPassword": "TrailLoginWithEmailPassword", 
-      "GoogleOneTimeProductNotification": "GoogleOneTimeProductNotification"
+      "GoogleOneTimeProductNotification": "GoogleOneTimeProductNotification", 
+      "StarbuxAndPurchase": "StarbuxAndPurchase", 
+      "DeleteAccount": "DeleteAccount", 
+      "LoginWithAmazon": "LoginWithAmazon"
     }
   }, 
   "BackgroundEffectType": {
@@ -386,7 +389,9 @@
     "values": {
       "None": null, 
       "IPAddress": "IPAddress", 
-      "DeviceKey": "DeviceKey"
+      "DeviceKey": "DeviceKey", 
+      "SteamId": "SteamId", 
+      "UserId": "UserId"
     }
   }, 
   "RestrictionType": {
@@ -394,7 +399,10 @@
     "values": {
       "None": null, 
       "PublicChat": "PublicChat", 
-      "Market": "Market"
+      "Market": "Market", 
+      "Account": "Account", 
+      "IAP": "IAP", 
+      "ToBeReviewed": "ToBeReviewed"
     }
   }, 
   "CasinoMatchStatus": {
@@ -767,7 +775,9 @@
       "TargetRoom": "TargetRoom", 
       "YourCraft": "YourCraft", 
       "CurrentRoom": "CurrentRoom", 
-      "OriginRoom": "OriginRoom"
+      "OriginRoom": "OriginRoom", 
+      "AllEnemyRoom": "AllEnemyRoom", 
+      "AllFriendlyRoom": "AllFriendlyRoom"
     }
   }, 
   "ConditionTypeComparison": {
@@ -816,7 +826,18 @@
       "ReloadTime": "ReloadTime", 
       "CooldownTime": "CooldownTime", 
       "OrderIndex": "OrderIndex", 
-      "DeployCount": "DeployCount"
+      "DeployCount": "DeployCount", 
+      "MaxHp": "MaxHp", 
+      "ShipPower": "ShipPower", 
+      "Stamina": "Stamina", 
+      "Invulnerability": "Invulnerability", 
+      "Disable": "Disable", 
+      "Cooldown": "Cooldown", 
+      "Progress": "Progress", 
+      "Special": "Special", 
+      "Evasion": "Evasion", 
+      "Healing": "Healing", 
+      "Type": "Type"
     }
   }, 
   "Contributor": {
@@ -832,14 +853,16 @@
     "type": "StrEnum", 
     "values": {
       "Default": "Default", 
-      "Kamikaze": "Kamikaze"
+      "Kamikaze": "Kamikaze", 
+      "None": null
     }
   }, 
   "CraftTargetType": {
     "type": "StrEnum", 
     "values": {
       "Single": "Single", 
-      "Random": "Random"
+      "Random": "Random", 
+      "RandomUnique": "RandomUnique"
     }
   }, 
   "CurrencyType": {
@@ -872,7 +895,13 @@
       "AllRooms": "AllRooms", 
       "PassPoints": "PassPoints", 
       "AllItems": "AllItems", 
-      "AllCharacters": "AllCharacters"
+      "AllCharacters": "AllCharacters", 
+      "CharactersOfLevel": "CharactersOfLevel", 
+      "AllCharactersOfLevel": "AllCharactersOfLevel", 
+      "Trophy": "Trophy", 
+      "CharactersOfRarity": "CharactersOfRarity", 
+      "AllCharactersOfRarity": "AllCharactersOfRarity", 
+      "Skin": "Skin"
     }
   }, 
   "DataValidationErrorType": {
@@ -955,7 +984,7 @@
     }
   }, 
   "FileType": {
-    "type": "IntEnum", 
+    "type": "StrEnum", 
     "values": {
       "File": 0, 
       "Sprite": 1, 
@@ -965,12 +994,25 @@
     }
   }, 
   "AccessType": {
-    "type": "IntEnum", 
+    "type": "StrEnum", 
     "values": {
       "Private": 0, 
       "Public": 1, 
       "Business": 2, 
       "System": 3
+    }
+  }, 
+  "SpriteType": {
+    "type": "StrEnum", 
+    "values": {
+      "None": 0, 
+      "Interior": 1, 
+      "Exterior": 2, 
+      "InteriorDestroyed": 3, 
+      "ExteriorDestroyed": 4, 
+      "InteriorActivate": 5, 
+      "ExteriorActivate": 6, 
+      "Loading": 7
     }
   }, 
   "FriendType": {
@@ -1044,7 +1086,7 @@
       "Module": "Module", 
       "Rename": "Rename", 
       "Sticker": "Sticker", 
-      "Skin": "Skin", 
+      "ShipSkin": "ShipSkin", 
       "InstantTraining": "InstantTraining", 
       "ReduceFatigue": "ReduceFatigue", 
       "ReducePrestige": "ReducePrestige", 
@@ -1064,8 +1106,9 @@
       "BlueprintShip": "BlueprintShip", 
       "BlueprintRoom": "BlueprintRoom", 
       "SpeedUpResearch": "SpeedUpResearch", 
-      "RoomSkin": "RoomSkin", 
-      "InstantXP": "InstantXP"
+      "Skin": "Skin", 
+      "InstantXP": "InstantXP", 
+      "SkipBattlePassTiers": "SkipBattlePassTiers"
     }
   }, 
   "ModuleType": {
@@ -1284,7 +1327,8 @@
       "AllianceAnnouncement": "AllianceAnnouncement", 
       "ReloadUserData": "ReloadUserData", 
       "FriendRequestCancel": "FriendRequestCancel", 
-      "Gift": "Gift"
+      "Gift": "Gift", 
+      "MessageOnHold": "MessageOnHold"
     }
   }, 
   "MissileType": {
@@ -1311,7 +1355,8 @@
       "Radius": "Radius", 
       "Line": "Line", 
       "All": "All", 
-      "Random": "Random"
+      "Random": "Random", 
+      "RandomUnique": "RandomUnique"
     }
   }, 
   "MissionDesignStatus": {
@@ -1397,7 +1442,11 @@
       "DailyDealOffer": "DailyDealOffer", 
       "ValueOffer": "ValueOffer", 
       "Code": "Code", 
-      "NonPremiumDailyDealOffer": "NonPremiumDailyDealOffer"
+      "NonPremiumDailyDealOffer": "NonPremiumDailyDealOffer", 
+      "ThemeActivity": "ThemeActivity", 
+      "LevelGift": "LevelGift", 
+      "MonthlyCard": "MonthlyCard", 
+      "BoostingGift": "BoostingGift"
     }
   }, 
   "PromotionDesignFlag": {
@@ -1566,7 +1615,8 @@
       "RequireItem": 4, 
       "AllowDesignSwitch": 8, 
       "DisplayWhenMissingRequirements": 16, 
-      "DontAllowUpgrade": 32
+      "DontAllowUpgrade": 32, 
+      "HideOnUGC": 64
     }
   }, 
   "CrewSacrificePoints": {
@@ -1627,7 +1677,8 @@
     "type": "IntFlag", 
     "values": {
       "None": 0, 
-      "HideIfRequirementNotMet": 1
+      "HideIfRequirementNotMet": 1, 
+      "DisablePurchase": 2
     }
   }, 
   "RoomStatus": {
@@ -1695,7 +1746,7 @@
       "UseLiveOps": 8192, 
       "UseHistoryCache": 16384, 
       "LegendaryLeague": 32768, 
-      "AllowOneGlobalMerchantShip": 65536, 
+      "AllowTestPaymentInProduction": 65536, 
       "AllowOneGlobalNPCShip": 131072, 
       "UseOpenSearch": 262144, 
       "UseClientBattleFinalisationOnLogin": 524288, 
@@ -1707,7 +1758,12 @@
       "UseAliyunOSS": 33554432, 
       "CheckAge": 67108864, 
       "DoNotCheckIPAddress": 134217728, 
-      "AllowAdminLoginDuringMaintenance": 268435456
+      "AllowAdminLoginDuringMaintenance": 268435456, 
+      "CheckStarbuxSpentTask": 536870912, 
+      "CheckIAPPurchaseTask": 1073741824, 
+      "VerifyBattleChecksum": 2147483648, 
+      "CheckMarketFilters": 4294967296, 
+      "SwitchRoomSkinInstantly": 8589934592
     }
   }, 
   "SaleType": {
@@ -1838,6 +1894,17 @@
       "CollectResources": "CollectResources"
     }
   }, 
+  "SkinType": {
+    "type": "StrEnum", 
+    "values": {
+      "None": null, 
+      "RoomSkin": "RoomSkin", 
+      "ShipSkin": "ShipSkin", 
+      "ItemSkin": "ItemSkin", 
+      "MissileSkin": "MissileSkin", 
+      "CraftSkin": "CraftSkin"
+    }
+  }, 
   "MarkerFlag": {
     "type": "IntFlag", 
     "values": {
@@ -1945,7 +2012,10 @@
       "CollectGeneratedMineralCount": 30, 
       "CollectGeneratedGasCount": 31, 
       "DonateSupplyCount": 32, 
-      "RevengeBattleCount": 33
+      "RevengeBattleCount": 33, 
+      "PurchaseIAPPackage": 34, 
+      "SpendStarbux": 35, 
+      "PurchasePromotion": 36
     }
   }, 
   "TaskCategory": {
@@ -1959,7 +2029,8 @@
       "BattlePassSeason": 5, 
       "BattlePassDailyTemplate": 6, 
       "BattlePassSeasonTemplate": 7, 
-      "BattlePassDailyReroll": 8
+      "BattlePassDailyReroll": 8, 
+      "Theme": 9
     }
   }, 
   "TaskDesignFlagsType": {
@@ -1986,6 +2057,25 @@
       "WinChallengeEvent": "WinChallengeEvent", 
       "WinMissionDesign": "WinMissionDesign", 
       "DestroyShipOfRace": "DestroyShipOfRace"
+    }
+  }, 
+  "ObjectArgumentIAPPack": {
+    "type": "IntEnum", 
+    "values": {
+      "None": 0, 
+      "MonthlyMembership": 1, 
+      "Starbux500": 2, 
+      "Starbux1200": 3, 
+      "Starbux2500": 4, 
+      "Starbux6500": 5, 
+      "Starbux14000": 6, 
+      "SeasonPass": 7, 
+      "Sale1": 8, 
+      "Sale2": 9, 
+      "Sale3": 10, 
+      "Sale4": 11, 
+      "Sale5": 12, 
+      "Sale6": 13
     }
   }, 
   "TrainingAnimationStyle": {
@@ -2023,6 +2113,37 @@
       "Server": "Server", 
       "Client": "Client", 
       "Others": "Others"
+    }
+  }, 
+  "UGCSkinFlagEnum": {
+    "type": "IntEnum", 
+    "values": {
+      "Draft": 0, 
+      "Review": 1, 
+      "Approved": 2, 
+      "Block": 3
+    }
+  }, 
+  "UGCSkinSortType": {
+    "type": "StrEnum", 
+    "values": {
+      "Votes": "Votes", 
+      "Newest": "Newest", 
+      "Oldest": "Oldest", 
+      "Liked": "Liked", 
+      "MyCreations": "MyCreations"
+    }
+  }, 
+  "UGCVoteType": {
+    "type": "StrEnum", 
+    "values": {
+      "Vote": "Vote", 
+      "Report": "Report", 
+      "Ban": "Ban", 
+      "BanLog": "BanLog", 
+      "UnbanLog": "UnbanLog", 
+      "DeleteLog": "DeleteLog", 
+      "ApproveLog": "ApproveLog"
     }
   }, 
   "PSSAdminDesignType": {
@@ -2363,6 +2484,83 @@
       "_END": 60
     }
   }, 
+  "TutorialStep": {
+    "type": "IntEnum", 
+    "values": {
+      "None": 0, 
+      "ShowWelcome": 1, 
+      "TapStore": 2, 
+      "PurchaseWeaponRoom": 3, 
+      "PlaceMiningRoom": 4, 
+      "WaitConstruction": 5, 
+      "WaitMineral": 6, 
+      "CollectMineral": 7, 
+      "TapMissionButton": 8, 
+      "TapGalaxySystemNode": 9, 
+      "TapBootCamp": 10, 
+      "FirstBattleStart": 11, 
+      "BattleOverView": 12, 
+      "BattleEnergyBarDescription": 13, 
+      "ShowSelfShip": 14, 
+      "ShowEnemyShip": 15, 
+      "Aim": 16, 
+      "PowerUp": 17, 
+      "WaitForBattleEnd": 18, 
+      "BattleEnd": 19, 
+      "SelectUpgradeCharacter": 20, 
+      "TapProfileButton": 21, 
+      "TapCharacterUpgradeButton": 22, 
+      "UpgradeDescription": 23, 
+      "CrewDescription": 24, 
+      "DesUpgradeBedroom": 25, 
+      "SelectBedRoom": 26, 
+      "TapBedroomProfileButton": 27, 
+      "DescripUpgradeBedroom": 28, 
+      "TapUpgradeBedRoom": 29, 
+      "WaitBedroomUpgrade": 30, 
+      "TapStoreForRecruit": 31, 
+      "TapCrewButton": 32, 
+      "TapRecruit": 33, 
+      "AchievementDescription": 34, 
+      "TapTrophyButton": 35, 
+      "SelectAchievementLabel": 36, 
+      "CollectAchievementReward": 37, 
+      "CloseAchievementPanel": 38, 
+      "AssignJobOverview": 39, 
+      "SelectCharacterForAssigningJob": 40, 
+      "DragCharacterToLaserRoom": 41, 
+      "PostAssigningCharacter": 42, 
+      "PostAssigningCharacter2": 43, 
+      "SecondBattleTapMissionButton": 44, 
+      "TapSecondMission": 45, 
+      "MidBreak": 46, 
+      "AdvancedBattleIntro": 47, 
+      "AdvanceBattleReduceEngine": 48, 
+      "AdvanceBattleIntroEnergyBar": 49, 
+      "AdvanceBattleIncreaseLaserPower": 50, 
+      "AdvanceBattleMonitor": 51, 
+      "UpgradeShipTapShop": 52, 
+      "TapShopShipCategory": 53, 
+      "TapShipUpgradeButton": 54, 
+      "ShipUpgradingExplaination": 55, 
+      "ExpShipUpgraded": 56, 
+      "ExpMoreRoom": 57, 
+      "ExpGoodLuck": 58, 
+      "TapOption": 59, 
+      "EndPhase": 60, 
+      "StartAITutorial": 61, 
+      "TapAICrew": 62, 
+      "TapAIButton": 63, 
+      "TapNewCommand": 64, 
+      "TapAICondition": 65, 
+      "ConfirmAICondition": 66, 
+      "TapAIAction": 67, 
+      "ConfirmAIAction": 68, 
+      "ConfirmAICommand": 69, 
+      "CloseAIMenu": 70, 
+      "EndAITutorial": 71
+    }
+  }, 
   "ReportType": {
     "type": "IntEnum", 
     "values": {
@@ -2375,17 +2573,28 @@
     }
   }, 
   "PurchaseVIPStatus": {
-    "type": "IntEnum", 
+    "type": "StrEnum", 
     "values": {
       "None": 0, 
       "VIP": 1
     }
   }, 
   "LeagueType": {
-    "type": "IntEnum", 
+    "type": "StrEnum", 
     "values": {
       "Standard": 0, 
       "Legendary": 1
+    }
+  }, 
+  "UserSourceAdsPlatformType": {
+    "type": "StrEnum", 
+    "values": {
+      "Unknown": 0, 
+      "Chanyou": 1, 
+      "Baidu": 2, 
+      "Tiktok": 3, 
+      "Bilibili": 4, 
+      "NoReportingUser": 5
     }
   }, 
   "PlatformType": {
@@ -2400,7 +2609,26 @@
       "TrailGG": "TrailGG", 
       "NowGG": "NowGG", 
       "ChinaGame": "ChinaGame", 
-      "TapTap": "TapTap"
+      "TapTap": "TapTap", 
+      "TapTap_HaoYou": "TapTap_HaoYou", 
+      "TapTap_4399": "TapTap_4399", 
+      "ChinaGame_iOS": "ChinaGame_iOS", 
+      "QuickSDK": "QuickSDK", 
+      "ChinaGame_PC": "ChinaGame_PC", 
+      "ChinaGame_Android": "ChinaGame_Android", 
+      "TapTap_Tiktok": "TapTap_Tiktok", 
+      "TapTap_Sipu": "TapTap_Sipu", 
+      "TapTap_Android1": "TapTap_Android1", 
+      "TapTap_Android2": "TapTap_Android2", 
+      "TapTap_Android3": "TapTap_Android3", 
+      "TapTap_Android4": "TapTap_Android4", 
+      "TapTap_Android5": "TapTap_Android5", 
+      "TapTap_Android6": "TapTap_Android6", 
+      "TapTap_Android7": "TapTap_Android7", 
+      "TapTap_Android8": "TapTap_Android8", 
+      "TapTap_Android9": "TapTap_Android9", 
+      "TapTap_Android10": "TapTap_Android10", 
+      "ChinaGame_TianYiYun": "ChinaGame_TianYiYun"
     }
   }
 }
