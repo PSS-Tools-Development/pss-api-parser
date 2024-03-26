@@ -9,16 +9,17 @@ import pssapi.entities as _entities
 from ...types import EntityInfo as _EntityInfo
 from ...utils import parse as _parse
 from ... import enums as _enums
+from .entity_base_raw import EntityBaseRaw as _EntityBaseRaw
 
 
-class {{ entity.name }}Raw:
+class {{ entity.name }}Raw(_EntityBaseRaw):
     XML_NODE_NAME: str = '{{ entity.xml_node_name }}'
 
     def __init__(self, {{ entity.name_snake_case }}_info: _EntityInfo) -> None:
         self._dict: _Dict[str, _Any] = {{ '{}' }}
 {% for property in entity.properties %}
 {% if property.builtin %}
-        self._{{ property.name_snake_case }}: {{ property.typehint }} = _parse.pss_{{ property.type }}({{ entity.name_snake_case }}_info.get('{{ property.name }}'))
+        self._{{ property.name_snake_case }}: {{ property.typehint }} = _parse.pss_{{ property.type }}({{ entity.name_snake_case }}_info.pop('{{ property.name }}'))
 {% else %}
 {% if property.is_int_enum %}
 
@@ -27,12 +28,13 @@ class {{ entity.name }}Raw:
 {% elif property.is_str_enum %}
 
 {% elif property.is_collection %}
-        self._{{ property.name_snake_case }}: _List[_{{ property.typehint }}] = [_{{ property.typehint }}(child_info) for child_info in {{ entity.name_snake_case }}_info.get('{{ property.name }}')[0].get('{{ property.name }}[:-1]', [])] if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else []
+        self._{{ property.name_snake_case }}: _List[_{{ property.typehint }}] = [_{{ property.typehint }}(child_info) for child_info in {{ entity.name_snake_case }}_info.pop('{{ property.name }}')[0].get('{{ property.name }}[:-1]', [])] if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else []
 {% else %}
-        self._{{ property.name_snake_case }}: _{{ property.typehint }} = _{{ property.typehint }}({{ entity.name_snake_case }}_info.get('{{ property.name }}')[0]) if {{ entity.name_snake_case }}_info.get('{{ property.name }}', []) else None
+        self._{{ property.name_snake_case }}: _{{ property.typehint }} = _{{ property.typehint }}({{ entity.name_snake_case }}_info.pop('{{ property.name }}')[0]) if {{ entity.name_snake_case }}_info.get('{{ property.name }}', []) else None
 {% endif %}
 {% endif %}
 {% endfor %}
+        super().__init__({{ entity.name_snake_case }}_info)
 
 {% for property in entity.properties %}
 
