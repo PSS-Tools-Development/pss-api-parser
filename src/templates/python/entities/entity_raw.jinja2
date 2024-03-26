@@ -27,7 +27,7 @@ class {{ entity.name }}Raw:
 {% elif property.is_str_enum %}
 
 {% elif property.is_collection %}
-        self._{{ property.name_snake_case }}: _List[_{{ property.typehint }}] = [_{{ property.typehint }}(child_info) for child_info in {{ entity.name_snake_case }}_info.get('{{ property.name }}')] if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else []
+        self._{{ property.name_snake_case }}: _List[_{{ property.typehint }}] = [_{{ property.typehint }}(child_info) for child_info in {{ entity.name_snake_case }}_info.get('{{ property.name }}')[0].get('{{ property.name }}[:-1]')] if {{ entity.name_snake_case }}_info.get('{{ property.name }}') else []
 {% else %}
         self._{{ property.name_snake_case }}: _{{ property.typehint }} = _{{ property.typehint }}({{ entity.name_snake_case }}_info.get('{{ property.name }}')[0]) if {{ entity.name_snake_case }}_info.get('{{ property.name }}', []) else None
 {% endif %}
