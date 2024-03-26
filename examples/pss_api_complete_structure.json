@@ -220,6 +220,7 @@
         "endpoint": "ListAnimations",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int"
         },
         "response_structure": {
@@ -245,6 +246,7 @@
         "endpoint": "ListBackgrounds",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int"
         },
         "response_structure": {
@@ -270,6 +272,7 @@
         "endpoint": "ListAllChallengeDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -296,6 +299,7 @@
         "endpoint": "ListAllCharacterDesignActions",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int"
         },
         "response_structure": {
@@ -319,6 +323,7 @@
         "endpoint": "ListAllCharacterDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -347,6 +352,7 @@
         "endpoint": "ListAllDrawDesigns",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -419,6 +425,7 @@
         "endpoint": "ListAllCollectionDesigns",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1189,6 +1196,7 @@
         "endpoint": "ListAllDivisionDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1316,6 +1324,7 @@
         "endpoint": "ListMarkerGeneratorDesigns",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1363,6 +1372,7 @@
         "endpoint": "ListStarSystemLinks",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int"
         },
         "response_structure": {
@@ -1430,6 +1440,7 @@
         "endpoint": "ListStarSystems",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1478,6 +1489,7 @@
         "endpoint": "ListItemDesignActions",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int"
         },
         "response_structure": {
@@ -1501,6 +1513,7 @@
         "endpoint": "ListItemDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1574,6 +1587,7 @@
         "method": "GET",
         "query_parameters": {
           "accessToken": "str",
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1830,6 +1844,7 @@
         "endpoint": "ListAllMissionDesigns4",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1913,6 +1928,7 @@
         "endpoint": "ListAllPromotionDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1939,6 +1955,7 @@
         "endpoint": "ListAllResearchDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -1965,6 +1982,7 @@
         "endpoint": "ListAllRewardDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2014,6 +2032,7 @@
         "endpoint": "ListRoomDesignSprites2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2126,6 +2145,7 @@
         "endpoint": "ListCraftDesigns",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int"
         },
         "response_structure": {
@@ -2149,6 +2169,7 @@
         "endpoint": "ListMissileDesigns",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int"
         },
         "response_structure": {
@@ -2172,6 +2193,7 @@
         "endpoint": "ListRoomDesignPurchase",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int"
         },
         "response_structure": {
@@ -2195,6 +2217,7 @@
         "endpoint": "ListRoomDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2249,6 +2272,7 @@
         "endpoint": "ListAllSeasonDesigns",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2257,6 +2281,9 @@
             "ListAllSeasonDesigns": {
               "SeasonDesigns": {
                 "SeasonDesign": {}
+              },
+              "properties": {
+                "version": "int"
               }
             }
           }
@@ -2310,6 +2337,7 @@
         "endpoint": "ListAllNewsDesigns",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2457,6 +2485,7 @@
         "endpoint": "ListAllShipDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2483,6 +2512,7 @@
         "endpoint": "ListSituationDesigns",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2536,6 +2566,7 @@
         "endpoint": "ListAllTrainingDesigns2",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2779,6 +2810,7 @@
         "endpoint": "ListSkins",
         "method": "GET",
         "query_parameters": {
+          "clientDateTime": "str",
           "designVersion": "int",
           "languageKey": "str"
         },
@@ -2790,6 +2822,9 @@
               },
               "Skins": {
                 "Skin": {}
+              },
+              "properties": {
+                "version": "int"
               }
             }
           }
@@ -3318,6 +3353,10 @@
       "StandardSpriteId": "int"
     },
     "CollectionDesign": {
+      "AbilityIconSpriteId": "int",
+      "AbilityName": null,
+      "Argument": "int",
+      "BaseChance": "int",
       "BaseEnhancementValue": "int",
       "CollectionDescription": "str",
       "CollectionDesignId": "int",
@@ -3329,9 +3368,12 @@
       "HaloAnimationId": "int",
       "IconSpriteId": "int",
       "MaxCombo": "int",
+      "MaxUse": "int",
       "MinCombo": "int",
       "SpriteId": "int",
-      "StepEnhancementValue": "int"
+      "StepChance": "int",
+      "StepEnhancementValue": "int",
+      "TriggerType": "str"
     },
     "ConditionType": {
       "ColorString": null,
@@ -3352,6 +3394,7 @@
     },
     "CraftDesign": {
       "AttackDistance": "int",
+      "AttackRange": "int",
       "CraftAttackType": "str",
       "CraftDesignId": "int",
       "CraftName": "str",
@@ -4203,7 +4246,7 @@
     },
     "SkinSet": {
       "ApprovalFlags": "str",
-      "CostString": null,
+      "CostString": "str",
       "DateUpdated": "datetime",
       "Flags": "int",
       "Metadata": null,
