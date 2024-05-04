@@ -1920,6 +1920,49 @@
         "service": "MissionService"
       }
     },
+    "PublicService": {
+      "GetShipDetails": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetShipDetails",
+        "method": "GET",
+        "query_parameters": {
+          "accessToken": "str",
+          "userId": "int"
+        },
+        "response_structure": {
+          "GetShipDetails": {
+            "Ship": {
+              "User": {}
+            }
+          }
+        },
+        "service": "PublicService"
+      },
+      "GetShipRoomDetails": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetShipRoomDetails",
+        "method": "GET",
+        "query_parameters": {
+          "accessToken": "str",
+          "userId": "int"
+        },
+        "response_structure": {
+          "GetShipDetails": {
+            "Ship": {
+              "User": {},
+              "Rooms": {
+                "Room": {}
+              }
+            }
+          }
+        },
+        "service": "PublicService"
+      }
+    },
     "PromotionService": {
       "ListAllPromotionDesigns2": {
         "content_parameters": {},
