@@ -188,7 +188,7 @@
         },
         "response_gzipped": false,
         "response_structure": {
-          "GetShipDetails": {
+          "GetShipRoomDetails": {
             "Ship": {
               "Rooms": {
                 "Room": {}
