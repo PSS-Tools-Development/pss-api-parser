@@ -2316,10 +2316,10 @@
         "response_structure": {
           "GetShipDetails": {
             "Ship": {
-              "User": {},
               "Rooms": {
                 "Room": {}
-              }
+              },
+              "User": {}
             }
           }
         },
@@ -3147,6 +3147,32 @@
         },
         "service": "UserService"
       },
+      "ListSkinSets2": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListSkinSets2",
+        "method": "GET",
+        "query_parameters": {
+          "clientDateTime": "str",
+          "designVersion": "int",
+          "languageKey": "str"
+        },
+        "response_gzipped": false,
+        "response_structure": {
+          "UserService": {
+            "ListSkinSets": {
+              "SkinSets": {
+                "SkinSet": {}
+              },
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        },
+        "service": "UserService"
+      },
       "ListSkins": {
         "content_parameters": {},
         "content_structure": {},
@@ -3165,6 +3191,32 @@
               "SkinSets": {
                 "SkinSet": {}
               },
+              "Skins": {
+                "Skin": {}
+              },
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        },
+        "service": "UserService"
+      },
+      "ListSkins2": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListSkins2",
+        "method": "GET",
+        "query_parameters": {
+          "clientDateTime": "str",
+          "designVersion": "int",
+          "languageKey": "str"
+        },
+        "response_gzipped": false,
+        "response_structure": {
+          "UserService": {
+            "ListSkins": {
               "Skins": {
                 "Skin": {}
               },
@@ -3422,6 +3474,7 @@
       "ActionTypeParameterRelativity": "str",
       "ActionTypeParameterValue": "int",
       "ColorString": null,
+      "ConditionParameterArgument": "int",
       "ConditionTypeCategory": "str",
       "ConditionTypeParameter": "str",
       "ImageSpriteId": "int",
@@ -3586,6 +3639,8 @@
       "AvailableDate": "datetime",
       "BattleCharacterHp": "int",
       "BloodlustFrame": "int",
+      "BonusTrainingCapacity": "int",
+      "BoostLevel": "int",
       "CharacterActions": "CharacterActions",
       "CharacterDesignId": "int",
       "CharacterId": "int",
@@ -3635,6 +3690,7 @@
     "CharacterDesign": {
       "ActionSoundFileId": "int",
       "Attack": "float",
+      "BoostValuesString": "str",
       "CharacterBodyPartId": "int",
       "CharacterDesignDescription": "str",
       "CharacterDesignId": "int",
@@ -3714,20 +3770,24 @@
       "CollectionName": "str",
       "CollectionType": "str",
       "ColorString": "str",
+      "CooldownTime": "int",
       "EnhancementType": "str",
       "Flags": "int",
       "HaloAnimationId": "int",
       "IconSpriteId": "int",
       "MaxCombo": "int",
       "MaxUse": "int",
+      "Metadata": null,
       "MinCombo": "int",
       "SpriteId": "int",
       "StepChance": "int",
-      "StepEnhancementValue": "int",
+      "StepEnhancementValue": "float",
+      "TriggerAnimationId": "int",
       "TriggerType": "str"
     },
     "ConditionType": {
       "ColorString": null,
+      "ConditionParameterArgument": "int",
       "ConditionTypeAvailability": "int",
       "ConditionTypeCategory": "str",
       "ConditionTypeComparison": "str",
@@ -3749,7 +3809,9 @@
       "CraftAttackType": "str",
       "CraftDesignId": "int",
       "CraftName": "str",
+      "CraftPathingType": "str",
       "CraftTargetType": "str",
+      "EntityCount": "int",
       "FlightSpeed": "int",
       "Hp": "int",
       "MissileDesignId": "int",
@@ -4249,6 +4311,7 @@
       "RoomName": "str",
       "RoomShortName": "str",
       "RoomType": "str",
+      "RoomVariantType": "int",
       "RootRoomDesignId": "int",
       "Rotate": "bool",
       "Rows": "int",
@@ -4309,7 +4372,9 @@
       "FromDate": "datetime",
       "IconSpriteId": "int",
       "Metadata": "str",
+      "PremiumRewardString": null,
       "PrologueDescription": "str",
+      "RepeatRewardString": null,
       "RequirementString": null,
       "RewardString": "str",
       "SeasonDescription": "str",
@@ -4395,6 +4460,7 @@
       "MaintenanceTitle": null,
       "MarkerGeneratorDesignVersion": "int",
       "MaxBoostDuration": "int",
+      "MaxCrews": "int",
       "MaxDailyDraws": "int",
       "MaxRedemptionCount": "int",
       "MaxRedemptionCountPerMonth": "int",
@@ -4601,7 +4667,7 @@
       "CostString": "str",
       "DateUpdated": "datetime",
       "Flags": "int",
-      "Metadata": null,
+      "Metadata": "str",
       "RequirementString": "str",
       "SkinSetDescription": "str",
       "SkinSetId": "int",
