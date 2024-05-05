@@ -99,7 +99,7 @@ def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
         flow.request.content = request_content.encode('utf-8')
 
     response_content = ''
-    if flow.response.content:
+    if flow.response and flow.response.content:
         response_content = flow.response.content.decode('utf-8')
         matches = __RX_PROPERTIES.finditer(response_content)
         for match in matches:
