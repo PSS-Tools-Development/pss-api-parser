@@ -171,7 +171,7 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> _utils.NestedDict:
                 else:
                     result['query_parameters'][split_param[0]] = None
 
-    result['content'] = flow.request.content.decode('utf-8') or None
+    result['content'] = flow.request.content.decode('utf-8') if flow.request and flow.request.content else None
     result['content_structure'] = {}
     result['content_type'] = ''
 
@@ -192,7 +192,7 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> _utils.NestedDict:
     if result['content_structure']:
         if result['content_type'] == 'json':
             result['content_parameters'] = __get_parameters_from_content_json(result['content_structure'])
-    result['response'] = flow.response.text or None
+    result['response'] = flow.response.text if flow.response and flow.response.text else None
     result['response_structure'] = {}
     result['response_gzipped'] = False
     if result['response']:
