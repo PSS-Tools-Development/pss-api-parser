@@ -16,6 +16,7 @@ class PssFlowDetails:
         self.__endpoint: str = details.get('endpoint', '')
         self.__method: str = details.get('method')
         self.__query_parameters: _Dict[str, str] = details.get('query_parameters', {})
+        self.__response_gzipped: bool = details.get('response_gzipped')
         self.__response_structure: _utils.NestedDict = details.get('response_structure', {})
         self.__service: str = details.get('service', '')
         self.__original_flow: _HTTPFlow = details.get('original_flow')
@@ -53,6 +54,10 @@ class PssFlowDetails:
     @property
     def query_parameters(self) -> _Dict[str, str]:
         return self.__query_parameters
+    
+    @property
+    def response_gzipped(self) -> bool:
+        return self.__response_gzipped or False
 
     @property
     def response_structure(self) -> _utils.NestedDict:
@@ -81,6 +86,7 @@ class PssFlowDetails:
             'endpoint': self.endpoint,
             'method': self.method,
             'query_parameters': self.query_parameters,
+            'response_gzipped': self.response_gzipped,
             'response_structure': self.response_structure,
             'service': self.service,
         }

@@ -1,3 +1,4 @@
+import base64 as _base64
 from datetime import datetime as _datetime
 import json as _json
 import os as _os
@@ -8,6 +9,7 @@ from typing import List as _List
 from typing import Set as _Set
 from typing import Union as _Union
 from xml.etree import ElementTree as _ElementTree
+import zlib as _zlib
 
 from contexttimer import Timer as _Timer
 from mitmproxy.http import HTTPFlow as _HTTPFlow
@@ -125,7 +127,7 @@ def store_structure_json(file_path: str, flow_details: ApiStructure, compressed:
         separators = (',', ':')
     else:
         indent = 2
-        separators = (', ', ': ')
+        separators = (',', ': ')
     with open(file_path, 'w') as fp:
         _json.dump(flow_details_dicts, fp, indent=indent, separators=separators)
 
@@ -190,10 +192,23 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> _utils.NestedDict:
     if result['content_structure']:
         if result['content_type'] == 'json':
             result['content_parameters'] = __get_parameters_from_content_json(result['content_structure'])
-    result['response'] = flow.response.content.decode('utf-8') or None
+    result['response'] = flow.response.text or None
     result['response_structure'] = {}
+    result['response_gzipped'] = False
     if result['response']:
-        result['response_structure'] = __convert_xml_to_dict(_ElementTree.fromstring(result['response']))
+        converted = False
+        try:
+            result['response_structure'] = __convert_xml_to_dict(_ElementTree.fromstring(result['response']))
+            converted = True
+        except _ElementTree.ParseError:
+            pass
+
+        if not converted:
+            base64_decoded_content = _base64.b64decode(flow.response.content)
+            unzipped_content = _zlib.decompress(base64_decoded_content, _zlib.MAX_WBITS|32)
+            decoded_content = unzipped_content.decode('utf-8')
+            result['response_structure'] = __convert_xml_to_dict(_ElementTree.fromstring(decoded_content))
+            result['response_gzipped'] = True
 
     result['original_flow'] = flow
     return result
@@ -333,6 +348,7 @@ def merge_flows(flow1: _PssFlowDetails, flow2: _PssFlowDetails, second_overrides
         'endpoint': flow2.endpoint or flow1.endpoint if second_overrides_first else flow1.endpoint or flow2.endpoint,
         'method': flow2.method or flow1.method if second_overrides_first else flow1.method or flow2.method,
         'query_parameters': query_parameters,
+        'response_gzipped':  (flow2.response_gzipped if second_overrides_first else flow1.response_gzipped or flow2.response_gzipped) or False,
         'response_structure': response_structure,
         'service': flow2.service or flow1.service if second_overrides_first else flow1.service or flow2.service,
         'original_flow': flow2.original_flow or flow1.original_flow if second_overrides_first else flow1.original_flow or flow2.original_flow

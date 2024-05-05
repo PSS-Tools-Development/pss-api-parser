@@ -11,6 +11,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AchievementService": {
             "ListAchievementDesigns": {
@@ -37,6 +38,7 @@
           "accessToken": "str",
           "allianceId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "GetAlliance": {
@@ -56,6 +58,7 @@
           "accessToken": "str",
           "userId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "GetUser": {
@@ -78,6 +81,7 @@
           "from": "int",
           "to": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "ListUsersByChampionshipScoreRanking": {
@@ -99,6 +103,7 @@
           "skip": "int",
           "take": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "ListAlliancesByRanking": {
@@ -119,6 +124,7 @@
         "query_parameters": {
           "divisionDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "ListAlliancesWithDivision": {
@@ -142,6 +148,7 @@
           "skip": "int",
           "take": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "ListCharactersGivenInAlliance": {
@@ -171,6 +178,7 @@
           "skip": "int",
           "take": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "ListUsers": {
@@ -200,6 +208,7 @@
           "skip": "int",
           "take": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "SearchAlliances": {
@@ -223,6 +232,7 @@
           "clientDateTime": "str",
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AnimationService": {
             "ListAnimations": {
@@ -249,6 +259,7 @@
           "clientDateTime": "str",
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "BackgroundService": {
             "ListBackgrounds": {
@@ -276,6 +287,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "ChallengeService": {
             "ListAllChallengeDesigns": {
@@ -302,6 +314,7 @@
           "clientDateTime": "str",
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CharacterService": {
             "ListAllCharacterDesignActions": {
@@ -327,6 +340,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CharacterService": {
             "ListAllCharacterDesigns": {
@@ -356,6 +370,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CharacterService": {
             "ListAllDrawDesigns": {
@@ -379,6 +394,7 @@
         "query_parameters": {
           "characterDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CharacterService": {
             "PrestigeCharacterFrom": {
@@ -402,6 +418,7 @@
         "query_parameters": {
           "characterDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CharacterService": {
             "PrestigeCharacterTo": {
@@ -429,6 +446,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CollectionService": {
             "ListAllCollectionDesigns": {
@@ -486,6 +504,7 @@
           "ListStarSystemLinkVersion": "int",
           "ListStarSystemVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "DesignService": {
             "ListAllDesigns": {
@@ -718,6 +737,7 @@
           "ListStarSystemLinkVersion": "int",
           "ListStarSystemVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "DesignService": {
             "ListAllDesigns": {
@@ -969,6 +989,7 @@
           "ListStarSystemLinkVersion": "int",
           "ListStarSystemVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "DesignService": {
             "ListAllDesigns": {
@@ -1186,6 +1207,289 @@
           }
         },
         "service": "DesignService"
+      },
+      "ListAllDynamicDesigns": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListAllDynamicDesigns",
+        "method": "GET",
+        "query_parameters": {
+          "LanguageKey": "str",
+          "ListAllPromotionDesignVersion": "int",
+          "ListAllTaskDesignVersion": "int",
+          "ListItemDesignVersion": "int"
+        },
+        "response_gzipped": true,
+        "response_structure": {
+          "DesignService": {
+            "ListAllDynamicDesigns": {
+              "ItemDesigns": {
+                "ItemDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "PromotionDesigns": {
+                "PromotionDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "TaskDesigns": {
+                "TaskDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              }
+            }
+          }
+        },
+        "service": "DesignService"
+      },
+      "ListAllStaticDesigns": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListAllStaticDesigns",
+        "method": "GET",
+        "query_parameters": {
+          "LanguageKey": "str",
+          "ListAchievementDesignVersion": "int",
+          "ListActionTypeVersion": "int",
+          "ListAllChallengeDesignVersion": "int",
+          "ListAllCharacterDesignActionVersion": "int",
+          "ListAllCharacterDesignVersion": "int",
+          "ListAllCollectionDesignVersion": "int",
+          "ListAllDivisionDesignVersion": "int",
+          "ListAllDrawDesignVersion": "int",
+          "ListAllMissionDesignVersion": "int",
+          "ListAllNewsDesignVersion": "int",
+          "ListAllResearchDesignVersion": "int",
+          "ListAllRewardDesignVersion": "int",
+          "ListAllShipDesignVersion": "int",
+          "ListAllSituationDesignVersion": "int",
+          "ListAllTrainingDesignVersion": "int",
+          "ListAnimationVersion": "int",
+          "ListAssetVersion": "int",
+          "ListBackgroundVersion": "int",
+          "ListConditionTypeVersion": "int",
+          "ListCraftDesignVersion": "int",
+          "ListFileVersion": "int",
+          "ListItemDesignActionVersion": "int",
+          "ListLeagueVersion": "int",
+          "ListMarkerGeneratorDesignVersion": "int",
+          "ListMissileDesignVersion": "int",
+          "ListRoomDesignPurchaseVersion": "int",
+          "ListRoomDesignSpriteVersion": "int",
+          "ListRoomDesignVersion": "int",
+          "ListSeasonDesignVersion": "int",
+          "ListSkinSetVersion": "int",
+          "ListSkinVersion": "int",
+          "ListSpriteVersion": "int",
+          "ListStarSystemLinkVersion": "int",
+          "ListStarSystemVersion": "int"
+        },
+        "response_gzipped": true,
+        "response_structure": {
+          "DesignService": {
+            "ListAllStaticDesigns": {
+              "AchievementDesigns": {
+                "AchievementDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Animations": {
+                "Animation": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Backgrounds": {
+                "Background": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ChallengeDesigns": {
+                "ChallengeDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "CharacterDesignActions": {
+                "CharacterDesignAction": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "CharacterDesigns": {
+                "CharacterDesign": {
+                  "CharacterParts": {
+                    "CharacterPart": {}
+                  }
+                },
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "CollectionDesigns": {
+                "CollectionDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "CraftDesigns": {
+                "CraftDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "DivisionDesigns": {
+                "DivisionDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "DrawDesigns": {
+                "DrawDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Files": {
+                "File": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ItemDesignActions": {
+                "ItemDesignAction": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Leagues": {
+                "League": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "MissileDesigns": {
+                "MissileDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "MissionDesigns": {
+                "MissionDesign": {
+                  "InstantMissionEvents": {}
+                },
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "NewsDesigns": {
+                "NewsDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ResearchDesigns": {
+                "ResearchDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "RewardDesigns": {
+                "RewardDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "RoomDesignPurchases": {
+                "RoomDesignPurchase": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "RoomDesignSprites": {
+                "RoomDesignSprite": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "RoomDesigns": {
+                "RoomDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "SeasonDesigns": {
+                "SeasonDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "ShipDesigns": {
+                "ShipDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "SituationDesigns": {
+                "SituationDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "SkinSets": {
+                "SkinSet": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Skins": {
+                "Skin": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "Sprites": {
+                "Sprite": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "StarSystemLinks": {
+                "StarSystemLink": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "StarSystemMarkerGenerators": {
+                "StarSystemMarkerGenerator": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "StarSystems": {
+                "StarSystem": {},
+                "properties": {
+                  "version": "int"
+                }
+              },
+              "TrainingDesigns": {
+                "TrainingDesign": {},
+                "properties": {
+                  "version": "int"
+                }
+              }
+            }
+          }
+        },
+        "service": "DesignService"
       }
     },
     "DivisionService": {
@@ -1200,6 +1504,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "DivisionService": {
             "ListAllDivisionDesigns": {
@@ -1226,6 +1531,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "FileService": {
             "ListFiles": {
@@ -1250,6 +1556,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "FileService": {
             "ListSprites": {
@@ -1278,6 +1585,7 @@
           "clientDateTime": "str",
           "starSystemId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GalaxyService": {
             "GoTo": {
@@ -1328,6 +1636,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GalaxyService": {
             "ListMarkerGeneratorDesigns": {
@@ -1351,6 +1660,7 @@
         "query_parameters": {
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GalaxyService": {
             "ListPlanets": {
@@ -1375,6 +1685,7 @@
           "clientDateTime": "str",
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GalaxyService": {
             "ListStarSystemLinks": {
@@ -1399,6 +1710,7 @@
           "accessToken": "str",
           "clientDateTime": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GalaxyService": {
             "ListStarSystemMarkers": {
@@ -1419,6 +1731,7 @@
         "query_parameters": {
           "accessToken": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GalaxyService": {
             "ListStarSystemMarkersAndUserMarkers": {
@@ -1444,6 +1757,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GalaxyService": {
             "ListStarSystems": {
@@ -1469,6 +1783,7 @@
         "query_parameters": {
           "itemDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "HistoryService": {
             "PriceHistory": {
@@ -1492,6 +1807,7 @@
           "clientDateTime": "str",
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "ItemService": {
             "ListItemDesignActions": {
@@ -1517,6 +1833,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "ItemService": {
             "ListItemDesigns": {
@@ -1544,6 +1861,7 @@
           "from": "int",
           "to": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "LadderService": {
             "ListUsersByChampionshipScoreRanking": {
@@ -1566,6 +1884,7 @@
           "from": "int",
           "to": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "LadderService": {
             "ListUsersByRanking": {
@@ -1591,6 +1910,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "LeagueService": {
             "ListLeagues": {
@@ -1614,6 +1934,7 @@
         "endpoint": "GetCatalogQuantity",
         "method": "GET",
         "query_parameters": {},
+        "response_gzipped": false,
         "response_structure": {
           "LiveOpsService": {
             "GetCatalogQuantity": {}
@@ -1631,6 +1952,7 @@
           "deviceType": "str",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "LiveOpsService": {
             "GetTodayLiveOps": {
@@ -1650,6 +1972,7 @@
           "deviceType": "str",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "LiveOpsService": {
             "GetTodayLiveOps": {
@@ -1673,6 +1996,7 @@
           "saleStatus": "str",
           "to": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "MarketService": {
             "ListSalesByItemDesignId": {
@@ -1702,6 +2026,7 @@
           "take": "int",
           "userId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "MessageService": {
             "ListActiveMarketplaceMessages": {
@@ -1723,6 +2048,7 @@
           "accessToken": "str",
           "channelKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "MessageService": {
             "ListMessagesForChannelKey": {
@@ -1743,6 +2069,7 @@
         "query_parameters": {
           "accessToken": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "MessageService": {
             "ListPrivateMessages": {
@@ -1769,6 +2096,7 @@
         "endpoint": "SendMessage3",
         "method": "POST",
         "query_parameters": {},
+        "response_gzipped": false,
         "response_structure": {
           "MessageService": {
             "SendMessage": {
@@ -1793,6 +2121,7 @@
         "endpoint": "SendPrivateMessage3",
         "method": "POST",
         "query_parameters": {},
+        "response_gzipped": false,
         "response_structure": {
           "MessageService": {
             "SendMessage": {
@@ -1817,6 +2146,7 @@
           "messageId": "int",
           "missionDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "MissionService": {
             "CreateMission": {
@@ -1848,6 +2178,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "MissionService": {
             "ListAllMissionDesigns": {
@@ -1877,6 +2208,7 @@
           "clientDateTime": "str",
           "missionEventId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "MissionService": {
             "SelectEvent": {
@@ -1903,6 +2235,7 @@
           "clientNumber": "int",
           "missionEventId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "MissionService": {
             "SelectEvent": {
@@ -1920,6 +2253,34 @@
         "service": "MissionService"
       }
     },
+    "PromotionService": {
+      "ListAllPromotionDesigns2": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "ListAllPromotionDesigns2",
+        "method": "GET",
+        "query_parameters": {
+          "clientDateTime": "str",
+          "designVersion": "int",
+          "languageKey": "str"
+        },
+        "response_gzipped": false,
+        "response_structure": {
+          "PromotionService": {
+            "ListAllPromotionDesigns": {
+              "PromotionDesigns": {
+                "PromotionDesign": {}
+              },
+              "properties": {
+                "version": "int"
+              }
+            }
+          }
+        },
+        "service": "PromotionService"
+      }
+    },
     "PublicService": {
       "GetShipDetails": {
         "content_parameters": {},
@@ -1931,6 +2292,7 @@
           "accessToken": "str",
           "userId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GetShipDetails": {
             "Ship": {
@@ -1950,6 +2312,7 @@
           "accessToken": "str",
           "userId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GetShipDetails": {
             "Ship": {
@@ -1961,33 +2324,6 @@
           }
         },
         "service": "PublicService"
-      }
-    },
-    "PromotionService": {
-      "ListAllPromotionDesigns2": {
-        "content_parameters": {},
-        "content_structure": {},
-        "content_type": "",
-        "endpoint": "ListAllPromotionDesigns2",
-        "method": "GET",
-        "query_parameters": {
-          "clientDateTime": "str",
-          "designVersion": "int",
-          "languageKey": "str"
-        },
-        "response_structure": {
-          "PromotionService": {
-            "ListAllPromotionDesigns": {
-              "PromotionDesigns": {
-                "PromotionDesign": {}
-              },
-              "properties": {
-                "version": "int"
-              }
-            }
-          }
-        },
-        "service": "PromotionService"
       }
     },
     "ResearchService": {
@@ -2002,6 +2338,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "ResearchService": {
             "ListAllResearchDesigns": {
@@ -2029,6 +2366,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RewardService": {
             "ListAllRewardDesigns": {
@@ -2054,6 +2392,7 @@
         "query_parameters": {
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomDesignSpriteService": {
             "ListRoomDesignSprites": {
@@ -2079,6 +2418,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomDesignSpriteService": {
             "ListRoomDesignSprites": {
@@ -2105,6 +2445,7 @@
           "languageKey": "str",
           "missileDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "GetMissileDesign": {
@@ -2124,6 +2465,7 @@
           "languageKey": "str",
           "roomDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "GetRoomDesign": {
@@ -2143,6 +2485,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "ListActionTypes": {
@@ -2167,6 +2510,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "ListConditionTypes": {
@@ -2191,6 +2535,7 @@
           "clientDateTime": "str",
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "ListCraftDesigns": {
@@ -2215,6 +2560,7 @@
           "clientDateTime": "str",
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "ListMissileDesigns": {
@@ -2239,6 +2585,7 @@
           "clientDateTime": "str",
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "ListRoomDesignPurchase": {
@@ -2264,6 +2611,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "ListRoomDesigns": {
@@ -2291,6 +2639,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "SeasonService": {
             "ListAllSeasonDesigns": {
@@ -2317,6 +2666,7 @@
           "deviceType": "str",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "SettingService": {
             "GetLatestSetting": {
@@ -2336,6 +2686,7 @@
           "deviceType": "str",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "SettingService": {
             "GetLatestSetting": {
@@ -2356,6 +2707,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "SettingService": {
             "ListAllNewsDesigns": {
@@ -2383,6 +2735,7 @@
           "clientDateTime": "str",
           "userId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "ShipService": {
             "GetShipByUserId": {
@@ -2432,6 +2785,7 @@
           "accessToken": "str",
           "userId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "ShipService": {
             "InspectShip": {
@@ -2468,6 +2822,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "ShipService": {
             "ListShipDesigns": {
@@ -2495,6 +2850,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "SituationService": {
             "ListSituationDesigns": {
@@ -2522,6 +2878,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "TaskService": {
             "ListAllTaskDesigns": {
@@ -2549,6 +2906,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "TrainingService": {
             "ListAllTrainingDesigns": {
@@ -2575,6 +2933,7 @@
           "accessToken": "str",
           "friendUserId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "AcceptFriendRequest": {
@@ -2594,6 +2953,7 @@
           "accessToken": "str",
           "friendUserId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "AddFriend": {
@@ -2613,6 +2973,7 @@
           "accessToken": "str",
           "friendUserId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "DeclineFriendRequest": {
@@ -2639,6 +3000,7 @@
           "refresh_token": "str",
           "signal": "bool"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "UserLogin": {
@@ -2694,6 +3056,7 @@
         "endpoint": "DeviceLogin12",
         "method": "POST",
         "query_parameters": {},
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "UserLogin": {
@@ -2749,6 +3112,7 @@
         "endpoint": "DeviceLogin15",
         "method": "POST",
         "query_parameters": {},
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "UserLogin": {
@@ -2771,6 +3135,7 @@
           "UserId": "int",
           "accessToken": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "ListFriends": {
@@ -2793,6 +3158,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "ListSkins": {
@@ -2820,6 +3186,7 @@
           "accessToken": "str",
           "friendUserId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "RemoveFriend": {}
@@ -2836,6 +3203,7 @@
         "query_parameters": {
           "searchString": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "SearchUsers": {
@@ -2895,6 +3263,7 @@
         "endpoint": "SteamLogin3",
         "method": "POST",
         "query_parameters": {},
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "UserLogin": {
@@ -2952,6 +3321,7 @@
         "endpoint": "SteamLogin6",
         "method": "POST",
         "query_parameters": {},
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "UserLogin": {
@@ -2978,6 +3348,7 @@
           "email": "str",
           "password": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserEmailPasswordAuthorize": {},
           "UserService": {
@@ -3006,6 +3377,7 @@
           "languageKey": "str",
           "password": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "UserService": {
             "UserEmailPasswordAuthorize": {
@@ -3333,7 +3705,7 @@
     },
     "CollectionDesign": {
       "AbilityIconSpriteId": "int",
-      "AbilityName": null,
+      "AbilityName": "str",
       "Argument": "int",
       "BaseChance": "int",
       "BaseEnhancementValue": "int",

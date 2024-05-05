@@ -325,6 +325,7 @@ def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cache
                 'parameter_raw_definitions': ', '.join(parameter_raw_definitions),
                 'parameters': parameters,
                 'raw_endpoint_call_parameters': ', '.join(raw_endpoint_call_parameters),
+                'response_gzipped': endpoint_definition['response_gzipped'],
                 'return_type_str': return_type,
                 'version': version,
                 'xml_parent_tag_name': xml_parent_tag_name,
