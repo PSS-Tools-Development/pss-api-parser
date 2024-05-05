@@ -10,6 +10,7 @@
         "query_parameters": {
           "divisionDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "AllianceService": {
             "ListAlliancesWithDivision": {
@@ -33,6 +34,7 @@
           "designVersion": "int",
           "languageKey": "str"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CharacterService": {
             "ListAllDrawDesigns": {
@@ -56,6 +58,7 @@
         "query_parameters": {
           "characterDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CharacterService": {
             "PrestigeCharacterFrom": {
@@ -79,6 +82,7 @@
         "query_parameters": {
           "characterDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "CharacterService": {
             "PrestigeCharacterTo": {
@@ -104,6 +108,7 @@
         "query_parameters": {
           "designVersion": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "GalaxyService": {
             "ListPlanets": {
@@ -129,6 +134,7 @@
         "query_parameters": {
           "itemDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "HistoryService": {
             "PriceHistory": {
@@ -149,6 +155,51 @@
         }
       }
     },
+    "PublicService": {
+      "GetShipDetails": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetShipDetails",
+        "method": "GET",
+        "query_parameters": {
+          "accessToken": "str",
+          "userId": "int"
+        },
+        "response_gzipped": false,
+        "response_structure": {
+          "GetShipDetails": {
+            "Ship": {
+              "User": {}
+            }
+          }
+        },
+        "service": "PublicService"
+      },
+      "GetShipRoomDetails": {
+        "content_parameters": {},
+        "content_structure": {},
+        "content_type": "",
+        "endpoint": "GetShipRoomDetails",
+        "method": "GET",
+        "query_parameters": {
+          "accessToken": "str",
+          "userId": "int"
+        },
+        "response_gzipped": false,
+        "response_structure": {
+          "GetShipDetails": {
+            "Ship": {
+              "Rooms": {
+                "Room": {}
+              },
+              "User": {}
+            }
+          }
+        },
+        "service": "PublicService"
+      }
+    },
     "RoomService": {
       "GetMissileDesign": {
         "content_parameters": {},
@@ -160,6 +211,7 @@
           "languageKey": "str",
           "missileDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "GetMissileDesign": {
@@ -179,6 +231,7 @@
           "languageKey": "str",
           "roomDesignId": "int"
         },
+        "response_gzipped": false,
         "response_structure": {
           "RoomService": {
             "GetRoomDesign": {
