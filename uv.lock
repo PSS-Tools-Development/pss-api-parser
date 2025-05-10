@@ -814,17 +814,17 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "autoflake" },
-    { name = "black" },
-    { name = "coverage" },
-    { name = "flake8" },
-    { name = "flake8-black" },
-    { name = "flake8-bugbear" },
-    { name = "isort" },
-    { name = "pre-commit" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "vulture" },
+    { name = "autoflake", specifier = ">=2.3.1" },
+    { name = "black", specifier = ">=25.1.0" },
+    { name = "coverage", specifier = ">=7.8.0" },
+    { name = "flake8", specifier = ">=7.2.0" },
+    { name = "flake8-black", specifier = ">=0.3.6" },
+    { name = "flake8-bugbear", specifier = ">=24.12.12" },
+    { name = "isort", specifier = ">=6.0.1" },
+    { name = "pre-commit", specifier = ">=4.2.0" },
+    { name = "pytest", specifier = ">=8.3.5" },
+    { name = "pytest-cov", specifier = ">=6.1.1" },
+    { name = "vulture", specifier = ">=2.14" },
 ]
 
 [[package]]
