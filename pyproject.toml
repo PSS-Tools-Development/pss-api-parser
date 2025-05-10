@@ -1,26 +1,71 @@
-[tool.poetry]
+[project]
 name = "pss-api-parser"
-version = "0.1.0"
 description = "Parses the structure of the PSS API based on flows documented through mitmproxy"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
 authors = [
-    "The worst. <theworstpss@gmail.com>",
-    "Solevis",
+    {name = "The worst.", email = "theworstpss@gmail.com"},
+    {name = "Solevis"}
 ]
-license = "MIT"
 readme = "README.md"
+keywords = [
+    "Pixel Starships",
+    "PSS",
+    "API",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "Typing :: Typed",
+]
+dynamic = ["version"]
+dependencies = [
+    "mitmproxy>=11.0.2",
+    "jinja2>=3.1.6",
+    "contexttimer>=0.3.3",
+    "typer>=0.15.3",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-mitmproxy = "^9.0.1"
-Jinja2 = "^3.1.2"
-contexttimer = "^0.3.3"
-colorama = "^0.4.6"
+[project.urls]
+Repository = "https://github.com/PSS-Tools-Development/pss-api-parser"
+Issues = "https://github.com/PSS-Tools-Development/pss-api-parser/issues"
+Changelog = "https://github.com/PSS-Tools-Development/pss-api-parser/releases"
+
+[project.scripts]
+pssapiparser = "pss_api_parser.main:app"
+
+[tool.hatch.version]
+path = "src/pss_api_parser/__init__.py"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.pytest.ini_options]
-pythonpath = [
-  "."
+[tool.uv]
+dev-dependencies = [
+    "autoflake>=2.3.1",
+    "black>=25.1.0",
+    "coverage>=7.8.0",
+    "flake8>=7.2.0",
+    "flake8-black>=0.3.6",
+    "flake8-bugbear>=24.12.12",
+    "isort>=6.0.1",
+    "pre-commit>=4.2.0",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "vulture>=2.14",
 ]
+
+[tool.isort]
+profile = "black"

@@ -9,7 +9,8 @@ examples/*
 !examples/pss_steam_dump.cs
 
 # VS Code
-.vscode/
+.vscode/*
+!.vscode/settings.json
 .idea/
 
 # Byte-compiled / optimized / DLL files
