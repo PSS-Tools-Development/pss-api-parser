@@ -5,25 +5,20 @@ from mitmproxy.http import HTTPFlow as _HTTPFlow
 
 from . import utils as _utils
 
+
 ResponseStructure = _Dict[str, _Union[str, "ResponseStructure"]]
 
 
 class PssFlowDetails:
     def __init__(self, details: dict) -> None:
-        self.__content_parameters: _utils.NestedDict = details.get(
-            "content_parameters", {}
-        )
-        self.__content_structure: _utils.NestedDict = details.get(
-            "content_structure", {}
-        )
+        self.__content_parameters: _utils.NestedDict = details.get("content_parameters", {})
+        self.__content_structure: _utils.NestedDict = details.get("content_structure", {})
         self.__content_type: str = details.get("content_type")
         self.__endpoint: str = details.get("endpoint", "")
         self.__method: str = details.get("method")
         self.__query_parameters: _Dict[str, str] = details.get("query_parameters", {})
         self.__response_gzipped: bool = details.get("response_gzipped")
-        self.__response_structure: _utils.NestedDict = details.get(
-            "response_structure", {}
-        )
+        self.__response_structure: _utils.NestedDict = details.get("response_structure", {})
         self.__service: str = details.get("service", "")
         self.__original_flow: _HTTPFlow = details.get("original_flow")
 

@@ -1,8 +1,9 @@
 import json as _json
 import re as _re
-from enum import StrEnum, auto
+from enum import StrEnum
 from typing import Dict as _Dict
 from typing import Union as _Union
+
 
 EnumDefinition = _Dict[str, _Union[str, _Dict[str, _Union[int, str]]]]
 TYPE_INT_ENUM = "IntEnum"
@@ -12,17 +13,13 @@ TYPE_STR_ENUM = "StrEnum"
 CSHARP_ACCESS_MODIFIERS = ["private", "public", "internal", "protected"]
 RX_CSHARP_ACCESS_MODIFIERS = "|".join(CSHARP_ACCESS_MODIFIERS)
 
-MARKER_ENUM_DEFINITION_PREFIX = (
-    "// Namespace: SavySoda.PixelStarships.Model.SharedModel.Enums"
-)
-RX_ENUM_DEFINITION: _re.Pattern = _re.compile(
-    rf"({RX_CSHARP_ACCESS_MODIFIERS}) enum ([^\.]*?) "
-)
+MARKER_ENUM_DEFINITION_PREFIX = "// Namespace: SavySoda.PixelStarships.Model.SharedModel.Enums"
+RX_ENUM_DEFINITION: _re.Pattern = _re.compile(rf"({RX_CSHARP_ACCESS_MODIFIERS}) enum ([^\.]*?) ")
 RX_ENUM_VALUE_DEFINITION = f"({RX_CSHARP_ACCESS_MODIFIERS}) const {{0}} (.*?) = (.*?);"  # {0} should receive the name of the enum
 
 
 class ProgrammingLanguage(StrEnum):
-    PYTHON = auto()
+    PYTHON = "python"
 
     def template_dir(self):
         return self.value
@@ -51,33 +48,24 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
                     match = RX_ENUM_DEFINITION.search(line)
                     if match:
                         enum_name = match.group(2)
-                        rx_enum_value_custom = _re.compile(
-                            RX_ENUM_VALUE_DEFINITION.format(enum_name)
-                        )
+                        rx_enum_value_custom = _re.compile(RX_ENUM_VALUE_DEFINITION.format(enum_name))
                         result[enum_name] = {
                             "type": TYPE_INT_ENUM if "Flag" in enum_name else "",
                             "values": {},
                         }
                 elif line.startswith("}"):  # All values collected
                     if not result[enum_name]["type"]:
-                        if any(
-                            value_type and isinstance(value_type, str)
-                            for value_type in result[enum_name]["values"].values()
-                        ):
+                        if any(value_type and isinstance(value_type, str) for value_type in result[enum_name]["values"].values()):
                             result[enum_name]["type"] = TYPE_STR_ENUM
                         else:
                             result[enum_name]["type"] = TYPE_INT_ENUM
                     if result[enum_name]["type"] == TYPE_STR_ENUM:
                         for enum_value_name in result[enum_name]["values"].keys():
                             if result[enum_name]["values"][enum_value_name] is not None:
-                                result[enum_name]["values"][
-                                    enum_value_name
-                                ] = enum_value_name
+                                result[enum_name]["values"][enum_value_name] = enum_value_name
                     for enum_value_name in tuple(result[enum_name]["values"].keys()):
                         if enum_value_name.startswith(enum_name):
-                            result[enum_name]["values"][
-                                enum_value_name[len(enum_name) :]
-                            ] = result[enum_name]["values"][enum_value_name]
+                            result[enum_name]["values"][enum_value_name[len(enum_name) :]] = result[enum_name]["values"][enum_value_name]
                             result[enum_name]["values"].pop(enum_value_name)
                     found_marker = False
                     enum_name = rx_enum_value_custom = None
@@ -88,25 +76,17 @@ def parse_csharp_dump_file(file_path: str) -> _Dict[str, EnumDefinition]:
                         match = rx_enum_value_custom.search(line)
                         if match:
                             enum_value_name = match.group(2)
-                            if (
-                                result[enum_name]["type"] == TYPE_INT_ENUM
-                                or enum_value_name.isupper()
-                                or not likely_str
-                            ):
+                            if result[enum_name]["type"] == TYPE_INT_ENUM or enum_value_name.isupper() or not likely_str:
                                 enum_value_value = int(match.group(3))
                             else:
                                 enum_value_value = enum_value_name
                             if enum_value_value == "None":
                                 enum_value_value = None
-                            result[enum_name]["values"][
-                                enum_value_name
-                            ] = enum_value_value
+                            result[enum_name]["values"][enum_value_name] = enum_value_value
                         likely_str = False
 
     for enum_name in result.keys():
-        if result[enum_name]["type"] == TYPE_INT_ENUM and is_int_flag(
-            enum_name, result[enum_name]
-        ):
+        if result[enum_name]["type"] == TYPE_INT_ENUM and is_int_flag(enum_name, result[enum_name]):
             result[enum_name]["type"] = TYPE_INT_FLAG
 
     return result

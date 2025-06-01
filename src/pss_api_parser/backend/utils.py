@@ -3,9 +3,11 @@ import keyword as _keyword
 import os as _os
 import re as _re
 from datetime import datetime as _datetime
+from pathlib import Path
 from typing import Dict as _Dict
 from typing import Optional as _Optional
 from typing import Union as _Union
+
 
 NestedDict = _Dict[str, _Union[str, "NestedDict"]]
 
@@ -37,9 +39,8 @@ def convert_snake_to_lower_camel_case(s: str) -> str:
     return subs[0] + "".join(sub.title() for sub in subs[1:])
 
 
-def create_path(path: str) -> None:
-    if not _os.path.exists(path):
-        _os.makedirs(path)
+def create_path(path: Path | str) -> None:
+    Path(path).mkdir(parents=True, exist_ok=True)
 
 
 def create_file(path: str, contents: str, overwrite: bool = False) -> _Optional[str]:

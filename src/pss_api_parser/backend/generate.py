@@ -1,6 +1,7 @@
 import json as _json
 import os as _os
 import string as _string
+from pathlib import Path
 from typing import Dict as _Dict
 from typing import Iterable as _Iterable
 from typing import List as _List
@@ -13,6 +14,7 @@ from jinja2 import PackageLoader as _PackageLoader
 from . import enums as _enums
 from . import parse as _parse
 from . import utils as _utils
+
 
 BUILTIN_TYPES = list(_parse.TYPE_ORDER_LOOKUP.keys())
 
@@ -48,11 +50,7 @@ def filter_enums_data(
     for service in services_data:
         for endpoint in service["endpoints"]:
             for parameter in endpoint["parameters"]:
-                potential_enum_names.append(
-                    _utils.convert_snake_to_camel_case(
-                        _utils.convert_camel_to_snake_case(parameter["name"])
-                    )
-                )
+                potential_enum_names.append(_utils.convert_snake_to_camel_case(_utils.convert_camel_to_snake_case(parameter["name"])))
 
     for entity in entities_data:
         for property in entity["properties"]:
@@ -69,21 +67,15 @@ def filter_enums_data(
     potential_enum_names = set(potential_enum_names)
 
     parsed_enum_names = set(enums_data.keys())
-    used_enum_names = potential_enum_names.intersection(
-        potential_enum_names, parsed_enum_names
-    )
+    used_enum_names = potential_enum_names.intersection(potential_enum_names, parsed_enum_names)
 
     result = {key: value for key, value in enums_data.items() if key in used_enum_names}
     return result
 
 
-def prepare_parsed_api_data(
-    parsed_api_data: dict, cacheable_endpoints: dict
-) -> _Tuple[_List[dict], _List[dict]]:
+def prepare_parsed_api_data(parsed_api_data: dict, cacheable_endpoints: dict) -> _Tuple[_List[dict], _List[dict]]:
     known_entity_names = set(parsed_api_data["entities"].keys())
-    services = __prepare_services_data(
-        parsed_api_data["endpoints"], known_entity_names, cacheable_endpoints
-    )
+    services = __prepare_services_data(parsed_api_data["endpoints"], known_entity_names, cacheable_endpoints)
     entities = __prepare_entities_data(parsed_api_data["entities"])
     return services, entities
 
@@ -111,9 +103,7 @@ def prepare_parsed_enums_data(
                 parsed_enums_data[enum_name]["values"].items(),
                 key=lambda item: item[1] or "",
             )
-        enum_value_names = [
-            key for key, value in sorted_enum_values if value not in ignore_value_names
-        ]
+        enum_value_names = [key for key, value in sorted_enum_values if value not in ignore_value_names]
 
         enum_definition["enum_values"] = []
         for value_name in enum_value_names:
@@ -121,9 +111,7 @@ def prepare_parsed_enums_data(
                 enum_definition["enum_values"].append(
                     {
                         "name": value_name,
-                        "name_upper": _utils.convert_camel_to_snake_case(
-                            value_name
-                        ).upper(),
+                        "name_upper": _utils.convert_camel_to_snake_case(value_name).upper(),
                         "value": parsed_enums_data[enum_name]["values"][value_name],
                     }
                 )
@@ -146,9 +134,7 @@ def prepare_parsed_enums_data(
     return result
 
 
-def __find_entity_name_for_property_type(
-    property_type: str, entity_names: _Iterable[str]
-) -> _Tuple[str, bool]:
+def __find_entity_name_for_property_type(property_type: str, entity_names: _Iterable[str]) -> _Tuple[str, bool]:
     """
     Returns the matching entity name and if it's likely to be a collection of that entity.
     """
@@ -168,9 +154,7 @@ def __find_entity_name_for_property_type(
     return (None, None)
 
 
-def __find_enum_name_for_property_name(
-    property_name: str, entity_name: str, enum_names: _Iterable[str]
-) -> _Optional[str]:
+def __find_enum_name_for_property_name(property_name: str, entity_name: str, enum_names: _Iterable[str]) -> _Optional[str]:
     """
     Returns the matching entity name or None if none matching could be found.
     """
@@ -232,9 +216,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
             is_collection = False
             property_typehint = property_type
             if not is_built_in_type:
-                property_type, is_collection = __find_entity_name_for_property_type(
-                    property_type, entities_data.keys()
-                )
+                property_type, is_collection = __find_entity_name_for_property_type(property_type, entities_data.keys())
                 if not property_type:
                     continue  # Skip properties that are neither of an builtin type nor of a known entity type
                 is_entity_type = True
@@ -281,9 +263,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
     return result
 
 
-def __prepare_services_data(
-    endpoints_data: dict, known_entity_names: set, cacheable_endpoints: dict
-) -> _List[dict]:
+def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cacheable_endpoints: dict) -> _List[dict]:
     result = []
     for service_name, endpoints in endpoints_data.items():
         service_imports = {"List", "Tuple"}
@@ -305,28 +285,15 @@ def __prepare_services_data(
         for endpoint_name, endpoint_definition in endpoints.items():
             endpoint_name_without_version = endpoint_name.rstrip(_string.digits)
             name_snake_case = _utils.convert_camel_to_snake_case(endpoint_name)
-            name_snake_case_without_version = _utils.convert_camel_to_snake_case(
-                endpoint_name_without_version
-            )
+            name_snake_case_without_version = _utils.convert_camel_to_snake_case(endpoint_name_without_version)
             if name_snake_case != name_snake_case_without_version:
-                version = int(
-                    name_snake_case[
-                        len(name_snake_case_without_version) - len(name_snake_case) :
-                    ].strip("_")
-                )
+                version = int(name_snake_case[len(name_snake_case_without_version) - len(name_snake_case) :].strip("_"))
             else:
                 version = 1
-            xml_parent_tag_name, return_types = __get_return_type(
-                endpoint_definition["response_structure"], known_entity_names
-            )
-            parameters = __extract_parameters(
-                endpoint_definition["query_parameters"]
-                or endpoint_definition.get("content_parameters", {})
-            )
+            xml_parent_tag_name, return_types = __get_return_type(endpoint_definition["response_structure"], known_entity_names)
+            parameters = __extract_parameters(endpoint_definition["query_parameters"] or endpoint_definition.get("content_parameters", {}))
             service_imports.update(parameter["type"] for parameter in parameters)
-            endpoint_data_version_property_name = service_cacheable_endpoints.get(
-                endpoint_name_without_version, None
-            )
+            endpoint_data_version_property_name = service_cacheable_endpoints.get(endpoint_name_without_version, None)
 
             parameter_definitions = []
             parameter_definitions_with_default_value = []
@@ -346,9 +313,7 @@ def __prepare_services_data(
                 else:
                     default_value = parameter.get("default_value")
                     if default_value:
-                        parameter_definitions_with_default_value.append(
-                            f"{param_def} = {default_value}"
-                        )
+                        parameter_definitions_with_default_value.append(f"{param_def} = {default_value}")
                     else:
                         parameter_definitions.append(param_def)
 
@@ -356,19 +321,14 @@ def __prepare_services_data(
 
             parameter_definitions.extend(parameter_definitions_with_default_value)
 
-            entity_types = [
-                f"(_{return_type[0]}, '{return_type[1]}', {return_type[2]})"
-                for return_type in return_types
-            ]
+            entity_types = [f"(_{return_type[0]}, '{return_type[1]}', {return_type[2]})" for return_type in return_types]
             entity_types_str = ", ".join(entity_types)
             return_type = __get_return_type_for_python(return_types)
 
             service["raw_endpoints"].append(
                 {
                     "base_path_name": name_snake_case.upper(),
-                    "content_structure": _json.dumps(
-                        endpoint_definition["content_structure"], separators=(",", ":")
-                    ),
+                    "content_structure": _json.dumps(endpoint_definition["content_structure"], separators=(",", ":")),
                     "content_type": endpoint_definition["content_type"],
                     "data_version_property_name": endpoint_data_version_property_name,
                     "entity_tags": "",
@@ -381,9 +341,7 @@ def __prepare_services_data(
                     "parameter_definitions": ", ".join(parameter_definitions),
                     "parameter_raw_definitions": ", ".join(parameter_raw_definitions),
                     "parameters": parameters,
-                    "raw_endpoint_call_parameters": ", ".join(
-                        raw_endpoint_call_parameters
-                    ),
+                    "raw_endpoint_call_parameters": ", ".join(raw_endpoint_call_parameters),
                     "response_gzipped": endpoint_definition["response_gzipped"],
                     "return_type_str": return_type,
                     "version": version,
@@ -391,20 +349,15 @@ def __prepare_services_data(
                 }
             )
 
-            endpoint_max_versions[name_snake_case_without_version] = max(
-                endpoint_max_versions.get(name_snake_case_without_version, 0), version
-            )
+            endpoint_max_versions[name_snake_case_without_version] = max(endpoint_max_versions.get(name_snake_case_without_version, 0), version)
 
             if return_types:
-                service["entity_types"].extend(
-                    return_type[0] for return_type in return_types
-                )
+                service["entity_types"].extend(return_type[0] for return_type in return_types)
 
         service["endpoints"] = [
             endpoint
             for endpoint in service["raw_endpoints"]
-            if endpoint["version"]
-            == endpoint_max_versions[endpoint["name_snake_case_without_version"]]
+            if endpoint["version"] == endpoint_max_versions[endpoint["name_snake_case_without_version"]]
         ]
 
         for service_import in service_imports:
@@ -421,25 +374,24 @@ def __prepare_services_data(
 # -----
 
 
-def generate_files_from_data(
+def _generate_files_from_data(
     services_data: list,
     entities_data: list,
     enums_data: list,
-    target_path: str,
+    target_path: Path,
     force_overwrite: bool,
     target_language: _enums.ProgrammingLanguage,
 ) -> None:
     template_dir = f"templates/{target_language.template_dir()}"
     env = _Environment(
-        loader=_PackageLoader("src", template_dir),
+        loader=_PackageLoader("pss_api_parser", template_dir),
         trim_blocks=True,
     )
 
-    target_path = target_path.rstrip("/").rstrip("\\")
-    if target_path[-10:].lower() != "src/pssapi":
-        target_path = _os.path.join(target_path, "src/pssapi")
-    if target_path[-6:].lower() != "pssapi":
-        target_path = _os.path.join(target_path, "pssapi")
+    if str(target_path)[-10:].lower() != "src/pssapi":
+        target_path = target_path / "src/pssapi"
+    if str(target_path)[-6:].lower() != "pssapi":
+        target_path = target_path / "pssapi"
 
     _utils.create_path(target_path)
 
@@ -452,11 +404,15 @@ def generate_files_from_data(
     __generate_fixed_files(target_path, env, force_overwrite)
 
 
+def _format_files(target_path: Path):
+    pass
+
+
 def generate_source_code(
     parsed_api_data_file_path: str,
     enums_data_file_path: str,
     cacheable_endpoints_file_path: str,
-    target_path: str,
+    target_path: Path | str,
     target_language: _enums.ProgrammingLanguage = _enums.ProgrammingLanguage.PYTHON,
     force_overwrite: bool = False,
 ) -> None:
@@ -464,15 +420,11 @@ def generate_source_code(
         raise Exception("Parameter 'force_overwrite' must not be None!")
     parsed_api_data = read_data(parsed_api_data_file_path)
     cacheable_endpoints = read_data(cacheable_endpoints_file_path)
-    services_data, entities_data = prepare_parsed_api_data(
-        parsed_api_data, cacheable_endpoints
-    )
+    services_data, entities_data = prepare_parsed_api_data(parsed_api_data, cacheable_endpoints)
 
     enums_data = read_data(enums_data_file_path) if enums_data_file_path else None
     if enums_data:
-        filtered_enums_data = filter_enums_data(
-            enums_data, services_data, entities_data
-        )
+        filtered_enums_data = filter_enums_data(enums_data, services_data, entities_data)
         prepared_enums_data = prepare_parsed_enums_data(filtered_enums_data)
         custom_enums_data = __generate_custom_enums_data()
 
@@ -480,7 +432,8 @@ def generate_source_code(
     else:
         all_enums_data = None
 
-    generate_files_from_data(
+    target_path = Path(target_path)
+    _generate_files_from_data(
         services_data,
         entities_data,
         all_enums_data,
@@ -488,42 +441,37 @@ def generate_source_code(
         force_overwrite,
         target_language,
     )
+    _format_files(target_path)
 
 
-def __generate_client_file(
-    services_data: dict, target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_client_file(services_data: dict, target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     client_base_template = env.get_template("client_base.jinja2")
     client_template = env.get_template("client.jinja2")
 
     _utils.create_file(
-        _os.path.join(target_path, "client_base.py"),
+        target_path / "client_base.py",
         client_base_template.render(services=services_data),
         overwrite=True,
     )
 
     _utils.create_file(
-        _os.path.join(target_path, "client.py"),
+        target_path / "client.py",
         client_template.render(services=services_data),
         overwrite=force_overwrite,
     )
 
 
-def __generate_constants_file(
-    target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_constants_file(target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     constants_template = env.get_template("constants.jinja2")
 
     _utils.create_file(
-        _os.path.join(target_path, "constants.py"),
+        target_path / "constants.py",
         constants_template.render(),
         overwrite=force_overwrite,
     )
 
 
-def __generate_core_file(
-    target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_core_file(target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     core_template = env.get_template("core.jinja2")
 
     _utils.create_file(
@@ -533,9 +481,7 @@ def __generate_core_file(
     )
 
 
-def __generate_entities_files(
-    entities_data: dict, target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_entities_files(entities_data: dict, target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     entity_template = env.get_template("entities/entity.jinja2")
     entity_base_template = env.get_template("entities/entity_base.jinja2")
     entities_init_template = env.get_template("entities/entities_init.jinja2")
@@ -543,10 +489,10 @@ def __generate_entities_files(
     entity_base_raw_template = env.get_template("entities/entity_base_raw.jinja2")
     entities_raw_init_template = env.get_template("entities/entities_raw_init.jinja2")
 
-    entities_path = _os.path.join(target_path, "entities")
-    entities_raw_path = _os.path.join(entities_path, "raw")
-
+    entities_path = target_path / "entities"
     _utils.create_path(entities_path)
+
+    entities_raw_path = entities_path / "raw"
     _utils.create_path(entities_raw_path)
 
     for entity in entities_data:
@@ -587,15 +533,13 @@ def __generate_entities_files(
     )
 
 
-def __generate_enums_files(
-    enums_data: list, target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_enums_files(enums_data: list, target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     int_enum_template = env.get_template("enums/enum_int.jinja2")
     int_flag_template = env.get_template("enums/enum_int_flag.jinja2")
     str_enum_template = env.get_template("enums/enum_str.jinja2")
     enum_init_template = env.get_template("enums/enum_init.jinja2")
-    enums_path = _os.path.join(target_path, "enums")
 
+    enums_path = target_path / "enums"
     _utils.create_path(enums_path)
 
     for enum in enums_data:
@@ -618,9 +562,7 @@ def __generate_enums_files(
     )
 
 
-def __generate_fixed_files(
-    target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_fixed_files(target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     __generate_constants_file(target_path, env, force_overwrite)
     __generate_core_file(target_path, env, force_overwrite)
     __generate_pssapi_init_file(target_path, env, force_overwrite)
@@ -628,9 +570,7 @@ def __generate_fixed_files(
     __generate_types_file(target_path, env, force_overwrite)
 
 
-def __generate_pssapi_init_file(
-    target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_pssapi_init_file(target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     pssapi_init_template = env.get_template("pssapi_init.jinja2")
 
     _utils.create_file(
@@ -640,19 +580,17 @@ def __generate_pssapi_init_file(
     )
 
 
-def __generate_services_files(
-    services_data: dict, target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_services_files(services_data: dict, target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     service_template = env.get_template("services/service.jinja2")
     service_base_template = env.get_template("services/service_base.jinja2")
     services_init_template = env.get_template("services/services_init.jinja2")
     service_raw_template = env.get_template("services/service_raw.jinja2")
     services_raw_init_template = env.get_template("services/services_raw_init.jinja2")
 
-    services_path = _os.path.join(target_path, "services")
-    services_raw_path = _os.path.join(services_path, "raw")
-
+    services_path = target_path / "services"
     _utils.create_path(services_path)
+
+    services_raw_path = services_path / "raw"
     _utils.create_path(services_raw_path)
 
     for service in services_data:
@@ -686,9 +624,7 @@ def __generate_services_files(
     )
 
 
-def __generate_types_file(
-    target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_types_file(target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     types_template = env.get_template("types.jinja2")
 
     _utils.create_file(
@@ -698,14 +634,12 @@ def __generate_types_file(
     )
 
 
-def __generate_utils_submodule(
-    target_path: str, env: _Environment, force_overwrite: bool
-) -> None:
+def __generate_utils_submodule(target_path: Path, env: _Environment, force_overwrite: bool) -> None:
     utils_init_template = env.get_template("utils/utils_init.jinja2")
     utils_datetime_template = env.get_template("utils/utils_datetime.jinja2")
     utils_parse_template = env.get_template("utils/utils_parse.jinja2")
-    utils_path = _os.path.join(target_path, "utils")
 
+    utils_path = target_path / "utils"
     _utils.create_path(utils_path)
 
     _utils.create_file(
@@ -753,9 +687,7 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
             result.append(
                 {
                     "name": name,
-                    "name_snake_case": _utils.append_underscore_if_keyword(
-                        _utils.convert_camel_to_snake_case(name)
-                    ),
+                    "name_snake_case": _utils.append_underscore_if_keyword(_utils.convert_camel_to_snake_case(name)),
                     "type": parameter_type or "str",
                     "default_value": default_value,
                     "self_field": self_field,
@@ -778,9 +710,7 @@ def __find_id_property(property_names: _List[str], entity_name: str) -> _Optiona
     return None
 
 
-def __find_name_property(
-    property_names: _List[str], entity_name: str
-) -> _Optional[str]:
+def __find_name_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
     for property_name in property_names:
         if property_name and property_name[:2] == "Id":
             return property_name
@@ -801,9 +731,7 @@ def __get_endpoint_raw_parameter_definitions(parameters: _List[dict]) -> _List[s
     return result
 
 
-def __get_return_type(
-    response_structure: dict, entity_names: _List[str], parent_tag_name: str = None
-) -> _Tuple[str, _List[_Tuple[str, str, bool]]]:
+def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, _List[_Tuple[str, str, bool]]]:
     """The return type will be determined by crawling through dict 'response_structure' until there's
     a match of tag name and any known entity_name. All matching tag names on that depth will
     be considered for the response type. If there's only one entity type, a list of that entity
@@ -818,20 +746,11 @@ def __get_return_type(
             child_types = [
                 (
                     parent_tag_name,
-                    [
-                        (entity_type, parent_tag_name, True)
-                        for entity_type in entity_types
-                    ],
+                    [(entity_type, parent_tag_name, True) for entity_type in entity_types],
                 )
             ]
 
-        child_types.extend(
-            [
-                __get_return_type(response_structure[key], entity_names, key)
-                for key in keys
-                if key not in entity_types
-            ]
-        )
+        child_types.extend([__get_return_type(response_structure[key], entity_names, key) for key in keys if key not in entity_types])
 
         return_types = []
         for return_type in child_types:
@@ -843,11 +762,7 @@ def __get_return_type(
                 entity_types = [
                     (
                         entity_type[0],
-                        (
-                            entity_type[1]
-                            if f"{entity_type[0]}s" == entity_type[1]
-                            else entity_type[0]
-                        ),
+                        (entity_type[1] if f"{entity_type[0]}s" == entity_type[1] else entity_type[0]),
                         f"{entity_type[0]}s" == entity_type[1],
                     )
                     for entity_type in entity_types
@@ -859,11 +774,7 @@ def __get_return_type(
         elif len(return_types) == 1:
             return return_types[0]
         else:
-            entity_types = [
-                entity_type
-                for _, return_type in return_types
-                for entity_type in return_type
-            ]
+            entity_types = [entity_type for _, return_type in return_types for entity_type in return_type]
             return (parent_tag_name, entity_types)
     return (None, [])
 

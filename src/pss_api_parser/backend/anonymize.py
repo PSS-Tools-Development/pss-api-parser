@@ -1,5 +1,6 @@
 import json as _json
 import re as _re
+from pathlib import Path
 from typing import List as _List
 
 from mitmproxy.http import HTTPFlow as _HTTPFlow
@@ -7,6 +8,7 @@ from mitmproxy.io import FlowReader as _FlowReader
 from mitmproxy.io import FlowWriter as _FlowWriter
 
 from . import utils as _utils
+
 
 # ---------- Constants ----------
 
@@ -51,6 +53,14 @@ __RX_PROPERTIES: _re.Pattern = _re.compile(
 # ---------- Functions ----------
 
 
+def anonymize_file(file_path: Path, output_folder: Path) -> Path:
+    output_file_name = f"{file_path.stem}_anonymized{file_path.suffix}"
+    output_file_path = output_folder / output_file_name
+    anonymized_flows = anynomize_flows(file_path)
+    store_flows(output_file_path, anonymized_flows)
+    return output_file_path
+
+
 def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
     flow.server_conn.sockname = (None, None)
 
@@ -73,10 +83,7 @@ def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
         if request_content_dict:
             # Request Content is a json dictionary
             for query_param_name, query_param_value in request_content_dict.items():
-                if (
-                    query_param_name.lower() in __QUERY_PARAM_NAMES
-                    and query_param_value
-                ):
+                if query_param_name.lower() in __QUERY_PARAM_NAMES and query_param_value:
                     try:
                         int(query_param_value)
                         query_param_value = "0" * len(query_param_value)
@@ -91,24 +98,16 @@ def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
                 request_content_dict = {}
                 for query_param in query_params:
                     split_query_param = query_param.split("=")
-                    if (
-                        len(split_query_param) == 2
-                    ):  # Ignore malformed query parameters or strings that aren't query parameters
+                    if len(split_query_param) == 2:  # Ignore malformed query parameters or strings that aren't query parameters
                         query_param_name, query_param_value = split_query_param
-                        if (
-                            query_param_name.lower() in __QUERY_PARAM_NAMES
-                            and query_param_value
-                        ):
+                        if query_param_name.lower() in __QUERY_PARAM_NAMES and query_param_value:
                             try:
                                 int(query_param_value)
                                 query_param_value = "0" * len(query_param_value)
                             except ValueError:
                                 query_param_value = "x" * len(query_param_value)
                         request_content_dict[query_param_name] = query_param_value
-                request_content = "&".join(
-                    "=".join((key, value))
-                    for key, value in request_content_dict.items()
-                )
+                request_content = "&".join("=".join((key, value)) for key, value in request_content_dict.items())
 
         flow.request.content = request_content.encode("utf-8")
 
@@ -127,9 +126,7 @@ def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
                     property_value = "2016-01-06T00:00:00"
                 except ValueError:
                     property_value = "x" * len(property_value)
-            response_content = response_content.replace(
-                matched_string, f' {property_name}="{property_value}"'
-            )
+            response_content = response_content.replace(matched_string, f' {property_name}="{property_value}"')
 
         flow.response.content = response_content.encode("utf-8")
 

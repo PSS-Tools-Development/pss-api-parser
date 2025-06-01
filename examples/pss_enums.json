@@ -984,7 +984,7 @@
     }
   }, 
   "FileType": {
-    "type": "StrEnum", 
+    "type": "IntEnum", 
     "values": {
       "File": 0, 
       "Sprite": 1, 
@@ -994,7 +994,7 @@
     }
   }, 
   "AccessType": {
-    "type": "StrEnum", 
+    "type": "IntEnum", 
     "values": {
       "Private": 0, 
       "Public": 1, 
@@ -1003,7 +1003,7 @@
     }
   }, 
   "SpriteType": {
-    "type": "StrEnum", 
+    "type": "IntEnum", 
     "values": {
       "None": 0, 
       "Interior": 1, 
@@ -2573,21 +2573,21 @@
     }
   }, 
   "PurchaseVIPStatus": {
-    "type": "StrEnum", 
+    "type": "IntEnum", 
     "values": {
       "None": 0, 
       "VIP": 1
     }
   }, 
   "LeagueType": {
-    "type": "StrEnum", 
+    "type": "IntEnum", 
     "values": {
       "Standard": 0, 
       "Legendary": 1
     }
   }, 
   "UserSourceAdsPlatformType": {
-    "type": "StrEnum", 
+    "type": "IntEnum", 
     "values": {
       "Unknown": 0, 
       "Chanyou": 1, 

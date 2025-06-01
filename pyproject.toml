@@ -1,7 +1,7 @@
 [project]
 name = "pss-api-parser"
 description = "Parses the structure of the PSS API based on flows documented through mitmproxy"
-requires-python = ">=3.11"
+requires-python = ">=3.11.7"
 license = {file = "LICENSE"}
 authors = [
     {name = "The worst.", email = "theworstpss@gmail.com"},
@@ -22,7 +22,7 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.10",
     "Topic :: Internet",
     "Topic :: Software Development :: Libraries",
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -31,10 +31,10 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
-    "mitmproxy>=11.0.2",
-    "jinja2>=3.1.6",
-    "contexttimer>=0.3.3",
+    "mitmproxy>=9.0.1, <10",
+    "jinja2>=3.1.2, <4",
     "typer>=0.15.3",
+    "contexttimer>=0.3.3,<1",
 ]
 
 [project.urls]
@@ -67,5 +67,43 @@ dev-dependencies = [
     "vulture>=2.14",
 ]
 
+[tool.flake8]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    ".venv",
+]
+extend-ignore = ["B008","B907","B950","E203","E501","W291","W503"]
+show-source = true
+statistics = true
+select = ["B","B9","BLK","C","E","F","W"]
+max-complexity = 10
+max-line-length = 150
+
+[tool.autoflake]
+expand-star-imports = true
+ignore-init-module-imports = true
+in-place = true
+recursive = true
+remove-all-unused-imports = true
+
+[tool.black]
+line-length = 150
+target-version = ['py311']
+include = '\.pyi?$'
+
 [tool.isort]
+src_paths = ["./src/pss_api_parser", "./tests"]
+py_version = 311
+skip_gitignore = true
+skip_glob = ["bin/*"]
 profile = "black"
+line_length = 150
+lines_after_imports = 2
+
+[tool.vulture]
+min_confidence = 100
+paths = ["./src/pss_api_parser"]
+sort_by_size = true

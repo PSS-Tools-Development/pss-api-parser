@@ -1,4 +1,3 @@
-from typing import Dict as _Dict
 from typing import List as _List
 from typing import Tuple as _Tuple
 
@@ -25,9 +24,7 @@ def test___get_return_type__multiple_entity_collections():
 
 
 def test___get_return_type__single_entity_collection():
-    response_structure = {
-        "AllianceService": {"ListAlliancesByRanking": {"Alliances": {"Alliance": {}}}}
-    }
+    response_structure = {"AllianceService": {"ListAlliancesByRanking": {"Alliances": {"Alliance": {}}}}}
     entity_names = ["Alliance", "ItemDesign", "User"]
     expected_result = ("Alliances", [("Alliance", "Alliances", True)])
 
