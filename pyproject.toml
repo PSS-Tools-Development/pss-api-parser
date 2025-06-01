@@ -1,7 +1,7 @@
 [project]
 name = "pss-api-parser"
 description = "Parses the structure of the PSS API based on flows documented through mitmproxy"
-requires-python = ">=3.11.7"
+requires-python = ">=3.11.7, <3.12"
 license = {file = "LICENSE"}
 authors = [
     {name = "The worst.", email = "theworstpss@gmail.com"},
