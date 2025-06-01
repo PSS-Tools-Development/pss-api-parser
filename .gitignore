@@ -7,6 +7,7 @@ examples/*
 !examples/pss_api_steam_anonymized.flows
 !examples/pss_api_steam_anonymized.json
 !examples/pss_steam_dump.cs
+debug.py
 
 # VS Code
 .vscode/*
