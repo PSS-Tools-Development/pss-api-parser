@@ -187,7 +187,11 @@ def __convert_flow_to_dict(flow: _HTTPFlow) -> _utils.NestedDict:
                 else:
                     result["query_parameters"][split_param[0]] = None
 
-    result["content"] = flow.request.content.decode("utf-8") if flow.request and flow.request.content else None
+    result["content"] = (
+        flow.request.content.decode("utf-8")
+        if flow.request and flow.request.headers.get("content-encoding") is None and flow.request.content
+        else None
+    )
     result["content_structure"] = {}
     result["content_type"] = ""
 
