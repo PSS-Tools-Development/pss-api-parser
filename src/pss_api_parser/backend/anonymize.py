@@ -74,7 +74,8 @@ def anonymize_flow(flow: _HTTPFlow) -> _HTTPFlow:
         flow.request.query[query_param_name] = query_param_value
 
     request_content = ""
-    if flow.request.content:
+    request_content_encoding = flow.request.headers.get("content-encoding")
+    if not request_content_encoding and flow.request.content:
         request_content = flow.request.content.decode("utf-8")
         try:
             request_content_dict: dict = _json.loads(request_content)
