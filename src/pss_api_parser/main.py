@@ -1,6 +1,6 @@
 from pathlib import Path
 from time import perf_counter
-from typing import Annotated
+from typing import Annotated, Optional
 
 import typer
 from rich import print as rich_print
@@ -84,7 +84,7 @@ def gen(
         ),
     ],
     enums: Annotated[
-        Path,
+        Optional[Path],
         typer.Option(
             "--enums",
             "-e",
@@ -96,7 +96,7 @@ def gen(
         ),
     ] = None,
     cacheable: Annotated[
-        Path,
+        Optional[Path],
         typer.Option(
             "--cacheable",
             "-c",

@@ -2,11 +2,7 @@ import json as _json
 import os as _os
 import string as _string
 from pathlib import Path
-from typing import Dict as _Dict
-from typing import Iterable as _Iterable
-from typing import List as _List
-from typing import Optional as _Optional
-from typing import Tuple as _Tuple
+from typing import Dict, Iterable, List, Optional, Tuple
 
 from jinja2 import Environment as _Environment
 from jinja2 import PackageLoader as _PackageLoader
@@ -42,10 +38,10 @@ RESERVED_PROPERTY_NAMES = ["id"]
 
 
 def filter_enums_data(
-    enums_data: _Dict[str, _enums.EnumDefinition],
-    services_data: _List[dict],
-    entities_data: _List[dict],
-) -> _Dict[str, _enums.EnumDefinition]:
+    enums_data: Dict[str, _enums.EnumDefinition],
+    services_data: List[dict],
+    entities_data: List[dict],
+) -> Dict[str, _enums.EnumDefinition]:
     potential_enum_names = []
     for service in services_data:
         for endpoint in service["endpoints"]:
@@ -73,16 +69,14 @@ def filter_enums_data(
     return result
 
 
-def prepare_parsed_api_data(parsed_api_data: dict, cacheable_endpoints: dict) -> _Tuple[_List[dict], _List[dict]]:
+def prepare_parsed_api_data(parsed_api_data: dict, cacheable_endpoints: dict) -> Tuple[List[dict], List[dict]]:
     known_entity_names = set(parsed_api_data["entities"].keys())
     services = __prepare_services_data(parsed_api_data["endpoints"], known_entity_names, cacheable_endpoints)
     entities = __prepare_entities_data(parsed_api_data["entities"])
     return services, entities
 
 
-def prepare_parsed_enums_data(
-    parsed_enums_data: _Dict[str, _enums.EnumDefinition],
-) -> list:
+def prepare_parsed_enums_data(parsed_enums_data: Dict[str, _enums.EnumDefinition]) -> list:
     result = []
     ignore_value_names = ["None", "Unknown"]
     int_enum_types = (_enums.TYPE_INT_ENUM, _enums.TYPE_INT_FLAG)
@@ -134,7 +128,7 @@ def prepare_parsed_enums_data(
     return result
 
 
-def __find_entity_name_for_property_type(property_type: str, entity_names: _Iterable[str]) -> _Tuple[str, bool]:
+def __find_entity_name_for_property_type(property_type: str, entity_names: Iterable[str]) -> Tuple[str, bool]:
     """
     Returns the matching entity name and if it's likely to be a collection of that entity.
     """
@@ -154,7 +148,7 @@ def __find_entity_name_for_property_type(property_type: str, entity_names: _Iter
     return (None, None)
 
 
-def __find_enum_name_for_property_name(property_name: str, entity_name: str, enum_names: _Iterable[str]) -> _Optional[str]:
+def __find_enum_name_for_property_name(property_name: str, entity_name: str, enum_names: Iterable[str]) -> Optional[str]:
     """
     Returns the matching entity name or None if none matching could be found.
     """
@@ -263,7 +257,7 @@ def __prepare_entities_data(entities_data: dict) -> list:
     return result
 
 
-def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cacheable_endpoints: dict) -> _List[dict]:
+def __prepare_services_data(endpoints_data: dict, known_entity_names: set, cacheable_endpoints: dict) -> List[dict]:
     result = []
     for service_name, endpoints in endpoints_data.items():
         service_imports = {"List", "Tuple"}
@@ -409,9 +403,9 @@ def _format_files(target_path: Path):
 
 
 def generate_source_code(
-    parsed_api_data_file_path: str,
-    enums_data_file_path: str,
-    cacheable_endpoints_file_path: str,
+    parsed_api_data_file_path: Path | str,
+    enums_data_file_path: Optional[Path | str],
+    cacheable_endpoints_file_path: Optional[Path | str],
     target_path: Path | str,
     target_language: _enums.ProgrammingLanguage = _enums.ProgrammingLanguage.PYTHON,
     force_overwrite: bool = False,
@@ -666,13 +660,13 @@ def __generate_utils_submodule(target_path: Path, env: _Environment, force_overw
 # -----
 
 
-def read_data(file_path: str) -> dict:
+def read_data(file_path: Path | str) -> dict:
     with open(file_path) as f:
         result = _json.load(f)
     return result
 
 
-def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
+def __extract_parameters(query_parameters: dict) -> List[Dict[str, str]]:
     result = []
     for name, parameter_type in query_parameters.items():
         if name:
@@ -696,7 +690,7 @@ def __extract_parameters(query_parameters: dict) -> _List[_Dict[str, str]]:
     return result
 
 
-def __find_id_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
+def __find_id_property(property_names: List[str], entity_name: str) -> Optional[str]:
     exact_id_name = f"{entity_name}Id"
     found_id_name = False
 
@@ -710,14 +704,14 @@ def __find_id_property(property_names: _List[str], entity_name: str) -> _Optiona
     return None
 
 
-def __find_name_property(property_names: _List[str], entity_name: str) -> _Optional[str]:
+def __find_name_property(property_names: List[str], entity_name: str) -> Optional[str]:
     for property_name in property_names:
         if property_name and property_name[:2] == "Id":
             return property_name
     return None
 
 
-def __get_endpoint_raw_parameter_definitions(parameters: _List[dict]) -> _List[str]:
+def __get_endpoint_raw_parameter_definitions(parameters: List[dict]) -> List[str]:
     result = []
     for parameter in parameters:
         param_def = ""
@@ -731,7 +725,7 @@ def __get_endpoint_raw_parameter_definitions(parameters: _List[dict]) -> _List[s
     return result
 
 
-def __get_return_type(response_structure: dict, entity_names: _List[str], parent_tag_name: str = None) -> _Tuple[str, _List[_Tuple[str, str, bool]]]:
+def __get_return_type(response_structure: dict, entity_names: List[str], parent_tag_name: str = None) -> Tuple[str, List[Tuple[str, str, bool]]]:
     """The return type will be determined by crawling through dict 'response_structure' until there's
     a match of tag name and any known entity_name. All matching tag names on that depth will
     be considered for the response type. If there's only one entity type, a list of that entity
@@ -758,7 +752,7 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
                 return_parent_tag_name, entity_types = return_type
                 # 0 -> entity name
                 # 1 -> parent tag name
-                # f'{entity_type[0]}s' == entity_type[1] -> is_list
+                # f'{entity_type[0]}s' == entity_type[1] -> isList
                 entity_types = [
                     (
                         entity_type[0],
@@ -779,17 +773,17 @@ def __get_return_type(response_structure: dict, entity_names: _List[str], parent
     return (None, [])
 
 
-def __get_return_type_for_python(return_types: _List[_Tuple[str, str, bool]]) -> str:
+def __get_return_type_for_python(return_types: List[Tuple[str, str, bool]]) -> str:
     if not return_types:
         return ""
 
     result = []
-    for entity_name, _parent_tag, is_list in return_types:
-        if is_list:
-            result.append(f"_List[_{entity_name}]")
+    for entity_name, _parent_tag, isList in return_types:
+        if isList:
+            result.append(f"List[_{entity_name}]")
         else:
             result.append(f"_{entity_name}")
     if len(result) > 1:
-        return f'_Tuple[{", ".join(result)}]'
+        return f'Tuple[{", ".join(result)}]'
     else:
         return result[0]
