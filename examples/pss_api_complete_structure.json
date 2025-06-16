@@ -2314,14 +2314,6 @@
         },
         "response_gzipped": false,
         "response_structure": {
-          "GetShipDetails": {
-            "Ship": {
-              "Rooms": {
-                "Room": {}
-              },
-              "User": {}
-            }
-          },
           "GetShipRoomDetails": {
             "Ship": {
               "Rooms": {
