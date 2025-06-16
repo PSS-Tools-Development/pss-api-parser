@@ -152,7 +152,7 @@ def gen(
 
 @app.command("merge", help="Merge parsed flows files.")
 def merge(
-    out_dir: Annotated[
+    out_file: Annotated[
         Path,
         typer.Argument(
             file_okay=True,
@@ -188,7 +188,7 @@ def merge(
     uncompressed: Annotated[bool, typer.Option("--uncompressed", "-u", show_default=False, help="Preserve whitespace in the output file")] = False,
 ):
     rich_print("Merge parsed mitmproxy flows files.\n")
-    ui.print_input_output(parsed_flows, out_dir)
+    ui.print_input_output(parsed_flows, out_file)
     ui.print_step(f"Compressed storage: {'No' if uncompressed else 'Yes'}", "yellow")
     ui.print_step("Merging parsed flows...", "blue")
 
@@ -202,7 +202,7 @@ def merge(
         overrides = read_structure_json(overrides)
         result = apply_overrides(result, overrides)
 
-    store_structure_json(out_dir, result, (not uncompressed))
+    store_structure_json(out_file, result, (not uncompressed))
 
     end = perf_counter()
     ui.print_step(f"All flow files merged in {end-start:.2f} seconds.", "blue")
