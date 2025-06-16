@@ -9,15 +9,14 @@ from .objectstructure import PssObjectStructure as _PssObjectStructure
 
 
 ApiStructure = _Dict[str, _Dict[str, _Union[_List[_PssFlowDetails], _List[_PssObjectStructure]]]]
-ApiOrganizedFlowsDict = _Dict[str, 'ApiOrganizedFlowsDict']
-NestedDict = _Dict[str, _Union[str, 'NestedDict']]
-
+ApiOrganizedFlowsDict = _Dict[str, "ApiOrganizedFlowsDict"]
+NestedDict = _Dict[str, _Union[str, "NestedDict"]]
 
 
 def apply_overrides(structure: ApiStructure, overrides: ApiStructure) -> ApiStructure:
     result = {
-        'endpoints': override_organized_flows(structure.get('endpoints'), overrides.get('endpoints')),
-        'entities': override_object_structures(structure.get('entities'), overrides.get('entities'))
+        "endpoints": override_organized_flows(structure.get("endpoints"), overrides.get("endpoints")),
+        "entities": override_object_structures(structure.get("entities"), overrides.get("entities")),
     }
     return result
 
@@ -27,19 +26,25 @@ def override_organized_flows(flows: ApiStructure, overrides: ApiStructure) -> Ap
         return flows
     if not flows and overrides:
         return overrides
-    
+
     result = dict(flows)
 
     for service, endpoints in overrides.items():
         if service in result.keys():
             for endpoint, flow_details in endpoints.items():
                 if endpoint in result[service]:
-                    result.setdefault(service, {})[endpoint] = [_parse.merge_flows(flows[service][endpoint][0], flow_details[0], second_overrides_first=True)]
+                    result.setdefault(service, {})[endpoint] = [
+                        _parse.merge_flows(
+                            flows[service][endpoint][0],
+                            flow_details[0],
+                            second_overrides_first=True,
+                        )
+                    ]
                 else:
                     result.setdefault(service, {})[endpoint] = flow_details
         else:
             result[service] = endpoints
-    
+
     return result
 
 
@@ -53,7 +58,16 @@ def override_object_structures(object_structures: _List[_PssObjectStructure], ov
         object_1 = objects_dict.get(object_name)
         object_2 = overrides_dict.get(object_name)
         if object_1 and object_2:
-            result.append(_PssObjectStructure(object_1.object_type_name, _parse.merge_type_dictionaries(object_1.properties, object_2.properties, second_overrides_first=True)))
+            result.append(
+                _PssObjectStructure(
+                    object_1.object_type_name,
+                    _parse.merge_type_dictionaries(
+                        object_1.properties,
+                        object_2.properties,
+                        second_overrides_first=True,
+                    ),
+                )
+            )
         elif object_1:
             result.append(object_1)
         elif object_2:
@@ -62,14 +76,18 @@ def override_object_structures(object_structures: _List[_PssObjectStructure], ov
     return result
 
 
-def convert_entities_dict_to_object_structures(entities: _Dict[str, _Dict[str, str]]) -> _List[_PssObjectStructure]:
+def convert_entities_dict_to_object_structures(
+    entities: _Dict[str, _Dict[str, str]],
+) -> _List[_PssObjectStructure]:
     result = {_PssObjectStructure(entity_name, properties) for entity_name, properties in entities.items()}
     return result
 
 
-def convert_structure_dict_to_organized_flows(organized_dict: ApiOrganizedFlowsDict) -> ApiStructure:
+def convert_structure_dict_to_organized_flows(
+    organized_dict: ApiOrganizedFlowsDict,
+) -> ApiStructure:
     result: ApiStructure = {}
-    for service, endpoints in organized_dict['endpoints'].items():
+    for service, endpoints in organized_dict["endpoints"].items():
         for endpoint, flow_dict in endpoints.items():
             result.setdefault(service, {}).setdefault(endpoint, []).append(_PssFlowDetails(flow_dict))
     return result
@@ -103,7 +121,11 @@ def merge_organized_flows(flows_1: ApiStructure, flows_2: ApiStructure) -> ApiSt
     return result
 
 
-def merge_object_structures(object_structures_1: _List[_PssObjectStructure], object_structures_2: _List[_PssObjectStructure], override_object_structures_1: bool = False) -> _List[_PssObjectStructure]:
+def merge_object_structures(
+    object_structures_1: _List[_PssObjectStructure],
+    object_structures_2: _List[_PssObjectStructure],
+    override_object_structures_1: bool = False,
+) -> _List[_PssObjectStructure]:
     if object_structures_1 and not object_structures_2:
         return list(object_structures_1)
     if not object_structures_1 and object_structures_2:
@@ -137,17 +159,17 @@ def merge_api_structures(structure_1: ApiStructure, structure_2: ApiStructure, o
     if not structure_1 and structure_2:
         return dict(structure_2)
     result = {
-        'endpoints': merge_organized_flows(structure_1['endpoints'], structure_2['endpoints']),
-        'entities': merge_object_structures(structure_1['entities'], structure_2['entities'])
+        "endpoints": merge_organized_flows(structure_1["endpoints"], structure_2["endpoints"]),
+        "entities": merge_object_structures(structure_1["entities"], structure_2["entities"]),
     }
     return result
 
 
 def read_structure_json(file_path: str) -> ApiStructure:
-    with open(file_path, 'r') as fp:
+    with open(file_path, "r") as fp:
         flows = _json.load(fp)
     result = {
-        'endpoints': convert_structure_dict_to_organized_flows(flows),
-        'entities': convert_entities_dict_to_object_structures(flows.get('entities'))
+        "endpoints": convert_structure_dict_to_organized_flows(flows),
+        "entities": convert_entities_dict_to_object_structures(flows.get("entities")),
     }
     return result

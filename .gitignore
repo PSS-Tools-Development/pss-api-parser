@@ -7,9 +7,11 @@ examples/*
 !examples/pss_api_steam_anonymized.flows
 !examples/pss_api_steam_anonymized.json
 !examples/pss_steam_dump.cs
+debug.py
 
 # VS Code
-.vscode/
+.vscode/*
+!.vscode/settings.json
 .idea/
 
 # Byte-compiled / optimized / DLL files
@@ -90,9 +92,6 @@ target/
 # IPython
 profile_default/
 ipython_config.py
-
-# pyenv
-.python-version
 
 # celery beat schedule file
 celerybeat-schedule
