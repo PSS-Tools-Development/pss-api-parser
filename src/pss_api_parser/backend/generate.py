@@ -780,10 +780,10 @@ def __get_return_type_for_python(return_types: List[Tuple[str, str, bool]]) -> s
     result = []
     for entity_name, _parent_tag, isList in return_types:
         if isList:
-            result.append(f"List[_{entity_name}]")
+            result.append(f"_List[_{entity_name}]")
         else:
             result.append(f"_{entity_name}")
     if len(result) > 1:
-        return f'Tuple[{", ".join(result)}]'
+        return f'_Tuple[{", ".join(result)}]'
     else:
         return result[0]
